@@ -1,0 +1,82 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400">
+  <!-- Paní Cokdyž s příručním kufříkem. Postava je shodná s pani-cokdyz.svg,
+       mění se jen rekvizita: místo telefonu drží kufr na kolečkách. -->
+
+  <rect x="0" y="0" width="400" height="400" fill="#FFFFFF"/>
+  <circle cx="200" cy="200" r="185" fill="#E6F8FA"/>
+
+  <!-- měsíc a čas -->
+  <circle cx="322" cy="62" r="28" fill="#FFD23F"/>
+  <circle cx="334" cy="52" r="24" fill="#E6F8FA"/>
+  <text x="285" y="112" font-family="Arial, sans-serif" font-weight="bold" font-size="20" fill="#14233A">00:47</text>
+
+  <!-- hvězdičky -->
+  <text x="60" y="70" font-family="Arial, sans-serif" font-size="22" fill="#FF6FA5">&#10022;</text>
+  <text x="330" y="180" font-family="Arial, sans-serif" font-size="16" fill="#1AC0CE">&#10022;</text>
+  <text x="40" y="240" font-family="Arial, sans-serif" font-size="14" fill="#1AC0CE">&#10022;</text>
+
+  <!-- šeptání -->
+  <text x="26" y="150" font-family="Arial, sans-serif" font-style="italic" font-size="17" fill="#14233A" transform="rotate(-8 26 150)">a co když&#8230;</text>
+
+  <!-- tělo: župan -->
+  <path d="M118 385 L118 300 Q118 252 165 250 L235 250 Q282 252 282 300 L282 385 Z" fill="#1AC0CE"/>
+  <path d="M175 252 L200 292 L225 252 Z" fill="#F4FBFC"/>
+
+  <!-- hlava -->
+  <circle cx="200" cy="178" r="76" fill="#FFE0CC"/>
+
+  <!-- vlasy pod natáčkami -->
+  <path d="M126 170 Q128 96 200 92 Q272 96 274 170 Q262 128 200 124 Q138 128 126 170 Z" fill="#E8E1F4"/>
+
+  <!-- natáčky -->
+  <g>
+    <circle cx="142" cy="126" r="17" fill="#FF6FA5"/><circle cx="142" cy="126" r="7" fill="#FFF0F6"/>
+    <circle cx="176" cy="106" r="17" fill="#FF6FA5"/><circle cx="176" cy="106" r="7" fill="#FFF0F6"/>
+    <circle cx="212" cy="102" r="17" fill="#FF6FA5"/><circle cx="212" cy="102" r="7" fill="#FFF0F6"/>
+    <circle cx="246" cy="112" r="17" fill="#FF6FA5"/><circle cx="246" cy="112" r="7" fill="#FFF0F6"/>
+    <circle cx="270" cy="136" r="15" fill="#FF6FA5"/><circle cx="270" cy="136" r="6" fill="#FFF0F6"/>
+  </g>
+
+  <!-- ustarané obočí -->
+  <path d="M150 152 Q168 146 184 158" stroke="#14233A" stroke-width="5" fill="none" stroke-linecap="round"/>
+  <path d="M250 152 Q232 146 216 158" stroke="#14233A" stroke-width="5" fill="none" stroke-linecap="round"/>
+
+  <!-- brýle -->
+  <circle cx="170" cy="188" r="22" fill="#FFFFFF" opacity="0.85" stroke="#14233A" stroke-width="5"/>
+  <circle cx="230" cy="188" r="22" fill="#FFFFFF" opacity="0.85" stroke="#14233A" stroke-width="5"/>
+  <line x1="192" y1="188" x2="208" y2="188" stroke="#14233A" stroke-width="5" stroke-linecap="round"/>
+  <line x1="148" y1="184" x2="128" y2="176" stroke="#14233A" stroke-width="5" stroke-linecap="round"/>
+  <line x1="252" y1="184" x2="272" y2="176" stroke="#14233A" stroke-width="5" stroke-linecap="round"/>
+
+  <!-- oči -->
+  <circle cx="170" cy="190" r="5.5" fill="#14233A"/>
+  <circle cx="230" cy="190" r="5.5" fill="#14233A"/>
+
+  <!-- tváře -->
+  <ellipse cx="146" cy="218" rx="11" ry="7" fill="#FF6FA5" opacity="0.45"/>
+  <ellipse cx="254" cy="218" rx="11" ry="7" fill="#FF6FA5" opacity="0.45"/>
+
+  <!-- ustaraná pusa -->
+  <path d="M184 238 Q200 230 216 238" stroke="#14233A" stroke-width="5" fill="none" stroke-linecap="round"/>
+
+  <!-- KUFR: teleskopická rukojeť -->
+  <line x1="176" y1="300" x2="176" y2="266" stroke="#14233A" stroke-width="6" stroke-linecap="round"/>
+  <line x1="224" y1="300" x2="224" y2="266" stroke="#14233A" stroke-width="6" stroke-linecap="round"/>
+  <line x1="170" y1="266" x2="230" y2="266" stroke="#14233A" stroke-width="8" stroke-linecap="round"/>
+
+  <!-- KUFR: tělo -->
+  <rect x="156" y="300" width="88" height="74" rx="12" fill="#FF6FA5"/>
+  <rect x="156" y="326" width="88" height="12" fill="#FFF0F6" opacity="0.85"/>
+  <!-- zip a cvočky -->
+  <line x1="168" y1="312" x2="232" y2="312" stroke="#FFF0F6" stroke-width="3" stroke-linecap="round" opacity="0.9"/>
+  <circle cx="200" cy="356" r="6" fill="#FFF0F6" opacity="0.9"/>
+  <!-- kolečka -->
+  <circle cx="170" cy="378" r="7" fill="#14233A"/>
+  <circle cx="230" cy="378" r="7" fill="#14233A"/>
+  <!-- visačka -->
+  <line x1="230" y1="266" x2="244" y2="286" stroke="#14233A" stroke-width="3" stroke-linecap="round"/>
+  <rect x="236" y="286" width="22" height="16" rx="3" fill="#FFD23F" stroke="#14233A" stroke-width="2.5"/>
+
+  <!-- ruka svírá rukojeť -->
+  <circle cx="200" cy="266" r="14" fill="#FFE0CC"/>
+</svg>

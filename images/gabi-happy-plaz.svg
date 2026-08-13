@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400">
+  <!-- Gábi na pláži, vysmátá, ruce nahoře. Stejná postava jako
+       gabi-zamlzene-bryle.svg (hlava r=76 na (200,178), stejná kšiltovka),
+       jen jiná nálada a brýle: tam zamlžené, tady sluneční.
+       Pozadí je průhledné, moře a písek jsou oříznuté do kolečka. -->
+
+  <clipPath id="happyKolo"><circle cx="200" cy="200" r="185"/></clipPath>
+
+  <g clip-path="url(#happyKolo)">
+    <!-- obloha -->
+    <rect x="0" y="0" width="400" height="400" fill="#E6F8FA"/>
+
+    <!-- slunce -->
+    <circle cx="310" cy="96" r="30" fill="#FFD23F"/>
+
+    <!-- moře a písek: obzor níž, ať jsou ruce proti obloze -->
+    <rect x="0" y="246" width="400" height="52" fill="#1AC0CE"/>
+    <path d="M0 292 Q70 282 140 292 Q210 302 280 292 Q340 284 400 294 L400 400 L0 400 Z" fill="#FFE0CC"/>
+
+    <!-- vlnky -->
+    <g stroke="#FFFFFF" stroke-width="5" fill="none" stroke-linecap="round">
+      <path d="M26 264 Q42 254 58 264"/>
+      <path d="M70 282 Q86 272 102 282"/>
+      <path d="M302 264 Q318 254 334 264"/>
+      <path d="M340 282 Q356 272 372 282"/>
+    </g>
+
+    <!-- ruce nahoru a od těla, gesto hurá -->
+    <g fill="none" stroke-linecap="round">
+      <path d="M150 274 Q90 210 64 112" stroke="#E9C6AB" stroke-width="26"/>
+      <path d="M250 274 Q310 210 336 112" stroke="#E9C6AB" stroke-width="26"/>
+      <path d="M150 274 Q90 210 64 112" stroke="#FFE0CC" stroke-width="20"/>
+      <path d="M250 274 Q310 210 336 112" stroke="#FFE0CC" stroke-width="20"/>
+    </g>
+    <circle cx="62" cy="106" r="17" fill="#FFE0CC" stroke="#E9C6AB" stroke-width="3"/>
+    <circle cx="338" cy="106" r="17" fill="#FFE0CC" stroke="#E9C6AB" stroke-width="3"/>
+
+    <!-- tělo: tričko -->
+    <path d="M118 385 L118 302 Q118 254 166 252 L234 252 Q282 254 282 302 L282 385 Z" fill="#1AC0CE"/>
+    <path d="M176 254 L200 292 L224 254 Z" fill="#F4FBFC"/>
+    <text x="200" y="314" text-anchor="middle" font-family="Arial, sans-serif" font-weight="bold"
+          font-size="13" letter-spacing="-0.2" fill="#FFFFFF">www.sgabinafloridu.cz</text>
+
+    <!-- vlasy -->
+    <path d="M200 88 Q286 88 288 186 Q290 248 272 276 Q256 254 262 206 Q262 138 200 134
+             Q138 138 138 206 Q144 254 128 276 Q110 248 112 186 Q114 88 200 88 Z" fill="#2A3550"/>
+
+    <!-- hlava -->
+    <circle cx="200" cy="178" r="76" fill="#FFE0CC"/>
+
+    <!-- kšiltovka, výraznější: vyšší dýnko a širší štítek -->
+    <clipPath id="happyKstil"><path d="M116 130 Q116 58 200 58 Q284 58 284 130 Z"/></clipPath>
+    <g clip-path="url(#happyKstil)">
+      <rect x="104" y="58" width="192" height="22" fill="#F4FBFC"/>
+      <rect x="104" y="80" width="192" height="13" fill="#FF6FA5"/>
+      <rect x="104" y="93" width="192" height="6"  fill="#FFD23F"/>
+      <rect x="104" y="99" width="192" height="13" fill="#F4FBFC"/>
+      <rect x="104" y="112" width="192" height="18" fill="#1AC0CE"/>
+    </g>
+    <path d="M116 130 Q116 58 200 58 Q284 58 284 130" fill="none" stroke="#14233A" stroke-width="4" stroke-linejoin="round"/>
+    <circle cx="200" cy="62" r="6" fill="#14233A"/>
+    <path d="M108 128 Q200 172 292 128 Z" fill="#0E8C97" stroke="#14233A" stroke-width="3" stroke-linejoin="round"/>
+
+    <!-- obočí nahoru, radost -->
+    <path d="M150 162 Q168 150 186 160" stroke="#14233A" stroke-width="5" fill="none" stroke-linecap="round"/>
+    <path d="M250 162 Q232 150 214 160" stroke="#14233A" stroke-width="5" fill="none" stroke-linecap="round"/>
+
+    <!-- sluneční brýle -->
+    <line x1="142" y1="182" x2="126" y2="178" stroke="#14233A" stroke-width="6" stroke-linecap="round"/>
+    <line x1="258" y1="182" x2="274" y2="178" stroke="#14233A" stroke-width="6" stroke-linecap="round"/>
+    <rect x="141" y="174" width="56" height="38" rx="17" fill="#14233A"/>
+    <rect x="203" y="174" width="56" height="38" rx="17" fill="#14233A"/>
+    <line x1="197" y1="184" x2="203" y2="184" stroke="#14233A" stroke-width="7"/>
+    <path d="M152 180 L165 180 L150 204 L143 196 Z" fill="#FFFFFF" opacity="0.32"/>
+    <path d="M214 180 L227 180 L212 204 L205 196 Z" fill="#FFFFFF" opacity="0.32"/>
+
+    <!-- pusa dokořán, smích -->
+    <path d="M168 218 Q200 224 232 218 Q226 254 200 254 Q174 254 168 218 Z" fill="#14233A"/>
+    <path d="M172 220 Q200 227 228 220 Q226 231 200 233 Q174 231 172 220 Z" fill="#FFFFFF"/>
+
+    <!-- tváře -->
+    <ellipse cx="140" cy="222" rx="11" ry="7" fill="#FF6FA5" opacity="0.45"/>
+    <ellipse cx="260" cy="222" rx="11" ry="7" fill="#FF6FA5" opacity="0.45"/>
+  </g>
+
+  <!-- hvězdičky -->
+  <text x="52" y="120" font-family="Arial, sans-serif" font-size="16" fill="#1AC0CE">&#10022;</text>
+  <text x="348" y="150" font-family="Arial, sans-serif" font-size="14" fill="#1AC0CE">&#10022;</text>
+</svg>

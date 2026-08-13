@@ -1,0 +1,26 @@
+{
+  "name": "Než odletíš – Do USA bez cestovky",
+  "short_name": "Než odletíš",
+  "description": "Část 1: příprava na první samostatný let do USA, krok za krokem.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#F4FBFC",
+  "theme_color": "#1AC0CE",
+  "lang": "cs",
+  "icons": [
+    {
+      "src": "icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
