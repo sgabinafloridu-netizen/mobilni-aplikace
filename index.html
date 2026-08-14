@@ -270,6 +270,8 @@
     background: linear-gradient(135deg, var(--tyrkys) 0%, var(--tyrkys-dark) 100%);
     color: #fff; border-color: transparent; box-shadow: 0 2px 6px rgba(26,192,206,.35);
   }
+  .side-item.locked .side-ico { background: #F3E9D3; color: #6b5319; border-color: #E8DCC0; }
+  .side-item.locked .side-title { color: var(--text-muted); }
   .side-body { flex: 1 1 auto; min-width: 0; }
   .side-title { display: block; font-size: 13.5px; font-weight: 600; color: var(--text); line-height: 1.35; }
   .side-item.active .side-title { color: var(--tyrkys-dark); font-weight: 700; }
@@ -631,6 +633,15 @@
   .mg-card.done .mg-label { color: var(--text-faint); }
   .mg-card.done { background: linear-gradient(180deg, #F4FCFD 0%, var(--surface) 100%); border-color: #CBEDF1; }
   .mg-check { color: var(--tyrkys-dark); font-size: 13px; font-weight: 800; }
+  /* zamčený modul: tlumený, ale ne vyřazený. Klik vede na pozvánku, ne do zdi. */
+  .mg-card.locked { background: #FCFAF4; border-color: #E8DCC0; }
+  .mg-card.locked .mg-title, .mg-card.locked .mg-desc { color: var(--text-muted); }
+  .mg-card.locked .mg-label { color: #6b5319; }
+  .mg-lock {
+    display: inline-flex; align-items: center; gap: 5px; flex: 0 0 auto;
+    background: #F3E9D3; color: #6b5319; border-radius: var(--r-pill);
+    padding: 4px 11px; font-size: 10px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase;
+  }
 
   .section { margin-top: var(--s8); }
   .section-head { display: flex; align-items: baseline; justify-content: space-between; gap: var(--s4); margin-bottom: var(--s5); }
@@ -1065,6 +1076,64 @@
     border: 1.5px dashed var(--line-strong); border-radius: var(--r-lg);
     padding: var(--s9) var(--s6); text-align: center; color: var(--text-faint);
     font-size: 15px; line-height: 1.7;
+  }
+
+  /* ── zamčený modul: pozvánka, ne zeď ── */
+  .unlock-box {
+    border: 1.5px solid #E8DCC0; background: #FCFAF4;
+    border-radius: var(--r-lg); padding: var(--s6);
+  }
+  .unlock-kicker {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: #F3E9D3; color: #6b5319; border-radius: var(--r-pill);
+    padding: 5px 12px; font-size: 10.5px; font-weight: 800;
+    letter-spacing: .1em; text-transform: uppercase;
+  }
+  .unlock-title {
+    margin: var(--s4) 0 var(--s3); font-size: 21px; font-weight: 800;
+    letter-spacing: -.02em; line-height: 1.25;
+  }
+  .unlock-lead { font-size: 15.5px; line-height: 1.75; color: var(--text-muted); }
+  .unlock-lead p + p { margin-top: var(--s3); }
+  .unlock-inside {
+    margin-top: var(--s5); padding-top: var(--s5); border-top: 1px solid #E8DCC0;
+  }
+  .unlock-inside-head {
+    font-size: 11px; font-weight: 800; letter-spacing: .1em;
+    text-transform: uppercase; color: #6b5319; margin-bottom: var(--s3);
+  }
+  .unlock-list { list-style: none; display: flex; flex-direction: column; gap: var(--s2); }
+  .unlock-list li {
+    display: flex; gap: var(--s3); align-items: baseline;
+    font-size: 15px; line-height: 1.6; color: var(--text);
+  }
+  .unlock-list li::before { content: '›'; color: #6b5319; font-weight: 800; flex: 0 0 auto; }
+  .unlock-actions {
+    margin-top: var(--s6); padding-top: var(--s5); border-top: 1px solid #E8DCC0;
+  }
+  .unlock-label { font-size: 13.5px; font-weight: 700; color: var(--text); margin-bottom: var(--s3); }
+  .unlock-form { display: flex; gap: var(--s3); flex-wrap: wrap; }
+  .unlock-input {
+    flex: 1 1 190px; min-width: 0;
+    border: 1.5px solid var(--line-strong); border-radius: var(--r-md);
+    padding: 12px var(--s4); font-family: inherit; font-size: 15px;
+    background: var(--surface); color: var(--text);
+  }
+  .unlock-input:focus { outline: 2px solid var(--tyrkys); outline-offset: 1px; border-color: var(--tyrkys); }
+  .unlock-btn {
+    flex: 0 0 auto; border: none; border-radius: var(--r-md); cursor: pointer;
+    padding: 12px var(--s6); font-family: inherit; font-size: 15px; font-weight: 800;
+    background: var(--tyrkys); color: #fff;
+  }
+  .unlock-btn:hover { background: var(--tyrkys-dark); }
+  .unlock-err {
+    display: none; margin-top: var(--s3);
+    font-size: 13.5px; font-weight: 700; color: #C4275A;
+  }
+  .unlock-err.show { display: block; }
+  .unlock-buy {
+    display: inline-block; margin-top: var(--s4); font-size: 14px;
+    font-weight: 700; color: var(--tyrkys-dark);
   }
 
   /* ── velké tlačítko hotovo + pochvala ── */
@@ -1573,10 +1642,31 @@
   var STORAGE_CHECKLIST = "nezOdletisChecklist";
   var STORAGE_TRAVELERS = "nezOdletisCestujici";
   var STORAGE_ANSWERS = "nezOdletisOdpovedi";
+  var STORAGE_UNLOCKED = "nezOdletisOdemceno";
+
+  /* ── balíčky ──────────────────────────────────────────────────────────────
+     Tady se mění, co je za co. Modul patří do balíčku přes pole `balicek`,
+     o přístupu rozhoduje jediná funkce isUnlocked(). Nikde jinde se stav
+     nákupu neřeší.
+
+     POZOR: zámek je měkký. Bez serveru je obsah i logika v souboru u
+     uživatele, takže kdo otevře konzoli, odemkne si vše. Pro texty a
+     checklisty to stačí. Videa patří mimo appku, tam zámek opravdu drží.
+     Viz CLAUDE.md, sekce 10.
+
+     `odkaz` = URL prodejní stránky. Dokud je prázdný, tlačítko na koupi se
+     nezobrazí a zůstane jen zadání kódu.                                    */
+  var BALICKY = {
+    zaklad:    { nazev: "Základ",    rozsah: "moduly 1 až 4", odkaz: "" },
+    rozsireni: { nazev: "Rozšíření", rozsah: "moduly 5 až 7", odkaz: "" }
+  };
+  var VYCHOZI_BALICKY = ["zaklad"];          // co má kupující odemčené rovnou
+  var KODY = { "ROZSIRENI": "rozsireni" };   // odemykací kód → balíček
 
   var MODULES = [
     {
       id: "destinace",
+      balicek: "zaklad",
       name: "Kdy a kam: rozhodnutí, které udělá nebo zkazí celou cestu",
       shortName: "Kdy a kam",
       emoji: "📍",
@@ -1760,6 +1850,7 @@
     // počet se bere automaticky z jeho kroků, takže se čísla nemůžou rozejít.
     {
       id: "doklady",
+      balicek: "zaklad",
       name: "Doklady a formálnosti: co musíš mít vyřízené, než nastoupíš do letadla",
       shortName: "Doklady",
       dashboard: true,
@@ -2004,19 +2095,19 @@
         }
       ]
     },
-    { id: "letenky",    name: "Letenky a ubytování",          emoji: "✈️", time: "25 min", lessons: 6,
+    { id: "letenky",    balicek: "zaklad",    name: "Letenky a ubytování",          emoji: "✈️", time: "25 min", lessons: 6,
       accent: "#FF6FA5", accentSoft: "#FFF1F6",
       desc: "Kde hledat, kdy kupovat a čemu u levných nabídek nevěřit." },
-    { id: "doprava",    name: "Doprava na místě",             emoji: "🚗", time: "15 min", lessons: 5,
+    { id: "doprava",    balicek: "zaklad",    name: "Doprava na místě",             emoji: "🚗", time: "15 min", lessons: 5,
       accent: "#E8783F", accentSoft: "#FFF1E8",
       desc: "Auto, dálnice, aplikace. Jak se tam pohybovat bez nervů." },
-    { id: "finance",    name: "Finance a placení",            emoji: "💳", time: "15 min", lessons: 5,
+    { id: "finance",    balicek: "rozsireni", name: "Finance a placení",            emoji: "💳", time: "15 min", lessons: 5,
       accent: "#C08A00", accentSoft: "#FFF6DC",
       desc: "Karty, hotovost, spropitné. Kolik si připravit a na co pozor." },
-    { id: "checklisty", name: "Checklisty",                   emoji: "✅", time: "10 min", lessons: 4,
+    { id: "checklisty", balicek: "rozsireni", name: "Checklisty",                   emoji: "✅", time: "10 min", lessons: 4,
       accent: "#0E8A96", accentSoft: "#E2F4F6",
       desc: "Co sbalit, co vytisknout a co mít v příruční tašce." },
-    { id: "krize",      name: "Krizové situace před odletem", emoji: "🆘", time: "15 min", lessons: 5,
+    { id: "krize",      balicek: "rozsireni", name: "Krizové situace před odletem", emoji: "🆘", time: "15 min", lessons: 5,
       accent: "#E85892", accentSoft: "#FFEAF2",
       desc: "Zrušený let, nemoc, ztracený pas. Klidný plán B pro každou z nich." }
   ];
@@ -2095,6 +2186,34 @@
   function saveTravelers(d) { localStorage.setItem(STORAGE_TRAVELERS, JSON.stringify(d)); }
   function loadAnswers()  { try { return JSON.parse(localStorage.getItem(STORAGE_ANSWERS) || "{}"); } catch (e) { return {}; } }
   function saveAnswers(d) { localStorage.setItem(STORAGE_ANSWERS, JSON.stringify(d)); }
+
+  /* ── balíčky: co má uživatel odemčené ── */
+  function loadUnlocked() {
+    try {
+      var raw = localStorage.getItem(STORAGE_UNLOCKED);
+      if (!raw) return VYCHOZI_BALICKY.slice();
+      var arr = JSON.parse(raw);
+      return Array.isArray(arr) ? arr : VYCHOZI_BALICKY.slice();
+    } catch (e) { return VYCHOZI_BALICKY.slice(); }
+  }
+  function saveUnlocked(arr) { localStorage.setItem(STORAGE_UNLOCKED, JSON.stringify(arr)); }
+
+  /* Jediné místo, které rozhoduje o přístupu k modulu. */
+  function isUnlocked(mod) {
+    if (!mod || !mod.balicek) return true;   // modul bez balíčku je vždycky dostupný
+    return loadUnlocked().indexOf(mod.balicek) !== -1;
+  }
+
+  /* Vrátí id balíčku, pokud kód sedí, jinak null. Nezáleží na velikosti písmen. */
+  function balicekProKod(kod) {
+    var klic = String(kod || "").trim().toUpperCase();
+    return Object.prototype.hasOwnProperty.call(KODY, klic) ? KODY[klic] : null;
+  }
+
+  function odemkniBalicek(id) {
+    var akt = loadUnlocked();
+    if (akt.indexOf(id) === -1) { akt.push(id); saveUnlocked(akt); }
+  }
 
   /* ── navigace ── */
   var screens = document.querySelectorAll(".screen");
@@ -2223,7 +2342,8 @@
     function item(opts) {
       var b = document.createElement("button");
       b.type = "button";
-      b.className = "side-item" + (opts.active ? " active" : "") + (opts.done ? " done" : "");
+      b.className = "side-item" + (opts.active ? " active" : "") + (opts.done ? " done" : "") +
+                    (opts.locked ? " locked" : "");
       b.innerHTML =
         '<span class="side-ico">' + opts.ico + '</span>' +
         '<span class="side-body">' +
@@ -2255,12 +2375,17 @@
     MODULES.forEach(function (mod, i) {
       var done = !!progress[mod.id];
       var ready = !!(mod.steps && mod.steps.length);
+      var locked = !isUnlocked(mod);
+      var bal = BALICKY[mod.balicek];
       item({
-        ico: done ? "✓" : (i + 1),
+        ico: locked ? "🔒" : (done ? "✓" : (i + 1)),
         title: mod.shortName || mod.name,
-        meta: modMeta(mod) + (ready ? "" : " · připravuje se"),
+        meta: locked
+          ? "balíček " + (bal ? bal.nazev : mod.balicek)
+          : modMeta(mod) + (ready ? "" : " · připravuje se"),
         active: currentScreen === "s-module" && currentModuleId === mod.id,
-        done: done,
+        done: done && !locked,
+        locked: locked,
         onClick: function () { openModule(mod.id); }
       });
     });
@@ -2404,12 +2529,14 @@
     var totalDays = Math.max(daysUntil(dateStr), 1);
 
     var doneCount = MODULES.filter(function (m) { return progress[m.id]; }).length;
-    var currentIdx = MODULES.findIndex(function (m) { return !progress[m.id]; }); // -1 = všechno hotovo
+    // aktuální = první nehotový, ale zamčené přeskakujeme, tam se nepokračuje
+    var currentIdx = MODULES.findIndex(function (m) { return !progress[m.id] && isUnlocked(m); });
 
     MODULES.forEach(function (mod, i) {
-      var done = !!progress[mod.id];
+      var locked = !isUnlocked(mod);
+      var done = !!progress[mod.id] && !locked;
       var isCurrent = i === currentIdx;
-      var state = done ? "done" : (isCurrent ? "current" : "future");
+      var state = locked ? "future" : (done ? "done" : (isCurrent ? "current" : "future"));
       var ready = !!(mod.steps && mod.steps.length);
 
       var offset = Math.round((totalDays * i) / MODULES.length);
@@ -2420,7 +2547,9 @@
       item.className = "journey-item " + state;
 
       var cta;
-      if (done) {
+      if (locked) {
+        cta = '<button type="button" class="journey-cta is-ghost" data-mod="' + mod.id + '">Odemknout</button>';
+      } else if (done) {
         cta = '<span class="journey-done-tag">✓ Hotovo</span>';
       } else if (isCurrent) {
         cta = '<button type="button" class="journey-cta is-current" data-mod="' + mod.id + '">Pokračovat →</button>';
@@ -2428,15 +2557,19 @@
         cta = '<button type="button" class="journey-cta is-ghost" data-mod="' + mod.id + '">Začít</button>';
       }
 
+      var bal = BALICKY[mod.balicek];
       item.innerHTML =
         '<div class="journey-node" style="' + (state !== "done" ? "background:" + (mod.accentSoft || "") + ";color:" + (mod.accent || "") + ";" : "") + '">' +
-          (done ? "✓" : mod.emoji) +
+          (locked ? "🔒" : (done ? "✓" : mod.emoji)) +
         '</div>' +
         '<div class="journey-card" style="--accent:' + (mod.accent || "") + ';--accent-soft:' + (mod.accentSoft || "") + '">' +
           '<div class="journey-body">' +
             '<span class="journey-when">' + when + '</span>' +
             '<span class="journey-name">' + mod.name + '</span>' +
-            '<span class="journey-meta">' + modMeta(mod) + (ready ? "" : " · připravuje se") + '</span>' +
+            '<span class="journey-meta">' +
+              (locked ? "balíček " + (bal ? bal.nazev : mod.balicek)
+                      : modMeta(mod) + (ready ? "" : " · připravuje se")) +
+            '</span>' +
           '</div>' +
           cta +
         '</div>';
@@ -2493,10 +2626,15 @@
   document.getElementById("st-trezor-link").addEventListener("click", function () { goTo("s-trezor"); });
 
   /* ── uvítací stránka ── */
+  /* Další modul na řadě. Zamčené přeskakujeme, ať tlačítko „Pokračovat"
+     nepošle uživatele do zdi. Když jsou všechny dostupné hotové, nabídneme
+     první zamčený, tam je pozvánka na místě. */
   function nextModuleId() {
     var progress = loadProgress();
-    var next = MODULES.filter(function (m) { return !progress[m.id]; })[0];
-    return next ? next.id : MODULES[0].id;
+    var next = MODULES.filter(function (m) { return !progress[m.id] && isUnlocked(m); })[0];
+    if (next) return next.id;
+    var locked = MODULES.filter(function (m) { return !isUnlocked(m); })[0];
+    return locked ? locked.id : MODULES[0].id;
   }
 
   function renderWelcome() {
@@ -2553,15 +2691,18 @@
 
     MODULES.forEach(function (mod, i) {
       var done = !!progress[mod.id];
-      var isNext = (mod.id === nextId) && !done;
+      var locked = !isUnlocked(mod);
+      var isNext = (mod.id === nextId) && !done && !locked;
       var card = document.createElement("button");
       card.type = "button";
-      card.className = "mg-card" + (done ? " done" : "") + (isNext ? " current" : "");
+      card.className = "mg-card" + (done && !locked ? " done" : "") +
+                       (isNext ? " current" : "") + (locked ? " locked" : "");
       card.innerHTML =
         '<span class="mg-top">' +
           '<span class="mg-label">' + (i + 1) + '. modul</span>' +
-          (isNext ? '<span class="mg-badge">Pokračuj tady</span>'
-                  : (done ? '<span class="mg-check">✓ Hotovo</span>' : '')) +
+          (locked ? '<span class="mg-lock">🔒 Zamčeno</span>'
+                  : (isNext ? '<span class="mg-badge">Pokračuj tady</span>'
+                            : (done ? '<span class="mg-check">✓ Hotovo</span>' : ''))) +
         '</span>' +
         '<span class="mg-title">' + mod.name + '</span>' +
         '<span class="mg-desc">' + (mod.desc || "") + '</span>' +
@@ -3186,6 +3327,85 @@
     })(start);
   }
 
+  /* Pozvánka místo obsahu, když modul patří do nekoupeného balíčku.
+     Ukazuje, co je uvnitř, a nabízí odemčení. Zeď neprodává. */
+  function renderUnlockHtml(mod) {
+    var bal = BALICKY[mod.balicek] || { nazev: mod.balicek, rozsah: "", odkaz: "" };
+
+    var uvnitr = (mod.steps && mod.steps.length)
+      ? mod.steps.map(function (s) { return s.title; })
+      : (mod.desc ? [mod.desc] : []);
+
+    var html =
+      '<div class="unlock-box">' +
+        '<span class="unlock-kicker">🔒 Balíček ' + bal.nazev + '</span>' +
+        '<h3 class="unlock-title">' + mod.name + '</h3>' +
+        '<div class="unlock-lead">' +
+          '<p>Tenhle modul zatím nemáš odemčený. Je součástí balíčku <strong>' +
+            bal.nazev + '</strong>' + (bal.rozsah ? ', kam patří ' + bal.rozsah : '') + '.</p>' +
+          '<p>Až ho budeš mít, projdeme si to spolu stejně jako všechno ostatní: krok po kroku, ' +
+            's checklisty, které si odškrtáš, a bez toho, aby ses to musela dohledávat po fórech.</p>' +
+        '</div>';
+
+    if (uvnitr.length) {
+      html +=
+        '<div class="unlock-inside">' +
+          '<div class="unlock-inside-head">Co je uvnitř</div>' +
+          '<ul class="unlock-list">' +
+            uvnitr.map(function (t) { return '<li>' + t + '</li>'; }).join('') +
+          '</ul>' +
+        '</div>';
+    }
+
+    html +=
+      '<div class="unlock-actions">' +
+        '<div class="unlock-label">Máš odemykací kód? Zadej ho tady.</div>' +
+        '<div class="unlock-form">' +
+          '<input type="text" class="unlock-input" id="unlock-input" ' +
+            'placeholder="Kód z e-mailu" autocomplete="off" spellcheck="false">' +
+          '<button type="button" class="unlock-btn" id="unlock-btn">Odemknout</button>' +
+        '</div>' +
+        '<p class="unlock-err" id="unlock-err">Tenhle kód nesedí. Zkontroluj ho v e-mailu, ' +
+          'na velikosti písmen nezáleží.</p>' +
+        (bal.odkaz
+          ? '<a class="unlock-buy" href="' + bal.odkaz + '" target="_blank" rel="noopener">' +
+              'Chci balíček ' + bal.nazev + ' →</a>'
+          : '') +
+      '</div>' +
+      '</div>';
+
+    return html;
+  }
+
+  /* Obsluha zadání kódu v pozvánce. Po úspěchu modul rovnou otevře. */
+  function initUnlockForm(modId) {
+    var btn = document.getElementById("unlock-btn");
+    var input = document.getElementById("unlock-input");
+    var err = document.getElementById("unlock-err");
+    if (!btn || !input) return;
+
+    function zkus() {
+      var bal = balicekProKod(input.value);
+      if (!bal) {
+        err.classList.add("show");
+        input.focus();
+        input.select();
+        return;
+      }
+      err.classList.remove("show");
+      odemkniBalicek(bal);
+      renderSidebar();
+      renderHome();
+      openModule(modId);
+    }
+
+    btn.addEventListener("click", zkus);
+    input.addEventListener("keydown", function (e) {
+      if (e.key === "Enter") { e.preventDefault(); zkus(); }
+    });
+    input.addEventListener("input", function () { err.classList.remove("show"); });
+  }
+
   function openModule(id) {
     var mod = MODULES.filter(function (m) { return m.id === id; })[0];
     if (!mod) return;
@@ -3209,19 +3429,32 @@
     var praise = document.getElementById("module-praise");
     praise.classList.remove("show");
 
+    var odemceno = isUnlocked(mod);
+
+    // zamčený modul nejde označit za hotový, není co dokončit
     // hotový modul se dá otevřít znovu, ale tlačítko už nenabízíme
     var alreadyDone = !!loadProgress()[id];
-    document.getElementById("btn-module-done").hidden = alreadyDone;
-    document.getElementById("done-hint").hidden = alreadyDone;
-    if (alreadyDone) showPraise(mod, false);
+    document.getElementById("btn-module-done").hidden = alreadyDone || !odemceno;
+    document.getElementById("done-hint").hidden = alreadyDone || !odemceno;
+    if (alreadyDone && odemceno) showPraise(mod, false);
 
     var hookEl = document.getElementById("module-hook");
-    if (mod.hook) {
+    if (mod.hook && odemceno) {
       var hookParas = Array.isArray(mod.hook) ? mod.hook : [mod.hook];
       hookEl.innerHTML = paras(hookParas);
       hookEl.style.display = "block";
     } else {
       hookEl.style.display = "none";
+    }
+
+    // zamčený modul: místo kroků pozvánka, dashboard ani obsah lekce nedávají smysl
+    if (!odemceno) {
+      document.getElementById("module-steps").innerHTML = renderUnlockHtml(mod);
+      renderDashboard(null);                       // schová kartu připravenosti
+      document.getElementById("toc-card").hidden = true;
+      initUnlockForm(mod.id);
+      goTo("s-module");
+      return;
     }
 
     var stepsEl = document.getElementById("module-steps");

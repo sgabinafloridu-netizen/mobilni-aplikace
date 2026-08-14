@@ -179,13 +179,31 @@ Appka není jednorázový kurz, ale **prodejní produkt s balíčky**. I když s
 - **Checklisty ke stažení** (tisk nebo soubor).
 - **Prokliky na Gábiny další produkty**, prodejní videa a moduly.
 
+### Stav: odemykání je postavené
+
+Balíčky Části 1:
+
+| Balíček | Moduly | Odemčeno |
+|---|---|---|
+| `zaklad` | 1 až 4 (Kdy a kam, Doklady, Letenky, Doprava) | rovnou po koupi appky |
+| `rozsireni` | 5 až 7 (Finance, Checklisty, Krize) | až po zadání kódu |
+
+**Kde se co mění** (vše pohromadě nad polem `MODULES`):
+- `BALICKY` — název, rozsah a `odkaz` na prodejní stránku. Dokud je `odkaz` prázdný, tlačítko na koupi se nezobrazí.
+- `VYCHOZI_BALICKY` — co má kupující odemčené hned
+- `KODY` — dvojice odemykací kód → balíček, kód se porovnává bez ohledu na velikost písmen a mezery
+
+Stav odemčení: `localStorage`, klíč `nezOdletisOdemceno` (pole id balíčků).
+
+**Nový modul** = přidat mu pole `balicek`, nic víc. **Nový balíček** = řádek v `BALICKY` a řádek v `KODY`.
+
 ### Co z toho plyne pro architekturu
 
-**1. Zámek odděl od obsahu.** Modul dostane pole `balicek` (např. `"zaklad"`, `"rozsireni"`) a existuje **jediná funkce** `isUnlocked(mod)`. Nikde jinde se stav nákupu neřeší. Přidat pole do `MODULES` teď nestojí nic, dodělávat to zpětně přes celou appku ano.
+**1. Zámek odděl od obsahu.** ✅ Hotovo. O přístupu rozhoduje **jediná funkce** `isUnlocked(mod)`. Nikde jinde se stav nákupu neřeší, ani ve vykreslování menu, dlaždic či časové osy.
 
 **2. Odkazy na videa a produkty patří do dat, ne do textu.** Nikdy nepsat URL natvrdo doprostřed odstavce. Vždy `link{}` nebo samostatné pole, ať jde odkaz vyměnit nebo zamknout na jednom místě.
 
-**3. Zamčený modul se musí chovat jako pozvánka, ne jako zeď.** Ukázat, co uvnitř je, a proč to stojí za to. Prodej přes to, co uživatel právě zjistil, že mu chybí (viz pravidlo z bible Goliášové).
+**3. Zamčený modul se chová jako pozvánka, ne jako zeď.** ✅ Hotovo, funkce `renderUnlockHtml()`. Zamčený modul zůstává všude klikatelný, klik vede na pozvánku: co je uvnitř, pole na kód, případně odkaz na koupi. Zeď neprodává. Prodej přes to, co uživatel právě zjistil, že mu chybí (pravidlo z bible Goliášové).
 
 **4. Část 2 = samostatný soubor ve stejné složce.** Sdílí `localStorage` (stejný origin), takže Trezor a odškrtané položky přetečou z Části 1 automaticky. Klíče proto **nikdy nepřejmenovávat**.
 
