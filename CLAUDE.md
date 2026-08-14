@@ -156,15 +156,38 @@ Gábi je autorka a texty musí znít jejím hlasem. **Role při psaní: špičko
 - **Nikdy slovo „přepážka"** → „imigrační kontrola".
 - **Zvýrazňuj `<strong>`**: jedna klíčová fráze na odstavec nebo položku (číslo, lhůta, výjimka, důsledek). Ne celá věta.
 
+### Metoda: storytelling místo reklamního jazyka (Goliášová)
+
+Jádro v jedné větě: **přestat mluvit reklamní řečí a začít vyprávět příběh v 1. osobě o konkrétním člověku a konkrétním momentu, aby se v tom čtenář poznal.**
+
+**Zakázaný reklamní jazyk** (na tohle lidé reagují automatickým odmítnutím jako na telefonního prodejce): „nabízím", „pokud máte zájem", „ozvěte se mi", „jsme firma, která", výčty služeb, tón shora dolů, oslovení cílové skupiny místo jednoho člověka.
+
+**Techniky, které se v appce reálně používají:**
+
+| Technika | Jak vypadá v praxi |
+|---|---|
+| **Personifikace** | Nudné nebo těžké téma dostane postavu. Strach = paní Cokdyž. |
+| **Curiosity gap** | Začni scénou, kde čtenář neví, kam míříš, pointu odhal až po pár odstavcích. |
+| **Konkrétní mikro-detail** | Ne „krásná pláž", ale „mušle, co ráno vyplavou na Sanibelu". Detail musí být reálný. |
+| **Sebeironie a zranitelnost** | „Sama jsem tomu věřila tak dlouho, až jsem si to dohledala." Gábi nestojí nad čtenářem. |
+| **Přímé oslovení a otázka** | Mluv na jednoho člověka, ptej se tak, aby si odpověděl v hlavě. |
+| **Pojmenuj nepřítele** | Dej blbému zvyku jméno, ať se od něj dá odrazit („mýtus, co si pěstuju jako pokojovou rostlinu"). |
+| **Tučně jen klíčové fráze** | Vzniká tím linka, kterou čtenář přečte i při rychlém projetí. |
+| **Po příběhu praktický postup** | Emoce, a hned za tím konkrétní kroky. V appce to dělá dvojice lead a checklist. |
+
+**Kostra delšího textu:** háček (scéna, ne pozdrav) → rozvinutí → aha moment → most k tématu → jedno CTA → osobní dovětek.
+
+⚠️ **Co si od Goliášové nebrat:** píše hovorově („Hranatej Béda"), tahle značka ne. Ber vypravěčství a odvahu, ne pražské zkratky.
+
 ### Tón
-- Vypravěčství podle Goliášové: scéna místo poučování, konkrétní mikro-detail místo obecného slova, sebeironie („sama jsem tomu věřila"), nikdy mentorský tón shora.
 - **Paní Cokdyž** = strach jako postava, noční směna v 00:47. Nikdy nevyhraje, ale ani nezemře.
+- Komu se píše: **Lenka**, konkrétní člověk se svými strachy (peníze, angličtina, imigrační kontrola, děti), ne „cílovka".
 - ⚠️ **Checklisty a krizové materiály jedou střídmě.** Člověk ve stresu nepotřebuje vtipy, potřebuje jistotu. Vtip maximálně v části položek, ať jde seznam pořád rychle projet očima.
 
 ### Podklady (číst před psaním)
 - `MUJ BRAND/pani-cokdyz-BIBLE.md` — hlas a postava, nejdůležitější
 - `MUJ BRAND/brand-dna-sgabinafloridu (2).md` — mise, tón
-- `Copywriting GOLIASova.md` — metoda, teorie
+- `Copywriting GOLIASova.md` — metoda celá, leží v kořeni `MUJ CLAUDE`, ne v `MUJ BRAND`
 - Ilustrace: `Marketingové podklady/obrazky/` (paní Cokdyž varianty, kreslená Gábi)
 
 ### Fakta
