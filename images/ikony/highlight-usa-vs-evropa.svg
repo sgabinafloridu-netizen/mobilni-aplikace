@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400">
+  <!-- Highlight cover: USA vs. Evropa. Čistá ikona bez postavy — dvoubarevná placka VS. -->
+  <rect x="0" y="0" width="400" height="400" fill="#FFFFFF"/>
+  <circle cx="200" cy="200" r="185" fill="#E6F8FA"/>
+
+  <text x="70" y="100" font-family="Arial, sans-serif" font-size="18" fill="#FF6FA5">&#10022;</text>
+  <text x="310" y="310" font-family="Arial, sans-serif" font-size="16" fill="#1AC0CE">&#10022;</text>
+
+  <!-- placka VS -->
+  <circle cx="200" cy="200" r="120" fill="#FFFFFF"/>
+  <path d="M200 80 A120 120 0 0 0 200 320 Z" fill="#1AC0CE"/>
+  <path d="M200 80 A120 120 0 0 1 200 320 Z" fill="#FF6FA5"/>
+  <circle cx="200" cy="200" r="120" fill="none" stroke="#14233A" stroke-width="8"/>
+  <line x1="200" y1="80" x2="200" y2="320" stroke="#14233A" stroke-width="6"/>
+  <text x="200" y="222" text-anchor="middle" font-family="Arial, sans-serif" font-weight="bold" font-size="76" fill="#FFFFFF">VS</text>
+
+  <!-- drobné hvězdičky na tyrkysové straně -->
+  <circle cx="150" cy="140" r="4" fill="#FFFFFF"/>
+  <circle cx="170" cy="120" r="4" fill="#FFFFFF"/>
+  <circle cx="192" cy="112" r="4" fill="#FFFFFF"/>
+</svg>

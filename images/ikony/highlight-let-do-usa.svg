@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400">
+  <!-- Highlight cover: Let do USA. Čistá ikona bez postavy — klasické letadýlko. -->
+  <rect x="0" y="0" width="400" height="400" fill="#FFFFFF"/>
+  <circle cx="200" cy="200" r="185" fill="#E6F8FA"/>
+
+  <text x="75" y="100" font-family="Arial, sans-serif" font-size="18" fill="#FF6FA5">&#10022;</text>
+  <text x="310" y="120" font-family="Arial, sans-serif" font-size="16" fill="#1AC0CE">&#10022;</text>
+
+  <!-- letadélko: klasický tvar (Material "flight" glyph) -->
+  <g transform="translate(200,208) rotate(-15) scale(9.5) translate(-11.5,-12)">
+    <path d="M21,16v-2l-8-5V3.5C13,2.67,12.33,2,11.5,2S10,2.67,10,3.5V9l-8,5v2l8-2.5V19l-2.5,1.5V22l4-1.5l4,1.5v-1.5L13,19v-5.5L21,16z" fill="#14233A"/>
+  </g>
+
+  <!-- stopa za letadélkem -->
+  <path d="M64 300 Q104 292 142 302" stroke="#1AC0CE" stroke-width="8" fill="none" stroke-linecap="round" opacity="0.55"/>
+  <path d="M78 322 Q112 316 144 324" stroke="#1AC0CE" stroke-width="8" fill="none" stroke-linecap="round" opacity="0.35"/>
+</svg>

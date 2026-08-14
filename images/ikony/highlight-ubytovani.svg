@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400">
+  <!-- Ikona: Ubytování. Postel z boku, polštář a přehoz. Těžiště kolem středu kruhu. -->
+  <rect x="0" y="0" width="400" height="400" fill="#FFFFFF"/>
+  <circle cx="200" cy="200" r="185" fill="#E6F8FA"/>
+
+  <text x="75" y="100" font-family="Arial, sans-serif" font-size="18" fill="#FF6FA5">&#10022;</text>
+  <text x="310" y="300" font-family="Arial, sans-serif" font-size="16" fill="#1AC0CE">&#10022;</text>
+
+  <!-- noční lampička -->
+  <circle cx="102" cy="92" r="20" fill="#FFD23F"/>
+  <line x1="102" y1="112" x2="102" y2="126" stroke="#14233A" stroke-width="8" stroke-linecap="round"/>
+
+  <!-- čelo postele -->
+  <rect x="86" y="126" width="32" height="144" rx="14" fill="#14233A"/>
+
+  <!-- matrace -->
+  <rect x="92" y="196" width="226" height="54" rx="18" fill="#F4FBFC" stroke="#14233A" stroke-width="9"/>
+
+  <!-- přehoz -->
+  <path d="M202 201 L313 201 Q313 201 313 212 L313 234 Q313 245 302 245 L202 245 Z" fill="#1AC0CE"/>
+  <line x1="202" y1="201" x2="202" y2="245" stroke="#14233A" stroke-width="8" stroke-linecap="round"/>
+
+  <!-- polštář -->
+  <rect x="120" y="156" width="78" height="42" rx="16" fill="#FF6FA5" stroke="#14233A" stroke-width="8"/>
+
+  <!-- nohy -->
+  <line x1="108" y1="250" x2="108" y2="286" stroke="#14233A" stroke-width="13" stroke-linecap="round"/>
+  <line x1="302" y1="250" x2="302" y2="286" stroke="#14233A" stroke-width="13" stroke-linecap="round"/>
+</svg>

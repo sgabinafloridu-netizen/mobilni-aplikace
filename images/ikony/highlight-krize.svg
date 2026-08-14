@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400">
+  <!-- Ikona: Krizové situace. Záchranný kruh, ne poplašná siréna. Plán B, ne panika. -->
+  <rect x="0" y="0" width="400" height="400" fill="#FFFFFF"/>
+  <circle cx="200" cy="200" r="185" fill="#E6F8FA"/>
+
+  <text x="75" y="100" font-family="Arial, sans-serif" font-size="18" fill="#FF6FA5">&#10022;</text>
+  <text x="310" y="300" font-family="Arial, sans-serif" font-size="16" fill="#1AC0CE">&#10022;</text>
+
+  <!-- kruh -->
+  <circle cx="200" cy="200" r="98" fill="#FF6FA5" stroke="#14233A" stroke-width="9"/>
+
+  <!-- bílé segmenty -->
+  <rect x="184" y="98" width="32" height="56" rx="6" fill="#F4FBFC"/>
+  <rect x="184" y="246" width="32" height="56" rx="6" fill="#F4FBFC"/>
+  <rect x="98" y="184" width="56" height="32" rx="6" fill="#F4FBFC"/>
+  <rect x="246" y="184" width="56" height="32" rx="6" fill="#F4FBFC"/>
+
+  <!-- vnitřek -->
+  <circle cx="200" cy="200" r="52" fill="#E6F8FA" stroke="#14233A" stroke-width="9"/>
+
+  <!-- lano -->
+  <path d="M268 132 Q306 108 318 74" fill="none" stroke="#FFD23F" stroke-width="10" stroke-linecap="round"/>
+  <circle cx="318" cy="70" r="11" fill="#FFD23F" stroke="#14233A" stroke-width="4"/>
+</svg>

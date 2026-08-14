@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400">
+  <!-- Highlight cover: My story. Čistá ikona bez postavy — otevřený deníček se srdíčkem. -->
+  <rect x="0" y="0" width="400" height="400" fill="#FFFFFF"/>
+  <circle cx="200" cy="200" r="185" fill="#E6F8FA"/>
+
+  <text x="75" y="100" font-family="Arial, sans-serif" font-size="18" fill="#FF6FA5">&#10022;</text>
+  <text x="310" y="300" font-family="Arial, sans-serif" font-size="16" fill="#1AC0CE">&#10022;</text>
+
+  <!-- deníček: dvě stránky -->
+  <path d="M90 150 Q200 120 200 150 L200 300 Q200 270 90 300 Z" fill="#F4FBFC" stroke="#14233A" stroke-width="8" stroke-linejoin="round"/>
+  <path d="M310 150 Q200 120 200 150 L200 300 Q200 270 310 300 Z" fill="#F4FBFC" stroke="#14233A" stroke-width="8" stroke-linejoin="round"/>
+
+  <!-- srdíčko na levé stránce -->
+  <path d="M158 195 C148 178 122 186 122 205 C122 222 158 246 158 246 C158 246 194 222 194 205 C194 186 168 178 158 195 Z" fill="#FF6FA5"/>
+
+  <!-- řádky rukopisu na pravé stránce -->
+  <line x1="228" y1="185" x2="268" y2="180" stroke="#1AC0CE" stroke-width="7" stroke-linecap="round"/>
+  <line x1="228" y1="210" x2="276" y2="207" stroke="#1AC0CE" stroke-width="7" stroke-linecap="round"/>
+  <line x1="228" y1="235" x2="260" y2="233" stroke="#1AC0CE" stroke-width="7" stroke-linecap="round"/>
+
+  <!-- pírko -->
+  <line x1="180" y1="270" x2="252" y2="140" stroke="#FFD23F" stroke-width="10" stroke-linecap="round"/>
+  <circle cx="180" cy="270" r="6" fill="#14233A"/>
+</svg>

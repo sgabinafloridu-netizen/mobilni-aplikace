@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400">
+  <!-- Highlight cover: Příroda a pláže. Čistá ikona bez postavy — palma, slunce, vlna. -->
+  <rect x="0" y="0" width="400" height="400" fill="#FFFFFF"/>
+  <circle cx="200" cy="200" r="185" fill="#E6F8FA"/>
+
+  <!-- sluníčko -->
+  <circle cx="278" cy="110" r="34" fill="#FFD23F"/>
+  <line x1="278" y1="60" x2="278" y2="44" stroke="#FFD23F" stroke-width="7" stroke-linecap="round"/>
+  <line x1="322" y1="110" x2="338" y2="110" stroke="#FFD23F" stroke-width="7" stroke-linecap="round"/>
+  <line x1="309" y1="79" x2="320" y2="68" stroke="#FFD23F" stroke-width="7" stroke-linecap="round"/>
+  <line x1="309" y1="141" x2="320" y2="152" stroke="#FFD23F" stroke-width="7" stroke-linecap="round"/>
+
+  <!-- vlnky -->
+  <path d="M60 300 Q90 284 120 300 T180 300" stroke="#1AC0CE" stroke-width="9" fill="none" stroke-linecap="round"/>
+  <path d="M60 322 Q90 306 120 322 T180 322" stroke="#1AC0CE" stroke-width="9" fill="none" stroke-linecap="round" opacity="0.55"/>
+
+  <!-- kmen palmy -->
+  <path d="M195 320 Q186 250 210 190" stroke="#14233A" stroke-width="16" fill="none" stroke-linecap="round"/>
+
+  <!-- listy palmy -->
+  <g stroke="#14233A" stroke-width="8" stroke-linecap="round">
+    <path d="M210 190 Q170 150 120 158" fill="none"/>
+    <path d="M210 190 Q190 130 140 108" fill="none"/>
+    <path d="M210 190 Q220 122 200 74" fill="none"/>
+    <path d="M210 190 Q248 130 300 118" fill="none"/>
+    <path d="M210 190 Q258 152 292 168" fill="none"/>
+  </g>
+  <g fill="#1AC0CE">
+    <path d="M210 190 Q170 150 120 158 Q168 172 210 198 Z"/>
+    <path d="M210 190 Q190 130 140 108 Q182 138 216 196 Z"/>
+    <path d="M210 190 Q248 130 300 118 Q252 142 216 196 Z"/>
+  </g>
+  <g fill="#FF6FA5">
+    <path d="M210 190 Q220 122 200 74 Q226 130 218 196 Z"/>
+    <path d="M210 190 Q258 152 292 168 Q244 168 214 198 Z"/>
+  </g>
+
+  <!-- kokosy -->
+  <circle cx="202" cy="204" r="9" fill="#FF6FA5" stroke="#14233A" stroke-width="3"/>
+  <circle cx="216" cy="210" r="9" fill="#FFD23F" stroke="#14233A" stroke-width="3"/>
+</svg>

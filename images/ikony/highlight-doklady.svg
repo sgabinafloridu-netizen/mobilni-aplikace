@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400">
+  <!-- Ikona: Doklady. Biometrický pas se zlatým symbolem čipu. -->
+  <rect x="0" y="0" width="400" height="400" fill="#FFFFFF"/>
+  <circle cx="200" cy="200" r="185" fill="#E6F8FA"/>
+
+  <text x="75" y="100" font-family="Arial, sans-serif" font-size="18" fill="#FF6FA5">&#10022;</text>
+  <text x="310" y="300" font-family="Arial, sans-serif" font-size="16" fill="#1AC0CE">&#10022;</text>
+
+  <!-- stránky vykukující zpod desek -->
+  <rect x="258" y="100" width="18" height="200" rx="9" fill="#F4FBFC" stroke="#14233A" stroke-width="5"/>
+
+  <!-- desky pasu -->
+  <rect x="124" y="88" width="146" height="224" rx="16" fill="#14233A"/>
+
+  <!-- zlatý symbol čipu -->
+  <rect x="166" y="168" width="62" height="46" rx="7" fill="none" stroke="#FFD23F" stroke-width="6"/>
+  <rect x="182" y="182" width="30" height="18" rx="3" fill="#FFD23F"/>
+  <line x1="166" y1="184" x2="150" y2="184" stroke="#FFD23F" stroke-width="6" stroke-linecap="round"/>
+  <line x1="166" y1="198" x2="150" y2="198" stroke="#FFD23F" stroke-width="6" stroke-linecap="round"/>
+  <line x1="228" y1="184" x2="244" y2="184" stroke="#FFD23F" stroke-width="6" stroke-linecap="round"/>
+  <line x1="228" y1="198" x2="244" y2="198" stroke="#FFD23F" stroke-width="6" stroke-linecap="round"/>
+
+  <!-- řádky s údaji -->
+  <line x1="158" y1="252" x2="236" y2="252" stroke="#1AC0CE" stroke-width="9" stroke-linecap="round"/>
+  <line x1="158" y1="278" x2="206" y2="278" stroke="#FF6FA5" stroke-width="9" stroke-linecap="round"/>
+
+  <!-- horní ražba -->
+  <line x1="158" y1="126" x2="236" y2="126" stroke="#FFD23F" stroke-width="7" stroke-linecap="round" opacity="0.75"/>
+</svg>

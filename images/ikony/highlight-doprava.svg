@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400">
+  <!-- Ikona: Doprava na místě. Auto z boku na silnici. -->
+  <rect x="0" y="0" width="400" height="400" fill="#FFFFFF"/>
+  <circle cx="200" cy="200" r="185" fill="#E6F8FA"/>
+
+  <text x="75" y="100" font-family="Arial, sans-serif" font-size="18" fill="#FF6FA5">&#10022;</text>
+  <text x="310" y="300" font-family="Arial, sans-serif" font-size="16" fill="#1AC0CE">&#10022;</text>
+
+  <!-- karoserie -->
+  <path d="M84 250 L84 214 Q84 202 98 198 L138 186 Q160 152 200 150 L248 150 Q272 152 288 186 L302 192 Q316 198 316 212 L316 250 Z"
+        fill="#1AC0CE" stroke="#14233A" stroke-width="9" stroke-linejoin="round"/>
+
+  <!-- okna -->
+  <path d="M150 188 L168 164 L192 164 L192 188 Z" fill="#F4FBFC" stroke="#14233A" stroke-width="6" stroke-linejoin="round"/>
+  <path d="M208 164 L244 164 Q262 168 274 188 L208 188 Z" fill="#F4FBFC" stroke="#14233A" stroke-width="6" stroke-linejoin="round"/>
+
+  <!-- světlo -->
+  <circle cx="306" cy="222" r="9" fill="#FFD23F" stroke="#14233A" stroke-width="4"/>
+
+  <!-- kola -->
+  <circle cx="140" cy="252" r="32" fill="#14233A"/>
+  <circle cx="140" cy="252" r="13" fill="#F4FBFC"/>
+  <circle cx="268" cy="252" r="32" fill="#14233A"/>
+  <circle cx="268" cy="252" r="13" fill="#F4FBFC"/>
+
+  <!-- silnice -->
+  <line x1="66" y1="300" x2="140" y2="300" stroke="#14233A" stroke-width="9" stroke-linecap="round" opacity="0.28"/>
+  <line x1="170" y1="300" x2="230" y2="300" stroke="#FF6FA5" stroke-width="9" stroke-linecap="round"/>
+  <line x1="260" y1="300" x2="334" y2="300" stroke="#14233A" stroke-width="9" stroke-linecap="round" opacity="0.28"/>
+</svg>
