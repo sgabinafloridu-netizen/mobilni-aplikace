@@ -1645,9 +1645,19 @@
   var STORAGE_UNLOCKED = "nezOdletisOdemceno";
 
   /* ── balíčky ──────────────────────────────────────────────────────────────
-     Tady se mění, co je za co. Modul patří do balíčku přes pole `balicek`,
-     o přístupu rozhoduje jediná funkce isUnlocked(). Nikde jinde se stav
-     nákupu neřeší.
+     POZOR NA DVOJÍ VÝZNAM SLOVA „MODUL":
+       · v appce = kapitola uvnitř této části (Kdy a kam, Doklady, …), 7 kusů
+       · ve strategii = samostatně prodejný produkt (Před odletem, Po příletu,
+         Florida, New York, parky, …)
+     Celá tahle appka je JEDEN strategický modul: „Před odletem", cena kolem
+     1 500 Kč. Dělit ji uvnitř na placené části se neplánuje.
+
+     Kapitola patří do balíčku přes pole `balicek`, o přístupu rozhoduje
+     jediná funkce isUnlocked(). Nikde jinde se stav nákupu neřeší.
+
+     Až přibudou další produkty (Po příletu, Florida, …), přidají se sem jako
+     nové balíčky a jejich kapitoly budou v appce vidět, ale zamčené. Přesně
+     tak to chce strategie: zákazník vidí, co si může dokoupit.
 
      POZOR: zámek je měkký. Bez serveru je obsah i logika v souboru u
      uživatele, takže kdo otevře konzoli, odemkne si vše. Pro texty a
@@ -1657,16 +1667,15 @@
      `odkaz` = URL prodejní stránky. Dokud je prázdný, tlačítko na koupi se
      nezobrazí a zůstane jen zadání kódu.                                    */
   var BALICKY = {
-    zaklad:    { nazev: "Základ",    rozsah: "moduly 1 až 4", odkaz: "" },
-    rozsireni: { nazev: "Rozšíření", rozsah: "moduly 5 až 7", odkaz: "" }
+    "pred-odletem": { nazev: "Před odletem", rozsah: "celá tahle část", odkaz: "" }
   };
-  var VYCHOZI_BALICKY = ["zaklad"];          // co má kupující odemčené rovnou
-  var KODY = { "ROZSIRENI": "rozsireni" };   // odemykací kód → balíček
+  var VYCHOZI_BALICKY = ["pred-odletem"];  // co má kupující odemčené rovnou
+  var KODY = {};                           // kód → balíček, zatím není co odemykat
 
   var MODULES = [
     {
       id: "destinace",
-      balicek: "zaklad",
+      balicek: "pred-odletem",
       name: "Kdy a kam: rozhodnutí, které udělá nebo zkazí celou cestu",
       shortName: "Kdy a kam",
       emoji: "📍",
@@ -1850,7 +1859,7 @@
     // počet se bere automaticky z jeho kroků, takže se čísla nemůžou rozejít.
     {
       id: "doklady",
-      balicek: "zaklad",
+      balicek: "pred-odletem",
       name: "Doklady a formálnosti: co musíš mít vyřízené, než nastoupíš do letadla",
       shortName: "Doklady",
       dashboard: true,
@@ -2095,19 +2104,19 @@
         }
       ]
     },
-    { id: "letenky",    balicek: "zaklad",    name: "Letenky a ubytování",          emoji: "✈️", time: "25 min", lessons: 6,
+    { id: "letenky",    balicek: "pred-odletem", name: "Letenky a ubytování",          emoji: "✈️", time: "25 min", lessons: 6,
       accent: "#FF6FA5", accentSoft: "#FFF1F6",
       desc: "Kde hledat, kdy kupovat a čemu u levných nabídek nevěřit." },
-    { id: "doprava",    balicek: "zaklad",    name: "Doprava na místě",             emoji: "🚗", time: "15 min", lessons: 5,
+    { id: "doprava",    balicek: "pred-odletem", name: "Doprava na místě",             emoji: "🚗", time: "15 min", lessons: 5,
       accent: "#E8783F", accentSoft: "#FFF1E8",
       desc: "Auto, dálnice, aplikace. Jak se tam pohybovat bez nervů." },
-    { id: "finance",    balicek: "rozsireni", name: "Finance a placení",            emoji: "💳", time: "15 min", lessons: 5,
+    { id: "finance",    balicek: "pred-odletem", name: "Finance a placení",            emoji: "💳", time: "15 min", lessons: 5,
       accent: "#C08A00", accentSoft: "#FFF6DC",
       desc: "Karty, hotovost, spropitné. Kolik si připravit a na co pozor." },
-    { id: "checklisty", balicek: "rozsireni", name: "Checklisty",                   emoji: "✅", time: "10 min", lessons: 4,
+    { id: "checklisty", balicek: "pred-odletem", name: "Checklisty",                   emoji: "✅", time: "10 min", lessons: 4,
       accent: "#0E8A96", accentSoft: "#E2F4F6",
       desc: "Co sbalit, co vytisknout a co mít v příruční tašce." },
-    { id: "krize",      balicek: "rozsireni", name: "Krizové situace před odletem", emoji: "🆘", time: "15 min", lessons: 5,
+    { id: "krize",      balicek: "pred-odletem", name: "Krizové situace před odletem", emoji: "🆘", time: "15 min", lessons: 5,
       accent: "#E85892", accentSoft: "#FFEAF2",
       desc: "Zrušený let, nemoc, ztracený pas. Klidný plán B pro každou z nich." }
   ];
