@@ -1863,20 +1863,21 @@
       name: "Doklady a formálnosti: co musíš mít vyřízené, než nastoupíš do letadla",
       shortName: "Doklady",
       dashboard: true,
+      dashboardTitle: "Připravenost na doklady",
       emoji: "📄",
       time: "20 min",
       accent: "#0E5A66", accentSoft: "#E4F0F2",
       desc: "ESTA, pas, pojištění. Co vyřídit, v jakém pořadí a jak dlouho to trvá.",
       prep: "<strong>Cestovní pas po ruce.</strong> Nic dalšího zatím shánět nemusíš, tenhle modul ti řekne přesně co a v jakém pořadí.",
       hook: [
-        "Kolikrát se mě lidi ptají, jestli fakt stačí jen pas a ESTA. Odpověď je: skoro vždycky ano. Jenže <strong>to slovo skoro dokáže na letišti pokazit celou dovolenou</strong>. Viděla jsem klienty, co doletěli až do Miami a <strong>hned je posadili zpátky do letadla domů</strong>, protože jim ESTA vypršela před 2 dny, nebo protože u přepážky neuměli říct adresu první noci a imigrační úředník to nebral na lehkou váhu. V tomhle modulu projdeme přesně to, co musíš mít vyřízené, v jakém pořadí, a hlavně, co si internet plete."
+        "Kolikrát se mě lidi ptají, jestli fakt stačí jen pas a ESTA. Odpověď je: skoro vždycky ano. Jenže <strong>to slovo skoro dokáže na letišti pokazit celou dovolenou</strong>. Viděla jsem klienty, co doletěli až do Miami a <strong>hned je posadili zpátky do letadla domů</strong>, protože jim ESTA vypršela před 2 dny, nebo protože na imigrační kontrole neuměli říct adresu první noci a úředník to nebral na lehkou váhu. V tomhle modulu projdeme přesně to, co musíš mít vyřízené, v jakém pořadí, a hlavně, co si internet plete."
       ],
       praise: {
         emoji: "📄",
         title: "Doklady máš srovnané. Teď už tě na letišti nic nepřekvapí.",
         text:
           "Teď už víš, že biometrický pas nestačí jen mít, musí platit celý pobyt. Že ESTA se " +
-          "kupuje jen na jednom místě, ne u prvního webu, co vyskočí v Googlu. A že u přepážky " +
+          "kupuje jen na jednom místě, ne u prvního webu, co vyskočí v Googlu. A že na imigrační " +
           "budeš umět odpovědět na otázku, kterou spousta lidí zvorá: kde spíš tu první noc. " +
           "Paní Cokdyž si tentokrát bude muset najít jiné téma k řešení."
       },
@@ -2104,9 +2105,150 @@
         }
       ]
     },
-    { id: "letenky",    balicek: "pred-odletem", name: "Letenky a ubytování",          emoji: "✈️", time: "25 min", lessons: 6,
+    {
+      id: "letenky",
+      balicek: "pred-odletem",
+      name: "Letenky: kdy koupit a proč o všem rozhoduje přestup",
+      shortName: "Letenky",
+      dashboard: true,
+      dashboardTitle: "Připravenost na letenku",
+      emoji: "✈️",
+      time: "20 min",
+      accent: "#C4275A", accentSoft: "#FFEFF4",
+      desc: "Kdy kupovat, jak dlouhý přestup si nechat a co zkontrolovat, než klikneš na zaplatit.",
+      prep: "<strong>Zatím nic shánět nemusíš.</strong> Datum odletu už appka zná, takže si tenhle modul projdi dřív, než začneš letenky vůbec hledat.",
+      hook: [
+        "Klienti mi pořád posílají screenshoty s jedinou otázkou: je tohle dobrá cena? A já se skoro nikdy nedívám na cenu první. Dívám se na <strong>přestup</strong>. Protože nejdražší letenka, jakou si můžeš koupit, je ta levná s hodinou a půl na přestup v Americe. Tam se totiž nepřestupuje jako v Evropě, a kdo to neví, stojí odpoledne u pásu s kufrem v ruce a dívá se, jak mu druhé letadlo odlétá bez něj. V tomhle modulu si projdeme, kdy má smysl kupovat, jak dlouhý přestup si nechat a co zkontrolovat, než pustíš peníze."
+      ],
+      praise: {
+        emoji: "✈️",
+        title: "Letenka je vyřešená a přestup ti drží.",
+        text:
+          "Teď už víš, kdy má smysl kupovat a kdy jen zbytečně sleduješ ceny. Že se v Americe " +
+          "u prvního letiště vyzvedává kufr, i když letíš dál, a proto potřebuješ delší přestup, " +
+          "než ti nabídne vyhledávač. A že jméno na letence musí sedět s pasem do písmene. " +
+          "Paní Cokdyž si může nechat zdát o zmeškaném spoji, ty už víš, jak se mu vyhnout."
+      },
+      steps: [
+        {
+          icon: "📅",
+          kicker: "Krok 1",
+          title: "Kdy kupovat, ať zbytečně nepřeplatíš",
+          lead: [
+            "Tuhle otázku dostávám ze všech nejčastěji: kdy je ta správná chvíle koupit? Odpověď, kterou nikdo nechce slyšet, zní, že neexistuje jeden magický den, kdy jsou letenky nejlevnější. Existuje <strong>okno</strong>, ve kterém se vyplatí kupovat. Mimo něj platíš navíc, ať už proto, že jsi moc brzy, nebo moc pozdě.",
+            "Appka zná datum tvého odletu, tak si to spočítá za tebe."
+          ],
+          bookingCheck: true,
+          why: {
+            title: "Proč je to důležité",
+            body: [
+              "Aerolinky nasazují ceny podle toho, kolik míst už je prodaných, ne podle kalendáře. Rok dopředu je letadlo skoro prázdné a cena drží nahoře, protože není kam spěchat. Pár týdnů před odletem jde cena nahoru znovu, tentokrát proto, že kdo kupuje na poslední chvíli, obvykle letět musí. <strong>Mezi tím je okno</strong>, kdy se letadlo plní a aerolinka má důvod lákat.",
+              "U letů přes Atlantik vychází to okno zhruba na <strong>2 až 8 měsíců</strong> před odletem. V hlavní sezóně, tedy v létě a kolem Vánoc, se posouvá dřív, protože se místa vyprodají rychleji. Mimo sezónu se dá naopak klidně čekat déle."
+            ]
+          },
+          note: {
+            title: "Ještě jedna věc",
+            body: [
+              "Nejlevnější letenka není automaticky nejlepší. Než se rozhodneš podle ceny, přičti si k ní <strong>zavazadlo, výběr sedadla a čas navíc</strong> strávený na přestupu. Letenka o 2 000 Kč levnější, zato s přestupem v pět ráno a bez kufru v ceně, nakonec vyjde dráž. Jen to zjistíš až u odbavení."
+            ]
+          }
+        },
+        {
+          icon: "🔄",
+          kicker: "Krok 2",
+          title: "Přestup v Americe: tady se to kazí nejčastěji",
+          lead: [
+            "Jestli si máš z celého tohohle modulu odnést jedinou věc, ať je to tahle. <strong>V Americe se nepřestupuje jako v Evropě.</strong>",
+            "Když přiletíš do USA, projdeš imigrační kontrolou <strong>na prvním americkém letišti</strong>, kde přistaneš, i když pokračuješ dál. Tam si vyzvedneš kufr, projdeš s ním celnicí a znovu ho odbavíš. Teprve potom jdeš k navazujícímu letu. Nedá se to obejít a kufr za tebe nikdo nepřeloží."
+          ],
+          toggleQuestions: [
+            {
+              id: "prestup-usa",
+              question: "Máš v plánu přestup na americkém letišti?",
+              yesWarning: "Pak si na něj nech <strong>aspoň 3 hodiny</strong>. Vyhledávač ti nabídne klidně 90 minut, protože počítá jen s přeběhnutím mezi branami. Nepočítá s frontou na imigrační kontrole, s vyzvednutím kufru ani s tím, že ho musíš znovu odbavit."
+            }
+          ],
+          checklist: [
+            "Zkontrolovat čas mezi přílety a odlety, u přestupu v USA <strong>aspoň 3 hodiny</strong>",
+            "Ověřit, že mám ESTA, <strong>platí i pro pouhý tranzit</strong> přes americké letiště",
+            "Zjistit, jestli mám celou cestu <strong>na jedné rezervaci</strong>, nebo jako dvě samostatné letenky"
+          ],
+          trap: {
+            title: "Pozor na tohle",
+            body: [
+              "Dvě samostatně koupené letenky vypadají levněji, ale celé riziko nesou na tobě. Když první let nabere zpoždění a druhý ti uletí, <strong>aerolinka té druhé letenky ti nic nedluží</strong>, protože o tvém prvním letu nikdy nevěděla. Novou letenku si koupíš znovu a za cenu na poslední chvíli.",
+              "Na jedné rezervaci je to naopak starost aerolinky: přebookuje tě na další spoj a při delším zdržení řeší i hotel."
+            ]
+          }
+        },
+        {
+          icon: "🪪",
+          kicker: "Krok 3",
+          title: "Jméno na letence musí sedět s pasem",
+          lead: [
+            "Tohle vypadá jako formalita a přitom je to jeden z mála důvodů, proč tě nepustí do letadla, i když máš všechno ostatní v naprostém pořádku. Systém aerolinky porovnává letenku s pasem <strong>znak po znaku</strong>."
+          ],
+          checklist: [
+            "Jméno a příjmení na letence <strong>přesně jako v pase</strong>, včetně všech křestních jmen",
+            "Zkontrolovat <strong>datum narození</strong>, překlep v roce systém neodpustí",
+            "Ověřit, jak aerolinka zachází s diakritikou, <strong>Dvořák a Dvorak</strong> musí být zjevně tentýž člověk"
+          ],
+          trap: {
+            title: "Pozor na tohle",
+            body: [
+              "Opravit jméno po zakoupení znamená u většiny aerolinek <strong>poplatek v tisících</strong>, u některých se letenka neopravuje vůbec a musí se koupit nová. Zkontroluj si údaje <strong>ještě na potvrzovací stránce</strong>, ne až v e-mailu druhý den."
+            ]
+          }
+        },
+        {
+          icon: "🧳",
+          kicker: "Krok 4",
+          title: "Zavazadla: co je v ceně a co tě dožene až na letišti",
+          lead: [
+            "U letů do Ameriky bývá odbavené zavazadlo v ceně častěji než u evropských nízkonákladovek, jenže spoléhat se na to nedá. A ještě častěji se stane tohle: v ceně je let tam, ale <strong>ne zpátky</strong>."
+          ],
+          checklist: [
+            "Ověřit počet <strong>odbavených zavazadel v ceně</strong>, zvlášť pro cestu tam a zvlášť zpátky",
+            "Zjistit <strong>povolenou váhu</strong>, u letů do USA bývá 23 kg na kus",
+            "Zkontrolovat rozměry <strong>příručního zavazadla</strong>, aerolinky je měří přísněji než dřív",
+            "Vědět, že <strong>powerbanka patří do příručního</strong>, do odbaveného kufru nesmí"
+          ],
+          note: {
+            title: "Ještě jedna věc",
+            body: [
+              "Tekutiny v příručním zavazadle mají pořád stejné pravidlo: <strong>nádoby do 100 ml</strong> v jednom průhledném sáčku. Některá letiště už mají skenery, u kterých to neplatí, ale dokud to nevíš jistě, počítej s tou přísnější verzí."
+            ]
+          }
+        },
+        {
+          icon: "💳",
+          kicker: "Krok 5",
+          title: "Než klikneš na zaplatit",
+          lead: [
+            "Poslední kontrola, než pustíš peníze. Zabere dvě minuty a ušetří přesně ty chyby, které se pak těžko vracejí."
+          ],
+          companion: {
+            src: "images/gabi-happy-plaz.svg",
+            text: "Tuhle část dělám sama pokaždé, i po těch letech. Dvě minuty čtení proti tisícům za opravu, to se pořád vyplatí."
+          },
+          checklist: [
+            "Zkontrolovat <strong>letiště, ne jen město</strong>, New York má tři a mezi nimi je klidně hodina cesty",
+            "Přečíst si <strong>storno podmínky</strong> dřív, než zaplatíš",
+            "Platit <strong>kreditní kartou</strong>, u problémů s aerolinkou se peníze reklamují snáz",
+            "Uložit si <strong>číslo rezervace do Trezoru</strong>, ať ho máš po ruce i bez signálu"
+          ],
+          why: {
+            title: "Proč je to důležité",
+            body: [
+              "Rezervační číslo, těch pár znaků v potvrzovacím e-mailu, je to jediné, co po tobě při problému opravdu chtějí. Podle něj tě najdou v systému, i když ti zrovna nejde otevřít e-mail nebo dochází baterka. <strong>Proto patří do Trezoru</strong>, který funguje i bez signálu."
+            ]
+          }
+        }
+      ]
+    },
+    { id: "ubytovani", balicek: "pred-odletem", name: "Ubytování",                    emoji: "🏨", time: "15 min", lessons: 5,
       accent: "#FF6FA5", accentSoft: "#FFF1F6",
-      desc: "Kde hledat, kdy kupovat a čemu u levných nabídek nevěřit." },
+      desc: "Hotel, Airbnb nebo motel. Co je resort fee a proč hotel blokuje peníze na kartě." },
     { id: "doprava",    balicek: "pred-odletem", name: "Doprava na místě",             emoji: "🚗", time: "15 min", lessons: 5,
       accent: "#E8783F", accentSoft: "#FFF1E8",
       desc: "Auto, dálnice, aplikace. Jak se tam pohybovat bez nervů." },
@@ -2682,7 +2824,8 @@
     var nextMod = MODULES.filter(function (m) { return m.id === nextId; })[0];
     var hint = document.getElementById("welcome-cta-hint");
     if (doneCount === 0) {
-      hint.textContent = "Zabere to " + nextMod.time + ". Zbylých 6 modulů počká, až budeš mít chvíli příště.";
+      hint.textContent = "Zabere to " + nextMod.time + ". Zbylých " + (MODULES.length - 1) +
+                         " modulů počká, až budeš mít chvíli příště.";
     } else if (doneCount < MODULES.length) {
       hint.textContent = "Další na řadě: " + nextMod.name + ", zabere to " + nextMod.time + ".";
     } else {
@@ -2856,6 +2999,66 @@
       return { cls: "bad", text: who + " vyprší " + czDate(expiry) + ", ale návrat je až " + czDate(navrat) + ": potřebuje nový pas." };
     }
     return { cls: "ok", text: who + " vyprší " + czDate(expiry) + ", tvůj návrat je " + czDate(navrat) + ": v pořádku." };
+  }
+
+  /* Nákupní okno letenky. Appka zná datum odletu z úvodu, tak si spočítá,
+     jestli je zrovna dobrá chvíle kupovat. Hlavní sezóna (léto a Vánoce) se
+     vyprodává dřív, proto má okno posunuté. Je to orientace, ne věštba, a
+     text to tak i říká. */
+  function initBookingCheck() {
+    var box = document.getElementById("booking-check");
+    if (!box) return;
+
+    var setup = loadSetup();
+    if (!setup || !setup.datum) {
+      box.innerHTML =
+        '<p><strong>Chybí datum odletu.</strong> Bez něj nejde spočítat, jestli je čas kupovat. ' +
+        'Doplň ho v nastavení cesty a spočítá se to samo.</p>';
+      return;
+    }
+
+    var dnu = daysUntil(setup.datum);
+    var mesic = new Date(setup.datum + "T00:00:00").getMonth();     // 0 = leden
+    var sezona = (mesic >= 5 && mesic <= 7) || mesic === 11;        // červen až srpen, prosinec
+
+    // hranice okna: v sezóně se vyprodává dřív, tak se posouvá dopředu
+    var brzy  = sezona ? 300 : 240;
+    var pozde = sezona ? 45  : 40;
+
+    var cls, nadpis, text;
+    if (dnu < 0) {
+      cls = "wait"; nadpis = "Termín odletu už je za námi.";
+      text = "Zkontroluj si datum v nastavení cesty, tenhle výpočet z něj vychází.";
+    } else if (dnu > brzy) {
+      cls = "wait";
+      nadpis = "Na kupování je ještě brzy, zbývá " + dnu + " " + dnuPlural(dnu) + ".";
+      text = "Ceny teď drží nahoře, protože letadlo je skoro prázdné a aerolinka nemá důvod slevovat. " +
+             "Nastav si hlídače ceny a vrať se k tomu za pár týdnů.";
+    } else if (dnu > pozde) {
+      cls = "ok";
+      nadpis = "Jsi v nákupním okně, do odletu zbývá " + dnu + " " + dnuPlural(dnu) + ".";
+      text = sezona
+        ? "Letíš v hlavní sezóně, takže čekání na lepší cenu se spíš nevyplatí. Až uvidíš rozumnou nabídku, ber ji."
+        : "Tohle je ta část, kdy se letadlo plní a aerolinka má důvod lákat. Sleduj ceny, ale neodkládej to na poslední chvíli.";
+    } else {
+      cls = "bad";
+      nadpis = "Do odletu zbývá " + dnu + " " + dnuPlural(dnu) + ", kupuj hned.";
+      text = "Takhle blízko odletu už cena nahoru jen poroste, protože se doprodávají poslední místa. " +
+             "Čekání tady nic nezachrání.";
+    }
+
+    box.innerHTML =
+      '<p class="pc-verdict-line ' + cls + '"><strong>' + nadpis + '</strong></p>' +
+      '<p>' + text + '</p>' +
+      '<p style="font-size:13.5px;color:var(--text-faint);margin-top:var(--s3);">' +
+        'Orientační odhad podle data odletu. Žádná appka ti neřekne přesný den, kdy bude nejlevněji.' +
+      '</p>';
+  }
+
+  function dnuPlural(n) {
+    if (n === 1) return "den";
+    if (n >= 2 && n <= 4) return "dny";
+    return "dní";
   }
 
   function initPassportCheck() {
@@ -3093,7 +3296,8 @@
       '<div class="rc-top">' +
         '<img class="rc-mascot" src="' + mascotSrc + '" alt="Paní Cokdyž">' +
         '<div>' +
-          '<p class="rc-heading">Připravenost na doklady <span class="rc-pct">' + pct + ' %</span></p>' +
+          '<p class="rc-heading">' + (mod.dashboardTitle || "Jak na tom jsi") +
+            ' <span class="rc-pct">' + pct + ' %</span></p>' +
           '<p class="rc-sub">' + subLine + '</p>' +
         '</div>' +
       '</div>' +
@@ -3168,6 +3372,10 @@
 
       if (step.passportCheck) {
         html += '<div class="passport-check" id="passport-check"></div>';
+      }
+
+      if (step.bookingCheck) {
+        html += '<div class="passport-check" id="booking-check"></div>';
       }
 
       if (step.chipExample) {
@@ -3474,6 +3682,7 @@
     initMonthPicker();
     initChecklists();
     initPassportCheck();
+    initBookingCheck();
     initEstaCheck();
     initToggleQuestions();
     initAddressField();
