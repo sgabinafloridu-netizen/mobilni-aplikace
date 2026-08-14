@@ -66,15 +66,23 @@ Vše je v poli `MODULES` v `index.html`. Modul má:
   prep, hook[], praise{}, dashboard: bool, steps[] }
 ```
 
-Krok (`step`) má volitelně: `icon`, `kicker`, `title`, `lead[]`, `companion{}`, `checklist[]`, `checklistGroups[]`, `passportCheck`, `chipExample`, `estaCheck`, `toggleQuestions[]`, `addressField`, `monthPicker`, `gallery`, `quote`, `link{}`, `tip{}`, `why{}`, `trap{}`, `note{}`.
+Krok (`step`) má volitelně: `icon`, `kicker`, `title`, `lead[]`, `companion{}`, `checklist[]`, `checklistGroups[]`, `passportCheck`, `bookingCheck`, `chipExample`, `estaCheck`, `toggleQuestions[]`, `addressField`, `monthPicker`, `stayPicker`, `gallery`, `quote`, `link{}`, `tip{}`, `why{}`, `trap{}`, `note{}`.
+
+**Prvky, které počítají z toho, co uživatel zadal v úvodu** (tohle je jádro UX principu, ne ozdoba):
+- `passportCheck` porovná platnost pasů s datem návratu
+- `bookingCheck` z data odletu určí, jestli je zrovna nákupní okno na letenku (bere v úvahu hlavní sezónu)
+- `monthPicker` se otevře na měsíci skutečného odletu
+- `stayPicker` předvybere destinaci, kterou uživatel zadal, ostatní jdou přepnout
+
+Modul s `dashboard: true` si nese vlastní nadpis v `dashboardTitle`.
 
 ### ⚠️ Pořadí vykreslení je pevné
 `renderStepsHtml()` vykresluje prvky ve **fixním pořadí**, ne v pořadí, v jakém jsou zapsané v datech:
 
 ```
-lead → companion → checklist → checklistGroups → passportCheck → chipExample
-→ estaCheck → toggleQuestions → addressField → monthPicker → gallery
-→ quote → link → tip → why → trap → note
+lead → companion → checklist → checklistGroups → passportCheck → bookingCheck
+→ chipExample → estaCheck → toggleQuestions → addressField → monthPicker
+→ stayPicker → gallery → quote → link → tip → why → trap → note
 ```
 
 Když má něco vyjít jinde, musí se změnit `renderStepsHtml()`, ne pořadí klíčů v datech.
@@ -95,17 +103,22 @@ Po **každé** změně stavu volej `refreshDashboard()`, jinak se Připravenost 
 
 ## 5. Moduly
 
-Část 1 „Než odletíš" má **7 modulů**:
+Část 1 „Než odletíš" má **8 modulů**:
 
 | # | id | Název | Stav |
 |---|---|---|---|
 | 1 | `destinace` | Kdy a kam | ✅ hotový, 5 kroků |
-| 2 | `doklady` | Doklady a formálnosti | ✅ hotový, 6 kroků, má dashboard |
-| 3 | `letenky` | Letenky a ubytování | ⬜ jen kostra |
-| 4 | `doprava` | Doprava na místě | ⬜ jen kostra |
-| 5 | `finance` | Finance a placení | ⬜ jen kostra |
-| 6 | `checklisty` | Checklisty | ⬜ jen kostra |
-| 7 | `krize` | Krizové situace před odletem | ⬜ jen kostra |
+| 2 | `doklady` | Doklady a formálnosti | ✅ hotový, 6 kroků, dashboard |
+| 3 | `letenky` | Letenky | ✅ hotový, 5 kroků, dashboard |
+| 4 | `ubytovani` | Ubytování | ✅ hotový, 5 kroků, dashboard |
+| 5 | `doprava` | Doprava na místě | ⬜ jen kostra |
+| 6 | `finance` | Finance a placení | ⬜ jen kostra |
+| 7 | `checklisty` | Checklisty | ⬜ jen kostra |
+| 8 | `krize` | Krizové situace před odletem | ⬜ jen kostra |
+
+⚠️ **Moduly se klíčují podle `id`, ne podle pořadí.** Proto jde modul přidat nebo rozdělit bez ztráty dat: odškrtané položky i postup zůstanou. Nikdy nepřejmenovávat existující `id`.
+
+⚠️ **`doprava` patří obsahem do produktu „po příletu"**, ne mezi přípravu před odletem. Až se bude stavět druhý produkt, měla by se přesunout.
 
 **Část 2** naváže dalšími moduly (5 až 7, zatím neurčeno). Dohromady tedy cílově kolem 14 modulů. Seznam modulů Části 2 zatím neexistuje, doplnit až bude.
 

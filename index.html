@@ -913,6 +913,24 @@
   .mp-tier.bad  { background: var(--ruzova); }
   .mp-txt { flex: 1 1 auto; font-size: 13px; color: var(--text-muted); }
 
+  /* ── kde spát: obsah se mění podle destinace, kterou uživatel zadal v úvodu ── */
+  .stay-lead { margin-top: var(--s5); font-size: 15px; line-height: 1.7; color: var(--text); }
+  .stay-list { margin-top: var(--s4); display: flex; flex-direction: column; gap: var(--s3); }
+  .stay-opt {
+    background: var(--surface); border-radius: var(--r-md); padding: var(--s4);
+    border: 1px solid var(--line);
+  }
+  .stay-opt-name {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 14.5px; font-weight: 800; color: var(--text); margin-bottom: 4px;
+  }
+  .stay-opt-text { font-size: 14px; line-height: 1.65; color: var(--text-muted); }
+  .stay-note {
+    margin-top: var(--s4); padding: var(--s3) var(--s4);
+    background: #F3E9D3; color: #5c4a1f; border-radius: var(--r-md);
+    font-size: 13.5px; line-height: 1.6; font-weight: 600;
+  }
+
   /* citát paní Cokdyž */
   .step-quote { position: relative; margin: var(--s5) 0 0; padding: var(--s2) 0 var(--s2) var(--s5); }
   .step-quote::before {
@@ -2246,9 +2264,140 @@
         }
       ]
     },
-    { id: "ubytovani", balicek: "pred-odletem", name: "Ubytování",                    emoji: "🏨", time: "15 min", lessons: 5,
+    {
+      id: "ubytovani",
+      balicek: "pred-odletem",
+      name: "Ubytování: kde spát a co se k ceně ještě připočte",
+      shortName: "Ubytování",
+      dashboard: true,
+      dashboardTitle: "Připravenost na ubytování",
+      emoji: "🏨",
+      time: "15 min",
       accent: "#FF6FA5", accentSoft: "#FFF1F6",
-      desc: "Hotel, Airbnb nebo motel. Co je resort fee a proč hotel blokuje peníze na kartě." },
+      desc: "Kde spát podle destinace, co je resort fee a proč hotel zablokuje peníze na kartě.",
+      prep: "<strong>Nic shánět nemusíš.</strong> Stačí vědět, kam letíš, a to už appka ví z úvodu.",
+      hook: [
+        "Ubytování je jediná položka rozpočtu, u které lidi pravidelně počítají s jinou částkou, než nakonec zaplatí. Ne proto, že by je někdo podvedl, ale proto, že se v Americe k ceně za pokoj připočítávají věci, které u nás nikdo nezná. <strong>Rezervuješ za 120 dolarů a na účtu vidíš 165.</strong> A k tomu ti recepce při příjezdu zablokuje na kartě dalších pár set, což leckoho vyděsí úplně zbytečně. V tomhle modulu si projdeme, kde spát podle toho, kam jedeš, a co všechno se k té ceně nakonec přilepí."
+      ],
+      praise: {
+        emoji: "🏨",
+        title: "Ubytování máš vybrané a víš, co doopravdy zaplatíš.",
+        text:
+          "Teď už víš, jaké typy ubytování dávají smysl zrovna u tvojí destinace. Že cena na " +
+          "srovnávači nemusí být konečná a co se k ní připočte. A že blokace na kartě není útrata, " +
+          "jen jistota, kterou hotel pustí zpátky. Paní Cokdyž si může jít počítat něco jiného."
+      },
+      steps: [
+        {
+          icon: "🗺️",
+          kicker: "Krok 1",
+          title: "Kde spát podle toho, kam letíš",
+          lead: [
+            "Tohle je jediná část modulu, která se liší podle destinace, protože spát na Floridě a spát v národním parku jsou dvě úplně jiné disciplíny. Appka ví, kam máš namířeno, tak ti rovnou ukáže tu tvoji. Na ostatní se dá přepnout, když tě zajímají."
+          ],
+          stayPicker: true,
+          why: {
+            title: "Proč je to důležité",
+            body: [
+              "U ubytování rozhoduje načasování víc než u čehokoliv jiného, a pro každou destinaci vypadá jinak. Na Floridě se vyprodává <strong>zimní sezóna</strong>, protože v ní utíkají Američané ze severu před mrazem. V New Yorku ceny skáčou podle svátků a akcí ve městě. A v parcích jde o <strong>13 měsíců dopředu</strong>, protože ubytování uvnitř parku je omezené a víc ho nikdo nepostaví.",
+              "Proto nemá smysl hledat jedno univerzální pravidlo. Má smysl vědět, které pravidlo platí zrovna tam, kam letíš."
+            ]
+          }
+        },
+        {
+          icon: "🧾",
+          kicker: "Krok 2",
+          title: "Co se k ceně připočte, než ji zaplatíš",
+          lead: [
+            "Tady vzniká ten rozdíl mezi částkou, kterou vidíš na srovnávači, a tou, co ti nakonec naúčtují. Nic z toho není podvod, jsou to běžné americké poplatky. Jen o nich předem nikdo neřekne."
+          ],
+          checklist: [
+            "Ověřit, jestli se platí <strong>resort fee</strong>, povinný denní poplatek, který zaplatíš, i když bazén ani posilovnu nevyužiješ",
+            "Připočítat <strong>místní daně</strong>, v New Yorku dělají skoro 15 procent z ceny pokoje",
+            "Zjistit cenu <strong>parkování</strong>, v centrech měst se platí zvlášť a bývá pořádně drahé"
+          ],
+          why: {
+            title: "Proč je to důležité",
+            body: [
+              "Od roku 2025 platí v USA pravidlo, podle kterého musí hotely i rezervační weby ukazovat <strong>celkovou cenu včetně povinných poplatků</strong> hned, ne až v posledním kroku objednávky. Je to velká úleva, ale spolehnout se na to naslepo nedá, hlavně u menších ubytování a u zahraničních srovnávačů.",
+              "Zvyk je jednoduchý: než potvrdíš rezervaci, najdi si <strong>celkovou částku za celý pobyt</strong>, ne cenu za noc. Ta jediná ti řekne pravdu."
+            ]
+          },
+          note: {
+            title: "Ještě jedna věc",
+            body: [
+              "Resort fee bývá 25 až 50 dolarů za noc a účtují ho i hotely, které vůbec nevypadají jako resort. U týdenního pobytu je to klidně <strong>rozdíl v tisících korun</strong>, takže se vyplatí porovnávat ubytování až podle konečné ceny, ne podle té na první stránce."
+            ]
+          }
+        },
+        {
+          icon: "💳",
+          kicker: "Krok 3",
+          title: "Proč ti hotel zablokuje peníze na kartě",
+          lead: [
+            "Tohle vyděsí skoro každého, kdo to nečeká. Přijedeš na recepci, podáš kartu a hotel si na ní <strong>zablokuje několik set dolarů</strong>. Nejsou to peníze, které jsi utratila. Je to jistota pro případ, že bys něco rozbila nebo vypila celou minibar."
+          ],
+          companion: {
+            src: "images/gabi-happy-plaz.svg",
+            text: "Když mi to poprvé provedli, málem jsem volala do banky. Přitom je to úplně normální a peníze se vrátí. Jen o tom nikdo dopředu neřekne."
+          },
+          checklist: [
+            "Mít na kartě rezervu <strong>50 až 200 dolarů na noc</strong> navíc nad cenu ubytování",
+            "Platit <strong>kreditní kartou</strong>, ne debetní"
+          ],
+          why: {
+            title: "Proč je to důležité",
+            body: [
+              "Blokace se uvolní sama, obvykle <strong>pár dní po odjezdu</strong>, u některých bank to trvá i dva týdny. U kreditní karty se přitom jen sníží dostupný limit a z účtu ti reálně nic nezmizí.",
+              "U debetní karty je to jiné: peníze ti z účtu opravdu odejdou a čekáš, až se vrátí. Proto se do Ameriky jezdí s kreditkou, a proto ji zmiňoval už modul o dokladech."
+            ]
+          },
+          trap: {
+            title: "Pozor na tohle",
+            body: [
+              "Vyrazit na dvoutýdenní cestu s debetní kartou a přesně spočítaným rozpočtem. Hotel zablokuje 150 dolarů, půjčovna auta klidně 500, a najednou <strong>nemáš čím zaplatit večeři</strong>, přestože peníze na účtu formálně máš. Tohle je nejčastější důvod, proč lidi v Americe zůstanou bez prostředků."
+            ]
+          }
+        },
+        {
+          icon: "📋",
+          kicker: "Krok 4",
+          title: "Rezervace, storno a příjezd",
+          lead: [
+            "Pár drobností, které se špatně dohánějí na místě. Zabere to chvilku teď a ušetří to nepříjemné překvapení po dvanácti hodinách v letadle."
+          ],
+          checklist: [
+            "Přečíst <strong>storno podmínky</strong>, nevratná sazba bývá levnější jen o pár dolarů, ale zavře ti všechny dveře",
+            "Zkontrolovat <strong>čas příjezdu</strong>, běžný check-in bývá až od 15 hodin a po nočním letu jsi na místě dávno předtím",
+            "Ověřit <strong>minimální věk hosta</strong>, řada amerických ubytování ubytuje až od 21 let"
+          ],
+          note: {
+            title: "Ještě jedna věc",
+            body: [
+              "Když přiletíš ráno a pokoj bude až odpoledne, recepce ti <strong>skoro vždycky nechá zavazadla</strong> a můžeš vyrazit do města nalehko. Stačí o to říct, je to naprosto běžná služba a nic za ni nechtějí."
+            ]
+          }
+        },
+        {
+          icon: "🔒",
+          kicker: "Krok 5",
+          title: "Adresa první noci patří do Trezoru",
+          lead: [
+            "Poslední krok, a je krátký. Adresu prvního ubytování po tobě budou chtít na imigrační kontrole a potvrzovací číslo pak na recepci. Obojí potřebuješ mít po ruce ve chvíli, kdy nemusíš mít signál ani nabitý telefon."
+          ],
+          checklist: [
+            "Uložit <strong>adresu první noci</strong> do Trezoru, ptají se na ni na imigrační kontrole",
+            "Uložit <strong>potvrzovací číslo rezervace</strong>, ať ho najdeš i bez internetu"
+          ],
+          why: {
+            title: "Proč je to důležité",
+            body: [
+              "Trezor v téhle appce funguje offline, protože přesně tam ho budeš potřebovat: ve frontě na imigrační kontrole, kde nemáš americkou SIM kartu a wifi na letišti je přetížená. <strong>Co je v Trezoru, to máš vždycky.</strong>"
+            ]
+          }
+        }
+      ]
+    },
     { id: "doprava",    balicek: "pred-odletem", name: "Doprava na místě",             emoji: "🚗", time: "15 min", lessons: 5,
       accent: "#E8783F", accentSoft: "#FFF1E8",
       desc: "Auto, dálnice, aplikace. Jak se tam pohybovat bez nervů." },
@@ -2296,6 +2445,50 @@
     { m: "Lis", florida: ["good", "Hurikánová sezóna oficiálně končí 30. listopadu, ale reálně je listopad už bezpečný. Teploty kolem 25 až 27 stupňů, sucho, žádné bouřky. Američané ze severu začínají přijíždět na zimu a ceny hotelů pomalu stoupají. Oceán je ještě příjemně teplý: poslední šance na pohodlné koupání před zimním ochlazením vody."], newyork: ["ok", "Listopad je podzim přecházející do zimy. Teploty kolem 5 až 10 stupňů, stromy jsou holé, ale město se chystá na Vánoce. Macy's Thanksgiving Day Parade na konci listopadu přitáhne obrovské davy. Kdo chce New York bez přeplnění, ať přijede na začátek listopadu před svátky."], parky: ["ok", "Listopad je v parcích na jihozápadě stále příjemný pro denní výlety. Grand Canyon má kolem 5 až 10 stupňů přes den, ráno může mrznout. Parky na severu se začínají uzavírat nebo omezovat přístup. Zion a Bryce jsou ještě přístupné, ale kempování ve vyšších polohách se nedoporučuje."] },
     { m: "Pro", florida: ["good", "Prosinec na Floridě je ten měsíc, kdy sem přijede půlka Ameriky najednou. Sucho, 22 až 24 stupňů, žádné bouřky a Floridou se pohybují davy Američanů utíkajících před zimou. Ceny jsou nejvyšší za celý rok: hotely, restaurace, parkování. Vánoce na Floridě mají svou zvláštní atmosféru: palmové stromy ozdobené světýlky a Santa Claus v kraťasech. Oceán je nejchladnější v roce, kolem 22 stupňů, koupání spíš pro odvážnější."], newyork: ["ok", "Vánoční New York je sen. Fifth Avenue svítí, bruslení v Central Parku, vánoční trhy na každém rohu. Teploty kolem 0 až 5 stupňů, sníh možný kdykoliv. Turistů je hodně, ceny vysoké, ale atmosféra je jedinečná. Kdo chce New York jednou za život v nejkrásnější podobě, prosinec je ta správná volba: jen si přibalit teplý kabát a připravit peněženku."], parky: ["bad", "Zima, sníh, některé silnice na sezónu zavřené."] }
   ];
+
+  /* Kde spát podle destinace. Hloubkový obsah (konkrétní čtvrti, konkrétní
+     kempy) sem schválně nepatří, ten je náplní samostatných destinačních
+     produktů. Tady jde o to, mezi čím se vůbec rozhoduje. */
+  var STAY_BY_DEST = {
+    florida: {
+      lead: "Na Floridě se neplatí ani tak za pokoj, jako za to, jak daleko je od vody. Pár bloků do vnitrozemí umí srazit cenu skoro na polovinu, a na pláž stejně dojdeš pěšky.",
+      options: [
+        { ico: "🏖️", name: "Hotel přímo u pláže",
+          text: "Nejdražší varianta a v zimě se vyprodává měsíce dopředu, protože přijedou snowbirdi ze severu. Platíš za výhled a za to, že vyjdeš z pokoje rovnou na písek." },
+        { ico: "🏠", name: "Kondo nebo apartmán s kuchyní",
+          text: "Tohle doporučuju rodinám nejčastěji. Vlastní kuchyň znamená, že nemusíš třikrát denně do restaurace, a to je na Floridě ta úplně největší úspora." },
+        { ico: "🛣️", name: "Motel u silnice",
+          text: "Levné, čisté a naprosto v pořádku na jednu přejezdovou noc. Na celý týden bych to nechtěla, ale mezi dvěma místy je to praktické." }
+      ],
+      note: "Ceny na Floridě jdou nahoru v zimě, ne v létě. Je to přesně naopak, než jsme zvyklí z Evropy."
+    },
+    newyork: {
+      lead: "V New Yorku platíš za metry čtvereční a za vzdálenost od metra. Pokoj velikosti koupelny je tady běžný standard, ne podvod, a nikdo se za něj neomlouvá.",
+      options: [
+        { ico: "🏙️", name: "Hotel na Manhattanu",
+          text: "Nejdražší, zato ušetříš čas i nervy na přejíždění. Počítej s malým pokojem a s tím, že se k ceně připočte skoro 15 procent na daních." },
+        { ico: "🌉", name: "Brooklyn nebo Queens",
+          text: "Za stejné peníze dostaneš znatelně víc prostoru. Jen si předem ověř, kolik zastávek metrem to je do centra: 20 minut je pohoda, 50 minut začne po pár dnech otravovat." },
+        { ico: "🛏️", name: "Hostel nebo sdílený pokoj",
+          text: "Pro sólo cestovatele a mladší partu. V New Yorku je to jedna z mála cest, jak se vejít do rozumného rozpočtu a přitom bydlet blízko centra." }
+      ],
+      note: "Auto v New Yorku nepotřebuješ a parkování u hotelu stojí klidně 60 dolarů za noc. Tohle je jediná destinace ze tří, kde je auto spíš přítěž."
+    },
+    parky: {
+      lead: "V parcích nerozhoduje ani tak cena, jako to, jestli vůbec něco zbylo. Ubytování přímo v parku se rezervuje 13 měsíců dopředu a nejlepší termíny mizí během minut.",
+      options: [
+        { ico: "🏞️", name: "Lodge přímo v parku",
+          text: "Nejlepší varianta a zároveň nejtěžší k sehnání. Rezervace se otevírají 13 měsíců dopředu, vždycky prvního dne v měsíci, a oblíbené termíny jsou pryč během pár minut. Za ranní výhled bez davů to ale stojí." },
+        { ico: "⛺", name: "Kemp",
+          text: "Levné a nejblíž přírodě, rezervuje se přes Recreation.gov. Počítej s tím, že v noci bývá chladno i v létě, hlavně v Utahu, kde se přes den peče a nad ránem klidně mrzne." },
+        { ico: "🚐", name: "Obytný vůz",
+          text: "Ubytování a doprava v jednom, oblíbené hlavně na okruzích mezi parky. Místo v kempu s přípojkou si ale musíš zajistit dopředu, jen tak zaparkovat kdekoliv nejde." },
+        { ico: "🏨", name: "Motel v přilehlém městě",
+          text: "Když lodge nevyjde, tohle je záchrana. Bydlíš 20 až 40 minut od brány parku, což znamená ranní vstávání, zato je to reálně k sehnání." }
+      ],
+      note: "U parků platí jediné pravidlo: čím dřív, tím líp. Rezervace tady nejsou o penězích, ale o tom, kdo si první zapsal datum do kalendáře."
+    }
+  };
 
   // krátká scéna pro widget Moje cesta ("Za 39 dní ...")
   var DEST_SCENE = {
@@ -2958,6 +3151,47 @@
     show(defaultMonth);
   }
 
+  /* Kde spát: předvybere destinaci ze zadání cesty, ostatní jdou přepnout. */
+  function initStayPicker() {
+    var wrap = document.getElementById("stay-dests");
+    var result = document.getElementById("stay-result");
+    if (!wrap || !result) return;
+
+    var poradi = ["florida", "newyork", "parky"];
+
+    wrap.innerHTML = poradi.map(function (key) {
+      return '<button type="button" class="mp-month" data-dest="' + key + '">' +
+               (DEST_ICON[key] || "") + " " + (DEST_LABELS[key] || key) +
+             '</button>';
+    }).join('');
+
+    function show(key) {
+      var d = STAY_BY_DEST[key];
+      if (!d) return;
+      wrap.querySelectorAll(".mp-month").forEach(function (b) {
+        b.classList.toggle("active", b.dataset.dest === key);
+      });
+      result.innerHTML =
+        '<p class="stay-lead">' + d.lead + '</p>' +
+        '<div class="stay-list">' +
+          d.options.map(function (o) {
+            return '<div class="stay-opt">' +
+                     '<div class="stay-opt-name"><span aria-hidden="true">' + o.ico + '</span>' + o.name + '</div>' +
+                     '<div class="stay-opt-text">' + o.text + '</div>' +
+                   '</div>';
+          }).join('') +
+        '</div>' +
+        (d.note ? '<p class="stay-note">' + d.note + '</p>' : '');
+    }
+
+    wrap.querySelectorAll(".mp-month").forEach(function (btn) {
+      btn.addEventListener("click", function () { show(btn.dataset.dest); });
+    });
+
+    var setup = loadSetup();
+    show(setup && STAY_BY_DEST[setup.destinace] ? setup.destinace : "florida");
+  }
+
   function refreshGroupDone(groupEl) {
     var msg = groupEl.querySelector(".checklist-group-done");
     if (!msg) return;
@@ -3425,6 +3659,14 @@
                 '</div>';
       }
 
+      if (step.stayPicker) {
+        html += '<div class="month-picker">' +
+                  '<div class="mp-label">Tvoje destinace je předvybraná, přepnout se dá kdykoliv</div>' +
+                  '<div class="mp-months" id="stay-dests" style="grid-template-columns: repeat(3, 1fr);"></div>' +
+                  '<div id="stay-result"></div>' +
+                '</div>';
+      }
+
       if (step.gallery) {
         html += '<div class="step-gallery">' + step.gallery.map(function (p) {
           return '<figure class="photo-figure"><img src="' + p.src + '" alt="' + p.alt + '" loading="lazy">' +
@@ -3680,6 +3922,7 @@
       : '<div class="placeholder-note">Obsah tohohle modulu se ještě připravuje.<br>Tady budou kroky, vysvětlení a pasti, na které si dát pozor.</div>';
 
     initMonthPicker();
+    initStayPicker();
     initChecklists();
     initPassportCheck();
     initBookingCheck();
