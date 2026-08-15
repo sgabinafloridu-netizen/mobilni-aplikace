@@ -2149,48 +2149,56 @@
       desc: "Kdy kupovat, jak dlouhý přestup si nechat a co zkontrolovat, než klikneš na zaplatit.",
       prep: "<strong>Zatím nic shánět nemusíš.</strong> Datum odletu už appka zná, takže si tenhle modul projdi dřív, než začneš letenky vůbec hledat.",
       hook: [
-        "Klienti mi pořád posílají screenshoty s jedinou otázkou: je tohle dobrá cena? A já se skoro nikdy nedívám na cenu první. Dívám se na <strong>přestup</strong>. Protože nejdražší letenka, jakou si můžeš koupit, je ta levná s hodinou a půl na přestup v Americe. Tam se totiž nepřestupuje jako v Evropě, a kdo to neví, stojí odpoledne u pásu s kufrem v ruce a dívá se, jak mu druhé letadlo odlétá bez něj. V tomhle modulu si projdeme, kdy má smysl kupovat, jak dlouhý přestup si nechat a co zkontrolovat, než pustíš peníze."
+        "Klienti mi posílají screenshoty s jedinou otázkou: je tohle dobrá cena?",
+        "Já se na cenu nedívám první. Dívám se na <strong>přestup</strong>.",
+        "Nejdražší letenka, jakou si můžeš koupit, je ta levná s hodinou a půl v Americe. Tam se nepřestupuje jako v Evropě. Kdo to neví, stojí odpoledne u pásu s kufrem v ruce a kouká, jak mu druhé letadlo odlétá bez něj.",
+        "Projdeme kdy kupovat, jak dlouhý přestup si nechat a co zkontrolovat, než pustíš peníze."
       ],
       praise: {
         emoji: "✈️",
         title: "Letenka je vyřešená a přestup ti drží.",
         text:
-          "Teď už víš, kdy má smysl kupovat a kdy jen zbytečně sleduješ ceny. Že se v Americe " +
-          "u prvního letiště vyzvedává kufr, i když letíš dál, a proto potřebuješ delší přestup, " +
-          "než ti nabídne vyhledávač. A že jméno na letence musí sedět s pasem do písmene. " +
-          "Paní Cokdyž si může nechat zdát o zmeškaném spoji, ty už víš, jak se mu vyhnout."
+          "Víš, kdy kupovat a kdy jen zbytečně koukáš na ceny. Víš, že se kufr vyzvedává " +
+          "na prvním americkém letišti, i když letíš dál. Víš, že jméno na letence musí " +
+          "sedět s pasem do písmene. " +
+          "Paní Cokdyž si může nechat zdát o zmeškaném spoji. Ty už víš, jak se mu vyhnout."
       },
       steps: [
         {
           icon: "📅",
           kicker: "Krok 1",
-          title: "Kdy kupovat, ať zbytečně nepřeplatíš",
+          title: "Kdy je ta správná chvíle koupit",
           lead: [
-            "Tuhle otázku dostávám ze všech nejčastěji: kdy je ta správná chvíle koupit? Odpověď, kterou nikdo nechce slyšet, zní, že neexistuje jeden magický den, kdy jsou letenky nejlevnější. Existuje <strong>okno</strong>, ve kterém se vyplatí kupovat. Mimo něj platíš navíc, ať už proto, že jsi moc brzy, nebo moc pozdě.",
-            "Appka zná datum tvého odletu, tak si to spočítá za tebe."
+            "Tuhle otázku dostávám nejčastěji ze všech.",
+            "Magický den, kdy jsou letenky nejlevnější, neexistuje. Existuje <strong>okno</strong>. Mimo něj platíš navíc, ať už jsi moc brzy, nebo moc pozdě.",
+            "Appka zná datum tvého odletu. Pojďme se podívat, kde v tom okně zrovna stojíš."
           ],
           bookingCheck: true,
           why: {
             title: "Proč je to důležité",
             body: [
-              "Aerolinky nasazují ceny podle toho, kolik míst už je prodaných, ne podle kalendáře. Rok dopředu je letadlo skoro prázdné a cena drží nahoře, protože není kam spěchat. Pár týdnů před odletem jde cena nahoru znovu, tentokrát proto, že kdo kupuje na poslední chvíli, obvykle letět musí. <strong>Mezi tím je okno</strong>, kdy se letadlo plní a aerolinka má důvod lákat.",
-              "U letů přes Atlantik vychází to okno zhruba na <strong>2 až 8 měsíců</strong> před odletem. V hlavní sezóně, tedy v létě a kolem Vánoc, se posouvá dřív, protože se místa vyprodají rychleji. Mimo sezónu se dá naopak klidně čekat déle."
+              "Aerolinky nasazují ceny podle toho, kolik míst je prodaných. Ne podle kalendáře.",
+              "Rok dopředu je letadlo skoro prázdné a cena drží nahoře, protože není kam spěchat. Pár týdnů před odletem jde cena nahoru znovu, protože kdo kupuje na poslední chvíli, obvykle letět musí.",
+              "<strong>Mezi tím je okno.</strong> U letů přes Atlantik vychází zhruba na <strong>2 až 8 měsíců</strong> před odletem. V létě a kolem Vánoc se posouvá dřív, protože se místa vyprodají rychleji."
             ]
           },
           note: {
             title: "Ještě jedna věc",
             body: [
-              "Nejlevnější letenka není automaticky nejlepší. Než se rozhodneš podle ceny, přičti si k ní <strong>zavazadlo, výběr sedadla a čas navíc</strong> strávený na přestupu. Letenka o 2 000 Kč levnější, zato s přestupem v pět ráno a bez kufru v ceně, nakonec vyjde dráž. Jen to zjistíš až u odbavení."
+              "K ceně si přičti <strong>zavazadlo, výběr sedadla a čas na přestupu</strong>.",
+              "Letenka o 2 000 Kč levnější, zato s přestupem v pět ráno a bez kufru v ceně, vyjde dráž. Jen to zjistíš až u odbavení."
             ]
           }
         },
         {
           icon: "🔄",
           kicker: "Krok 2",
-          title: "Přestup v Americe: tady se to kazí nejčastěji",
+          title: "Proč je americký přestup jiný než evropský",
           lead: [
-            "Jestli si máš z celého tohohle modulu odnést jedinou věc, ať je to tahle. <strong>V Americe se nepřestupuje jako v Evropě.</strong>",
-            "Když přiletíš do USA, projdeš imigrační kontrolou <strong>na prvním americkém letišti</strong>, kde přistaneš, i když pokračuješ dál. Tam si vyzvedneš kufr, projdeš s ním celnicí a znovu ho odbavíš. Teprve potom jdeš k navazujícímu letu. Nedá se to obejít a kufr za tebe nikdo nepřeloží."
+            "Jestli si máš z modulu odnést jedinou věc, ať je to tahle.",
+            "Když přiletíš do USA, projdeš imigrační kontrolou <strong>na prvním americkém letišti</strong>, i když pokračuješ dál. Vyzvedneš si kufr, projdeš s ním celnicí a znovu ho odbavíš. Teprve potom jdeš k navazujícímu letu.",
+            "Říkám tomu <strong>americký přestup</strong>, protože s evropským nemá společného nic než jméno. Nedá se obejít a kufr za tebe nikdo nepřeloží.",
+            "Kolik hodin máš mezi přílety ty?"
           ],
           toggleQuestions: [
             {
@@ -2207,17 +2215,20 @@
           trap: {
             title: "Pozor na tohle",
             body: [
-              "Dvě samostatně koupené letenky vypadají levněji, ale celé riziko nesou na tobě. Když první let nabere zpoždění a druhý ti uletí, <strong>aerolinka té druhé letenky ti nic nedluží</strong>, protože o tvém prvním letu nikdy nevěděla. Novou letenku si koupíš znovu a za cenu na poslední chvíli.",
-              "Na jedné rezervaci je to naopak <strong>starost aerolinky</strong>: přebookuje tě na další spoj a při delším zdržení řeší i hotel."
+              "Dvě samostatně koupené letenky vypadají levněji. Riziko ale nesou celé na tobě.",
+              "Když první let nabere zpoždění a druhý ti uletí, <strong>aerolinka té druhé letenky ti nic nedluží</strong>. O tvém prvním letu nikdy nevěděla. Novou letenku si koupíš znovu a za cenu na poslední chvíli.",
+              "Na jedné rezervaci je to <strong>starost aerolinky</strong>. Přebookuje tě na další spoj a při delším zdržení řeší i hotel.",
+              "Sama jsem si kdysi koupila přestup s hodinou a půl v Atlantě. Naletěla jsem na to úplně stejně jako všichni ostatní."
             ]
           }
         },
         {
           icon: "🪪",
           kicker: "Krok 3",
-          title: "Jméno na letence musí sedět s pasem",
+          title: "Co udělá jedno písmeno navíc",
           lead: [
-            "Tohle vypadá jako formalita a přitom je to jeden z mála důvodů, proč tě nepustí do letadla, i když máš všechno ostatní v naprostém pořádku. Systém aerolinky porovnává letenku s pasem <strong>znak po znaku</strong>."
+            "Vypadá to jako formalita. Přitom je to jeden z mála důvodů, proč tě nepustí do letadla, i když máš všechno ostatní v pořádku.",
+            "Systém aerolinky porovnává letenku s pasem <strong>znak po znaku</strong>. <em>(Ano, kontroluju to i po sobě. Dvakrát.)</em>"
           ],
           checklist: [
             "Jméno a příjmení na letence <strong>přesně jako v pase</strong>, včetně všech křestních jmen",
@@ -2227,16 +2238,18 @@
           trap: {
             title: "Pozor na tohle",
             body: [
-              "Opravit jméno po zakoupení znamená u většiny aerolinek <strong>poplatek v tisících</strong>, u některých se letenka neopravuje vůbec a musí se koupit nová. Zkontroluj si údaje <strong>ještě na potvrzovací stránce</strong>, ne až v e-mailu druhý den."
+              "Oprava jména po zakoupení stojí u většiny aerolinek <strong>tisíce</strong>. U některých se letenka neopravuje vůbec a kupuje se nová.",
+              "Zkontroluj si údaje <strong>ještě na potvrzovací stránce</strong>. Ne až v e-mailu druhý den."
             ]
           }
         },
         {
           icon: "🧳",
           kicker: "Krok 4",
-          title: "Zavazadla: co je v ceně a co tě dožene až na letišti",
+          title: "Co je v ceně a co tě dožene až na letišti",
           lead: [
-            "U letů do Ameriky bývá odbavené zavazadlo v ceně častěji než u evropských nízkonákladovek, jenže spoléhat se na to nedá. A ještě častěji se stane tohle: v ceně je let tam, ale <strong>ne zpátky</strong>."
+            "U letů do Ameriky bývá odbavené zavazadlo v ceně častěji než u evropských nízkonákladovek. Spoléhat se na to ale nedá.",
+            "A ještě častěji se stane tohle: v ceně je let tam, ale <strong>ne zpátky</strong>."
           ],
           checklist: [
             "Ověřit počet <strong>odbavených zavazadel v ceně</strong>, zvlášť pro cestu tam a zvlášť zpátky",
@@ -2256,11 +2269,12 @@
           kicker: "Krok 5",
           title: "Než klikneš na zaplatit",
           lead: [
-            "Poslední kontrola, než pustíš peníze. Zabere <strong>dvě minuty</strong> a ušetří přesně ty chyby, které se pak těžko vracejí."
+            "Poslední kontrola, než pustíš peníze.",
+            "Zabere <strong>dvě minuty</strong> a ušetří přesně ty chyby, které se pak těžko vracejí."
           ],
           companion: {
             src: "images/gabi-happy-plaz.svg",
-            text: "Tuhle část dělám sama pokaždé, i po těch letech. <strong>Dvě minuty čtení proti tisícům za opravu</strong>, to se pořád vyplatí."
+            text: "Tuhle část dělám pokaždé, i po těch letech. <strong>Dvě minuty čtení proti tisícům za opravu.</strong>"
           },
           gallery: [
             { src: "images/most-key-west.jpg", alt: "Starý most na cestě na Key West, oceán na obě strany",
@@ -2275,7 +2289,8 @@
           why: {
             title: "Proč je to důležité",
             body: [
-              "Rezervační číslo, těch pár znaků v potvrzovacím e-mailu, je to jediné, co po tobě při problému opravdu chtějí. Podle něj tě najdou v systému, i když ti zrovna nejde otevřít e-mail nebo dochází baterka. <strong>Proto patří do Trezoru</strong>, který funguje i bez signálu."
+              "Rezervační číslo je těch pár znaků v potvrzovacím e-mailu. Při problému je to jediné, co po tobě opravdu chtějí.",
+              "Podle něj tě najdou v systému, i když ti nejde otevřít e-mail a dochází baterka. <strong>Proto patří do Trezoru</strong>, který funguje i bez signálu."
             ]
           }
         }
@@ -2295,23 +2310,28 @@
       desc: "Kde spát podle destinace, co je resort fee a proč hotel zablokuje peníze na kartě.",
       prep: "<strong>Nic shánět nemusíš.</strong> Stačí vědět, kam letíš, a to už appka ví z úvodu.",
       hook: [
-        "Ubytování je jediná položka rozpočtu, u které lidi pravidelně počítají s jinou částkou, než nakonec zaplatí. Ne proto, že by je někdo podvedl, ale proto, že se v Americe k ceně za pokoj připočítávají věci, které u nás nikdo nezná. <strong>Rezervuješ za 120 dolarů a na účtu vidíš 165.</strong> A k tomu ti recepce při příjezdu zablokuje na kartě dalších pár set, což leckoho vyděsí úplně zbytečně. V tomhle modulu si projdeme, kde spát podle toho, kam jedeš, a co všechno se k té ceně nakonec přilepí."
+        "Ubytování je jediná položka rozpočtu, u které lidi pravidelně počítají s jinou částkou, než nakonec zaplatí.",
+        "<strong>Rezervuješ za 120 dolarů a na účtu vidíš 165.</strong> Nikdo tě nepodvedl. Jen se v Americe k ceně za pokoj připočítávají věci, které u nás nikdo nezná.",
+        "A pak ti recepce při příjezdu zablokuje na kartě dalších pár set. Úplně zbytečné leknutí, protože to nejsou tvoje peníze pryč.",
+        "Projdeme kde spát podle toho, kam jedeš, a co všechno se k té ceně přilepí."
       ],
       praise: {
         emoji: "🏨",
         title: "Ubytování máš vybrané a víš, co doopravdy zaplatíš.",
         text:
-          "Teď už víš, jaké typy ubytování dávají smysl zrovna u tvojí destinace. Že cena na " +
-          "srovnávači nemusí být konečná a co se k ní připočte. A že blokace na kartě není útrata, " +
-          "jen jistota, kterou hotel pustí zpátky. Paní Cokdyž si může jít počítat něco jiného."
+          "Víš, co dává smysl zrovna u tvojí destinace. Víš, že cena na srovnávači nemusí " +
+          "být konečná. Víš, že blokace na kartě není útrata, jen jistota, kterou hotel pustí " +
+          "zpátky. " +
+          "Paní Cokdyž si může jít počítat něco jiného."
       },
       steps: [
         {
           icon: "🗺️",
           kicker: "Krok 1",
-          title: "Kde spát podle toho, kam letíš",
+          title: "Kde spát, když každá destinace hraje jinou hru",
           lead: [
-            "Tohle je jediná část modulu, která se liší podle destinace, protože <strong>spát na Floridě a spát v národním parku jsou dvě úplně jiné disciplíny</strong>. Appka ví, kam máš namířeno, tak ti rovnou ukáže tu tvoji. Na ostatní se dá přepnout, když tě zajímají."
+            "Tohle je jediná část modulu, která se liší podle destinace.",
+            "<strong>Spát na Floridě a spát v národním parku jsou dvě jiné disciplíny.</strong> Appka ví, kam máš namířeno, tak ti rovnou ukáže tu tvoji. Na ostatní se dá přepnout."
           ],
           stayPicker: true,
           gallery: [
@@ -2321,17 +2341,19 @@
           why: {
             title: "Proč je to důležité",
             body: [
-              "U ubytování rozhoduje načasování víc než u čehokoliv jiného, a pro každou destinaci vypadá jinak. Na Floridě se vyprodává <strong>zimní sezóna</strong>, protože v ní utíkají Američané ze severu před mrazem. V New Yorku ceny skáčou podle svátků a akcí ve městě. A v parcích jde o <strong>13 měsíců dopředu</strong>, protože ubytování uvnitř parku je omezené a víc ho nikdo nepostaví.",
-              "Proto nemá smysl hledat jedno univerzální pravidlo. Má smysl vědět, <strong>které pravidlo platí zrovna tam, kam letíš</strong>."
+              "U ubytování rozhoduje načasování víc než u čehokoliv jiného. A pro každou destinaci vypadá jinak.",
+              "Na Floridě se vyprodává <strong>zimní sezóna</strong>, protože v ní Američané ze severu utíkají před mrazem. V New Yorku ceny skáčou podle svátků a akcí ve městě. V parcích jde o <strong>13 měsíců dopředu</strong>, protože ubytování uvnitř parku je omezené a víc ho nikdo nepostaví.",
+              "Univerzální pravidlo neexistuje. Existuje jen to, <strong>které platí zrovna tam, kam letíš</strong>."
             ]
           }
         },
         {
           icon: "🧾",
           kicker: "Krok 2",
-          title: "Co se k ceně připočte, než ji zaplatíš",
+          title: "Kde se z pokoje za 120 dolarů stane 165",
           lead: [
-            "Tady vzniká ten rozdíl mezi částkou, kterou vidíš na srovnávači, a tou, co ti nakonec naúčtují. <strong>Nic z toho není podvod</strong>, jsou to běžné americké poplatky. Jen o nich předem nikdo neřekne."
+            "Tady vzniká ten rozdíl mezi částkou na srovnávači a tou na účtu.",
+            "<strong>Nic z toho není podvod.</strong> Jsou to běžné americké poplatky. Jen o nich předem nikdo neřekne."
           ],
           checklist: [
             "Ověřit, jestli se platí <strong>resort fee</strong>, povinný denní poplatek, který zaplatíš, i když bazén ani posilovnu nevyužiješ",
@@ -2341,27 +2363,31 @@
           why: {
             title: "Proč je to důležité",
             body: [
-              "Od roku 2025 platí v USA pravidlo, podle kterého musí hotely i rezervační weby ukazovat <strong>celkovou cenu včetně povinných poplatků</strong> hned, ne až v posledním kroku objednávky. Je to velká úleva, ale spolehnout se na to naslepo nedá, hlavně u menších ubytování a u zahraničních srovnávačů.",
-              "Zvyk je jednoduchý: než potvrdíš rezervaci, najdi si <strong>celkovou částku za celý pobyt</strong>, ne cenu za noc. Ta jediná ti řekne pravdu."
+              "Od roku 2025 musí hotely i rezervační weby v USA ukazovat <strong>celkovou cenu včetně povinných poplatků</strong> hned, ne až v posledním kroku objednávky.",
+              "Je to úleva. Spolehnout se na to naslepo ale nedá, hlavně u menších ubytování a zahraničních srovnávačů.",
+              "Než potvrdíš rezervaci, najdi si <strong>celkovou částku za celý pobyt</strong>. Ne cenu za noc. Ta jediná ti řekne pravdu."
             ]
           },
           note: {
             title: "Ještě jedna věc",
             body: [
-              "Resort fee bývá 25 až 50 dolarů za noc a účtují ho i hotely, které vůbec nevypadají jako resort. U týdenního pobytu je to klidně <strong>rozdíl v tisících korun</strong>, takže se vyplatí porovnávat ubytování až podle konečné ceny, ne podle té na první stránce."
+              "Resort fee bývá <strong>25 až 50 dolarů za noc</strong> a účtují ho i hotely, které jako resort vůbec nevypadají.",
+              "U týdenního pobytu je to rozdíl v tisících korun. Porovnávej proto až konečné ceny, ne ty na první stránce."
             ]
           }
         },
         {
           icon: "💳",
           kicker: "Krok 3",
-          title: "Proč ti hotel zablokuje peníze na kartě",
+          title: "Až ti hotel zablokuje peníze, nelekej se",
           lead: [
-            "Tohle vyděsí skoro každého, kdo to nečeká. Přijedeš na recepci, podáš kartu a hotel si na ní <strong>zablokuje několik set dolarů</strong>. Nejsou to peníze, které jsi utratila. Je to jistota pro případ, že bys něco rozbila nebo vypila celou minibar."
+            "Přijedeš na recepci, podáš kartu a hotel si na ní <strong>zablokuje několik set dolarů</strong>.",
+            "V tu chvíli se sevře žaludek každému, kdo to nečeká.",
+            "Nejsou to peníze pryč. Je to jistota pro případ, že se v pokoji něco rozbije nebo zmizí celý minibar."
           ],
           companion: {
             src: "images/gabi-happy-plaz.svg",
-            text: "Když mi to poprvé provedli, málem jsem volala do banky. Přitom je to <strong>úplně normální a peníze se vrátí</strong>. Jen o tom nikdo dopředu neřekne."
+            text: "Když mi to provedli poprvé, málem jsem volala do banky. Přitom je to <strong>úplně normální a peníze se vrátí</strong>. Jen o tom nikdo dopředu neřekne."
           },
           checklist: [
             "Mít na kartě rezervu <strong>50 až 200 dolarů na noc</strong> navíc nad cenu ubytování",
@@ -2370,23 +2396,27 @@
           why: {
             title: "Proč je to důležité",
             body: [
-              "Blokace se uvolní sama, obvykle <strong>pár dní po odjezdu</strong>, u některých bank to trvá i dva týdny. U kreditní karty se přitom jen sníží dostupný limit a z účtu ti reálně nic nezmizí.",
-              "U debetní karty je to jiné: <strong>peníze ti z účtu opravdu odejdou</strong> a čekáš, až se vrátí. Proto se do Ameriky jezdí s kreditkou, a proto ji zmiňoval už modul o dokladech."
+              "Blokace se uvolní sama, obvykle <strong>pár dní po odjezdu</strong>. U některých bank to trvá i dva týdny.",
+              "U kreditní karty se jen sníží dostupný limit. Z účtu ti reálně nic nezmizí.",
+              "U debetní je to jiné. <strong>Peníze ti z účtu opravdu odejdou</strong> a ty čekáš, až se vrátí. Proto se do Ameriky jezdí s kreditkou."
             ]
           },
           trap: {
             title: "Pozor na tohle",
             body: [
-              "Vyrazit na dvoutýdenní cestu s debetní kartou a přesně spočítaným rozpočtem. Hotel zablokuje 150 dolarů, půjčovna auta klidně 500, a najednou <strong>nemáš čím zaplatit večeři</strong>, přestože peníze na účtu formálně máš. Tohle je nejčastější důvod, proč lidi v Americe zůstanou bez prostředků."
+              "Vyrazit na dvoutýdenní cestu s debetní kartou a přesně spočítaným rozpočtem.",
+              "Hotel zablokuje 150 dolarů. Půjčovna auta klidně 500. A ty <strong>nemáš čím zaplatit večeři</strong>, přestože peníze na účtu formálně máš.",
+              "Tohle je nejčastější důvod, proč lidi v Americe zůstanou bez prostředků."
             ]
           }
         },
         {
           icon: "📋",
           kicker: "Krok 4",
-          title: "Rezervace, storno a příjezd",
+          title: "Co se špatně dohání až na místě",
           lead: [
-            "Pár drobností, které se <strong>špatně dohánějí na místě</strong>. Zabere to chvilku teď a ušetří to nepříjemné překvapení po dvanácti hodinách v letadle."
+            "Pár drobností, které se na místě dohánějí špatně.",
+            "Zaberou chvilku teď a ušetří překvapení po dvanácti hodinách v letadle."
           ],
           checklist: [
             "Přečíst <strong>storno podmínky</strong>, nevratná sazba bývá levnější jen o pár dolarů, ale zavře ti všechny dveře",
@@ -2396,16 +2426,18 @@
           note: {
             title: "Ještě jedna věc",
             body: [
-              "Když přiletíš ráno a pokoj bude až odpoledne, recepce ti <strong>skoro vždycky nechá zavazadla</strong> a můžeš vyrazit do města nalehko. Stačí o to říct, je to naprosto běžná služba a nic za ni nechtějí."
+              "Přiletíš ráno, pokoj bude až odpoledne. Recepce ti <strong>skoro vždycky nechá zavazadla</strong> a ty vyrazíš do města nalehko.",
+              "Stačí o to říct. Je to běžná služba a nic za ni nechtějí."
             ]
           }
         },
         {
           icon: "🔒",
           kicker: "Krok 5",
-          title: "Adresa první noci patří do Trezoru",
+          title: "Dvě věci, které musíš mít i bez signálu",
           lead: [
-            "Poslední krok, a je krátký. <strong>Adresu prvního ubytování</strong> po tobě budou chtít na imigrační kontrole a potvrzovací číslo pak na recepci. Obojí potřebuješ mít po ruce ve chvíli, kdy nemusíš mít signál ani nabitý telefon."
+            "Poslední krok, a je krátký.",
+            "<strong>Adresu prvního ubytování</strong> po tobě budou chtít na imigrační kontrole. Potvrzovací číslo pak na recepci. Obojí ve chvíli, kdy nemusíš mít signál ani nabitý telefon."
           ],
           checklist: [
             "Uložit <strong>adresu první noci</strong> do Trezoru, ptají se na ni na imigrační kontrole",
@@ -2418,7 +2450,8 @@
           why: {
             title: "Proč je to důležité",
             body: [
-              "Trezor v téhle appce funguje offline, protože přesně tam ho budeš potřebovat: ve frontě na imigrační kontrole, kde nemáš americkou SIM kartu a wifi na letišti je přetížená. <strong>Co je v Trezoru, to máš vždycky.</strong>"
+              "Trezor funguje offline, protože přesně tam ho budeš potřebovat. Ve frontě na imigrační kontrole, kde nemáš americkou SIM kartu a letištní wifi je přetížená.",
+              "<strong>Co je v Trezoru, to máš vždycky.</strong>"
             ]
           }
         }
