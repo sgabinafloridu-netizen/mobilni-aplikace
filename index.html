@@ -2287,7 +2287,7 @@
     {
       id: "letenky",
       balicek: "zaklad",
-      hero: { src: "images/hlavicky/hero-letenky.jpg", alt: "Nakloněná palma nad bílou pláží a tyrkysovým mořem",
+      hero: { src: "images/hlavicky/hero-letenky.jpg", alt: "Starý most na cestě na Key West, oceán na obě strany",
              popis: "letenka je jen cesta sem" },
 
       ikona: "images/ikony/highlight-let-do-usa.svg",
@@ -2518,7 +2518,7 @@
           ],
           pochvala: "✨ A je to. Letenka je vyřešená a číslo rezervace máš i bez signálu.",
           gallery: [
-            { src: "images/most-key-west.jpg", alt: "Starý most na cestě na Key West, oceán na obě strany",
+            { src: "images/palma-plaz.jpg", alt: "Nakloněná palma nad bílou pláží a tyrkysovým mořem",
               caption: "a kvůli tomuhle to celé zařizuješ" }
           ],
           trap: {
@@ -2900,9 +2900,156 @@
         }
       ]
     },
-    { id: "checklisty", balicek: "rozsireni", ikona: "images/ikony/highlight-checklisty.svg", name: "Checklisty",                   emoji: "✅", time: "10 min", lessons: 4,
+    {
+      id: "checklisty",
+      balicek: "rozsireni",
+      ikona: "images/ikony/highlight-checklisty.svg",
+      hero: { src: "images/hlavicky/hero-checklisty.jpg", alt: "Molo s restaurací nad mořem při západu slunce",
+             popis: "za pár hodin už tady budeš sedět a na balení si nevzpomeneš" },
+      name: "Checklisty: co sbalit, co vytisknout a co mít po ruce",
+      shortName: "Checklisty",
+      dashboard: true,
+      dashboardTitle: "Sbaleno",
+      emoji: "✅",
+      time: "15 min",
       accent: "#0E8A96", accentSoft: "#E2F4F6",
-      desc: "Co sbalit, co vytisknout a co mít v příruční tašce." },
+      desc: "Co do příručního, co do kufru, co vytisknout a co do Ameriky nesmí.",
+      prep: "<strong>Otevřený kufr.</strong> Tenhle modul se nečte předem, ten se odbavuje s věcmi v ruce.",
+      hook: [
+        "Balení je jediná část cesty, kterou nejde udělat v předstihu. A přesně proto se dělá pozdě večer a ve spěchu.",
+        "Tenhle modul není o tom, kolik triček si vzít. To zvládneš sama.",
+        "Je o čtyřech věcech, které lidem dělají problém pokaždé: <strong>co musí být v příručním, co se vyplatí vytisknout, co se do Ameriky nesmí a co se dokupuje až na místě</strong>.",
+        "Projdi si to s kufrem u nohou, ne v posteli."
+      ],
+      praise: {
+        emoji: "✅",
+        title: "Sbaleno. A tentokrát bez toho pocitu, že jsi na něco zapomněla.",
+        text:
+          "Doklady máš v příručním, ne v kufru, který se může zdržet. Papíry máš i na papíře, " +
+          "ne jen v mobilu s docházející baterkou. Do zavazadla ti nezůstalo nic, co by ti " +
+          "na celnici zabavili. " +
+          "Zbývá jediné: dojet na letiště."
+      },
+      steps: [
+        {
+          icon: "🎒",
+          kicker: "Krok 1",
+          title: "Co musí být v příručním, ať se stane cokoliv",
+          lead: [
+            "Odbavený kufr se ztratí zhruba jednomu z dvou set cestujících. Většinou se najde do dvou dnů.",
+            "Ty dva dny ale musíš z něčeho žít. A hlavně se s něčím dostat přes imigrační kontrolu.",
+            "<strong>Do příručního patří všechno, bez čeho se cesta zastaví.</strong>"
+          ],
+          checklist: [
+            "<strong>Pas a všechny doklady</strong>, nikdy ne v odbaveném kufru",
+            "<strong>Léky na předpis</strong> v originálním balení, ideálně i s recepturou",
+            "<strong>Powerbanka a kabely</strong>, do odbaveného kufru powerbanka nesmí",
+            "<strong>Náhradní spodní prádlo a tričko</strong> na ty dva dny bez kufru",
+            "<strong>Brýle, čočky a nabíječka na telefon</strong>, tedy věci, bez kterých se neobejdeš"
+          ],
+          pochvala: "✨ Hotovo. I kdyby se kufr zdržel, tvoje cesta se nezastaví.",
+          trap: {
+            title: "Pozor na tohle",
+            body: [
+              "Dát léky na předpis do odbaveného kufru je nejčastější chyba, kterou u klientů vidím.",
+              "Když se kufr zdrží, sháníš v cizí zemi lék, na který <strong>potřebuješ amerického lékaře a recept</strong>. To není otázka hodiny, to je otázka dne a několika set dolarů.",
+              "Léky patří k pasu. Do příručního, vždycky."
+            ]
+          }
+        },
+        {
+          icon: "🖨️",
+          kicker: "Krok 2",
+          title: "Co si vytisknout, i když máš všechno v mobilu",
+          lead: [
+            "Ano, i v roce 2026. A není to z nedůvěry k technice.",
+            "Je to proto, že po dvanácti hodinách v letadle máš 4 procenta baterky, letištní wifi nefunguje a před tebou stojí úředník, který čeká."
+          ],
+          checklist: [
+            "<strong>Adresa první noci</strong> včetně jména ubytování a telefonu",
+            "<strong>Potvrzení o ESTA</strong> a čísla letů tam i zpět",
+            "<strong>Číslo pojistky</strong> a telefon na asistenční službu",
+            "<strong>Rezervace ubytování a auta</strong>, aspoň potvrzovací čísla"
+          ],
+          pochvala: "✨ A je to. Jeden list papíru, který funguje i s vybitým telefonem.",
+          why: {
+            title: "Proč je to důležité",
+            body: [
+              "Všechno tohle máš zároveň v Trezoru v téhle appce, který funguje offline. To je první záloha.",
+              "Papír je druhá záloha, a ta funguje i s vybitým telefonem. <strong>Vejde se na jeden list.</strong>",
+              "Vytisknout dvakrát a jeden nechat v kufru není hloupost, je to zvyk lidí, kteří létají často."
+            ]
+          }
+        },
+        {
+          icon: "🔌",
+          kicker: "Krok 3",
+          title: "Tři věci, na které se zapomíná nejčastěji",
+          lead: [
+            "Oblečení si sbalíš sama a líp než já. Tyhle tři věci se ale zapomínají tak spolehlivě, že si zaslouží vlastní krok."
+          ],
+          checklist: [
+            "<strong>Adaptér do americké zásuvky</strong>, americké zásuvky mají jiné kolíky i jiné napětí",
+            "<strong>Opalovací krém s vysokým faktorem</strong>, floridské slunce je jinde než české",
+            "<strong>Lehká mikina nebo šátek</strong>, v amerických budovách je klimatizace nastavená nemilosrdně"
+          ],
+          pochvala: "✨ Máš to. Přesně tyhle tři věci pak lidi kupují první den za trojnásobek.",
+          note: {
+            title: "Ještě jedna věc",
+            body: [
+              "Adaptér kupuj doma. Na americkém letišti stojí <strong>několikanásobek</strong> a v hotelu ho většinou nemají.",
+              "A ověř si, jestli tvoje nabíječka zvládá <strong>110 voltů</strong>. Většina moderních nabíječek ano, ale žehlička na vlasy z Česka umí v Americe doslova shořet."
+            ]
+          }
+        },
+        {
+          icon: "🚫",
+          kicker: "Krok 4",
+          title: "Co se do Ameriky nesmí, ani v kufru",
+          lead: [
+            "Tady se to lidem kazí nejčastěji, a skoro vždycky s tou nejlepší vůlí. Vezmou si na cestu domácí klobásu nebo babiččin domácí kompot.",
+            "Americká celnice je na jídlo <strong>mimořádně přísná</strong> a nejde o šikanu. Jde o zavlečení nákazy a škůdců.",
+            "Nedeklarovaná zakázaná potravina znamená pokutu <strong>až 10 000 dolarů</strong>."
+          ],
+          checklist: [
+            "Nebrat <strong>žádné maso a výrobky z něj</strong>, ani konzervy, ani sušené, ani klobásu",
+            "Nebrat <strong>čerstvé ovoce a zeleninu</strong>, ani sušené, ani doma zavařené",
+            "Nebrat <strong>měkké sýry</strong>, tvrdé zrající déle než 60 dní projdou",
+            "Co si přece jen vezmeš, <strong>přiznat v celním prohlášení</strong>, přiznaná věc znamená nanejvýš zabavení"
+          ],
+          pochvala: "✨ Hotovo. Na celnici tě nic nepřekvapí a klobása doma zůstane doma.",
+          trap: {
+            title: "Pozor na tohle",
+            body: [
+              "Rozdíl mezi zabavením a pokutou nedělá to, co vezeš. Dělá ho to, <strong>jestli jsi to přiznala</strong>.",
+              "Když věc uvedeš v celním prohlášení a nesmí se dovézt, seberou ti ji a jedeš dál. Když ji neuvedeš a najdou ji, je z toho pokuta v tisících dolarů.",
+              "Když si nejsi jistá, přiznej to. Vždycky."
+            ]
+          }
+        },
+        {
+          icon: "🌙",
+          kicker: "Krok 5",
+          title: "Poslední večer: pět minut a jdeš spát",
+          lead: [
+            "Poslední kontrola, kterou uděláš s kufrem už zavřeným.",
+            "Cílem není nic doplňovat. Cílem je jít spát s tím, že už není co řešit."
+          ],
+          checklist: [
+            "<strong>Online check-in</strong> hotový, palubenka v mobilu i vytištěná",
+            "<strong>Pas v příručním</strong>, fyzicky zkontrolovaný, ne „určitě tam je“",
+            "<strong>Telefon a powerbanka nabité</strong> na sto procent",
+            "<strong>Trezor v appce vyplněný</strong>, ať funguje i bez signálu",
+            "<strong>Odvoz na letiště</strong> potvrzený, včetně času odjezdu"
+          ],
+          pochvala: "✨ A je to. Můžeš jít spát. Zítra už jenom cestuješ.",
+          gallery: [
+            { src: "images/gabi-zapad.jpg", alt: "Gábi v šiltovce proti západu slunce na Floridě",
+              caption: "tak zítra na shledanou, tady se na tebe těším" }
+          ]
+        }
+      ]
+    },
     { id: "krize",      balicek: "rozsireni", ikona: "images/ikony/highlight-krize.svg", name: "Krizové situace před odletem", emoji: "🆘", time: "15 min", lessons: 5,
       accent: "#E85892", accentSoft: "#FFEAF2",
       desc: "Zrušený let, nemoc, ztracený pas. Klidný plán B pro každou z nich." }
