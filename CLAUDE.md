@@ -111,9 +111,16 @@ Průvodce „Než odletíš" má **7 modulů** a jsou rozdělené do dvou placen
 | 2 | `doklady` | Doklady a formálnosti | `zaklad` | ✅ hotový, 6 kroků, dashboard |
 | 3 | `letenky` | Letenky | `zaklad` | ✅ hotový, 5 kroků, dashboard |
 | 4 | `ubytovani` | Ubytování | `zaklad` | ✅ hotový, 5 kroků, dashboard |
-| 5 | `finance` | Finance a placení | `rozsireni` | ⬜ jen kostra |
-| 6 | `checklisty` | Checklisty | `rozsireni` | ⬜ jen kostra |
-| 7 | `krize` | Krizové situace před odletem | `rozsireni` | ⬜ jen kostra |
+| 5 | `finance` | Finance a placení | `rozsireni` | ✅ hotový, 6 kroků, dashboard |
+| 6 | `checklisty` | Checklisty | `rozsireni` | ✅ hotový, 5 kroků, dashboard |
+| 7 | `krize` | Krizové situace před odletem | `rozsireni` | ✅ hotový, 5 kroků, dashboard |
+
+**Průvodce „Než odletíš" je obsahově hotový.** 7 modulů, 39 kroků, zhruba 7 650 slov.
+Obě cenové úrovně se dají prodat, protože ani jedna se neotevře prázdná.
+
+⚠️ **Modul 7 se píše jinak než ostatní.** Bez vtipů a bez paní Cokdyž, protože ho člověk
+čte ve stresu. Pravidlo je z bible, sekce o krizových materiálech. Modul to říká rovnou
+v úvodu, ať čtenáře nepřekvapí změna tónu.
 
 Moduly 1 až 4 = příprava před odletem. Moduly 5 až 7 = to, co se hodí těsně před odletem a v den letu.
 

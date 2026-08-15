@@ -3050,9 +3050,159 @@
         }
       ]
     },
-    { id: "krize",      balicek: "rozsireni", ikona: "images/ikony/highlight-krize.svg", name: "Krizové situace před odletem", emoji: "🆘", time: "15 min", lessons: 5,
+    {
+      id: "krize",
+      balicek: "rozsireni",
+      ikona: "images/ikony/highlight-krize.svg",
+      hero: { src: "images/hlavicky/hero-krize.jpg", alt: "Průzračná voda floridského pramene s paddleboardem",
+             popis: "a tohle je ta cesta, kterou si nenecháš pokazit" },
+      name: "Když se něco pokazí před odletem",
+      shortName: "Krizové situace",
+      dashboard: true,
+      dashboardTitle: "Plán B připravený",
+      emoji: "🆘",
+      time: "15 min",
       accent: "#E85892", accentSoft: "#FFEAF2",
-      desc: "Zrušený let, nemoc, ztracený pas. Klidný plán B pro každou z nich." }
+      desc: "Zrušený let, nemoc, ztracený pas, zamítnutá ESTA. Klidný postup pro každou z nich.",
+      prep: "<strong>Nic.</strong> Tenhle modul si projdi v klidu dopředu, ať ho v případě potřeby nemusíš číst poprvé.",
+      hook: [
+        "Tenhle modul je jiný než ostatní. Nebudeme si tu dělat legraci a nebude tu paní Cokdyž.",
+        "Když se něco pokazí, člověk nepotřebuje vtip. Potřebuje vědět, co udělat jako první.",
+        "Projdeme čtyři situace, které se reálně stávají, a u každé postup. Ne proto, aby ses bála. Proto, abys věděla, že každá z nich má řešení."
+      ],
+      praise: {
+        emoji: "🆘",
+        title: "Plán B máš připravený a doufejme, že ho nikdy nepoužiješ.",
+        text:
+          "Víš, na co máš nárok při zrušeném letu a kolik to dělá. Víš, co udělat, když onemocníš " +
+          "nebo přijdeš o pas pár dní před odletem. A víš, že ani zamítnutá ESTA neznamená konec cesty. " +
+          "Tohle je ten modul, který si přeješ nepotřebovat. Ale je lepší ho mít."
+      },
+      steps: [
+        {
+          icon: "🛫",
+          kicker: "Krok 1",
+          title: "Zrušený nebo hodně zpožděný let",
+          lead: [
+            "Nejčastější a zároveň ta nejlépe ošetřená situace. Na let odlétající z Evropy se totiž vztahují evropská pravidla, a ta jsou k cestujícím vstřícná.",
+            "Při zrušení nebo zpoždění <strong>o 3 hodiny a víc</strong> máš nárok na odškodnění <strong>600 eur na osobu</strong>. U letu do USA jde vždycky o tuhle nejvyšší sazbu, protože je delší než 3 500 km.",
+            "Odškodnění je navíc k tomu, že tě aerolinka musí dopravit do cíle nebo vrátit peníze."
+          ],
+          checklist: [
+            "Nikam neodcházet, dokud <strong>nemám od aerolinky písemně</strong>, co se s letem děje",
+            "<strong>Vyfotit informační tabuli</strong> se zpožděním a schovat palubenky",
+            "Vyžádat si u přepážky <strong>občerstvení a případně ubytování</strong>, na to je nárok už při kratším zpoždění",
+            "Odškodnění si nárokovat <strong>u aerolinky</strong>, ne přes zprostředkovatele, kteří si berou provizi"
+          ],
+          pochvala: "✨ Hotovo. Víš, na co máš nárok, a nenecháš si to vymluvit u přepážky.",
+          why: {
+            title: "Proč je to důležité",
+            body: [
+              "Nárok vzniká automaticky ze zákona, ne z dobré vůle aerolinky. Ta ho ale sama od sebe nenabídne.",
+              "Odškodnění se počítá <strong>podle zpoždění v cíli</strong>, ne podle odletu. Když vyletíš o hodinu později, ale kvůli zmeškanému přestupu dorazíš o pět hodin později, počítá se těch pět.",
+              "Nárok nevzniká jen tehdy, když šlo o <strong>mimořádnou okolnost</strong>, typicky počasí nebo stávku řízení letového provozu. Technická závada mimořádná okolnost není."
+            ]
+          }
+        },
+        {
+          icon: "🤒",
+          kicker: "Krok 2",
+          title: "Onemocníš pár dní před odletem",
+          lead: [
+            "Tohle je situace, kde se rozhoduje o desítkách tisíc, a rozhodlo se o nich už ve chvíli, kdy se kupovalo pojištění.",
+            "Klíčové slovo je <strong>storno pojištění</strong>. To není totéž co pojištění léčebných výloh."
+          ],
+          checklist: [
+            "Zjistit, jestli mám <strong>připojištění storna</strong>, ne jen léčebné výlohy",
+            "Při onemocnění jít <strong>hned k lékaři</strong> a nechat si vystavit potvrzení s datem",
+            "Nahlásit to <strong>pojišťovně i aerolince co nejdřív</strong>, ne až po termínu odletu",
+            "Zjistit u ubytování, <strong>do kdy jde zrušit bez poplatku</strong>"
+          ],
+          pochvala: "✨ Máš to. Nejdražší část téhle situace se řeší dopředu, ne až se stane.",
+          trap: {
+            title: "Pozor na tohle",
+            body: [
+              "Storno pojištění se dá sjednat <strong>jen krátce po zakoupení zájezdu nebo letenky</strong>, obvykle do několika dní. Později už ne.",
+              "Kdo si ho nesjedná hned, nemá ho jak dohnat. A pak platí zrušenou cestu z vlastní kapsy."
+            ]
+          }
+        },
+        {
+          icon: "📕",
+          kicker: "Krok 3",
+          title: "Ztratíš pas nebo ti propadl",
+          lead: [
+            "Vypadá to jako konec cesty. Není.",
+            "Existuje zrychlené vydání pasu, a to i na poslední chvíli. Stojí to peníze, ale funguje."
+          ],
+          checklist: [
+            "Při ztrátě <strong>nahlásit to policii</strong> a nechat si vystavit potvrzení",
+            "Zajít na <strong>úřad obce s rozšířenou působností</strong> a požádat o zrychlené vydání",
+            "Počítat s tím, že pas <strong>do 24 hodin</strong> se vyzvedává jen na ministerstvu vnitra v Praze",
+            "Po vydání nového pasu <strong>znovu požádat o ESTA</strong>, ta je navázaná na číslo pasu"
+          ],
+          pochvala: "✨ A je to. I tahle situace má řešení, jen stojí peníze a jeden den navíc.",
+          why: {
+            title: "Proč je to důležité",
+            body: [
+              "Zrychlené vydání stojí <strong>6 000 Kč za dospělého</strong> a 2 000 Kč za dítě ve variantě do 24 hodin. Do 5 pracovních dnů je to levnější.",
+              "Na tuhle část se zapomíná nejčastěji: <strong>ESTA je navázaná na konkrétní číslo pasu</strong>. S novým pasem ta stará neplatí a musí se podat znovu, včetně poplatku."
+            ]
+          }
+        },
+        {
+          icon: "🚫",
+          kicker: "Krok 4",
+          title: "Zamítnutá ESTA",
+          lead: [
+            "Stane se to zřídka, ale stane. A je to jediná z těchhle situací, kterou nejde vyřešit rychle.",
+            "<strong>Zamítnutou ESTA nemá smysl podávat znovu.</strong> Systém si žádost pamatuje a další pokus dopadne stejně."
+          ],
+          checklist: [
+            "Nepodávat <strong>opakovanou žádost o ESTA</strong>, výsledek bude stejný",
+            "Požádat o <strong>klasické vízum B1/B2</strong> na americké ambasádě",
+            "Počítat s <strong>osobním pohovorem</strong> a s čekáním v řádu týdnů až měsíců",
+            "S nákupem nevratné letenky <strong>počkat, dokud vízum nemám</strong>"
+          ],
+          pochvala: "✨ Hotovo. Víš, kudy vede cesta dál, i kdyby ESTA neprošla.",
+          note: {
+            title: "Ještě jedna věc",
+            body: [
+              "Právě proto se ESTA vyřizuje <strong>jako první</strong>, dřív než letenka. Když se něco pokazí, nepřijdeš u toho o peníze za letenku.",
+              "Pokud tenhle modul čteš dřív, než jsi cokoliv koupila, jsi přesně tam, kde máš být."
+            ]
+          },
+          link: {
+            title: "U.S. Department of State: Visitor Visa",
+            sub: "Oficiální informace o turistických a business vízech B1/B2.",
+            url: "https://travel.state.gov/content/travel/en/us-visas/tourism-visit/visitor.html"
+          }
+        },
+        {
+          icon: "📇",
+          kicker: "Krok 5",
+          title: "Co mít po ruce, aby se to řešilo snadno",
+          lead: [
+            "Všechny situace výš mají jedno společné: řeší se telefonem a papírem.",
+            "Když máš tyhle údaje pohromadě, je z krize nepříjemné odpoledne. Když je nemáš, je z ní ztracený den."
+          ],
+          checklist: [
+            "<strong>Číslo pojistky a telefon na asistenci</strong>, uložené v Trezoru",
+            "<strong>Kontakt na aerolinku</strong>, ideálně i české číslo",
+            "<strong>Čísla rezervací</strong> letenky i ubytování",
+            "<strong>Kopie pasu</strong> v telefonu i vytištěná, zvlášť od originálu"
+          ],
+          pochvala: "✨ A je to. Tímhle modul končí a doufám, že z něj nikdy nic nepoužiješ.",
+          why: {
+            title: "Proč je to důležité",
+            body: [
+              "Trezor v téhle appce funguje offline, takže se k číslům dostaneš i na letišti bez signálu a s vybitými daty.",
+              "Kopie pasu neslouží jako doklad, ale <strong>výrazně zrychlí vyřízení nového</strong>, když o ten pravý přijdeš."
+            ]
+          }
+        }
+      ]
+    }
   ];
 
   /* kolik lekcí modul má: z kroků, dokud nejsou napsané, tak z plánu */
