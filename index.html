@@ -303,6 +303,13 @@
     padding-top: env(safe-area-inset-top);
     border-bottom: 1px solid var(--line);
   }
+  .topbar-krok {
+    flex: 0 0 auto; margin-left: auto;
+    background: var(--sunken); color: var(--text-soft);
+    border-radius: var(--r-pill); padding: 5px 11px;
+    font-size: 11.5px; font-weight: 800; white-space: nowrap;
+    font-variant-numeric: tabular-nums;
+  }
 
   /* ══ OSA S LETADÉLKEM ══ */
   .rail { padding: 11px clamp(16px, 4vw, 56px) 13px; }
@@ -784,7 +791,29 @@
     flex: 0 0 auto; width: 20px; height: 20px; border-radius: var(--r-pill);
     background: var(--accent-soft); color: var(--accent);
     display: grid; place-items: center; font-size: 10.5px; font-weight: 800; margin-top: 1px;
+    transition: background .15s, color .15s;
   }
+  /* kde zrovna jsem: krok, který mám před očima */
+  .toc-item.active {
+    background: var(--accent-soft); color: var(--accent); font-weight: 800;
+    box-shadow: inset 3px 0 0 var(--accent);
+  }
+  .toc-item.active .toc-num { background: var(--accent); color: #fff; }
+  /* co už mám za sebou */
+  .toc-item.done { color: var(--text-faint); }
+  .toc-item.done .toc-num {
+    background: var(--tyrkys); color: #fff; font-size: 12px;
+  }
+
+  /* hotový krok pozná i sám sebe, ne jen obsah vpravo */
+  .step-card.done { border-color: #CBEDF1; background: linear-gradient(180deg, #F7FDFD 0%, var(--surface) 46%); }
+  .step-card.done .step-badge { background: var(--tyrkys); }
+  .step-hotovo {
+    display: none; align-items: center; gap: 6px; margin-left: auto; flex: 0 0 auto;
+    font-size: 11px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase;
+    color: var(--tyrkys-dark); white-space: nowrap;
+  }
+  .step-card.done .step-hotovo { display: flex; }
   .aside-meta { display: flex; flex-direction: column; gap: var(--s4); }
   .aside-meta > div { display: flex; flex-direction: column; }
   .aside-meta .k { display: block; font-size: 10.5px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; color: var(--text-soft); margin-bottom: 4px; }
@@ -1419,6 +1448,8 @@
       <div class="topbar">
         <button class="icon-btn" id="btn-menu" aria-label="Otevřít menu">☰</button>
         <span class="topbar-title" id="topbar-title">Přehled</span>
+        <!-- kde jsem v lekci. Vidět i tam, kde se obsah vpravo schová za tlačítko. -->
+        <span class="topbar-krok" id="topbar-krok" hidden></span>
       </div>
 
       <!-- osa se 7 zastávkami, letadélko ukazuje aktuální pozici -->
@@ -3058,6 +3089,8 @@
     onboarding.style.display = inShell ? "none" : "grid";
     shell.hidden = !inShell;
 
+    var lista = document.getElementById("topbar-krok");
+    if (lista && screenId !== "s-module") lista.hidden = true;
     if (screenId === "s-uvod") topbarTitle.textContent = "Úvod";
     else if (screenId === "s-home") topbarTitle.textContent = "Přehled";
     else if (screenId === "s-trezor") topbarTitle.textContent = "Trezor";
@@ -3627,6 +3660,58 @@
     show(defaultMonth);
   }
 
+  /* ── orientace v lekci ──────────────────────────────────────────────────
+     Dvě otázky, na které si musí umět odpovědět každý, kdo v lekci scrolluje:
+     kde zrovna jsem, a co už mám za sebou. Bez tohohle kroky splývají.     */
+
+  var tocPozorovatel = null;
+
+  /* Kde jsem: krok, který je zrovna v horní části obrazovky, se zvýrazní
+     v obsahu vpravo. */
+  function initTocSledovani() {
+    if (tocPozorovatel) { tocPozorovatel.disconnect(); tocPozorovatel = null; }
+    var kroky = document.querySelectorAll('#module-steps .step-card');
+    if (!kroky.length || !("IntersectionObserver" in window)) return;
+
+    tocPozorovatel = new IntersectionObserver(function (zaznamy) {
+      var viditelne = zaznamy.filter(function (z) { return z.isIntersecting; });
+      if (!viditelne.length) return;
+      // ten nejvýš na obrazovce vyhrává
+      viditelne.sort(function (a, b) {
+        return a.boundingClientRect.top - b.boundingClientRect.top;
+      });
+      var id = viditelne[0].target.id;                 // krok-3
+      var poradi = Number(id.split("-")[1]) - 1;
+      document.querySelectorAll("#lesson-toc .toc-item").forEach(function (b, bi) {
+        b.classList.toggle("active", bi === poradi);
+      });
+      // totéž do horní lišty, aby to bylo vidět i na úzké obrazovce
+      var lista = document.getElementById("topbar-krok");
+      if (lista) {
+        lista.textContent = "Krok " + (poradi + 1) + " ze " + kroky.length;
+        lista.hidden = false;
+      }
+    }, { rootMargin: "-96px 0px -55% 0px", threshold: 0 });
+
+    kroky.forEach(function (k) { tocPozorovatel.observe(k); });
+  }
+
+  /* Co mám za sebou: krok, ve kterém je odškrtané všechno, dostane značku
+     u sebe i v obsahu vpravo. Kroky bez checklistu se neznačí, tam není co. */
+  function refreshHotoveKroky() {
+    document.querySelectorAll('#module-steps .step-card').forEach(function (karta, i) {
+      var boxy = karta.querySelectorAll(".check-item input");
+      var hotovo = boxy.length > 0 && Array.prototype.every.call(boxy, function (b) { return b.checked; });
+      karta.classList.toggle("done", hotovo);
+      var polozka = document.querySelectorAll("#lesson-toc .toc-item")[i];
+      if (polozka) {
+        polozka.classList.toggle("done", hotovo);
+        var cislo = polozka.querySelector(".toc-num");
+        if (cislo) cislo.textContent = hotovo ? "✓" : String(i + 1);
+      }
+    });
+  }
+
   /* Video nebo podcast ke kroku. Dokud soubor neexistuje, zůstane dlaždice
      s návodem. Přehrávač se odkryje sám, jakmile se nahrávka načte. */
   function initStepVideos() {
@@ -3722,10 +3807,12 @@
         var group = label.closest(".checklist-group");
         if (group) refreshGroupDone(group);
         refreshDashboard();
+        refreshHotoveKroky();
       });
     });
 
     document.querySelectorAll(".checklist-group").forEach(refreshGroupDone);
+    refreshHotoveKroky();
   }
 
   function pcVerdict(name, expiry, navrat) {
@@ -4064,6 +4151,7 @@
                   '<span class="step-kicker">' + (step.kicker || ('Krok ' + (i + 1))) + '</span>' +
                   '<span class="step-name">' + step.title + '</span>' +
                 '</span>' +
+                '<span class="step-hotovo">✓ Hotovo</span>' +
               '</div>';
 
       if (step.lead) html += '<div class="step-lead measure">' + paras(step.lead) + '</div>';
@@ -4517,6 +4605,11 @@
     } else {
       tocCard.hidden = true;
     }
+
+    // až teď, když obsah vpravo existuje: doznačit hotové kroky a začít
+    // sledovat, kde se člověk v lekci nachází
+    refreshHotoveKroky();
+    initTocSledovani();
 
     goTo("s-module");
   }
