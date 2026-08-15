@@ -2650,9 +2650,187 @@
          name: "Doprava na místě", emoji: "🚗", time: "15 min", lessons: 5,
          accent: "#E8783F", accentSoft: "#FFF1E8",
          desc: "Auto, dálnice, aplikace. Jak se tam pohybovat bez nervů." },        */
-    { id: "finance",    balicek: "rozsireni", ikona: "images/ikony/highlight-florida-levneji.svg", name: "Finance a placení",            emoji: "💳", time: "15 min", lessons: 5,
+    {
+      id: "finance",
+      balicek: "rozsireni",
+      ikona: "images/ikony/highlight-florida-levneji.svg",
+      name: "Finance a placení: kolik si vzít a kolik ti sebere banka",
+      shortName: "Finance",
+      dashboard: true,
+      dashboardTitle: "Připravenost na peníze",
+      emoji: "💳",
+      time: "20 min",
       accent: "#C08A00", accentSoft: "#FFF6DC",
-      desc: "Karty, hotovost, spropitné. Kolik si připravit a na co pozor." },
+      desc: "Karty, hotovost, kurzy. Co si připravit doma, ať v Americe neplatíš navíc.",
+      prep: "<strong>Peněženku po ruce.</strong> Podíváme se, co v ní máš, a co z toho v Americe k něčemu bude.",
+      hook: [
+        "Na cestu do Ameriky se lidi připraví do posledního papíru. Pas, ESTA, pojištění, adresa první noci.",
+        "A pak zaplatí první večeři a nechají v ní o čtyři stovky víc, než museli.",
+        "Nikdo je nepodvedl. Jen jim to nikdo neřekl dopředu.",
+        "Tenhle modul je o tom, co si srovnat <strong>doma</strong>, protože na místě už se s tím nedá nic dělat."
+      ],
+      praise: {
+        emoji: "💳",
+        title: "Peníze máš srovnané a nikdo si z nich neukousne víc, než musí.",
+        text:
+          "Víš, kterou kartu vytáhnout a kterou nechat doma. Víš, kolik ti sebere banka " +
+          "a jak se vyhnout kurzu, který ti terminál sám nabídne. " +
+          "A víš, co udělat s bankou, než odletíš. " +
+          "To je za jeden večer u stolu docela slušný výnos."
+      },
+      steps: [
+        {
+          icon: "💳",
+          kicker: "Krok 1",
+          title: "Proč do Ameriky nestačí jedna karta",
+          lead: [
+            "V Česku vystačíš s jednou kartou roky. V Americe je jedna karta riziko.",
+            "Ne proto, že by tam byly nebezpečné bankomaty. Ale protože se karta umí zablokovat, ztratit, nebo prostě zůstat v půjčovně aut jako záloha.",
+            "Kolik karet máš v peněžence teď?"
+          ],
+          checklist: [
+            "Vzít si <strong>aspoň dvě karty</strong> od různých bank, ne dvě od jedné",
+            "Aspoň jedna z nich musí být <strong>kreditní</strong>, kvůli zálohám v hotelu a v půjčovně",
+            "Nosit je <strong>každou jinde</strong>, jedna v peněžence, druhá v zavazadle nebo u druhého člověka"
+          ],
+          pochvala: "✨ Hotovo. Když jedna karta selže, cesta kvůli tomu neskončí.",
+          why: {
+            title: "Proč je to důležité",
+            body: [
+              "Kreditní kartu už zmiňoval modul o dokladech i ten o ubytování, a pokaždé ze stejného důvodu: hotel i půjčovna auta si na ní <strong>blokují peníze</strong>.",
+              "U debetní karty ti tyhle peníze reálně odejdou z účtu a čekáš, až se vrátí. U kreditní se jen sníží limit.",
+              "Proto ta druhá karta. Když se ti na kreditce zablokuje 500 dolarů za auto, chceš mít ještě z čeho žít."
+            ]
+          }
+        },
+        {
+          icon: "💵",
+          kicker: "Krok 2",
+          title: "Kolik hotovosti si vzít",
+          lead: [
+            "Amerika je zemí karet. Zaplatíš jimi kafe za dva dolary i benzín uprostřed ničeho.",
+            "Přesto se bez hotovosti neobejdeš. Ne kvůli nákupům, ale kvůli lidem: <strong>spropitné, nosič, pokojská, parkovací automat</strong>.",
+            "Rozumná částka na dva týdny jsou <strong>200 až 300 dolarů</strong>, a hlavně v malých bankovkách."
+          ],
+          checklist: [
+            "Vzít si <strong>200 až 300 dolarů</strong> na dva týdny, spíš míň než víc",
+            "Nechat si je rozměnit na <strong>jednodolarovky a pětky</strong>, ne stodolarovky",
+            "Rozdělit hotovost <strong>na dvě místa</strong>, ne všechno v jedné peněžence"
+          ],
+          pochvala: "✨ A je to. Na spropitné i na parkovací automat máš, a nemusíš u toho lovit kartu.",
+          note: {
+            title: "Ještě jedna věc",
+            body: [
+              "Stodolarovkou v Americe nezaplatíš skoro nikde. Malé obchody ji odmítají a leckde na ni mají ceduli.",
+              "Když měníš peníze doma, řekni si rovnou o <strong>malé bankovky</strong>. V Americe ti je nikdo ochotně rozměňovat nebude."
+            ]
+          }
+        },
+        {
+          icon: "🏦",
+          kicker: "Krok 3",
+          title: "Kolik si z každé platby ukousne banka",
+          lead: [
+            "Tady se ztrácejí ty peníze, o kterých nikdo nemluví. Ne po stovkách, ale po procentech z každé jednotlivé platby.",
+            "Běžná česká karta si za platbu v cizí měně účtuje <strong>2 až 4 procenta</strong>. Při útratě 40 000 Kč je to <strong>800 až 1 600 Kč</strong> jen za to, že platíš.",
+            "Karty typu Revolut si ve všední den neúčtují nic. O víkendu si Standard přidává <strong>1 procento</strong>."
+          ],
+          toggleQuestions: [
+            {
+              id: "ma-revolut",
+              question: "Máš Revolut, Wise nebo podobnou kartu?",
+              yesWarning: "Pak ji ber jako <strong>hlavní kartu na běžné placení</strong> a bankovní kartu měj jako zálohu. Jen si na ni pošli peníze ve všední den, o víkendu si Revolut Standard přidává 1 procento k převodu měny."
+            }
+          ],
+          checklist: [
+            "Zjistit u své banky, <strong>kolik si účtuje za platbu v cizí měně</strong>",
+            "Zvážit <strong>Revolut nebo Wise</strong> jako hlavní kartu na běžné placení",
+            "Počítat s tím, že americký bankomat si přidá <strong>3 až 5 dolarů</strong> za výběr"
+          ],
+          pochvala: "✨ Hotovo. Tohle je nejtišší položka celého rozpočtu a ty už ji máš spočítanou.",
+          why: {
+            title: "Proč je to důležité",
+            body: [
+              "Poplatek za platbu v cizí měně nikde nesvítí. Nevidíš ho v obchodě ani na účtence, objeví se až ve výpisu, dávno po návratu.",
+              "Proto se vyplatí vědět to <strong>dopředu</strong>, ne až doma nad výpisem. Rozdíl mezi bankovní kartou a Revolutem dělá u dvoutýdenní cesty klidně tisíc korun."
+            ]
+          }
+        },
+        {
+          icon: "⚠️",
+          kicker: "Krok 4",
+          title: "Až se tě terminál zeptá na koruny, řekni ne",
+          lead: [
+            "Tomuhle říkám <strong>korunová past</strong> a je to nejdražší dvě vteřiny celé dovolené.",
+            "Zaplatíš kartou a terminál se zeptá, jestli chceš zaplatit v korunách, nebo v dolarech. Vypadá to jako laskavost. Konečně uvidíš cenu v měně, které rozumíš.",
+            "<strong>Vždycky vyber dolary.</strong> Vždycky.",
+            "<em>(Sama jsem to zmáčkla špatně. A ne jednou.)</em>"
+          ],
+          checklist: [
+            "Na terminálu i v bankomatu vždycky vybrat <strong>dolary</strong>, nikdy koruny",
+            "Když se automat zeptá na „conversion“ nebo „your currency“, <strong>odmítnout</strong>"
+          ],
+          pochvala: "✨ Máš to. Tímhle jediným zvykem ušetříš víc než hledáním levnějších restaurací.",
+          trap: {
+            title: "Pozor na tohle",
+            body: [
+              "Když vybereš koruny, kurz ti nedá tvoje banka. Dá ti ho <strong>ten terminál</strong>, a přidá si k němu svoji přirážku.",
+              "Ta přirážka bývá <strong>3 až 6 procent</strong> a v extrémech i mnohem víc.",
+              "Zaplatíš tak dvakrát: jednou tomu terminálu za převod a podruhé své bance za platbu v cizí měně. Za jediné zmáčknutí špatného tlačítka."
+            ]
+          }
+        },
+        {
+          icon: "📞",
+          kicker: "Krok 5",
+          title: "Co udělat s bankou, než odletíš",
+          lead: [
+            "Deset minut v aplikaci banky večer před odletem. Nic víc to není.",
+            "A ušetří to ten nejnepříjemnější scénář: stojíš u pokladny, karta neprojde a ty nevíš proč."
+          ],
+          checklist: [
+            "Nahlásit bance, že <strong>budeš platit v USA</strong>, ať platbu nevyhodnotí jako podvodnou",
+            "Zkontrolovat <strong>denní limity</strong> na platby i na výběry a případně si je zvýšit",
+            "Ověřit, že <strong>platby na internetu a v zahraničí jsou povolené</strong>",
+            "Uložit si <strong>číslo na blokaci karty</strong> do Trezoru, ať ho máš i bez signálu"
+          ],
+          pochvala: "✨ A je to. Karta ti v Americe neselže kvůli něčemu, co šlo vyřešit doma.",
+          why: {
+            title: "Proč je to důležité",
+            body: [
+              "Banky vyhodnocují neobvyklé platby automaticky. Platba za benzín v Ocale ve tři ráno českého času vypadá v systému přesně jako podvod.",
+              "Karta se zablokuje a odblokovat ji z Ameriky znamená telefonát do Česka, obvykle v době, kdy je tam noc."
+            ]
+          }
+        },
+        {
+          icon: "🧮",
+          kicker: "Krok 6",
+          title: "Kolik to celé bude stát",
+          lead: [
+            "Zbývá poslední otázka, a je ta největší: kolik si mám vlastně připravit?",
+            "Na tohle mám vlastní kalkulačku. Spočítá rozpočet podle toho, kam jedeš, na jak dlouho a v kolika lidech, a ukáže i položky, na které se zapomíná."
+          ],
+          checklist: [
+            "Spočítat si <strong>rozpočet</strong> pro svůj konkrétní termín a počet lidí",
+            "Přidat si do něj <strong>rezervu na blokace</strong> na kartě, hotel i půjčovna si je berou"
+          ],
+          pochvala: "✨ Hotovo. Číslo máš, a je to tvoje číslo, ne strašák z internetu.",
+          link: {
+            title: "Rozpočtová kalkulačka na Floridu",
+            sub: "Spočítá rozpočet podle tvého termínu a počtu lidí, včetně položek, na které se zapomíná.",
+            url: "https://kalkulacka-florida.vercel.app"
+          },
+          note: {
+            title: "Ještě jedna věc",
+            body: [
+              "Do rozpočtu si připočti <strong>rezervu na blokace</strong>. Hotel si drží 50 až 200 dolarů za noc, půjčovna auta klidně 500.",
+              "Nejsou to utracené peníze a vrátí se ti. Jenže po tu dobu s nimi nemůžeš počítat, a přesně na tomhle lidi v Americe dojedou."
+            ]
+          }
+        }
+      ]
+    },
     { id: "checklisty", balicek: "rozsireni", ikona: "images/ikony/highlight-checklisty.svg", name: "Checklisty",                   emoji: "✅", time: "10 min", lessons: 4,
       accent: "#0E8A96", accentSoft: "#E2F4F6",
       desc: "Co sbalit, co vytisknout a co mít v příruční tašce." },
