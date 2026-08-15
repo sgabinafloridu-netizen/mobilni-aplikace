@@ -919,7 +919,7 @@
   .mp-tier.bad  { background: var(--ruzova); }
   .mp-txt { flex: 1 1 auto; font-size: 13px; color: var(--text-muted); }
 
-  /* ── video ke kroku: dokud soubor neexistuje, ukáže se vysvětlující dlaždice ── */
+  /* ── video nebo podcast ke kroku: dokud soubor neexistuje, je tu dlaždice s návodem ── */
   .step-video { margin-top: var(--s6); }
   .step-video-head {
     display: flex; align-items: center; gap: 8px;
@@ -929,6 +929,26 @@
   .step-video .video-frame { margin-top: 0; }
   .step-video-popis {
     margin-top: var(--s3); font-size: 14px; line-height: 1.7; color: var(--text-muted);
+  }
+
+  /* poslech: karta s ilustrací a přehrávačem, žádné černé okno */
+  .step-audio {
+    display: flex; align-items: center; gap: var(--s5);
+    background: var(--accent-soft, var(--sunken)); border-radius: var(--r-lg); padding: var(--s5);
+  }
+  .step-audio img { flex: 0 0 auto; width: 84px; height: 84px; border-radius: 50%; }
+  .step-audio-body { flex: 1 1 auto; min-width: 0; }
+  .step-audio-title { font-size: 16px; font-weight: 800; color: var(--text); margin-bottom: 4px; }
+  .step-audio-delka { font-size: 12.5px; font-weight: 700; color: var(--text-faint); }
+  .step-audio audio { width: 100%; margin-top: var(--s3); }
+  .step-audio.missing audio { display: none; }
+  .step-audio-ceka {
+    display: none; margin-top: var(--s3); font-size: 13.5px; line-height: 1.6; color: var(--text-muted);
+  }
+  .step-audio.missing .step-audio-ceka { display: block; }
+  @media (max-width: 520px) {
+    .step-audio { flex-direction: column; text-align: center; }
+    .step-audio-body { width: 100%; }
   }
 
   /* ── kreslená ilustrace ke kroku: kolečko značky plus popisek pod ním ── */
@@ -2292,7 +2312,7 @@
             "<strong>Hlídání ceny</strong>: zapneš ho a Google ti sám napíše, když cena klesne",
             "<strong>Víc letišť najednou</strong>: pro Floridu zadej Tampu, Orlando i Fort Lauderdale, rozdíl bývá i 8 000 Kč"
           ],
-          video: {
+          media: {
             kicker: "Jak kupuju letenky já",
             src: "video/letenky-jak-kupuju.mp4",
             poster: "video/letenky-jak-kupuju-poster.jpg",
@@ -2324,6 +2344,14 @@
             "Kolik hodin máš mezi přílety ty?"
           ],
           ilustrace: { src: "images/sceny/scena-prestup.svg", popis: "kufr si vyzvedneš i při přestupu, proto ty dvě až tři hodiny" },
+          media: {
+            kicker: "K poslechu",
+            src: "audio/prestup-krok-za-krokem.mp3",
+            titulek: "Přestup krok za krokem",
+            delka: "asi 8 minut",
+            obrazek: "images/sceny/scena-prestup.svg",
+            popis: "Pusť si to cestou na letiště nebo v letadle. Provedu tě celým přestupem od přistání po nástup do navazujícího letu, ať víš, co bude následovat, ještě než se otevřou dveře."
+          },
           toggleQuestions: [
             {
               id: "prestup-usa",
@@ -3404,13 +3432,15 @@
     show(defaultMonth);
   }
 
-  /* Video ke kroku. Dokud soubor neexistuje, zůstane vysvětlující dlaždice.
-     Přehrávač se odkryje sám, jakmile se video načte. */
+  /* Video nebo podcast ke kroku. Dokud soubor neexistuje, zůstane dlaždice
+     s návodem. Přehrávač se odkryje sám, jakmile se nahrávka načte. */
   function initStepVideos() {
-    document.querySelectorAll("[data-video-frame]").forEach(function (frame) {
-      var v = frame.querySelector("video");
-      if (!v) return;
-      v.addEventListener("loadedmetadata", function () { frame.classList.remove("missing"); });
+    document.querySelectorAll("[data-media]").forEach(function (frame) {
+      var prehravac = frame.querySelector("video, audio");
+      if (!prehravac) return;
+      prehravac.addEventListener("loadedmetadata", function () {
+        frame.classList.remove("missing");
+      });
     });
   }
 
@@ -3829,27 +3859,46 @@
 
       if (step.lead) html += '<div class="step-lead measure">' + paras(step.lead) + '</div>';
 
-      if (step.video) {
-        var vid = step.video;
+      /* Video nebo podcast. Rozliší se podle přípony: .mp3 je poslech, zbytek video.
+         Dokud soubor neexistuje, zůstane na jeho místě dlaždice s návodem. */
+      if (step.media) {
+        var med = step.media;
+        var jeZvuk = /\.mp3$/i.test(med.src);
         html += '<div class="step-video">' +
-                  '<div class="step-video-head"><span aria-hidden="true">🎬</span>' + vid.kicker + '</div>' +
-                  '<div class="video-frame missing" data-video-frame>' +
-                    '<video controls preload="metadata" playsinline poster="' + vid.poster + '">' +
-                      '<source src="' + vid.src + '" type="video/mp4">' +
+                  '<div class="step-video-head"><span aria-hidden="true">' +
+                    (jeZvuk ? '🎧' : '🎬') + '</span>' + med.kicker + '</div>';
+
+        if (jeZvuk) {
+          html += '<div class="step-audio missing" data-media>' +
+                    '<img src="' + (med.obrazek || 'images/gabi-happy-plaz.svg') + '" alt="">' +
+                    '<div class="step-audio-body">' +
+                      '<div class="step-audio-title">' + med.titulek + '</div>' +
+                      (med.delka ? '<div class="step-audio-delka">' + med.delka + '</div>' : '') +
+                      '<audio controls preload="metadata" src="' + med.src + '"></audio>' +
+                      '<div class="step-audio-ceka">Nahrávka se teprve chystá. Až bude, ulož ji jako ' +
+                        '<strong>' + med.src + '</strong> a přehrávač se objeví sám.</div>' +
+                    '</div>' +
+                  '</div>';
+        } else {
+          html += '<div class="video-frame missing" data-media>' +
+                    '<video controls preload="metadata" playsinline poster="' + med.poster + '">' +
+                      '<source src="' + med.src + '" type="video/mp4">' +
                       'Tvůj prohlížeč neumí přehrát video.' +
                     '</video>' +
                     '<div class="video-missing">' +
                       '<div class="play-mark" aria-hidden="true">▶</div>' +
-                      '<div class="vm-title">' + vid.titulek + '</div>' +
+                      '<div class="vm-title">' + med.titulek + '</div>' +
                       '<div class="vm-loading" aria-hidden="true">' +
                         '<span class="vm-cam">🎥</span><span class="vm-spinner"></span>' +
                       '</div>' +
-                      '<div class="vm-note">Až ho natočíš, ulož ho jako <strong>' + vid.src +
-                        '</strong> a náhled jako <strong>' + vid.poster +
+                      '<div class="vm-note">Až ho natočíš, ulož ho jako <strong>' + med.src +
+                        '</strong> a náhled jako <strong>' + med.poster +
                         '</strong>. Přehrávač se objeví sám.</div>' +
                     '</div>' +
-                  '</div>' +
-                  (vid.popis ? '<p class="step-video-popis">' + vid.popis + '</p>' : '') +
+                  '</div>';
+        }
+
+        html += (med.popis ? '<p class="step-video-popis">' + med.popis + '</p>' : '') +
                 '</div>';
       }
 

@@ -221,6 +221,8 @@ Appka je jeden článek delšího řetězce. Tohle je celý žebřík, ať se v�
 
 **Co z toho plyne pro tuhle appku:** je to průvodce „Než odletíš" a prodává se ve dvou úrovních, 690 a 1 490 Kč. Modul „Doprava na místě" sem nepatří, patří do „Až přistaneš".
 
+📄 **Kostra druhého průvodce „Až přistaneš" je hotová** a leží v `usa-bez-cestovky-cast2/KOSTRA.md`: 7 modulů od imigrační kontroly po krizové situace, plus vlastní obsah Trezoru. Než se do něj pustíš, přečti si ji, hlavně poznámku o překryvu s Letenkami.
+
 ### Co se ještě plánuje
 - **Videa k dokoupení** jako samostatný upsell
 - **Checklisty ke stažení** (tisk nebo soubor)
