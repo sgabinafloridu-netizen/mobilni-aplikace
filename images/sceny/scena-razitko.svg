@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400">
+  <!-- Notářsky ověřený souhlas. Jedna stránka papíru, na které stojí celá cesta. -->
+  <circle cx="200" cy="200" r="185" fill="#E6F8FA"/>
+  <text x="72" y="104" font-family="Arial, sans-serif" font-size="18" fill="#FF6FA5">&#10022;</text>
+  <text x="318" y="300" font-family="Arial, sans-serif" font-size="16" fill="#1AC0CE">&#10022;</text>
+
+  <!-- papír -->
+  <rect x="110" y="88" width="180" height="226" rx="16" fill="#FFFFFF" stroke="#14233A" stroke-width="9"/>
+
+  <!-- řádky textu -->
+  <g stroke="#14233A" stroke-width="9" stroke-linecap="round" opacity="0.26">
+    <line x1="140" y1="132" x2="260" y2="132"/>
+    <line x1="140" y1="164" x2="260" y2="164"/>
+    <line x1="140" y1="196" x2="216" y2="196"/>
+  </g>
+
+  <!-- razítko -->
+  <circle cx="230" cy="254" r="46" fill="none" stroke="#FF6FA5" stroke-width="9"/>
+  <path d="M208 254 l15 17 l29 -35" fill="none" stroke="#FF6FA5" stroke-width="10"
+        stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- podpis -->
+  <path d="M136 288 q17 -20 32 0 q15 20 32 -7" fill="none" stroke="#1AC0CE" stroke-width="8" stroke-linecap="round"/>
+</svg>

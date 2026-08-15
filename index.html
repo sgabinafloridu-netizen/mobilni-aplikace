@@ -919,6 +919,17 @@
   .mp-tier.bad  { background: var(--ruzova); }
   .mp-txt { flex: 1 1 auto; font-size: 13px; color: var(--text-muted); }
 
+  /* ── kreslená ilustrace ke kroku: kolečko značky plus popisek pod ním ── */
+  .step-ilustrace { margin-top: var(--s6); text-align: center; }
+  .step-ilustrace img {
+    width: 148px; height: 148px; display: block; margin: 0 auto;
+  }
+  .step-ilustrace figcaption {
+    margin-top: var(--s3); font-size: 13.5px; font-style: italic;
+    color: var(--text-faint); line-height: 1.6;
+  }
+  @media (max-width: 520px) { .step-ilustrace img { width: 124px; height: 124px; } }
+
   /* ── kde spát: obsah se mění podle destinace, kterou uživatel zadal v úvodu ── */
   .stay-lead { margin-top: var(--s5); font-size: 15px; line-height: 1.7; color: var(--text); }
   .stay-list { margin-top: var(--s4); display: flex; flex-direction: column; gap: var(--s3); }
@@ -1761,6 +1772,7 @@
           icon: "📅",
           kicker: "Krok 2",
           title: "Kdy do USA nejezdi, a proč to cestovky neříkají",
+          ilustrace: { src: "images/sceny/florida-bourka.svg", popis: "floridské odpoledne v létě: přijde, přejde, z asfaltu se kouří" },
           lead: [
             "Doma je to jasné. Škola skončí, teploty stoupají, jede se. V Americe <strong>tenhle vzorec nefunguje</strong>. Červenec na Floridě je vedro, vlhko a hurikánová sezóna v plném proudu. Grand Canyon v srpnu má na okraji snesitelných 27 stupňů, ale kdo sejde ke dnu kaňonu, tam ho čeká <strong>přes 40 stupňů</strong> a vzduch jako z trouby. New York v létě místní opouštějí, ne navštěvují. Prázdninový termín v USA znamená <strong>nejvyšší ceny, nejhorší počasí a nejdelší fronty</strong>. Všechno najednou."
           ],
@@ -1784,6 +1796,7 @@
           icon: "🌀",
           kicker: "Krok 3",
           title: "Hurikánová sezóna: kde, kdy a jak moc to řešit",
+          ilustrace: { src: "images/sceny/pani-cokdyz-radar.svg", popis: "paní Cokdyž si pořídila meteoradar" },
           lead: [
             "Hurikán. Stačí ho vyslovit a spousta lidí zavře prohlížeč s letenkami. Tak pojďme rovnou k faktům, protože na tenhle strach neplatí uklidňování, platí konkrétní informace.",
             "Než k nim dojdeme, poznej <strong>paní Cokdyž</strong>. Je to hlas v hlavě, co se nastěhuje ke každému, kdo si koupí letenku do Ameriky. Nikdy se neohlásí, nikdy nezaplatí kauci, a na noční směnu nastupuje přesně v 00:47."
@@ -2076,6 +2089,7 @@
           icon: "🧳",
           kicker: "Krok 4",
           title: "Dvě věci, na které se ptají na hranici",
+          ilustrace: { src: "images/sceny/urednik-kafe.svg", popis: "úředník krátce před kafem, ještě tři lidi" },
           lead: [
             "Kde sehnat nejlevnější letenku, to řeší jiný modul.",
             "Tohle je o dvou konkrétních věcech, které po tobě bude chtít vidět letecká společnost i imigrační úředník. Ještě než nastoupíš."
@@ -2103,6 +2117,7 @@
           icon: "🚑",
           kicker: "Krok 5",
           title: "Dva doklady, které nikdo nekontroluje. Dokud je nepotřebuješ",
+          ilustrace: { src: "images/sceny/scena-pojisteni.svg", popis: "nekontroluje ho nikdo, dokud ho nepotřebuješ" },
           lead: [
             "Na hranici ti je nikdo nezkontroluje. Přesně proto je skoro každý podcení.",
             "Dokud je nepotřebuje."
@@ -2139,6 +2154,7 @@
           icon: "👨‍👩‍👧",
           kicker: "Krok 6",
           title: "Jedna chybějící stránka, a zůstaneš na letišti",
+          ilustrace: { src: "images/sceny/scena-razitko.svg", popis: "razítko, které se den předem nesežene" },
           lead: [
             "Tenhle bod se netýká všech.",
             "Kdo ho ale přehlédne a zrovna se ho týká, může kvůli jedné chybějící stránce papíru zůstat stát na letišti. Zatímco zbytek rodiny už sedí v letadle."
@@ -2200,6 +2216,7 @@
           icon: "📅",
           kicker: "Krok 1",
           title: "Kdy je ta správná chvíle koupit",
+          ilustrace: { src: "images/sceny/scena-nakupni-okno.svg", popis: "okno, ve kterém se kupuje" },
           lead: [
             "Tuhle otázku dostávám nejčastěji ze všech.",
             "Magický den, kdy jsou letenky nejlevnější, neexistuje. Existuje <strong>okno</strong>. Mimo něj platíš navíc, ať už jsi moc brzy, nebo moc pozdě.",
@@ -2226,6 +2243,7 @@
           icon: "🔄",
           kicker: "Krok 2",
           title: "Proč je americký přestup jiný než evropský",
+          ilustrace: { src: "images/sceny/scena-prestup.svg", popis: "kufr si vyzvedneš i při přestupu, proto ty tři hodiny" },
           lead: [
             "Jestli si máš z modulu odnést jedinou věc, ať je to tahle.",
             "Když přiletíš do USA, projdeš imigrační kontrolou <strong>na prvním americkém letišti</strong>, i když pokračuješ dál. Vyzvedneš si kufr, projdeš s ním celnicí a znovu ho odbavíš. Teprve potom jdeš k navazujícímu letu.",
@@ -2279,6 +2297,7 @@
           icon: "🧳",
           kicker: "Krok 4",
           title: "Co je v ceně a co tě dožene až na letišti",
+          ilustrace: { src: "images/sceny/scena-vaha-kufr.svg", popis: "23 kg, a rozhoduje se u odbavení" },
           lead: [
             "U letů do Ameriky bývá odbavené zavazadlo v ceně častěji než u evropských nízkonákladovek. Spoléhat se na to ale nedá.",
             "A ještě častěji se stane tohle: v ceně je let tam, ale <strong>ne zpátky</strong>."
@@ -2412,6 +2431,7 @@
           icon: "💳",
           kicker: "Krok 3",
           title: "Až ti hotel zablokuje peníze, nelekej se",
+          ilustrace: { src: "images/sceny/scena-karta-blokace.svg", popis: "nejsou pryč, jen je někdo na pár dní zamkl" },
           lead: [
             "Přijedeš na recepci, podáš kartu a hotel si na ní <strong>zablokuje několik set dolarů</strong>.",
             "V tu chvíli se sevře žaludek každému, kdo to nečeká.",
@@ -3705,6 +3725,13 @@
               '</div>';
 
       if (step.lead) html += '<div class="step-lead measure">' + paras(step.lead) + '</div>';
+
+      if (step.ilustrace) {
+        html += '<figure class="step-ilustrace">' +
+                  '<img src="' + step.ilustrace.src + '" alt="" loading="lazy">' +
+                  '<figcaption>' + step.ilustrace.popis + '</figcaption>' +
+                '</figure>';
+      }
 
       if (step.companion) {
         html += '<div class="companion">' +

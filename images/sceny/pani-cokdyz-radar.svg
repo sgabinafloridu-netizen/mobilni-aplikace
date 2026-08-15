@@ -1,0 +1,95 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400">
+  <!-- Paní Cokdyž s meteoradarem. Postava je shodná s pani-cokdyz.svg,
+       liší se jen obsah displeje, barva záře a kapky deště. -->
+
+  <!-- pozadí: světle tyrkysové kolečko (samolepka) -->
+  <rect x="0" y="0" width="400" height="400" fill="#FFFFFF"/>
+  <circle cx="200" cy="200" r="185" fill="#E6F8FA"/>
+
+  <!-- měsíc a čas -->
+  <circle cx="322" cy="62" r="28" fill="#FFD23F"/>
+  <circle cx="334" cy="52" r="24" fill="#E6F8FA"/>
+  <text x="285" y="112" font-family="Arial, sans-serif" font-weight="bold" font-size="20" fill="#14233A">00:47</text>
+
+  <!-- mráček s kapkami místo jedné hvězdičky -->
+  <g>
+    <path d="M52 78 Q52 62 68 62 Q74 50 88 52 Q104 52 106 68 Q120 70 118 82 Q116 92 104 92 L64 92 Q52 92 52 78 Z" fill="#FFFFFF" stroke="#1AC0CE" stroke-width="4" stroke-linejoin="round"/>
+    <line x1="70" y1="102" x2="66" y2="114" stroke="#1AC0CE" stroke-width="5" stroke-linecap="round"/>
+    <line x1="88" y1="102" x2="84" y2="116" stroke="#1AC0CE" stroke-width="5" stroke-linecap="round"/>
+    <line x1="106" y1="102" x2="102" y2="112" stroke="#1AC0CE" stroke-width="5" stroke-linecap="round"/>
+  </g>
+
+  <!-- hvězdičky -->
+  <text x="330" y="180" font-family="Arial, sans-serif" font-size="16" fill="#1AC0CE">&#10022;</text>
+  <text x="40" y="240" font-family="Arial, sans-serif" font-size="14" fill="#1AC0CE">&#10022;</text>
+
+  <!-- šeptání -->
+  <text x="26" y="160" font-family="Arial, sans-serif" font-style="italic" font-size="17" fill="#14233A" transform="rotate(-8 26 160)">a co když&#8230;</text>
+
+  <!-- záře displeje: u radaru je studená, ne žlutá -->
+  <circle cx="200" cy="320" r="72" fill="#1AC0CE" opacity="0.20"/>
+
+  <!-- tělo: župan -->
+  <path d="M118 385 L118 300 Q118 252 165 250 L235 250 Q282 252 282 300 L282 385 Z" fill="#1AC0CE"/>
+  <!-- límec županu -->
+  <path d="M175 252 L200 292 L225 252 Z" fill="#F4FBFC"/>
+
+  <!-- hlava -->
+  <circle cx="200" cy="178" r="76" fill="#FFE0CC"/>
+
+  <!-- vlasy pod natáčkami -->
+  <path d="M126 170 Q128 96 200 92 Q272 96 274 170 Q262 128 200 124 Q138 128 126 170 Z" fill="#E8E1F4"/>
+
+  <!-- natáčky -->
+  <g>
+    <circle cx="142" cy="126" r="17" fill="#FF6FA5"/><circle cx="142" cy="126" r="7" fill="#FFF0F6"/>
+    <circle cx="176" cy="106" r="17" fill="#FF6FA5"/><circle cx="176" cy="106" r="7" fill="#FFF0F6"/>
+    <circle cx="212" cy="102" r="17" fill="#FF6FA5"/><circle cx="212" cy="102" r="7" fill="#FFF0F6"/>
+    <circle cx="246" cy="112" r="17" fill="#FF6FA5"/><circle cx="246" cy="112" r="7" fill="#FFF0F6"/>
+    <circle cx="270" cy="136" r="15" fill="#FF6FA5"/><circle cx="270" cy="136" r="6" fill="#FFF0F6"/>
+  </g>
+
+  <!-- ustarané obočí -->
+  <path d="M150 152 Q168 146 184 158" stroke="#14233A" stroke-width="5" fill="none" stroke-linecap="round"/>
+  <path d="M250 152 Q232 146 216 158" stroke="#14233A" stroke-width="5" fill="none" stroke-linecap="round"/>
+
+  <!-- brýle -->
+  <circle cx="170" cy="188" r="22" fill="#FFFFFF" opacity="0.85" stroke="#14233A" stroke-width="5"/>
+  <circle cx="230" cy="188" r="22" fill="#FFFFFF" opacity="0.85" stroke="#14233A" stroke-width="5"/>
+  <line x1="192" y1="188" x2="208" y2="188" stroke="#14233A" stroke-width="5" stroke-linecap="round"/>
+  <line x1="148" y1="184" x2="128" y2="176" stroke="#14233A" stroke-width="5" stroke-linecap="round"/>
+  <line x1="252" y1="184" x2="272" y2="176" stroke="#14233A" stroke-width="5" stroke-linecap="round"/>
+
+  <!-- oči -->
+  <circle cx="170" cy="190" r="5.5" fill="#14233A"/>
+  <circle cx="230" cy="190" r="5.5" fill="#14233A"/>
+
+  <!-- tváře -->
+  <ellipse cx="146" cy="218" rx="11" ry="7" fill="#FF6FA5" opacity="0.45"/>
+  <ellipse cx="254" cy="218" rx="11" ry="7" fill="#FF6FA5" opacity="0.45"/>
+
+  <!-- ustaraná pusa -->
+  <path d="M184 238 Q200 230 216 238" stroke="#14233A" stroke-width="5" fill="none" stroke-linecap="round"/>
+
+  <!-- telefon -->
+  <rect x="168" y="286" width="64" height="90" rx="12" fill="#14233A"/>
+  <rect x="175" y="294" width="50" height="66" rx="6" fill="#0B1B2E"/>
+
+  <!-- displej: meteoradar
+       Tvary jsou schválně hrubé. Kresba se v e-mailu zobrazuje široká 92 px,
+       takže cokoli tenčího než dva pixely v téhle soustavě zmizí. -->
+  <g>
+    <!-- kruh dosahu -->
+    <circle cx="200" cy="327" r="21" fill="none" stroke="#1AC0CE" stroke-width="2.6" opacity="0.75"/>
+    <!-- bouřková buňka, od okraje ke středu sílí -->
+    <ellipse cx="196" cy="322" rx="15" ry="12" fill="#1AC0CE"/>
+    <ellipse cx="198" cy="324" rx="9.5" ry="7.5" fill="#FFD23F"/>
+    <ellipse cx="200" cy="325" rx="4.5" ry="3.6" fill="#FF6FA5"/>
+    <!-- rotující paprsek -->
+    <line x1="200" y1="327" x2="216" y2="340" stroke="#1AC0CE" stroke-width="3" stroke-linecap="round"/>
+  </g>
+
+  <!-- ruce -->
+  <circle cx="160" cy="336" r="14" fill="#FFE0CC"/>
+  <circle cx="240" cy="336" r="14" fill="#FFE0CC"/>
+</svg>

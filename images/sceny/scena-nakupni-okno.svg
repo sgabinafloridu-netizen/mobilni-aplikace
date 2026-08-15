@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400">
+  <!-- Nákupní okno letenky: kalendář, ve kterém svítí jen ta správná část. -->
+  <circle cx="200" cy="200" r="185" fill="#E6F8FA"/>
+  <text x="72" y="104" font-family="Arial, sans-serif" font-size="18" fill="#FF6FA5">&#10022;</text>
+  <text x="316" y="296" font-family="Arial, sans-serif" font-size="16" fill="#1AC0CE">&#10022;</text>
+
+  <!-- kroužky nahoře -->
+  <line x1="146" y1="90" x2="146" y2="126" stroke="#14233A" stroke-width="10" stroke-linecap="round"/>
+  <line x1="254" y1="90" x2="254" y2="126" stroke="#14233A" stroke-width="10" stroke-linecap="round"/>
+
+  <!-- tělo kalendáře -->
+  <rect x="94" y="112" width="212" height="198" rx="18" fill="#FFFFFF" stroke="#14233A" stroke-width="9"/>
+  <path d="M103 112 h194 a9 9 0 0 1 9 9 v37 h-212 v-37 a9 9 0 0 1 9 -9 z" fill="#14233A"/>
+
+  <!-- moc brzy -->
+  <g fill="#CBE7EC">
+    <rect x="118" y="178" width="30" height="24" rx="6"/>
+    <rect x="158" y="178" width="30" height="24" rx="6"/>
+    <rect x="198" y="178" width="30" height="24" rx="6"/>
+    <rect x="238" y="178" width="30" height="24" rx="6"/>
+  </g>
+
+  <!-- okno, kdy se kupuje -->
+  <rect x="106" y="212" width="188" height="44" rx="13" fill="#1AC0CE"/>
+  <g fill="#FFFFFF">
+    <rect x="118" y="224" width="30" height="20" rx="5"/>
+    <rect x="158" y="224" width="30" height="20" rx="5"/>
+    <rect x="198" y="224" width="30" height="20" rx="5"/>
+    <rect x="238" y="224" width="30" height="20" rx="5"/>
+  </g>
+
+  <!-- moc pozdě -->
+  <g fill="#FFD3E4">
+    <rect x="118" y="268" width="30" height="24" rx="6"/>
+    <rect x="158" y="268" width="30" height="24" rx="6"/>
+    <rect x="198" y="268" width="30" height="24" rx="6"/>
+    <rect x="238" y="268" width="30" height="24" rx="6"/>
+  </g>
+
+  <!-- ukazatel na okno -->
+  <circle cx="300" cy="234" r="17" fill="#FFD23F" stroke="#14233A" stroke-width="5"/>
+</svg>

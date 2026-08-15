@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400">
+  <!-- Zavazadlo na váze. 23 kg je hranice, u které se u odbavení rozhoduje o poplatku. -->
+  <circle cx="200" cy="200" r="185" fill="#E6F8FA"/>
+  <text x="72" y="104" font-family="Arial, sans-serif" font-size="18" fill="#FF6FA5">&#10022;</text>
+  <text x="316" y="296" font-family="Arial, sans-serif" font-size="16" fill="#1AC0CE">&#10022;</text>
+
+  <!-- teleskopická rukojeť -->
+  <line x1="168" y1="152" x2="168" y2="118" stroke="#14233A" stroke-width="8" stroke-linecap="round"/>
+  <line x1="232" y1="152" x2="232" y2="118" stroke="#14233A" stroke-width="8" stroke-linecap="round"/>
+  <line x1="162" y1="118" x2="238" y2="118" stroke="#14233A" stroke-width="10" stroke-linecap="round"/>
+
+  <!-- kufr -->
+  <rect x="130" y="152" width="140" height="112" rx="18" fill="#1AC0CE" stroke="#14233A" stroke-width="8"/>
+  <rect x="130" y="190" width="140" height="16" fill="#E6F8FA" opacity="0.9"/>
+  <circle cx="200" cy="236" r="9" fill="#FFFFFF" opacity="0.9"/>
+  <rect x="246" y="136" width="26" height="18" rx="4" fill="#FFD23F" stroke="#14233A" stroke-width="4"/>
+
+  <!-- plošina a displej váhy -->
+  <rect x="102" y="268" width="196" height="18" rx="9" fill="#14233A"/>
+  <rect x="124" y="286" width="152" height="48" rx="14" fill="#FFFFFF" stroke="#14233A" stroke-width="8"/>
+  <text x="200" y="322" text-anchor="middle" font-family="Arial, sans-serif" font-weight="bold" font-size="30" fill="#FF6FA5">23</text>
+</svg>

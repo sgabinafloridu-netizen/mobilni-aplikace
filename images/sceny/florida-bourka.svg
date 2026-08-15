@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400">
+  <!-- Floridská odpolední bouřka. Celý příběh v jednom obrázku:
+       mrak, blesk, slunce, které už zase leze ven, a kouřící asfalt.
+       Stejná soustava jako zbytek sady: 400 × 400, samolepkové kolečko r=185,
+       tahy 5, mrak bílý s tyrkysovým obrysem jako u paní Cokdyž.
+       Pozadí je průhledné. -->
+
+  <!-- pozadí: světle tyrkysové kolečko (samolepka) -->
+  <circle cx="200" cy="200" r="185" fill="#E6F8FA"/>
+
+  <!-- čas: v rodině obrázků drží stejný rukopis jako 00:47 a 8:00 -->
+  <text x="46" y="104" font-family="Arial, sans-serif" font-weight="bold" font-size="20" fill="#14233A">15:00</text>
+
+  <!-- hvězdičky -->
+  <text x="330" y="248" font-family="Arial, sans-serif" font-size="16" fill="#1AC0CE">&#10022;</text>
+  <text x="52" y="268" font-family="Arial, sans-serif" font-size="14" fill="#1AC0CE">&#10022;</text>
+
+  <!-- slunce: už zase leze zpoza mraku -->
+  <circle cx="318" cy="100" r="42" fill="#FFD23F"/>
+
+  <!-- mokrý asfalt -->
+  <ellipse cx="200" cy="338" rx="142" ry="17" fill="#14233A" opacity="0.13"/>
+  <ellipse cx="200" cy="338" rx="88"  ry="10" fill="#14233A" opacity="0.10"/>
+
+  <!-- kouř z asfaltu -->
+  <g stroke="#FFFFFF" stroke-width="8" fill="none" stroke-linecap="round">
+    <path d="M122 332 Q110 310 124 296 Q138 282 126 264 Q116 250 126 238"/>
+    <path d="M278 332 Q290 310 276 296 Q262 282 274 264 Q284 250 274 238"/>
+  </g>
+
+  <!-- déšť -->
+  <g stroke="#1AC0CE" stroke-width="6" fill="none" stroke-linecap="round">
+    <line x1="112" y1="214" x2="102" y2="246"/>
+    <line x1="146" y1="228" x2="136" y2="258"/>
+    <line x1="122" y1="266" x2="112" y2="294"/>
+    <line x1="256" y1="222" x2="246" y2="252"/>
+    <line x1="288" y1="208" x2="278" y2="238"/>
+    <line x1="268" y1="264" x2="258" y2="292"/>
+  </g>
+
+  <!-- blesk -->
+  <path d="M212 192 L178 250 L204 250 L172 306 L228 240 L200 240 L228 192 Z" fill="#FFD23F"/>
+
+  <!-- mrak -->
+  <path d="M98 198 Q66 198 66 168 Q66 140 94 136 Q98 106 130 104 Q150 82 180 90
+           Q208 78 226 104 Q258 100 270 126 Q302 130 302 162 Q302 194 270 198 Z"
+        fill="#FFFFFF" stroke="#1AC0CE" stroke-width="5" stroke-linejoin="round"/>
+  <!-- stín na spodku mraku, ať má hloubku -->
+  <path d="M104 196 Q84 190 84 172 Q100 182 126 180 Q158 178 186 186 Q222 194 262 188 Q286 184 296 172 Q296 192 268 196 Z"
+        fill="#D6EEF2"/>
+</svg>
