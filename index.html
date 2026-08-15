@@ -1340,7 +1340,7 @@
           <button type="submit" class="btn btn-t btn-block" id="btn-setup-submit">Ukázat mi můj kurz →</button>
         </div>
       </form>
-      <p class="fine">Žádná registrace, žádné heslo. Kurz si to jen zapamatuje v tomhle prohlížeči.</p>
+      <p class="fine" id="setup-fine">Žádná registrace, žádné heslo. Kurz si to jen zapamatuje v tomhle prohlížeči.</p>
     </div>
   </div>
 </div>
@@ -2544,29 +2544,71 @@
     return d.getDate() + ". " + CZ_MONTHS[d.getMonth()];
   }
 
-  function loadSetup()    { try { return JSON.parse(localStorage.getItem(STORAGE_SETUP) || "null"); } catch (e) { return null; } }
-  function saveSetup(d)   { localStorage.setItem(STORAGE_SETUP, JSON.stringify(d)); }
-  function loadProgress() { try { return JSON.parse(localStorage.getItem(STORAGE_PROGRESS) || "{}"); } catch (e) { return {}; } }
-  function saveProgress(d){ localStorage.setItem(STORAGE_PROGRESS, JSON.stringify(d)); }
-  function loadTrezor()   { try { return JSON.parse(localStorage.getItem(STORAGE_TREZOR) || "{}"); } catch (e) { return {}; } }
-  function saveTrezor(d)  { localStorage.setItem(STORAGE_TREZOR, JSON.stringify(d)); }
-  function loadChecklist()  { try { return JSON.parse(localStorage.getItem(STORAGE_CHECKLIST) || "{}"); } catch (e) { return {}; } }
-  function saveChecklist(d) { localStorage.setItem(STORAGE_CHECKLIST, JSON.stringify(d)); }
-  function loadTravelers()  { try { return JSON.parse(localStorage.getItem(STORAGE_TRAVELERS) || "[]"); } catch (e) { return []; } }
-  function saveTravelers(d) { localStorage.setItem(STORAGE_TRAVELERS, JSON.stringify(d)); }
-  function loadAnswers()  { try { return JSON.parse(localStorage.getItem(STORAGE_ANSWERS) || "{}"); } catch (e) { return {}; } }
-  function saveAnswers(d) { localStorage.setItem(STORAGE_ANSWERS, JSON.stringify(d)); }
+  /* ── úložiště ─────────────────────────────────────────────────────────────
+     Appka se běžně otevírá jako soubor z disku a některé prohlížeče v tom
+     případě zakážou localStorage. Zápis pak spadne a bez tohohle ošetření by
+     spadl i kód okolo, takže by tlačítko zdánlivě nedělalo vůbec nic.
+     Když úložiště nefunguje, jedeme dál z paměti: appka funguje celá, jen si
+     nic nezapamatuje po zavření okna. Na to uživatele upozorníme.            */
+  var pametNouze = {};
+  var ulozisteFunguje = (function () {
+    try {
+      var k = "__zkouska__";
+      window.localStorage.setItem(k, "1");
+      window.localStorage.removeItem(k);
+      return true;
+    } catch (e) { return false; }
+  })();
+
+  // Když úložiště nefunguje, řekneme to rovnou, ať se člověk nediví,
+  // že po zavření okna začíná znovu.
+  if (!ulozisteFunguje) {
+    document.addEventListener("DOMContentLoaded", function () {
+      var fine = document.getElementById("setup-fine");
+      if (fine) {
+        fine.innerHTML = "<strong>Tenhle prohlížeč nedovolí kurzu nic uložit</strong>, " +
+          "takže projít si ho můžeš celý, ale po zavření okna začneš znovu. " +
+          "Pomůže otevřít appku z internetové adresy místo ze souboru na disku.";
+      }
+    });
+  }
+
+  function nacti(klic) {
+    if (ulozisteFunguje) {
+      try { return window.localStorage.getItem(klic); } catch (e) {}
+    }
+    return Object.prototype.hasOwnProperty.call(pametNouze, klic) ? pametNouze[klic] : null;
+  }
+  function uloz(klic, hodnota) {
+    pametNouze[klic] = hodnota;
+    if (ulozisteFunguje) {
+      try { window.localStorage.setItem(klic, hodnota); } catch (e) {}
+    }
+  }
+
+  function loadSetup()    { try { return JSON.parse(nacti(STORAGE_SETUP) || "null"); } catch (e) { return null; } }
+  function saveSetup(d)   { uloz(STORAGE_SETUP, JSON.stringify(d)); }
+  function loadProgress() { try { return JSON.parse(nacti(STORAGE_PROGRESS) || "{}"); } catch (e) { return {}; } }
+  function saveProgress(d){ uloz(STORAGE_PROGRESS, JSON.stringify(d)); }
+  function loadTrezor()   { try { return JSON.parse(nacti(STORAGE_TREZOR) || "{}"); } catch (e) { return {}; } }
+  function saveTrezor(d)  { uloz(STORAGE_TREZOR, JSON.stringify(d)); }
+  function loadChecklist()  { try { return JSON.parse(nacti(STORAGE_CHECKLIST) || "{}"); } catch (e) { return {}; } }
+  function saveChecklist(d) { uloz(STORAGE_CHECKLIST, JSON.stringify(d)); }
+  function loadTravelers()  { try { return JSON.parse(nacti(STORAGE_TRAVELERS) || "[]"); } catch (e) { return []; } }
+  function saveTravelers(d) { uloz(STORAGE_TRAVELERS, JSON.stringify(d)); }
+  function loadAnswers()  { try { return JSON.parse(nacti(STORAGE_ANSWERS) || "{}"); } catch (e) { return {}; } }
+  function saveAnswers(d) { uloz(STORAGE_ANSWERS, JSON.stringify(d)); }
 
   /* ── balíčky: co má uživatel odemčené ── */
   function loadUnlocked() {
     try {
-      var raw = localStorage.getItem(STORAGE_UNLOCKED);
+      var raw = nacti(STORAGE_UNLOCKED);
       if (!raw) return VYCHOZI_BALICKY.slice();
       var arr = JSON.parse(raw);
       return Array.isArray(arr) ? arr : VYCHOZI_BALICKY.slice();
     } catch (e) { return VYCHOZI_BALICKY.slice(); }
   }
-  function saveUnlocked(arr) { localStorage.setItem(STORAGE_UNLOCKED, JSON.stringify(arr)); }
+  function saveUnlocked(arr) { uloz(STORAGE_UNLOCKED, JSON.stringify(arr)); }
 
   /* Jediné místo, které rozhoduje o přístupu k modulu. */
   function isUnlocked(mod) {
@@ -2810,8 +2852,15 @@
     e.preventDefault();
     if (!inpDatum.value || !selectedDest) { setupErr.classList.add("show"); return; }
     setupErr.classList.remove("show");
-    saveSetup({ datum: inpDatum.value, datumNavrat: inpDatumNavrat.value || null, destinace: selectedDest });
-    renderHome();
+
+    // Uložení ani vykreslení nesmí zablokovat přechod dál. Kdyby cokoliv
+    // selhalo, uživatel se stejně dostane do kurzu, jen bez zapamatování.
+    try {
+      saveSetup({ datum: inpDatum.value, datumNavrat: inpDatumNavrat.value || null, destinace: selectedDest });
+    } catch (chyba) {}
+    try {
+      renderHome();
+    } catch (chyba) {}
     goTo("s-uvod");
   });
 
