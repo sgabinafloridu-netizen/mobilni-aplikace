@@ -820,6 +820,24 @@
   .aside-meta .v { display: block; font-size: 14px; color: var(--text); line-height: 1.6; }
   .aside-meta .v strong { color: var(--tyrkys-dark); font-weight: 700; }
 
+  /* fotka v hlavičce modulu: kvůli ní se člověk na tu cestu těší,
+     zatímco odškrtává pasy a pojistky */
+  .lesson-hero {
+    display: none; position: relative; margin-bottom: var(--s6);
+    border-radius: var(--r-lg); overflow: hidden; background: var(--sunken);
+    box-shadow: var(--sh-1);
+  }
+  .lesson-hero.show { display: block; }
+  .lesson-hero img { display: block; width: 100%; height: 190px; object-fit: cover; }
+  .lesson-hero figcaption {
+    position: absolute; left: 0; right: 0; bottom: 0;
+    padding: var(--s6) var(--s5) var(--s4);
+    font-family: 'Caveat', cursive; font-size: 21px; color: #fff;
+    text-shadow: 0 1px 10px rgba(0,0,0,.5);
+    background: linear-gradient(180deg, transparent, rgba(10,25,35,.62));
+  }
+  @media (max-width: 620px) { .lesson-hero img { height: 148px; } }
+
   .lesson-head { padding-bottom: var(--s6); margin-bottom: var(--s7); border-bottom: 1px solid var(--line); }
   .lesson-head .eyebrow { margin-bottom: var(--s4); background: var(--accent-soft); color: var(--accent); }
   .lesson-head h1 { display: flex; align-items: center; gap: var(--s4); }
@@ -1654,6 +1672,11 @@
           <div class="toc-scrim" id="toc-scrim"></div>
 
           <div class="lesson-main">
+            <figure class="lesson-hero" id="module-hero">
+              <img id="module-hero-img" src="" alt="">
+              <figcaption id="module-hero-popis"></figcaption>
+            </figure>
+
             <div class="lesson-head">
               <span class="eyebrow" id="module-badge">Modul</span>
               <h1>
@@ -1777,6 +1800,9 @@
     {
       id: "destinace",
       balicek: "zaklad",
+      hero: { src: "images/hlavicky/hero-kdy-a-kam.jpg", alt: "Ostrov u Key West z ptačí perspektivy, tyrkysová voda a palmy",
+             popis: "sem někam se za pár měsíců díváš z letadla" },
+
       ikona: "images/ikony/highlight-prezij-ameriku.svg",
       dashboard: true,
       dashboardTitle: "Jak jsi daleko",
@@ -1966,6 +1992,9 @@
     {
       id: "doklady",
       balicek: "zaklad",
+      hero: { src: "images/hlavicky/hero-doklady.jpg", alt: "Jespáci na mokrém písku u vody",
+             popis: "a tohle je ráno, kterému papíry stojí za to" },
+
       ikona: "images/ikony/highlight-doklady.svg",
       name: "Doklady a formálnosti: co musíš mít vyřízené, než nastoupíš do letadla",
       shortName: "Doklady",
@@ -2258,6 +2287,9 @@
     {
       id: "letenky",
       balicek: "zaklad",
+      hero: { src: "images/hlavicky/hero-letenky.jpg", alt: "Nakloněná palma nad bílou pláží a tyrkysovým mořem",
+             popis: "letenka je jen cesta sem" },
+
       ikona: "images/ikony/highlight-let-do-usa.svg",
       name: "Letenky: kdy koupit, kde hledat a proč o všem rozhoduje přestup",
       shortName: "Letenky",
@@ -2510,6 +2542,9 @@
     {
       id: "ubytovani",
       balicek: "zaklad",
+      hero: { src: "images/hlavicky/hero-ubytovani.jpg", alt: "Houpačka zavěšená na uschlém stromě přímo v mělké vodě",
+             popis: "první ráno, kdy nikam nemusíš" },
+
       ikona: "images/ikony/highlight-ubytovani.svg",
       name: "Ubytování: kde spát a co se k ceně ještě připočte",
       shortName: "Ubytování",
@@ -2684,6 +2719,9 @@
     {
       id: "finance",
       balicek: "rozsireni",
+      hero: { src: "images/hlavicky/hero-finance.jpg", alt: "Západ slunce nad mořem, lodě na hladině",
+             popis: "tohle si za ty peníze kupuješ" },
+
       ikona: "images/ikony/highlight-florida-levneji.svg",
       name: "Finance a placení: kolik si vzít a kolik ti sebere banka",
       shortName: "Finance",
@@ -4517,6 +4555,17 @@
 
     document.getElementById("module-badge").textContent = "Modul " + (MODULES.indexOf(mod) + 1) + " z " + MODULES.length;
     document.getElementById("module-title").textContent = mod.name;
+    // fotka v hlavičce modulu
+    var hero = document.getElementById("module-hero");
+    if (mod.hero) {
+      document.getElementById("module-hero-img").src = mod.hero.src;
+      document.getElementById("module-hero-img").alt = mod.hero.alt || "";
+      document.getElementById("module-hero-popis").textContent = mod.hero.popis || "";
+      hero.classList.add("show");
+    } else {
+      hero.classList.remove("show");
+    }
+
     // kreslená ikona značky, když ji modul má, jinak zůstane emoji
     var iconEl = document.getElementById("module-icon");
     if (mod.ikona) {
