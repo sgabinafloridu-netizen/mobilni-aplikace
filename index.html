@@ -1702,15 +1702,18 @@
      `odkaz` = URL prodejní stránky. Dokud je prázdný, tlačítko na koupi se
      nezobrazí a zůstane jen zadání kódu.                                    */
   var BALICKY = {
-    "pred-odletem": { nazev: "Před odletem", rozsah: "celá tahle část", odkaz: "" }
+    zaklad:    { nazev: "Příprava před odletem", rozsah: "moduly 1 až 4",
+                 cena: "690 Kč", odkaz: "" },
+    rozsireni: { nazev: "Celý průvodce Než odletíš", rozsah: "moduly 5 až 7 navíc",
+                 cena: "1 490 Kč", odkaz: "" }
   };
-  var VYCHOZI_BALICKY = ["pred-odletem"];  // co má kupující odemčené rovnou
-  var KODY = {};                           // kód → balíček, zatím není co odemykat
+  var VYCHOZI_BALICKY = ["zaklad"];         // co má kupující odemčené rovnou
+  var KODY = { "CELY": "rozsireni" };       // kód → balíček
 
   var MODULES = [
     {
       id: "destinace",
-      balicek: "pred-odletem",
+      balicek: "zaklad",
       ikona: "images/ikony/highlight-prezij-ameriku.svg",
       name: "Kdy a kam: rozhodnutí, které udělá nebo zkazí celou cestu",
       shortName: "Kdy a kam",
@@ -1897,7 +1900,7 @@
     // počet se bere automaticky z jeho kroků, takže se čísla nemůžou rozejít.
     {
       id: "doklady",
-      balicek: "pred-odletem",
+      balicek: "zaklad",
       ikona: "images/ikony/highlight-doklady.svg",
       name: "Doklady a formálnosti: co musíš mít vyřízené, než nastoupíš do letadla",
       shortName: "Doklady",
@@ -2185,7 +2188,7 @@
     },
     {
       id: "letenky",
-      balicek: "pred-odletem",
+      balicek: "zaklad",
       ikona: "images/ikony/highlight-let-do-usa.svg",
       name: "Letenky: kdy koupit a proč o všem rozhoduje přestup",
       shortName: "Letenky",
@@ -2349,7 +2352,7 @@
     },
     {
       id: "ubytovani",
-      balicek: "pred-odletem",
+      balicek: "zaklad",
       ikona: "images/ikony/highlight-ubytovani.svg",
       name: "Ubytování: kde spát a co se k ceně ještě připočte",
       shortName: "Ubytování",
@@ -2509,16 +2512,21 @@
         }
       ]
     },
-    { id: "doprava",    balicek: "pred-odletem", ikona: "images/ikony/highlight-doprava.svg", name: "Doprava na místě",             emoji: "🚗", time: "15 min", lessons: 5,
-      accent: "#E8783F", accentSoft: "#FFF1E8",
-      desc: "Auto, dálnice, aplikace. Jak se tam pohybovat bez nervů." },
-    { id: "finance",    balicek: "pred-odletem", ikona: "images/ikony/highlight-florida-levneji.svg", name: "Finance a placení",            emoji: "💳", time: "15 min", lessons: 5,
+    /* „Doprava na místě" se odsud přesunula do druhého průvodce „Až přistaneš",
+       kam patří obsahem: auto, dálnice, nakupování, restaurace. Ikona
+       images/ikony/highlight-doprava.svg na ni zůstává připravená.
+       Kdyby se sem měla vrátit, stačí obnovit tenhle záznam:
+       { id: "doprava", balicek: "rozsireni", ikona: "images/ikony/highlight-doprava.svg",
+         name: "Doprava na místě", emoji: "🚗", time: "15 min", lessons: 5,
+         accent: "#E8783F", accentSoft: "#FFF1E8",
+         desc: "Auto, dálnice, aplikace. Jak se tam pohybovat bez nervů." },        */
+    { id: "finance",    balicek: "rozsireni", ikona: "images/ikony/highlight-florida-levneji.svg", name: "Finance a placení",            emoji: "💳", time: "15 min", lessons: 5,
       accent: "#C08A00", accentSoft: "#FFF6DC",
       desc: "Karty, hotovost, spropitné. Kolik si připravit a na co pozor." },
-    { id: "checklisty", balicek: "pred-odletem", ikona: "images/ikony/highlight-checklisty.svg", name: "Checklisty",                   emoji: "✅", time: "10 min", lessons: 4,
+    { id: "checklisty", balicek: "rozsireni", ikona: "images/ikony/highlight-checklisty.svg", name: "Checklisty",                   emoji: "✅", time: "10 min", lessons: 4,
       accent: "#0E8A96", accentSoft: "#E2F4F6",
       desc: "Co sbalit, co vytisknout a co mít v příruční tašce." },
-    { id: "krize",      balicek: "pred-odletem", ikona: "images/ikony/highlight-krize.svg", name: "Krizové situace před odletem", emoji: "🆘", time: "15 min", lessons: 5,
+    { id: "krize",      balicek: "rozsireni", ikona: "images/ikony/highlight-krize.svg", name: "Krizové situace před odletem", emoji: "🆘", time: "15 min", lessons: 5,
       accent: "#E85892", accentSoft: "#FFEAF2",
       desc: "Zrušený let, nemoc, ztracený pas. Klidný plán B pro každou z nich." }
   ];
@@ -3967,10 +3975,12 @@
         '<span class="unlock-kicker">🔒 Balíček ' + bal.nazev + '</span>' +
         '<h3 class="unlock-title">' + mod.name + '</h3>' +
         '<div class="unlock-lead">' +
-          '<p>Tenhle modul zatím nemáš odemčený. Je součástí balíčku <strong>' +
-            bal.nazev + '</strong>' + (bal.rozsah ? ', kam patří ' + bal.rozsah : '') + '.</p>' +
-          '<p>Až ho budeš mít, projdeme si to spolu stejně jako všechno ostatní: krok po kroku, ' +
-            's checklisty, které si odškrtáš, a bez toho, aby ses to musela dohledávat po fórech.</p>' +
+          '<p>Tenhle modul zatím nemáš odemčený.</p>' +
+          '<p>Patří do balíčku <strong>' + bal.nazev + '</strong>' +
+            (bal.rozsah ? ' (' + bal.rozsah + ')' : '') +
+            (bal.cena ? ', <strong>' + bal.cena + '</strong>' : '') + '.</p>' +
+          '<p>Až ho budeš mít, projdeme si to spolu stejně jako zbytek. Krok po kroku, ' +
+            's checklisty, které si odškrtáš, a bez dohledávání po fórech.</p>' +
         '</div>';
 
     if (uvnitr.length) {

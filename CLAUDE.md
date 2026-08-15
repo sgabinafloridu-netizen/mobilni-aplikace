@@ -103,24 +103,23 @@ Po **každé** změně stavu volej `refreshDashboard()`, jinak se Připravenost 
 
 ## 5. Moduly
 
-Část 1 „Než odletíš" má **8 modulů**:
+Průvodce „Než odletíš" má **7 modulů** a jsou rozdělené do dvou placených balíčků:
 
-| # | id | Název | Stav |
-|---|---|---|---|
-| 1 | `destinace` | Kdy a kam | ✅ hotový, 5 kroků |
-| 2 | `doklady` | Doklady a formálnosti | ✅ hotový, 6 kroků, dashboard |
-| 3 | `letenky` | Letenky | ✅ hotový, 5 kroků, dashboard |
-| 4 | `ubytovani` | Ubytování | ✅ hotový, 5 kroků, dashboard |
-| 5 | `doprava` | Doprava na místě | ⬜ jen kostra |
-| 6 | `finance` | Finance a placení | ⬜ jen kostra |
-| 7 | `checklisty` | Checklisty | ⬜ jen kostra |
-| 8 | `krize` | Krizové situace před odletem | ⬜ jen kostra |
+| # | id | Název | Balíček | Stav |
+|---|---|---|---|---|
+| 1 | `destinace` | Kdy a kam | `zaklad` | ✅ hotový, 5 kroků |
+| 2 | `doklady` | Doklady a formálnosti | `zaklad` | ✅ hotový, 6 kroků, dashboard |
+| 3 | `letenky` | Letenky | `zaklad` | ✅ hotový, 5 kroků, dashboard |
+| 4 | `ubytovani` | Ubytování | `zaklad` | ✅ hotový, 5 kroků, dashboard |
+| 5 | `finance` | Finance a placení | `rozsireni` | ⬜ jen kostra |
+| 6 | `checklisty` | Checklisty | `rozsireni` | ⬜ jen kostra |
+| 7 | `krize` | Krizové situace před odletem | `rozsireni` | ⬜ jen kostra |
 
-⚠️ **Moduly se klíčují podle `id`, ne podle pořadí.** Proto jde modul přidat nebo rozdělit bez ztráty dat: odškrtané položky i postup zůstanou. Nikdy nepřejmenovávat existující `id`.
+Moduly 1 až 4 = příprava před odletem. Moduly 5 až 7 = to, co se hodí těsně před odletem a v den letu.
 
-⚠️ **`doprava` patří obsahem do produktu „po příletu"**, ne mezi přípravu před odletem. Až se bude stavět druhý produkt, měla by se přesunout.
+⚠️ **Moduly se klíčují podle `id`, ne podle pořadí.** Proto jde modul přidat, rozdělit nebo přesunout bez ztráty dat. Nikdy nepřejmenovávat existující `id`.
 
-**Část 2** naváže dalšími moduly (5 až 7, zatím neurčeno). Dohromady tedy cílově kolem 14 modulů. Seznam modulů Části 2 zatím neexistuje, doplnit až bude.
+⚠️ **„Doprava na místě" se odsud přesunula do průvodce „Až přistaneš"** (14. 8. 2026), kam patří obsahem. Byla jen kostra, nic se neztratilo. Zakomentovaný záznam i ikona zůstávají v `index.html`, kdyby se měla vrátit.
 
 ---
 
@@ -206,28 +205,38 @@ Immigrační a cestovní údaje **vždy ověřit webem**, ne psát z hlavy. Běh
 
 ## 10. Kam to směřuje (stavět s tímhle na paměti)
 
-Appka není jednorázový kurz, ale **prodejní produkt s balíčky**. I když se to zatím nestaví, každé nové rozhodnutí v kódu musí s tímhle počítat.
+### Celá prodejní kostra (potvrzeno 14. 8. 2026)
 
-### Co se plánuje
-- **Moduly se odemykají podle toho, co si kdo koupí.** Např. moduly 1 až 4 za jednu cenu, další 3 za druhou.
-- **Videa k dokoupení** jako samostatný upsell.
-- **Část 2** appky, která na Část 1 naváže dalšími moduly.
-- **Checklisty ke stažení** (tisk nebo soubor).
-- **Prokliky na Gábiny další produkty**, prodejní videa a moduly.
+Appka je jeden článek delšího řetězce. Tohle je celý žebřík, ať se ví, co na co navazuje:
+
+| Cena | Produkt | Co to je |
+|---|---|---|
+| zdarma | **4 taháky** | ESTA, před odletem, příruční zavazadlo, Florida kalkulačka. Každý sbírá e-mail přes ManyChat. |
+| 297 Kč | **Přes imigrační v klidu** | vstupní produkt, funguje i samostatně bez průvodce |
+| 690 Kč | **Než odletíš, moduly 1 až 4** | pro ty, kdo teď potřebují jen přípravu před odletem |
+| 1 490 Kč | **Než odletíš, celý (1 až 7)** | plný průvodce včetně modulů 5 až 7 na dobu těsně před odletem a v den letu. Bonus za celek se teprve vymýšlí. |
+| 1 490 Kč | **Až přistaneš** | druhý samostatný průvodce: život v USA po příletu, doprava, nakupování, restaurace |
+| 2 790 Kč | **oba průvodce** | Než odletíš + Až přistaneš, s bonusem za celek |
+| 19 900 až 30 000 Kč | **VIP itinerář na míru** | osobní plánování Florida tripu, konzultace, podpora během cesty |
+
+**Co z toho plyne pro tuhle appku:** je to průvodce „Než odletíš" a prodává se ve dvou úrovních, 690 a 1 490 Kč. Modul „Doprava na místě" sem nepatří, patří do „Až přistaneš".
+
+### Co se ještě plánuje
+- **Videa k dokoupení** jako samostatný upsell
+- **Checklisty ke stažení** (tisk nebo soubor)
+- **Prokliky na další produkty** ze žebříku výš
 
 ### Stav: odemykání je postavené
 
-Balíčky Části 1:
-
-| Balíček | Moduly | Odemčeno |
-|---|---|---|
-| `zaklad` | 1 až 4 (Kdy a kam, Doklady, Letenky, Doprava) | rovnou po koupi appky |
-| `rozsireni` | 5 až 7 (Finance, Checklisty, Krize) | až po zadání kódu |
+| Balíček | Moduly | Cena | Odemčeno |
+|---|---|---|---|
+| `zaklad` | 1 až 4 (Kdy a kam, Doklady, Letenky, Ubytování) | 690 Kč | rovnou po koupi |
+| `rozsireni` | 5 až 7 (Finance, Checklisty, Krize) | 1 490 Kč za celek | až po zadání kódu |
 
 **Kde se co mění** (vše pohromadě nad polem `MODULES`):
-- `BALICKY` — název, rozsah a `odkaz` na prodejní stránku. Dokud je `odkaz` prázdný, tlačítko na koupi se nezobrazí.
+- `BALICKY` — název, rozsah, `cena` (ukazuje se v pozvánce) a `odkaz` na prodejní stránku. Dokud je `odkaz` prázdný, tlačítko na koupi se nezobrazí.
 - `VYCHOZI_BALICKY` — co má kupující odemčené hned
-- `KODY` — dvojice odemykací kód → balíček, kód se porovnává bez ohledu na velikost písmen a mezery
+- `KODY` — dvojice odemykací kód → balíček, porovnává se bez ohledu na velikost písmen a mezery. Teď je tam zástupný `CELY`, před prodejem vyměnit.
 
 Stav odemčení: `localStorage`, klíč `nezOdletisOdemceno` (pole id balíčků).
 
