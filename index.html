@@ -919,6 +919,18 @@
   .mp-tier.bad  { background: var(--ruzova); }
   .mp-txt { flex: 1 1 auto; font-size: 13px; color: var(--text-muted); }
 
+  /* ── video ke kroku: dokud soubor neexistuje, ukáže se vysvětlující dlaždice ── */
+  .step-video { margin-top: var(--s6); }
+  .step-video-head {
+    display: flex; align-items: center; gap: 8px;
+    font-size: 11px; font-weight: 800; letter-spacing: .1em;
+    text-transform: uppercase; color: var(--accent, var(--tyrkys)); margin-bottom: var(--s3);
+  }
+  .step-video .video-frame { margin-top: 0; }
+  .step-video-popis {
+    margin-top: var(--s3); font-size: 14px; line-height: 1.7; color: var(--text-muted);
+  }
+
   /* ── kreslená ilustrace ke kroku: kolečko značky plus popisek pod ním ── */
   .step-ilustrace { margin-top: var(--s6); text-align: center; }
   .step-ilustrace img {
@@ -2280,6 +2292,13 @@
             "<strong>Hlídání ceny</strong>: zapneš ho a Google ti sám napíše, když cena klesne",
             "<strong>Víc letišť najednou</strong>: pro Floridu zadej Tampu, Orlando i Fort Lauderdale, rozdíl bývá i 8 000 Kč"
           ],
+          video: {
+            kicker: "Jak kupuju letenky já",
+            src: "video/letenky-jak-kupuju.mp4",
+            poster: "video/letenky-jak-kupuju-poster.jpg",
+            titulek: "Jak kupuju letenky já",
+            popis: "Projdu s tebou svoje hledání od začátku do konce. Ukážu, kam klikám, čeho si všímám ve výsledcích, a řeknu i to, na co se mě ptáte úplně nejčastěji."
+          },
           trap: {
             title: "Pozor na tohle",
             body: [
@@ -3385,6 +3404,16 @@
     show(defaultMonth);
   }
 
+  /* Video ke kroku. Dokud soubor neexistuje, zůstane vysvětlující dlaždice.
+     Přehrávač se odkryje sám, jakmile se video načte. */
+  function initStepVideos() {
+    document.querySelectorAll("[data-video-frame]").forEach(function (frame) {
+      var v = frame.querySelector("video");
+      if (!v) return;
+      v.addEventListener("loadedmetadata", function () { frame.classList.remove("missing"); });
+    });
+  }
+
   /* Kde spát: předvybere destinaci ze zadání cesty, ostatní jdou přepnout. */
   function initStayPicker() {
     var wrap = document.getElementById("stay-dests");
@@ -3800,6 +3829,30 @@
 
       if (step.lead) html += '<div class="step-lead measure">' + paras(step.lead) + '</div>';
 
+      if (step.video) {
+        var vid = step.video;
+        html += '<div class="step-video">' +
+                  '<div class="step-video-head"><span aria-hidden="true">🎬</span>' + vid.kicker + '</div>' +
+                  '<div class="video-frame missing" data-video-frame>' +
+                    '<video controls preload="metadata" playsinline poster="' + vid.poster + '">' +
+                      '<source src="' + vid.src + '" type="video/mp4">' +
+                      'Tvůj prohlížeč neumí přehrát video.' +
+                    '</video>' +
+                    '<div class="video-missing">' +
+                      '<div class="play-mark" aria-hidden="true">▶</div>' +
+                      '<div class="vm-title">' + vid.titulek + '</div>' +
+                      '<div class="vm-loading" aria-hidden="true">' +
+                        '<span class="vm-cam">🎥</span><span class="vm-spinner"></span>' +
+                      '</div>' +
+                      '<div class="vm-note">Až ho natočíš, ulož ho jako <strong>' + vid.src +
+                        '</strong> a náhled jako <strong>' + vid.poster +
+                        '</strong>. Přehrávač se objeví sám.</div>' +
+                    '</div>' +
+                  '</div>' +
+                  (vid.popis ? '<p class="step-video-popis">' + vid.popis + '</p>' : '') +
+                '</div>';
+      }
+
       if (step.ilustrace) {
         html += '<figure class="step-ilustrace">' +
                   '<img src="' + step.ilustrace.src + '" alt="" loading="lazy">' +
@@ -4172,6 +4225,7 @@
       ? renderStepsHtml(mod.steps, mod.id)
       : '<div class="placeholder-note">Obsah tohohle modulu se ještě připravuje.<br>Tady budou kroky, vysvětlení a pasti, na které si dát pozor.</div>';
 
+    initStepVideos();
     initMonthPicker();
     initStayPicker();
     initChecklists();
