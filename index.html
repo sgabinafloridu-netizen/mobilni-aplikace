@@ -2120,7 +2120,6 @@
           icon: "🚑",
           kicker: "Krok 5",
           title: "Dva doklady, které nikdo nekontroluje. Dokud je nepotřebuješ",
-          ilustrace: { src: "images/sceny/scena-pojisteni.svg", popis: "nekontroluje ho nikdo, dokud ho nepotřebuješ" },
           lead: [
             "Na hranici ti je nikdo nezkontroluje. Přesně proto je skoro každý podcení.",
             "Dokud je nepotřebuje."
@@ -2190,48 +2189,51 @@
       id: "letenky",
       balicek: "zaklad",
       ikona: "images/ikony/highlight-let-do-usa.svg",
-      name: "Letenky: kdy koupit a proč o všem rozhoduje přestup",
+      name: "Letenky: kdy koupit, kde hledat a proč o všem rozhoduje přestup",
       shortName: "Letenky",
       dashboard: true,
       dashboardTitle: "Připravenost na letenku",
       emoji: "✈️",
-      time: "20 min",
+      time: "25 min",
       accent: "#C4275A", accentSoft: "#FFEFF4",
-      desc: "Kdy kupovat, jak dlouhý přestup si nechat a co zkontrolovat, než klikneš na zaplatit.",
-      prep: "<strong>Zatím nic shánět nemusíš.</strong> Datum odletu už appka zná, takže si tenhle modul projdi dřív, než začneš letenky vůbec hledat.",
+      desc: "Kdy kupovat, čím hledat, jak dlouhý přestup si nechat a proč nekupovat přes srovnávač.",
+      prep: "<strong>Vyřízenou ESTA.</strong> Ta je vždycky první, letenka až po ní. Když ji ještě nemáš, vrať se o modul zpátky.",
       hook: [
-        "Klienti mi posílají screenshoty s jedinou otázkou: je tohle dobrá cena?",
+        "Nejdřív ESTA, potom letenka. V tomhle pořadí, nikdy naopak.",
+        "Zamítnutá ESTA se totiž neobchází a zaplacená letenka ti ji nevrátí. Proto je tenhle modul až druhý v řadě.",
+        "Klienti mi pak posílají screenshoty s jedinou otázkou: je tohle dobrá cena?",
         "Já se na cenu nedívám první. Dívám se na <strong>přestup</strong>.",
         "Nejdražší letenka, jakou si můžeš koupit, je ta levná s hodinou a půl v Americe. Tam se nepřestupuje jako v Evropě. Kdo to neví, stojí odpoledne u pásu s kufrem v ruce a kouká, jak mu druhé letadlo odlétá bez něj.",
-        "Projdeme kdy kupovat, jak dlouhý přestup si nechat a co zkontrolovat, než pustíš peníze."
+        "Projdeme kdy kupovat, čím hledat, jak dlouhý přestup si nechat a kde letenku rozhodně nekupovat."
       ],
       praise: {
         emoji: "✈️",
         title: "Letenka je vyřešená a přestup ti drží.",
         text:
           "Víš, kdy kupovat a kdy jen zbytečně koukáš na ceny. Víš, že se kufr vyzvedává " +
-          "na prvním americkém letišti, i když letíš dál. Víš, že jméno na letence musí " +
-          "sedět s pasem do písmene. " +
-          "Paní Cokdyž si může nechat zdát o zmeškaném spoji. Ty už víš, jak se mu vyhnout."
+          "na prvním americkém letišti, i když letíš dál. Víš, proč se letenka hledá na " +
+          "srovnávači, ale kupuje u aerolinky. " +
+          "Datum máš potvrzené. Teď se dá řešit, kde budeš spát."
       },
       steps: [
         {
           icon: "📅",
           kicker: "Krok 1",
           title: "Kdy je ta správná chvíle koupit",
-          ilustrace: { src: "images/sceny/scena-nakupni-okno.svg", popis: "okno, ve kterém se kupuje" },
           lead: [
             "Tuhle otázku dostávám nejčastěji ze všech.",
-            "Magický den, kdy jsou letenky nejlevnější, neexistuje. Existuje <strong>okno</strong>. Mimo něj platíš navíc, ať už jsi moc brzy, nebo moc pozdě.",
+            "Magický den, kdy jsou letenky nejlevnější, neexistuje. Existuje okno: <strong>2 až 4 měsíce před odletem</strong>.",
+            "Rok dopředu je moc brzy. Týden předem je moc pozdě, protože last minute do Ameriky nefunguje jako do Egypta.",
             "Appka zná datum tvého odletu. Pojďme se podívat, kde v tom okně zrovna stojíš."
           ],
+          ilustrace: { src: "images/sceny/scena-nakupni-okno.svg", popis: "okno, ve kterém se kupuje" },
           bookingCheck: true,
           why: {
             title: "Proč je to důležité",
             body: [
               "Aerolinky nasazují ceny podle toho, kolik míst je prodaných. Ne podle kalendáře.",
               "Rok dopředu je letadlo skoro prázdné a cena drží nahoře, protože není kam spěchat. Pár týdnů před odletem jde cena nahoru znovu, protože kdo kupuje na poslední chvíli, obvykle letět musí.",
-              "<strong>Mezi tím je okno.</strong> U letů přes Atlantik vychází zhruba na <strong>2 až 8 měsíců</strong> před odletem. V létě a kolem Vánoc se posouvá dřív, protože se místa vyprodají rychleji."
+              "<strong>Mezi tím je okno.</strong> V létě a kolem Vánoc se posouvá dřív, protože se místa vyprodají rychleji."
             ]
           },
           note: {
@@ -2243,25 +2245,75 @@
           }
         },
         {
-          icon: "🔄",
+          icon: "🗺️",
           kicker: "Krok 2",
+          title: "Letíš z Prahy, nebo z Mošnova?",
+          lead: [
+            "Tuhle vrstvu většina rad vynechá, protože je psaná z Prahy.",
+            "Z Moravy se do Ameriky létá jinak. Ostrava-Mošnov nemá přímé dálkové linky, takže se přestupuje tak jako tak. Jenom jinde, za jiné peníze a s jinak dlouhým čekáním.",
+            "Odkud fakticky poletíš ty?"
+          ],
+          checklist: [
+            "Porovnat <strong>Prahu i Vídeň</strong>, z Moravy bývá Vídeň blíž než Praha",
+            "Zkusit trasy přes <strong>Varšavu, Frankfurt a Amsterdam</strong>, každá má jinou cenu i jinou délku přestupu",
+            "Připočítat <strong>cestu na letiště</strong>, u časného odletu i nocleh před ním"
+          ],
+          why: {
+            title: "Proč je to důležité",
+            body: [
+              "Frankfurt a Amsterdam jsou velké přestupní uzly s hromadou spojů do USA. Bývá tam největší výběr a nejkratší čekání.",
+              "Varšava umí být výrazně levnější. Zaplatíš to ale delším přestupem.",
+              "A Vídeň je z Moravy autem nebo vlakem často rychleji než Praha. Když počítáš cenu letenky, počítej i tohle."
+            ]
+          }
+        },
+        {
+          icon: "🔎",
+          kicker: "Krok 3",
+          title: "Tři funkce, které dělají celý rozdíl",
+          lead: [
+            "Hledat letenky umí každý.",
+            "Rozdíl mezi drahou a levnou letenkou dělají tři funkce Google Flights, které většina lidí nikdy neotevře."
+          ],
+          checklist: [
+            "<strong>Flexibilní kalendář</strong>: uvidíš celý měsíc najednou, a že úterý místo pátku umí být o 4 000 Kč levnější",
+            "<strong>Hlídání ceny</strong>: zapneš ho a Google ti sám napíše, když cena klesne",
+            "<strong>Víc letišť najednou</strong>: pro Floridu zadej Tampu, Orlando i Fort Lauderdale, rozdíl bývá i 8 000 Kč"
+          ],
+          trap: {
+            title: "Pozor na tohle",
+            body: [
+              "Skyscanner a Kiwi jsou skvělé na srovnání. <strong>Nekupuj přes ně.</strong>",
+              "Když se let zruší nebo přeloží, aerolinka se postará o svoje přímé zákazníky. U zprostředkovatele čekáš na call centrum a o peníze se přeš týdny.",
+              "Najdi si spoj kde chceš. Kup ho <strong>na webu aerolinky</strong>."
+            ]
+          },
+          link: {
+            title: "Google Flights",
+            sub: "Flexibilní kalendář, hlídání ceny a hledání přes víc letišť najednou.",
+            url: "https://www.google.com/travel/flights"
+          }
+        },
+        {
+          icon: "🔄",
+          kicker: "Krok 4",
           title: "Proč je americký přestup jiný než evropský",
-          ilustrace: { src: "images/sceny/scena-prestup.svg", popis: "kufr si vyzvedneš i při přestupu, proto ty tři hodiny" },
           lead: [
             "Jestli si máš z modulu odnést jedinou věc, ať je to tahle.",
             "Když přiletíš do USA, projdeš imigrační kontrolou <strong>na prvním americkém letišti</strong>, i když pokračuješ dál. Vyzvedneš si kufr, projdeš s ním celnicí a znovu ho odbavíš. Teprve potom jdeš k navazujícímu letu.",
             "Říkám tomu <strong>americký přestup</strong>, protože s evropským nemá společného nic než jméno. Nedá se obejít a kufr za tebe nikdo nepřeloží.",
             "Kolik hodin máš mezi přílety ty?"
           ],
+          ilustrace: { src: "images/sceny/scena-prestup.svg", popis: "kufr si vyzvedneš i při přestupu, proto ty dvě až tři hodiny" },
           toggleQuestions: [
             {
               id: "prestup-usa",
               question: "Máš v plánu přestup na americkém letišti?",
-              yesWarning: "Pak si na něj nech <strong>aspoň 3 hodiny</strong>. Vyhledávač ti nabídne klidně 90 minut, protože počítá jen s přeběhnutím mezi branami. Nepočítá s frontou na imigrační kontrole, s vyzvednutím kufru ani s tím, že ho musíš znovu odbavit."
+              yesWarning: "Pak si na něj nech <strong>aspoň 2 až 3 hodiny</strong>. Vyhledávač ti nabídne klidně hodinu, protože počítá jen s přeběhnutím mezi branami. Nepočítá s frontou na imigrační kontrole, s vyzvednutím kufru ani s tím, že ho musíš znovu odbavit."
             }
           ],
           checklist: [
-            "Zkontrolovat čas mezi přílety a odlety, u přestupu v USA <strong>aspoň 3 hodiny</strong>",
+            "Zkontrolovat čas mezi přílety a odlety, u přestupu v USA <strong>aspoň 2 až 3 hodiny</strong>",
             "Ověřit, že mám ESTA, <strong>platí i pro pouhý tranzit</strong> přes americké letiště",
             "Zjistit, jestli mám celou cestu <strong>na jedné rezervaci</strong>, nebo jako dvě samostatné letenky"
           ],
@@ -2276,51 +2328,55 @@
           }
         },
         {
-          icon: "🪪",
-          kicker: "Krok 3",
-          title: "Co udělá jedno písmeno navíc",
+          icon: "🌙",
+          kicker: "Krok 5",
+          title: "Noční, nebo denní let?",
           lead: [
-            "Vypadá to jako formalita. Přitom je to jeden z mála důvodů, proč tě nepustí do letadla, i když máš všechno ostatní v pořádku.",
-            "Systém aerolinky porovnává letenku s pasem <strong>znak po znaku</strong>. <em>(Ano, kontroluju to i po sobě. Dvakrát.)</em>"
+            "Na tohle se skoro nikdo neptá. Přitom to rozhoduje, v jakém stavu dorazíš k imigrační kontrole.",
+            "Noční let z Evropy přistává v Americe dopoledne. Vyspaný v letadle nikdo není, hlavu máš vatovou, a před tebou je fronta a úředník s otázkami.",
+            "Denní let přistává večer. Dorazíš unavená, zato při smyslech, a jdeš rovnou spát v místním čase."
           ],
           checklist: [
-            "Jméno a příjmení na letence <strong>přesně jako v pase</strong>, včetně všech křestních jmen",
-            "Zkontrolovat <strong>datum narození</strong>, překlep v roce systém neodpustí",
-            "Ověřit, jak aerolinka zachází s diakritikou, <strong>Dvořák a Dvorak</strong> musí být zjevně tentýž člověk"
+            "U nočního letu počítat s tím, že <strong>první den v USA je odepsaný</strong>",
+            "Odpovědi pro imigrační kontrolu mít <strong>promyšlené předem</strong>, ne je vymýšlet s vatovou hlavou",
+            "Přehodit si hodinky na <strong>místní čas</strong> hned v letadle"
           ],
-          trap: {
-            title: "Pozor na tohle",
+          why: {
+            title: "Proč je to důležité",
             body: [
-              "Oprava jména po zakoupení stojí u většiny aerolinek <strong>tisíce</strong>. U některých se letenka neopravuje vůbec a kupuje se nová.",
-              "Zkontroluj si údaje <strong>ještě na potvrzovací stránce</strong>. Ne až v e-mailu druhý den."
+              "Let na západ se snáší líp než zpátky. Den se ti prodlouží a tělo to bere snáz, než když ho někdo o hodiny připraví.",
+              "Právě proto se první den v USA neplánuje nic důležitého. Ani dlouhá jízda autem, ani vyzvedávání něčeho, co má otevřeno jen do čtyř."
             ]
           }
         },
         {
           icon: "🧳",
-          kicker: "Krok 4",
-          title: "Co je v ceně a co tě dožene až na letišti",
-          ilustrace: { src: "images/sceny/scena-vaha-kufr.svg", popis: "23 kg, a rozhoduje se u odbavení" },
+          kicker: "Krok 6",
+          title: "Proč je Basic Economy dražší, než vypadá",
           lead: [
-            "U letů do Ameriky bývá odbavené zavazadlo v ceně častěji než u evropských nízkonákladovek. Spoléhat se na to ale nedá.",
-            "A ještě častěji se stane tohle: v ceně je let tam, ale <strong>ne zpátky</strong>."
+            "Nejlevnější tarif ve výsledcích se skoro vždycky jmenuje Basic Economy. Vypadá to jako výhra.",
+            "Je to nejdražší způsob, jak koupit levnou letenku."
           ],
+          ilustrace: { src: "images/sceny/scena-vaha-kufr.svg", popis: "23 kg, a rozhoduje se u odbavení" },
           checklist: [
             "Ověřit počet <strong>odbavených zavazadel v ceně</strong>, zvlášť pro cestu tam a zvlášť zpátky",
+            "Ověřit, co smíš vzít <strong>do kabiny</strong>, u Basic Economy se to liší aerolinka od aerolinky",
+            "Vědět, že Basic Economy <strong>nejde měnit ani vrátit</strong>",
             "Zjistit <strong>povolenou váhu</strong>, u letů do USA bývá 23 kg na kus",
-            "Zkontrolovat rozměry <strong>příručního zavazadla</strong>, aerolinky je měří přísněji než dřív",
             "Vědět, že <strong>powerbanka patří do příručního</strong>, do odbaveného kufru nesmí"
           ],
           note: {
             title: "Ještě jedna věc",
             body: [
-              "Tekutiny v příručním zavazadle mají pořád stejné pravidlo: <strong>nádoby do 100 ml</strong> v jednom průhledném sáčku. Některá letiště už mají skenery, u kterých to neplatí, ale dokud to nevíš jistě, počítej s tou přísnější verzí."
+              "U Basic Economy přes Atlantik se aerolinky liší, a dost. Delta pustí do kabiny <strong>jen osobní věc pod sedadlo</strong>. United v tomhle tarifu kufřík do přihrádky dovolí.",
+              "Než tarif koupíš, najdi si u té konkrétní aerolinky, co v něm doopravdy je. Rozdíl se pozná až u brány, kde se už nedohaduješ.",
+              "Tekutiny v příručním mají pořád stejné pravidlo: <strong>nádoby do 100 ml</strong> v jednom průhledném sáčku."
             ]
           }
         },
         {
           icon: "💳",
-          kicker: "Krok 5",
+          kicker: "Krok 7",
           title: "Než klikneš na zaplatit",
           lead: [
             "Poslední kontrola, než pustíš peníze.",
@@ -2330,16 +2386,26 @@
             src: "images/gabi-happy-plaz.svg",
             text: "Tuhle část dělám pokaždé, i po těch letech. <strong>Dvě minuty čtení proti tisícům za opravu.</strong>"
           },
-          gallery: [
-            { src: "images/most-key-west.jpg", alt: "Starý most na cestě na Key West, oceán na obě strany",
-              caption: "a kvůli tomuhle to celé zařizuješ" }
-          ],
           checklist: [
+            "Jméno a příjmení <strong>přesně jako v pase</strong>, včetně všech křestních jmen",
+            "Zkontrolovat <strong>datum narození</strong>, překlep v roce systém neodpustí",
             "Zkontrolovat <strong>letiště, ne jen město</strong>, New York má tři a mezi nimi je klidně hodina cesty",
             "Přečíst si <strong>storno podmínky</strong> dřív, než zaplatíš",
             "Platit <strong>kreditní kartou</strong>, u problémů s aerolinkou se peníze reklamují snáz",
             "Uložit si <strong>číslo rezervace do Trezoru</strong>, ať ho máš po ruce i bez signálu"
           ],
+          gallery: [
+            { src: "images/most-key-west.jpg", alt: "Starý most na cestě na Key West, oceán na obě strany",
+              caption: "a kvůli tomuhle to celé zařizuješ" }
+          ],
+          trap: {
+            title: "Pozor na tohle",
+            body: [
+              "Systém aerolinky porovnává letenku s pasem <strong>znak po znaku</strong>. <em>(Ano, kontroluju to i po sobě. Dvakrát.)</em>",
+              "Oprava jména po zakoupení stojí u většiny aerolinek <strong>tisíce</strong>. U některých se letenka neopravuje vůbec a kupuje se nová.",
+              "Zkontroluj si údaje <strong>ještě na potvrzovací stránce</strong>. Ne až v e-mailu druhý den."
+            ]
+          },
           why: {
             title: "Proč je to důležité",
             body: [
@@ -3424,8 +3490,8 @@
     var sezona = (mesic >= 5 && mesic <= 7) || mesic === 11;        // červen až srpen, prosinec
 
     // hranice okna: v sezóně se vyprodává dřív, tak se posouvá dopředu
-    var brzy  = sezona ? 300 : 240;
-    var pozde = sezona ? 45  : 40;
+    var brzy  = sezona ? 180 : 130;   // dřív než tohle je zbytečně brzy
+    var pozde = sezona ? 75  : 55;    // po tomhle už cena jen roste
 
     var cls, nadpis, text;
     if (dnu < 0) {
@@ -3434,19 +3500,19 @@
     } else if (dnu > brzy) {
       cls = "wait";
       nadpis = "Na kupování je ještě brzy, zbývá " + dnu + " " + dnuPlural(dnu) + ".";
-      text = "Ceny teď drží nahoře, protože letadlo je skoro prázdné a aerolinka nemá důvod slevovat. " +
-             "Nastav si hlídače ceny a vrať se k tomu za pár týdnů.";
+      text = "Ceny drží nahoře, protože letadlo je skoro prázdné a aerolinka nemá důvod slevovat. " +
+             "Zapni si hlídání ceny a vrať se k tomu, až budeš 4 měsíce před odletem.";
     } else if (dnu > pozde) {
       cls = "ok";
       nadpis = "Jsi v nákupním okně, do odletu zbývá " + dnu + " " + dnuPlural(dnu) + ".";
       text = sezona
         ? "Letíš v hlavní sezóně, takže čekání na lepší cenu se spíš nevyplatí. Až uvidíš rozumnou nabídku, ber ji."
-        : "Tohle je ta část, kdy se letadlo plní a aerolinka má důvod lákat. Sleduj ceny, ale neodkládej to na poslední chvíli.";
+        : "Jsi v tom okně 2 až 4 měsíců, kdy se letadlo plní a aerolinka má důvod lákat. Sleduj ceny, ale neodkládej to.";
     } else {
       cls = "bad";
       nadpis = "Do odletu zbývá " + dnu + " " + dnuPlural(dnu) + ", kupuj hned.";
-      text = "Takhle blízko odletu už cena nahoru jen poroste, protože se doprodávají poslední místa. " +
-             "Čekání tady nic nezachrání.";
+      text = "Takhle blízko odletu cena jen poroste, protože se doprodávají poslední místa. " +
+             "Last minute do Ameriky nefunguje jako do Egypta, čekání tady nic nezachrání.";
     }
 
     box.innerHTML =
