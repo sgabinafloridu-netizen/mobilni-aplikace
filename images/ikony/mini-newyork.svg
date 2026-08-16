@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48">
+  <!-- mini ikona pro inline pouziti vedle textu: jablko, "Big Apple", stejny styl jako palma -->
+  <path d="M24 16 Q24 10 20 8" stroke="#14233A" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+  <path d="M24 12 Q30 6 36 10 Q32 14 24 14 Z" fill="#1AC0CE"/>
+  <path d="M24 16
+           Q13 15 10 26
+           Q8 37 17 42
+           Q21 44 24 41
+           Q27 44 31 42
+           Q40 37 38 26
+           Q35 15 24 16 Z"
+        fill="#FF6FA5" stroke="#14233A" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M18 24 Q22 21 20 27" stroke="#FFFFFF" stroke-width="2.5" fill="none" stroke-linecap="round" opacity="0.55"/>
+</svg>

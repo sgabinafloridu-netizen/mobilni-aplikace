@@ -548,6 +548,9 @@
   .tw-v { display: flex; align-items: center; gap: 7px; font-size: 14px; font-weight: 700; color: var(--text); font-variant-numeric: tabular-nums; }
   .tw-v.big { font-size: 16px; }
   .tw-dest-ico { font-size: 15px; }
+  /* mini ikona destinace vedle textu, škáluje se s velikostí písma okolo,
+     ať sedí stejně dobře v malém tlačítku i ve velkém přehledu nahoře */
+  .dest-ico-mini { width: 1.25em; height: 1.25em; display: inline-block; vertical-align: -0.28em; object-fit: contain; }
   .tw-pill {
     display: inline-flex; align-items: center; gap: 6px;
     font-size: 11px; font-weight: 800; letter-spacing: .04em; padding: 3px 10px; border-radius: var(--r-pill);
@@ -3555,7 +3558,15 @@
   }
 
   var DEST_LABELS = { florida: "Florida", newyork: "New York", parky: "Národní parky" };
-  var DEST_ICON = { florida: "🌴", newyork: "🗽", parky: "🌵" };
+  var DEST_ICON = {
+    florida: "images/ikony/mini-florida.svg",
+    newyork: "images/ikony/mini-newyork.svg",
+    parky: "images/ikony/mini-parky.svg"
+  };
+  function destIconHtml(key) {
+    var src = DEST_ICON[key];
+    return src ? '<img class="dest-ico-mini" src="' + src + '" alt="">' : "";
+  }
 
   // vyhledávátko počasí v modulu 1: co dané destinace čeká v daném měsíci.
   // "good/ok/bad" jen řídí barevnou tečku, text je vždycky konkrétní věta.
@@ -3722,8 +3733,8 @@
       nazev: "Plánovač s tabulkou",
       obrazek: "images/ikony/highlight-checklisty.svg",
       popis: [
-        "Má Excel s barevnými záložkami, letenky koupené 6 měsíců dopředu a seznam restaurací seřazený podle Tripadvisoru. Když se něco změní, dostane malou krizi.",
-        "V USA je ale <strong>jako ryba ve vodě</strong>, protože tam jde rezervovat doslova všechno a systém funguje přesně tak, jak má.",
+        "Máš Excel s barevnými záložkami, letenky koupené 6 měsíců dopředu a seznam restaurací seřazený podle Tripadvisoru. Když se něco změní, dostaneš malou krizi.",
+        "V USA jsi ale <strong>jako ryba ve vodě</strong>, protože tam jde rezervovat doslova všechno a systém funguje přesně tak, jak má.",
         "<strong>Co ti tady pomůže:</strong> appka ti hlídá termíny, které nejdou dohnat. Kdy se otevírají rezervace parků, kdy začíná nákupní okno na letenku, do kdy platí pas.",
         "<strong>Na co pozor:</strong> aby toho v plánu nebylo víc, než se dá prožít. Amerika je větší, než vypadá na mapě."
       ]
@@ -3732,8 +3743,8 @@
       nazev: "Svobodný duch",
       obrazek: "images/ikony/highlight-prezij-ameriku.svg",
       popis: [
-        "Cestovku? Nikdy. Itinerář? Co to je? Letí s jedním batohem a uvidí. Miluje překvapení a nesnáší být svázaný.",
-        "V USA ho ale čeká studená sprcha. <strong>Zion Narrows se rezervuje půl roku dopředu a bez auta se nikam nedostane.</strong>",
+        "Cestovku? Nikdy. Itinerář? Co to je? Letíš s jedním batohem a uvidíš. Miluješ překvapení a nesnášíš, když tě něco svazuje.",
+        "V USA tě ale čeká studená sprcha. <strong>Zion Narrows se rezervuje půl roku dopředu a bez auta se nikam nedostaneš.</strong>",
         "<strong>Co ti tady pomůže:</strong> u každého kroku poznáš, co je opravdu potřeba mít dopředu a co v klidu počká. Je toho míň, než se bojíš.",
         "<strong>Na co pozor:</strong> na vstupy do parků a na ubytování uvnitř nich. To jsou jediná dvě místa, kde improvizace v Americe nefunguje."
       ]
@@ -3742,8 +3753,8 @@
       nazev: "Lovec zážitků za dobrou cenu",
       obrazek: "images/ikony/highlight-florida-levneji.svg",
       popis: [
-        "Chce vidět Grand Canyon, Everglades i Key West, a to všechno za cenu jednoho víkendu v Chorvatsku. Vstává v 5 ráno, aby stihl východ slunce, a spí v motelu u dálnice.",
-        "<strong>Hrdina.</strong>",
+        "Chceš vidět Grand Canyon, Everglades i Key West, a to všechno za cenu jednoho víkendu v Chorvatsku. Vstáváš v 5 ráno, aby ti neutekl východ slunce, a spíš v motelu u dálnice.",
+        "<strong>To je hrdinství.</strong>",
         "<strong>Co ti tady pomůže:</strong> nákupní okno na letenky, rozdíl mezi letišti, kde se dá ušetřit na ubytování a jak nepřijít o peníze na poplatcích za platby.",
         "<strong>Na co pozor:</strong> na místa, kde se šetřit opravdu nevyplatí. Pojištění a krátký přestup jsou přesně ta dvě."
       ]
@@ -3752,7 +3763,7 @@
       nazev: "Pohoda na prvním místě",
       obrazek: "images/ikony/highlight-priroda-a-plaze.svg",
       popis: [
-        "Ideální dovolená vypadá takhle: lehátko, moře, kniha, koktejl. Žádný budík, žádný seznam památek.",
+        "Tvoje ideální dovolená vypadá takhle: lehátko, moře, kniha, koktejl. Žádný budík, žádný seznam památek.",
         "<strong>Západní pobřeží Floridy pro tebe bude zjevení.</strong> Tiché, krásné a bez davů.",
         "<strong>Co ti tady pomůže:</strong> vybrat termín, kdy je tam nejmíň lidí, a ubytování, ze kterého nemusíš nikam jezdit.",
         "<strong>Na co pozor:</strong> na papíry. Jsou to jediné dvě hodiny nepohody na celé té cestě, ale bez nich to nejde. Odbudeme je hned na začátku."
@@ -3762,7 +3773,7 @@
       nazev: "Sociální motýl",
       obrazek: "images/ikony/highlight-my-story.svg",
       popis: [
-        "Jede proto, aby měl co vyprávět a co ukázat. Zná každé místo z Netflixu a chce stát přesně tam, kde stál jeho oblíbený herec. Universal Studios, South Beach, selfie z Brooklynského mostu.",
+        "Jedeš proto, aby ti bylo co vyprávět a co ukázat. Znáš každé místo z Netflixu a chceš stát přesně tam, kde stál tvůj oblíbený herec. Universal Studios, South Beach, selfie z Brooklynského mostu.",
         "<strong>Co ti tady pomůže:</strong> vybrat termín, kdy ta místa nejsou k udušení plná, a naplánovat je tak, aby se stihla i v denním světle.",
         "<strong>Na co pozor:</strong> na vstupy, které se kupují dopředu. Nejfotogeničtější místa Ameriky mívají frontu i rezervační systém."
       ]
@@ -4458,7 +4469,7 @@
       var d = daysUntil(setup.datum);
       document.getElementById("tw-days").textContent = (d >= 0 ? d : 0) + (d === 1 ? " den" : " dní");
       document.getElementById("tw-dest").textContent = DEST_LABELS[setup.destinace] || setup.destinace;
-      document.getElementById("tw-dest-ico").textContent = DEST_ICON[setup.destinace] || "";
+      document.getElementById("tw-dest-ico").innerHTML = destIconHtml(setup.destinace);
 
       var scene = DEST_SCENE[setup.destinace];
       document.getElementById("trip-teaser").textContent = scene
@@ -4696,7 +4707,7 @@
       result.innerHTML = destOrder.map(function (d) {
         var tier = row[d.key][0], txt = row[d.key][1];
         return '<div class="mp-row">' +
-                 '<span class="mp-dest">' + (DEST_ICON[d.key] || "") + ' ' + d.label + '</span>' +
+                 '<span class="mp-dest">' + destIconHtml(d.key) + ' ' + d.label + '</span>' +
                  '<span class="mp-tier ' + tier + '"></span>' +
                  '<span class="mp-txt">' + txt + '</span>' +
                '</div>';
@@ -4791,7 +4802,7 @@
 
     wrap.innerHTML = poradi.map(function (key) {
       return '<button type="button" class="mp-month" data-dest="' + key + '">' +
-               (DEST_ICON[key] || "") + " " + (DEST_LABELS[key] || key) +
+               destIconHtml(key) + " " + (DEST_LABELS[key] || key) +
              '</button>';
     }).join('');
 

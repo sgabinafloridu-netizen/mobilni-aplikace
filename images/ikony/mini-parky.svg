@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48">
+  <!-- mini ikona pro inline pouziti vedle textu: dva vrcholky kanonu, stejny styl jako palma -->
+  <circle cx="38" cy="10" r="5" fill="#FFD23F"/>
+  <path d="M4 40 L16 18 L24 30 L30 20 L44 40 Z" fill="#1AC0CE" stroke="#14233A" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M16 18 L20 24 L12 24 Z" fill="#FFFFFF" stroke="#14233A" stroke-width="1.5" stroke-linejoin="round"/>
+  <path d="M30 20 L33.5 25 L26.5 25 Z" fill="#FFFFFF" stroke="#14233A" stroke-width="1.5" stroke-linejoin="round"/>
+</svg>

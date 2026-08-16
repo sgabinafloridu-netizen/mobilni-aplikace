@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48">
+  <!-- mini ikona pro inline použití vedle textu (výběr destinace), bez pozadí -->
+  <path d="M24 42 Q22 30 26 20" stroke="#14233A" stroke-width="3" fill="none" stroke-linecap="round"/>
+  <g stroke="#14233A" stroke-width="2" stroke-linecap="round">
+    <path d="M26 20 Q16 14 8 17" fill="none"/>
+    <path d="M26 20 Q20 8 12 4" fill="none"/>
+    <path d="M26 20 Q30 8 40 6" fill="none"/>
+    <path d="M26 20 Q34 14 42 18" fill="none"/>
+  </g>
+  <path d="M26 20 Q16 14 8 17 Q18 19 26 24 Z" fill="#1AC0CE"/>
+  <path d="M26 20 Q20 8 12 4 Q22 12 27 22 Z" fill="#FF6FA5"/>
+  <path d="M26 20 Q30 8 40 6 Q30 12 27 22 Z" fill="#1AC0CE"/>
+  <path d="M26 20 Q34 14 42 18 Q32 18 27 23 Z" fill="#FF6FA5"/>
+</svg>
