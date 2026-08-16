@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400">
+  <!-- Highlight cover: Pozor/naléhavost. Vykřičník místo klipartové ikony. -->
+  <rect x="0" y="0" width="400" height="400" fill="#FFFFFF"/>
+  <circle cx="200" cy="200" r="185" fill="#E6F8FA"/>
+
+  <text x="88" y="118" font-family="Arial, sans-serif" font-size="18" fill="#FFD23F">&#10022;</text>
+  <text x="304" y="286" font-family="Arial, sans-serif" font-size="16" fill="#1AC0CE">&#10022;</text>
+
+  <path d="M200 96 Q222 96 220 122 L210 226 Q209 238 200 238 Q191 238 190 226 L180 122 Q178 96 200 96 Z"
+        fill="#FF6FA5" stroke="#14233A" stroke-width="8" stroke-linejoin="round"/>
+  <circle cx="200" cy="280" r="20" fill="#FF6FA5" stroke="#14233A" stroke-width="8"/>
+</svg>

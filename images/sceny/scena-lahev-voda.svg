@@ -1,0 +1,37 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400">
+  <!-- Nerezová lahev s karabinkou, jako z výletu do kaňonu. Prázdný štítek schválně,
+       ať se nekopíruje cizí logo, jen připomíná tu vlastní oblíbenou lahev na cesty. -->
+  <circle cx="200" cy="200" r="185" fill="#E6F8FA"/>
+  <text x="76" y="112" font-family="Arial, sans-serif" font-size="18" fill="#FF6FA5">&#10022;</text>
+  <text x="312" y="292" font-family="Arial, sans-serif" font-size="16" fill="#1AC0CE">&#10022;</text>
+
+  <!-- karabinka na víčku -->
+  <path d="M200 70 Q222 70 222 92 Q222 108 208 112 L208 96 Q208 86 200 86 Q192 86 192 96 L192 112
+           Q178 108 178 92 Q178 70 200 70 Z"
+        fill="none" stroke="#14233A" stroke-width="7" stroke-linejoin="round"/>
+
+  <!-- vicko -->
+  <rect x="176" y="108" width="48" height="28" rx="6" fill="#FFD23F" stroke="#14233A" stroke-width="7"/>
+
+  <!-- telo lahve -->
+  <path d="M164 136
+           L236 136
+           L236 322
+           Q236 340 218 340
+           L182 340
+           Q164 340 164 322
+           Z"
+        fill="#1AC0CE" stroke="#14233A" stroke-width="8" stroke-linejoin="round"/>
+
+  <!-- odlesk -->
+  <path d="M178 152 L178 320" stroke="#FFFFFF" stroke-width="8" stroke-linecap="round" opacity="0.45"/>
+
+  <!-- prazdny stitek na popisky, uvnitr tela lahve -->
+  <rect x="178" y="196" width="44" height="60" rx="8" fill="#FFFFFF" stroke="#14233A" stroke-width="5"/>
+  <path d="M186 214 L214 214 M186 226 L214 226 M186 238 L206 238"
+        stroke="#FF6FA5" stroke-width="5" stroke-linecap="round"/>
+
+  <!-- kapky vedle lahve -->
+  <path d="M280 220 Q280 206 290 196 Q300 206 300 220 Q300 230 290 230 Q280 230 280 220 Z" fill="#1AC0CE"/>
+  <path d="M262 262 Q262 252 269 245 Q276 252 276 262 Q276 269 269 269 Q262 269 262 262 Z" fill="#FFD23F"/>
+</svg>

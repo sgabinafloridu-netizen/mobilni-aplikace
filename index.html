@@ -1009,6 +1009,7 @@
   .disc > summary::-webkit-details-marker { display: none; }
   .disc > summary:hover { background: rgba(0,0,0,.02); }
   .disc .d-ico { flex: 0 0 auto; font-size: 16px; }
+  .disc .d-ico img { width: 18px; height: 18px; display: block; }
   .disc .d-chev { margin-left: auto; flex: 0 0 auto; color: var(--text-faint); font-size: 13px; transition: transform .25s; }
   .disc[open] .d-chev { transform: rotate(180deg); }
   .disc .d-body {
@@ -1332,6 +1333,12 @@
     color: #6b5319;
   }
   .step-tip-body { font-size: 15px; line-height: 1.7; color: var(--text); }
+  .step-tip-link {
+    display: inline-flex; align-items: center; gap: 6px; margin-top: var(--s4);
+    font-size: 14px; font-weight: 700; color: #6b5319; text-decoration: none;
+    border-bottom: 1.5px solid #6b5319;
+  }
+  .step-tip-link:hover { color: #4a3900; border-color: #4a3900; }
 
   /* ── odškrtávací checklist, hlavní akční prvek kroku ── */
   .checklist-hint {
@@ -2106,10 +2113,10 @@
         emojiImg: "images/ikony/highlight-priroda-a-plaze.svg",
         title: "A je to. Máš vybráno a víš proč.",
         text:
-          "Teď už víš, že Florida v září znamená sledovat předpověď, ne rušit letenky. Že kaňon " +
-          "v poledne v červenci není procházka, ale riziko. A že ta vysněná fotka z vyhlídky často " +
-          "začíná rezervací parkoviště 3 měsíce dopředu. To není málo. To je přesně ten rozdíl mezi " +
-          "člověkem, který jen doufá, že to vyjde, a člověkem, který ví, do čeho jde. Paní Cokdyž dnes " +
+          "Teď už víš, že Florida v září znamená <strong>sledovat předpověď, ne rušit letenky</strong>. Že kaňon " +
+          "v poledne v červenci není procházka, ale <strong>riziko</strong>. A že ta vysněná fotka z vyhlídky často " +
+          "začíná rezervací parkoviště <strong>3 měsíce dopředu</strong>. To není málo. To je přesně ten rozdíl mezi " +
+          "člověkem, který jen doufá, že to vyjde, a člověkem, <strong>který ví, do čeho jde</strong>. Paní Cokdyž dnes " +
           "v noci nebude mít o čem mluvit."
       },
       steps: [
@@ -2188,7 +2195,6 @@
           }
         },
         {
-          icon: "🌀",
           title: "Hurikánová sezóna: kde, kdy a jak moc to řešit",
           ilustrace: { src: "images/sceny/pani-cokdyz-radar.svg", popis: "paní Cokdyž si pořídila meteoradar" },
           media: {
@@ -2237,6 +2243,7 @@
         {
           icon: "🥵",
           title: "Grand Canyon v létě: co tě čeká a co ne",
+          ilustrace: { src: "images/sceny/scena-lahev-voda.svg", popis: "nerezová lahev s karabinkou, věrný parťák na každý výlet" },
           bloky: [
             { text: ["Na fotkách to vypadá jako nekonečná, ale docela neškodná vycházka. Výhled z okraje tě vtáhne, stezka se svažuje pozvolna a vítr, co fouká nahoře na vyhlídce, <strong>tě přesvědčí, že to bude v pohodě</strong>."] },
             { stat: "45 °C", popis: "tolik je dole ve stínu skal, zatímco nahoře na vyhlídce příjemně fouká vítr. Nejbližší voda je hodinu chůze zpátky, a zpátky je nahoru." },
@@ -2269,7 +2276,6 @@
           }
         },
         {
-          icon: "🚗",
           title: "Rezervace parků: proč to nestačí zařídit týden předem",
           hintProTyp: {
             svobodny: "Tohle je přesně to místo, kde tvůj styl v Americe narazí. <strong>Vstupy do parků se v Evropě neřeší, tady se vyprodají týdny dopředu.</strong> Je to jediná věc, kterou tě prosím udělat předem. Zbytek klidně nech na cestě.",
@@ -2293,7 +2299,11 @@
               "Pokud plánuješ navštívit aspoň 2 až 3 parky, podívej se na <strong>America the Beautiful</strong>. Je to roční karta, která tě pustí do všech národních parků v USA bez dalšího vstupného.",
               "Vstup do Grand Canyonu stojí 35 dolarů za auto, Zion podobně, <strong>karta se zaplatí po druhém parku a zbytek roku máš zdarma</strong>.",
               "Kupuje se online nebo přímo u vstupu. Jedna věc méně, na kterou myslet na místě."
-            ]
+            ],
+            link: {
+              title: "Koupit America the Beautiful",
+              url: "https://store.usgs.gov/pass"
+            }
           },
           why: {
             title: "Proč je to důležité",
@@ -5518,13 +5528,17 @@
         html += '<div class="step-tip">' +
                   '<div class="step-tip-head"><span aria-hidden="true">💰</span>' + (step.tip.title || 'Tip navíc') + '</div>' +
                   '<div class="step-tip-body">' + paras(step.tip.body) + '</div>' +
+                  (step.tip.link
+                    ? '<a class="step-tip-link" href="' + step.tip.link.url + '" target="_blank" rel="noopener">' +
+                        step.tip.link.title + ' ↗</a>'
+                    : '') +
                 '</div>';
       }
 
       // detaily si uživatel rozklikne, jen když chce
       if (step.why) {
         html += '<details class="disc disc-why">' +
-                  '<summary><span class="d-ico">💡</span>' + step.why.title +
+                  '<summary><span class="d-ico"><img src="images/ikony/mini-zarovka.svg" alt=""></span>' + step.why.title +
                   '<span class="d-chev" aria-hidden="true">▾</span></summary>' +
                   '<div class="d-body">' + paras(step.why.body) + '</div>' +
                 '</details>';
@@ -5538,7 +5552,7 @@
       }
       if (step.note) {
         html += '<details class="disc disc-note">' +
-                  '<summary><span class="d-ico">📝</span>' + step.note.title +
+                  '<summary><span class="d-ico"><img src="images/ikony/mini-poznamka.svg" alt=""></span>' + step.note.title +
                   '<span class="d-chev" aria-hidden="true">▾</span></summary>' +
                   '<div class="d-body">' + paras(step.note.body) + '</div>' +
                 '</details>';
