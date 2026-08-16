@@ -225,6 +225,16 @@ Jádro v jedné větě: **přestat mluvit reklamní řečí a začít vyprávět
 
 ⚠️ **Co si od Goliášové nebrat:** píše hovorově („Hranatej Béda"), tahle značka ne. Ber vypravěčství a odvahu, ne pražské zkratky.
 
+**Rozšířený checklist rytmu** (zdroj: `kurz-dna-hlas.md` na ploše, sekce 15). Aplikováno na `hook` všech 7 napsaných modulů, kontrolováno skriptem přes celé pole `MODULES`:
+
+- Žádný odstavec (položka pole `text`/`lead`/`body`) déle než 3 věty. Delší se rozseká na víc položek, ne stáhne na jednu.
+- Aspoň jedna jednoslovná nebo jednovětá pauza na modul („Konkrétní postup je jednoduchý." jako samostatná věta).
+- **Přesně 1 závorka se sebeironií na `hook`.** Víc je tik, ne mrknutí. Musí to být sebeironie nebo odsek, nikdy dovysvětlení faktu.
+- **Otázka na čtenáře na konci `hook`**, jako uzávěrka, ne na začátku.
+- Modul „krize" je výjimka z humoru (žádná paní Cokdyž, žádný vtip), ale závorka i otázka tam patří taky, jen vážným tónem.
+
+Kontrola přes Node (regex na řetězce v `MODULES`, ne přes DOM) je rychlejší než pročítat 90 000 znaků od oka. Skripty jsou jednorázové, po použití smazané ze scratchpadu, ale postup (extrahovat `var MODULES = ... ];`, projít `"..."` literály, počítat věty podle `. (?=[A-Z<])`) se dá znovu sestavit za minutu.
+
 ### Tón
 - **Paní Cokdyž** = strach jako postava, noční směna v 00:47. Nikdy nevyhraje, ale ani nezemře.
 - Komu se píše: **Lenka**, konkrétní člověk se svými strachy (peníze, angličtina, imigrační kontrola, děti), ne „cílovka".
