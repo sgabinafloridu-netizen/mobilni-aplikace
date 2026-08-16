@@ -1039,30 +1039,97 @@
   }
 
   /* ── kvíz: jaký jsi cestovatel ────────────────────────────────────────── */
-  .kviz { margin-top: var(--s5); background: var(--sunken); border-radius: var(--r-lg); padding: var(--s5); }
-  .kviz-otazka { font-size: 15.5px; font-weight: 700; color: var(--text); margin-bottom: var(--s4); line-height: 1.5; }
-  .kviz-postup { font-size: 11px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase;
-                 color: var(--text-soft); margin-bottom: var(--s3); }
-  .kviz-volby { display: flex; flex-direction: column; gap: 8px; }
-  .kviz-volba {
-    width: 100%; text-align: left; font-family: inherit; font-size: 14.5px; line-height: 1.5;
-    background: var(--surface); border: 1.5px solid var(--line-strong); border-radius: var(--r-md);
-    padding: 13px var(--s4); cursor: pointer; color: var(--text);
-    transition: border-color .15s, background .15s, transform .12s;
+  /* ── kvíz: jaký jsi cestovatel ────────────────────────────────────────
+     Vzhled se schválně drží kalkulačky (kalkulacka-florida.vercel.app),
+     aby na sebe produkty navazovaly: bílá karta s tyrkysovým rámečkem,
+     postup v přechodu tyrkys až růžová, kulatá ilustrace nad otázkou,
+     volby jako karty a výsledek jako odměna, ne jako výpis.
+     Hodnoty (22px rádius, 2px rámeček, stín, 84px ikona, 16px u voleb)
+     jsou převzaté z kalkulačky, ne odhadnuté. Neměnit od oka.          */
+  .kviz {
+    margin-top: var(--s5);
+    background: var(--surface);
+    border: 2px solid var(--tyrkys-light);
+    border-radius: 22px;
+    padding: 26px 22px;
+    box-shadow: 0 14px 34px rgba(20,35,58,.08);
   }
-  .kviz-volba:hover { border-color: var(--tyrkys); background: var(--tyrkys-light, #E6F8FA); transform: translateX(2px); }
+  .kviz-krok { animation: kvizIn .32s ease both; }
+  @keyframes kvizIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
 
-  .kviz-vysledek { display: none; }
-  .kviz-vysledek.show { display: block; animation: discIn .3s ease both; }
-  .kviz-vysledek-hlava { display: flex; align-items: center; gap: var(--s4); }
-  .kviz-vysledek-hlava img { flex: 0 0 auto; width: 76px; height: 76px; border-radius: 50%; }
-  .kviz-typ { font-size: 11px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: var(--tyrkys-dark); }
-  .kviz-nazev { font-size: 21px; font-weight: 800; letter-spacing: -.02em; color: var(--text); line-height: 1.2; }
-  .kviz-popis { margin-top: var(--s4); font-size: 15px; line-height: 1.75; color: var(--text-muted); }
+  /* postup nahoře: kolik otázek už je za tebou */
+  .kviz-postup-radek { display: flex; align-items: center; gap: 10px; margin-bottom: var(--s5); }
+  .kviz-postup {
+    font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase;
+    color: var(--text-faint); white-space: nowrap;
+  }
+  .kviz-pruh { display: flex; gap: 6px; flex: 1; }
+  .kviz-pruh span { height: 6px; flex: 1; border-radius: 6px; background: var(--tyrkys-light); }
+  .kviz-pruh span.hotovo { background: linear-gradient(90deg, var(--tyrkys), var(--ruzova)); }
+
+  /* hlava otázky */
+  .kviz-ikona { display: flex; justify-content: center; margin-bottom: 6px; }
+  .kviz-ikona img { width: 84px; height: 84px; }
+  .kviz-otazka { font-size: 21px; font-weight: 700; line-height: 1.3; text-align: center; color: var(--inkoust); }
+  .kviz-cara {
+    width: 54px; height: 4px; border-radius: 4px; margin: 10px auto 12px;
+    background: linear-gradient(90deg, var(--tyrkys), var(--ruzova));
+  }
+  .kviz-hint { font-size: 14.5px; line-height: 1.65; color: var(--text-muted); text-align: center; margin-bottom: 18px; }
+  .kviz-hint strong { color: var(--inkoust); font-weight: 700; }
+
+  /* volby */
+  .kviz-volby { display: flex; flex-direction: column; gap: 10px; }
+  .kviz-volba {
+    width: 100%; text-align: left; font-family: inherit;
+    font-size: 15px; font-weight: 600; line-height: 1.5;
+    border: 2px solid var(--tyrkys-light); border-radius: 16px;
+    padding: 14px 16px; cursor: pointer;
+    background: var(--page); color: var(--inkoust);
+    transition: border-color .15s, background .15s;
+  }
+  .kviz-volba:hover { border-color: var(--tyrkys); background: var(--tyrkys-light); }
+  .kviz-volba.vybrana { border-color: var(--tyrkys); background: var(--tyrkys-light); }
+
+  .kviz-zpet {
+    margin-top: 14px; background: none; border: none; cursor: pointer; font-family: inherit;
+    font-size: 13.5px; font-weight: 600; color: var(--text-faint); padding: 8px 6px;
+  }
+  .kviz-zpet:hover { color: var(--tyrkys-dark); }
+
+  /* výsledek: tohle je odměna za pět kliknutí, tak ať to má výbuch */
+  .kviz-vysledek { display: none; text-align: center; }
+  .kviz-vysledek.show { display: block; }
+  .kviz-vysledek img {
+    width: 150px; height: 150px; display: block; margin: 0 auto;
+    filter: drop-shadow(0 12px 22px rgba(20,35,58,.12));
+    animation: kvizPop .5s cubic-bezier(.22,1.2,.36,1) both;
+  }
+  @keyframes kvizPop { from { opacity: 0; transform: scale(.62); } to { opacity: 1; transform: scale(1); } }
+  .kviz-typ {
+    margin-top: 8px; font-size: 11px; font-weight: 700; letter-spacing: 1px;
+    text-transform: uppercase; color: var(--text-faint);
+  }
+  .kviz-nazev { font-size: 28px; font-weight: 800; line-height: 1.15; letter-spacing: -.02em; color: var(--inkoust); }
+  .kviz-popis { margin-top: var(--s5); font-size: 15px; line-height: 1.75; color: var(--text-muted); text-align: left; }
   .kviz-popis p + p { margin-top: var(--s3); }
+  .kviz-popis strong { color: var(--inkoust); font-weight: 700; }
   .kviz-znovu {
-    margin-top: var(--s4); background: none; border: none; cursor: pointer; font-family: inherit;
-    font-size: 13px; font-weight: 700; color: var(--text-faint); text-decoration: underline;
+    margin-top: var(--s5); background: none; border: none; cursor: pointer; font-family: inherit;
+    font-size: 13.5px; font-weight: 600; color: var(--tyrkys); padding: 8px 6px; text-decoration: underline;
+  }
+  .kviz-znovu:hover { color: var(--tyrkys-dark); }
+
+  /* na mobilu se zmenší ilustrace i nadpis, karta si vezme míň odsazení */
+  @media (max-width: 520px) {
+    .kviz { padding: 20px 15px; border-radius: 18px; }
+    .kviz-ikona img { width: 68px; height: 68px; }
+    .kviz-otazka { font-size: 18px; }
+    .kviz-hint { font-size: 13.5px; margin-bottom: 15px; }
+    .kviz-volba { font-size: 14.5px; padding: 13px 14px; border-radius: 14px; }
+    .kviz-vysledek img { width: 118px; height: 118px; }
+    .kviz-nazev { font-size: 23px; }
+    .kviz-postup { font-size: 10px; letter-spacing: .5px; }
   }
 
   /* osobní poznámka v dalších modulech podle výsledku kvízu */
@@ -3458,6 +3525,8 @@
   var KVIZ_OTAZKY = [
     {
       otazka: "Máš termín a destinaci. Co uděláš jako první?",
+      ikona: "images/ikony/highlight-checklisty.svg",
+      hint: "Na téhle jedné odpovědi se pozná skoro všechno ostatní. <strong>Špatná volba tu není.</strong>",
       volby: [
         { text: "Založím si tabulku a začnu si psát, co všechno je potřeba", typ: "planovac" },
         { text: "Nic. Sbalím se a zbytek se vyřeší cestou", typ: "svobodny" },
@@ -3468,6 +3537,8 @@
     },
     {
       otazka: "Kolik toho chceš za dva týdny stihnout?",
+      ikona: "images/ikony/highlight-usa-vs-evropa.svg",
+      hint: "Amerika je větší, než vypadá na mapě. Tahle odpověď rozhodne o <strong>půlce tvojí dovolené</strong>.",
       volby: [
         { text: "Mám to rozepsané po dnech, i s počtem nocí", typ: "planovac" },
         { text: "Co přijde, to přijde. Plán by mě jen svazoval", typ: "svobodny" },
@@ -3478,6 +3549,8 @@
     },
     {
       otazka: "Kde budeš spát?",
+      ikona: "images/ikony/highlight-ubytovani.svg",
+      hint: "Spaní není detail. Je to <strong>největší položka rozpočtu</strong> hned po letence.",
       volby: [
         { text: "Mám rezervováno, a to dávno", typ: "planovac" },
         { text: "Najdu něco na místě, vždycky se něco najde", typ: "svobodny" },
@@ -3488,6 +3561,8 @@
     },
     {
       otazka: "Je pět ráno a venku začíná svítat. Ty:",
+      ikona: "images/ikony/highlight-priroda-a-plaze.svg",
+      hint: "Tady se pozná, jestli je dovolená <strong>odpočinek, nebo výprava</strong>.",
       volby: [
         { text: "Vstávám. Mám to tak v plánu", typ: "planovac" },
         { text: "Vstanu, jestli se mi bude chtít", typ: "svobodny" },
@@ -3498,9 +3573,11 @@
     },
     {
       otazka: "Co si z té cesty chceš odvézt?",
+      ikona: "images/ikony/highlight-my-story.svg",
+      hint: "Poslední otázka. Podle téhle se pozná, <strong>co pro tebe ta cesta vlastně je</strong>.",
       volby: [
         { text: "Že všechno vyšlo tak, jak mělo", typ: "planovac" },
-        { text: "Historku, kterou jsem vůbec nečekal", typ: "svobodny" },
+        { text: "Historku, kterou nikdo nečekal", typ: "svobodny" },
         { text: "Pocit, že to stálo míň, než všichni čekali", typ: "lovec" },
         { text: "Vypnutou hlavu a opálení", typ: "pohoda" },
         { text: "Fotky a co vyprávět", typ: "motyl" }
@@ -3516,7 +3593,7 @@
         "Má Excel s barevnými záložkami, letenky koupené 6 měsíců dopředu a seznam restaurací seřazený podle Tripadvisoru. Když se něco změní, dostane malou krizi.",
         "V USA je ale <strong>jako ryba ve vodě</strong>, protože tam jde rezervovat doslova všechno a systém funguje přesně tak, jak má.",
         "<strong>Co ti tady pomůže:</strong> appka ti hlídá termíny, které nejdou dohnat. Kdy se otevírají rezervace parků, kdy začíná nákupní okno na letenku, do kdy platí pas.",
-        "<strong>Na co pozor:</strong> abys nenaplánovala víc, než se dá prožít. Amerika je větší, než vypadá na mapě."
+        "<strong>Na co pozor:</strong> aby toho v plánu nebylo víc, než se dá prožít. Amerika je větší, než vypadá na mapě."
       ]
     },
     svobodny: {
@@ -3567,53 +3644,78 @@
     var box = document.getElementById("kviz");
     if (!box) return;
 
+    /* Odpovědi se drží v poli, ne jen jako skóre. Bez toho by tlačítko
+       zpět nemělo co odečíst a překliknutí by se nedalo vzít zpátky.   */
+    var odpovedi = [];
+
     function vysledek(typ) {
       var t = KVIZ_TYPY[typ];
       if (!t) return;
       box.innerHTML =
         '<div class="kviz-vysledek show">' +
-          '<div class="kviz-vysledek-hlava">' +
-            '<img src="' + t.obrazek + '" alt="">' +
-            '<div><div class="kviz-typ">Jsi typ</div>' +
-            '<div class="kviz-nazev">' + t.nazev + '</div></div>' +
-          '</div>' +
+          '<img src="' + t.obrazek + '" alt="">' +
+          '<div class="kviz-typ">Jsi typ</div>' +
+          '<div class="kviz-nazev">' + t.nazev + '</div>' +
+          '<div class="kviz-cara"></div>' +
           '<div class="kviz-popis">' + paras(t.popis) + '</div>' +
           '<button type="button" class="kviz-znovu" id="kviz-znovu">Vyplnit znovu</button>' +
         '</div>';
       document.getElementById("kviz-znovu").addEventListener("click", function () {
-        saveTyp(""); otazka(0, {});
+        saveTyp(""); odpovedi = []; otazka(0);
       });
     }
 
-    function otazka(i, skore) {
+    function otazka(i) {
       if (i >= KVIZ_OTAZKY.length) {
-        var nej = null, max = -1;
+        var skore = {}, nej = null, max = -1;
+        odpovedi.forEach(function (t) { skore[t] = (skore[t] || 0) + 1; });
         Object.keys(skore).forEach(function (k) { if (skore[k] > max) { max = skore[k]; nej = k; } });
         saveTyp(nej);
         vysledek(nej);
         return;
       }
+
       var o = KVIZ_OTAZKY[i];
+      var pruh = "";
+      for (var p = 0; p < KVIZ_OTAZKY.length; p++) {
+        pruh += '<span class="' + (p <= i ? "hotovo" : "") + '"></span>';
+      }
+
       box.innerHTML =
-        '<div class="kviz-postup">Otázka ' + (i + 1) + ' ze ' + KVIZ_OTAZKY.length + '</div>' +
-        '<p class="kviz-otazka">' + o.otazka + '</p>' +
-        '<div class="kviz-volby">' +
-          o.volby.map(function (v, vi) {
-            return '<button type="button" class="kviz-volba" data-i="' + vi + '">' + v.text + '</button>';
-          }).join('') +
+        '<div class="kviz-krok">' +
+          '<div class="kviz-postup-radek">' +
+            '<span class="kviz-postup">Otázka ' + (i + 1) + '/' + KVIZ_OTAZKY.length + '</span>' +
+            '<span class="kviz-pruh">' + pruh + '</span>' +
+          '</div>' +
+          (o.ikona ? '<div class="kviz-ikona"><img src="' + o.ikona + '" alt="" loading="lazy"></div>' : '') +
+          '<h3 class="kviz-otazka">' + o.otazka + '</h3>' +
+          '<div class="kviz-cara"></div>' +
+          (o.hint ? '<p class="kviz-hint">' + o.hint + '</p>' : '') +
+          '<div class="kviz-volby">' +
+            o.volby.map(function (v, vi) {
+              return '<button type="button" class="kviz-volba" data-i="' + vi + '">' + v.text + '</button>';
+            }).join('') +
+          '</div>' +
+          (i > 0 ? '<button type="button" class="kviz-zpet" id="kviz-zpet">← Zpátky na předchozí otázku</button>' : '') +
         '</div>';
+
       box.querySelectorAll(".kviz-volba").forEach(function (b) {
         b.addEventListener("click", function () {
-          var typ = o.volby[Number(b.dataset.i)].typ;
-          skore[typ] = (skore[typ] || 0) + 1;
-          otazka(i + 1, skore);
+          // krátké přisvícení, ať je vidět, na co se kliklo, než se otázka přepne
+          b.classList.add("vybrana");
+          odpovedi[i] = o.volby[Number(b.dataset.i)].typ;
+          odpovedi.length = i + 1;
+          setTimeout(function () { otazka(i + 1); }, 160);
         });
       });
+
+      var zpet = document.getElementById("kviz-zpet");
+      if (zpet) zpet.addEventListener("click", function () { otazka(i - 1); });
     }
 
     var ulozeny = loadTyp();
     if (ulozeny && KVIZ_TYPY[ulozeny]) vysledek(ulozeny);
-    else otazka(0, {});
+    else otazka(0);
   }
 
   /* Kde spát podle destinace. Hloubkový obsah (konkrétní čtvrti, konkrétní

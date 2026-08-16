@@ -100,6 +100,20 @@ Když má něco vyjít jinde, musí se změnit `renderStepsHtml()`, ne pořadí 
 
 **Výjimka: `ilustrace`.** Když krok má `lead`, obrázek se nevykreslí za odstavci, ale **dovnitř** nich, a text ho obtéká. Strany se střídají podle pořadí kroku, dá se přebít polem `strana: "vlevo"` nebo `"vpravo"`. Bez `lead` (krok nemá co obtékat) spadne zpět na variantu na střed. Pod 700 px šířky se obtékání ruší, jinak by na řádek zbylo pár slov.
 
+### Kvíz se vzhledem drží kalkulačky
+Kvíz „jaký jsi cestovatel" má **záměrně stejný vzhled jako kalkulačka** na `kalkulacka-florida.vercel.app`, aby na sebe produkty navazovaly. Hodnoty jsou z ní odečtené, ne odhadnuté:
+
+| Prvek | Hodnota |
+|---|---|
+| karta | bílá, rámeček 2 px `--tyrkys-light`, rádius 22 px, stín `0 14px 34px rgba(20,35,58,.08)` |
+| postup | popisek 11 px/700 uppercase + segmenty 6 px, hotové v přechodu `tyrkys → ruzova` |
+| ilustrace otázky | 84 px, na střed |
+| nadpis | 21 px/700 na střed, pod ním čárka 54×4 px ve stejném přechodu |
+| volba | rámeček 2 px `--tyrkys-light`, rádius 16 px, `padding: 14px 16px`, 15 px/600, pozadí `--page` |
+| primární tlačítko | přechod `#FF6FA5 → #FF9E6B`, rádius 50 px, stín `0 4px 20px rgba(255,111,165,.4)` |
+
+Pod 520 px se ilustrace i nadpis zmenšují a karta si bere míň odsazení. **Když se kalkulačka předělá, musí se předělat i tohle**, jinak se produkty rozejdou.
+
 ### Kdy ilustraci nedávat
 Obrázek nesmí opakovat to, co hned pod ním appka ukáže doopravdy. Kreslený kalendář nad `bookingCheck`, který počítá dny do odletu, čtenáře jen zdrží. **Ilustrace patří k textu, ne k nástroji.**
 
