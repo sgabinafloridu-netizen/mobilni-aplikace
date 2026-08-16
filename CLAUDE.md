@@ -90,13 +90,18 @@ Modul s `dashboard: true` si nese vlastní nadpis v `dashboardTitle`.
 `renderStepsHtml()` vykresluje prvky ve **fixním pořadí**, ne v pořadí, v jakém jsou zapsané v datech:
 
 ```
-media → mapa → kviz → hintProTyp → ilustrace → lead → companion → checklist
+lead → media → mapa → kviz → hintProTyp → ilustrace → companion → checklist
 → checklistGroups → passportCheck → bookingCheck → chipExample → estaCheck
 → toggleQuestions → addressField → monthPicker → stayPicker → gallery
 → quote → link → tip → why → trap → note
 ```
 
 Když má něco vyjít jinde, musí se změnit `renderStepsHtml()`, ne pořadí klíčů v datech.
+
+**Výjimka: `ilustrace`.** Když krok má `lead`, obrázek se nevykreslí za odstavci, ale **dovnitř** nich, a text ho obtéká. Strany se střídají podle pořadí kroku, dá se přebít polem `strana: "vlevo"` nebo `"vpravo"`. Bez `lead` (krok nemá co obtékat) spadne zpět na variantu na střed. Pod 700 px šířky se obtékání ruší, jinak by na řádek zbylo pár slov.
+
+### Kdy ilustraci nedávat
+Obrázek nesmí opakovat to, co hned pod ním appka ukáže doopravdy. Kreslený kalendář nad `bookingCheck`, který počítá dny do odletu, čtenáře jen zdrží. **Ilustrace patří k textu, ne k nástroji.**
 
 ### Klíče v localStorage
 ```

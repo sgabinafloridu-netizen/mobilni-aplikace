@@ -1075,7 +1075,10 @@
   .step-hint p { font-size: 14px; line-height: 1.65; color: #0E5A66; }
   .step-hint strong { color: #0E5A66; }
 
-  /* ── kreslená ilustrace ke kroku: kolečko značky plus popisek pod ním ── */
+  /* ── kreslená ilustrace ke kroku ──────────────────────────────────────
+     Obrázek nemá text přerušit, ale patřit do něj. Proto se vkládá dovnitř
+     odstavců a text ho obtéká zleva nebo zprava. Záložní varianta na střed
+     zůstává pro kroky, které nemají žádný text k obtékání.               */
   .step-ilustrace { margin-top: var(--s6); text-align: center; }
   .step-ilustrace img {
     width: 148px; height: 148px; display: block; margin: 0 auto;
@@ -1085,6 +1088,29 @@
     color: var(--text-faint); line-height: 1.6;
   }
   @media (max-width: 520px) { .step-ilustrace img { width: 124px; height: 124px; } }
+
+  /* obtékaná varianta: šířka je podíl ze sloupce, ať zbude dost místa na text */
+  .step-ilustrace.obteka {
+    margin-top: 6px; margin-bottom: var(--s3);
+    width: 38%; min-width: 132px; max-width: 176px;
+  }
+  .step-ilustrace.obteka img { width: 100%; height: auto; }
+  .step-ilustrace.obteka figcaption { margin-top: var(--s2); font-size: 12.5px; }
+  .step-ilustrace.obteka-vpravo { float: right; margin-left: var(--s5); }
+  .step-ilustrace.obteka-vlevo  { float: left;  margin-right: var(--s5); }
+  /* aby obrázek nevytekl do checklistu pod odstavci */
+  .step-lead::after { content: ""; display: block; clear: both; }
+
+  /* na úzkém okně by u obtékaného obrázku zbylo na řádek pár slov,
+     takže se vrací doprostřed a text zase teče přes celou šířku */
+  @media (max-width: 700px) {
+    .step-ilustrace.obteka {
+      float: none; width: auto; max-width: none;
+      margin: var(--s5) auto 0;
+    }
+    .step-ilustrace.obteka img { width: 132px; height: 132px; margin: 0 auto; }
+    .step-ilustrace.obteka figcaption { font-size: 13.5px; }
+  }
 
   /* ── kde spát: obsah se mění podle destinace, kterou uživatel zadal v úvodu ── */
   .stay-lead { margin-top: var(--s5); font-size: 15px; line-height: 1.7; color: var(--text); }
@@ -2422,7 +2448,9 @@
             "Rok dopředu je moc brzy. Týden předem je moc pozdě, protože last minute do Ameriky nefunguje jako do Egypta.",
             "Appka zná datum tvého odletu. Pojďme se podívat, kde v tom okně zrovna stojíš."
           ],
-          ilustrace: { src: "images/sceny/scena-nakupni-okno.svg", popis: "okno, ve kterém se kupuje" },
+          /* obrázek okna tu byl a šel pryč: hned pod ním je bookingCheck,
+             který totéž ukáže na skutečném datu odletu. Kreslené okno nad
+             opravdovým oknem je jen zdržení. */
           bookingCheck: true,
           why: {
             title: "Proč je to důležité",
@@ -4891,7 +4919,22 @@
                 '<span class="step-hotovo">✓ Hotovo</span>' +
               '</div>';
 
-      if (step.lead) html += '<div class="step-lead measure">' + paras(step.lead) + '</div>';
+      /* Ilustrace patří dovnitř textu, ne mezi odstavce. Když krok má lead,
+         vloží se jako první dítě a odstavce ji obtečou. Strany se střídají
+         podle pořadí kroku, pokud si krok neurčí `strana` sám.             */
+      var ilustraceVlozena = false;
+      if (step.lead) {
+        var obtekana = "";
+        if (step.ilustrace) {
+          var strana = step.ilustrace.strana || (i % 2 === 0 ? "vpravo" : "vlevo");
+          obtekana = '<figure class="step-ilustrace obteka obteka-' + strana + '">' +
+                       '<img src="' + step.ilustrace.src + '" alt="" loading="lazy">' +
+                       '<figcaption>' + step.ilustrace.popis + '</figcaption>' +
+                     '</figure>';
+          ilustraceVlozena = true;
+        }
+        html += '<div class="step-lead measure">' + obtekana + paras(step.lead) + '</div>';
+      }
 
       /* Video nebo podcast. Rozliší se podle přípony: .mp3 je poslech, zbytek video.
          Dokud soubor neexistuje, zůstane na jeho místě dlaždice s návodem. */
@@ -5016,7 +5059,8 @@
         }
       }
 
-      if (step.ilustrace) {
+      // krok bez textu nemá co obtékat, tam ilustrace zůstává na střed
+      if (step.ilustrace && !ilustraceVlozena) {
         html += '<figure class="step-ilustrace">' +
                   '<img src="' + step.ilustrace.src + '" alt="" loading="lazy">' +
                   '<figcaption>' + step.ilustrace.popis + '</figcaption>' +
