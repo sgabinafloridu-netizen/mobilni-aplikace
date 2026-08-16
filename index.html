@@ -996,6 +996,83 @@
   .voda-vysledek-cislo { flex: 0 1 auto; font-size: 30px; font-weight: 800; color: var(--inkoust); }
   .voda-vysledek-text { flex: 1 1 200px; min-width: 180px; font-size: 14px; line-height: 1.6; color: var(--text-muted); }
 
+  /* ── kalkulačka rozpočtu ──────────────────────────────────────────────
+     Živý výpočet z toho, co si uživatel sám zadá. Žádné volání ven,
+     jen sčítání v prohlížeči, přesně v duchu appky.                     */
+  .rozpocet-kalk { clear: both; margin: var(--s6) 0; background: var(--sunken); border-radius: var(--r-lg); padding: var(--s5); }
+  .rozpocet-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s4); margin-top: var(--s4); }
+  .rozpocet-pole { display: flex; flex-direction: column; gap: 4px; }
+  .rozpocet-pole label { font-size: 12px; font-weight: 700; color: var(--text-soft); }
+  .rozpocet-pole .rp-vedlejsi { font-weight: 500; color: var(--text-faint); }
+  .rozpocet-input-wrap { position: relative; }
+  .rozpocet-pole input {
+    width: 100%; padding: 11px 44px 11px 13px; border-radius: var(--r-md);
+    border: 1.5px solid var(--line-strong); background: var(--surface);
+    font-family: inherit; font-size: 15px; font-weight: 700; color: var(--text);
+    outline: none; transition: border-color .15s;
+  }
+  .rozpocet-pole input:focus { border-color: var(--tyrkys); }
+  .rozpocet-unit {
+    position: absolute; right: 13px; top: 50%; transform: translateY(-50%);
+    font-size: 12.5px; font-weight: 700; color: var(--text-faint); pointer-events: none;
+  }
+  .rozpocet-vysledek {
+    margin-top: var(--s5); padding: var(--s5); border-radius: var(--r-lg);
+    background: linear-gradient(135deg, var(--tyrkys-light) 0%, var(--ruzova-light) 100%);
+    text-align: center;
+  }
+  .rozpocet-vysledek-cislo {
+    font-size: clamp(30px, 6vw, 42px); font-weight: 800; line-height: 1.1;
+    background: linear-gradient(135deg, var(--tyrkys-dark), var(--ruzova-deep));
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .rozpocet-vysledek-osoba { margin-top: 4px; font-size: 13.5px; font-weight: 700; color: var(--text-muted); }
+  .rozpocet-vysledek-rozpis { margin-top: 8px; font-size: 12px; font-weight: 600; color: var(--text-faint); }
+
+  /* Opakovací seznamy uvnitř kalkulačky: ubytování po úsecích cesty
+     (noc v letadle, hotel, Airbnb...) a aktivity/vstupy po položkách.
+     Stejné třídy pro obě, .rozpocet-radek--2 jen vynechá sloupec nocí. */
+  .rozpocet-sekce-nadpis { font-size: 12px; font-weight: 700; color: var(--text-soft); margin: var(--s5) 0 var(--s3); }
+  .rozpocet-radky { display: flex; flex-direction: column; gap: 8px; }
+  .rozpocet-radek {
+    display: grid; grid-template-columns: 1fr 74px 100px 26px; gap: 8px; align-items: center;
+  }
+  .rozpocet-radek.rozpocet-radek--2 { grid-template-columns: 1fr 100px 26px; }
+  .rozpocet-radek input {
+    width: 100%; padding: 9px 10px; border-radius: var(--r-sm);
+    border: 1.5px solid var(--line-strong); background: var(--surface);
+    font-family: inherit; font-size: 13.5px; font-weight: 600; color: var(--text); outline: none;
+  }
+  .rozpocet-radek input:focus { border-color: var(--tyrkys); }
+  .rozpocet-radek input[data-pole="popis"] { font-weight: 700; }
+  .rozpocet-radek-smazat {
+    width: 26px; height: 26px; border-radius: 50%; border: none; cursor: pointer;
+    background: var(--ruzova-light); color: var(--ruzova-deep); font-size: 14px; font-weight: 800;
+    display: grid; place-items: center; line-height: 1;
+  }
+  .rozpocet-radek-smazat:hover { background: var(--ruzova); color: #fff; }
+  .rozpocet-pridat {
+    margin-top: var(--s3); padding: 9px 14px; border-radius: var(--r-pill);
+    border: 1.5px dashed var(--line-strong); background: none; cursor: pointer;
+    font-family: inherit; font-size: 13px; font-weight: 700; color: var(--tyrkys-dark);
+  }
+  .rozpocet-pridat:hover { border-color: var(--tyrkys); background: var(--tyrkys-light); }
+  .rozpocet-soucet { margin-top: var(--s3); font-size: 12.5px; font-weight: 700; color: var(--text-faint); text-align: right; }
+  @media (max-width: 560px) {
+    .rozpocet-radek { grid-template-columns: 1fr 1fr; grid-template-areas: "popis popis" "noci cena" "smazat smazat"; }
+    .rozpocet-radek input[data-pole="popis"] { grid-area: popis; }
+    .rozpocet-radek input[data-pole="noci"] { grid-area: noci; }
+    .rozpocet-radek input[data-pole="cena"] { grid-area: cena; }
+    .rozpocet-radek-smazat { grid-area: smazat; justify-self: end; }
+    .rozpocet-radek--2 { grid-template-areas: "popis popis" "cena smazat"; }
+    .rozpocet-radek--2 input[data-pole="cena"] { grid-area: cena; }
+  }
+  .rozpocet-reset {
+    display: block; margin: var(--s4) auto 0; background: none; border: none; cursor: pointer;
+    font-family: inherit; font-size: 12.5px; font-weight: 700; color: var(--text-faint); text-decoration: underline;
+  }
+  @media (max-width: 520px) { .rozpocet-grid { grid-template-columns: 1fr; } }
+
   /* ── rozklikávací bloky ── */
   .disc {
     margin-top: var(--s4); border-radius: var(--r-md); overflow: hidden;
@@ -1749,7 +1826,7 @@
       </div>
 
       <!-- osa se 7 zastávkami, letadélko ukazuje aktuální pozici -->
-      <div class="rail">
+      <div class="rail" id="rail">
         <div class="rail-inner">
           <span class="rail-count" id="rail-count"><span class="rc-word">Modul </span>1 ze 7</span>
           <div class="rail-track" id="rail-track" role="progressbar"
@@ -2026,6 +2103,16 @@
               <div class="trezor-saved" id="trezor-rezervace-saved">Uloženo ✓</div>
             </div>
           </div>
+        </div>
+
+        <!-- 6) MŮJ ROZPOČET -->
+        <div class="screen" id="s-rozpocet">
+          <div class="page-head">
+            <span class="eyebrow">Počítá se samo</span>
+            <h1>Můj rozpočet</h1>
+            <p class="sub">Zadej svoje čísla, appka je sečte. Ubytování i vstupy jdou rozepsat po položkách, ať máš přehled, ne jen jedno velké číslo.</p>
+          </div>
+          <div class="rozpocet-kalk" id="rozpocet-kalk"></div>
         </div>
 
       </div>
@@ -3213,7 +3300,7 @@
           title: "Kolik to celé bude stát",
           lead: [
             "Zbývá poslední otázka, a je ta největší: kolik si mám vlastně připravit?",
-            "Na tohle mám vlastní kalkulačku. Spočítá rozpočet podle toho, kam jedeš, na jak dlouho a v kolika lidech, a ukáže i položky, na které se zapomíná."
+            "Appka to umí spočítat sama. Najdeš to v levém menu dole, v sekci <strong>Tvoje věci → Můj rozpočet</strong>, ať se ti to nikde neztratí a máš to po ruce i mimo tenhle modul."
           ],
           checklist: [
             "Spočítat si <strong>rozpočet</strong> pro svůj konkrétní termín a počet lidí",
@@ -3221,8 +3308,8 @@
           ],
           pochvala: "✨ Hotovo. Číslo máš, a je to tvoje číslo, ne strašák z internetu.",
           link: {
-            title: "Rozpočtová kalkulačka na Floridu",
-            sub: "Spočítá rozpočet podle tvého termínu a počtu lidí, včetně položek, na které se zapomíná.",
+            title: "Podrobnější kalkulačka na Floridu",
+            sub: "Samostatný nástroj s víc detaily, zaměřený přímo na Floridu.",
             url: "https://kalkulacka-florida.vercel.app"
           },
           note: {
@@ -4054,7 +4141,7 @@
     screens.forEach(function (s) { s.classList.toggle("active", s.id === screenId); });
 
     var inShell = (screenId === "s-uvod" || screenId === "s-home" ||
-                   screenId === "s-module" || screenId === "s-trezor");
+                   screenId === "s-module" || screenId === "s-trezor" || screenId === "s-rozpocet");
     onboarding.hidden = inShell;
     onboarding.style.display = inShell ? "none" : "grid";
     shell.hidden = !inShell;
@@ -4064,6 +4151,12 @@
     if (screenId === "s-uvod") topbarTitle.textContent = "Úvod";
     else if (screenId === "s-home") topbarTitle.textContent = "Přehled";
     else if (screenId === "s-trezor") topbarTitle.textContent = "Trezor";
+    else if (screenId === "s-rozpocet") topbarTitle.textContent = "Můj rozpočet";
+
+    // osa s moduly patří jen k modulovému postupu, na Trezoru a v rozpočtu
+    // nic neznázorňuje, tak tam jen mate
+    var railEl = document.getElementById("rail");
+    if (railEl) railEl.hidden = (screenId === "s-trezor" || screenId === "s-rozpocet");
 
     closeMenu();
     renderSidebar();
@@ -4215,6 +4308,11 @@
       ico: "🔒", title: "Trezor", meta: "ESTA, letenky, rezervace",
       active: currentScreen === "s-trezor",
       onClick: function () { goTo("s-trezor"); }
+    });
+    item({
+      ico: "🧮", title: "Můj rozpočet", meta: "Kolik to celé bude stát",
+      active: currentScreen === "s-rozpocet",
+      onClick: function () { goTo("s-rozpocet"); }
     });
   }
 
@@ -4639,6 +4737,209 @@
         vysledek.classList.add("show");
       });
     });
+  }
+
+  function formatKc(castka) {
+    var n = Math.round(castka);
+    return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g, " ") + " Kč";
+  }
+
+  /* Kalkulačka rozpočtu: živý výpočet z toho, co si uživatel sám zadá.
+     Ubytování i aktivity jdou rozepsat po položkách (noc v letadle, hotel,
+     vstup do parku...), protože skutečná cesta málokdy má jednu cenu za
+     noc nebo jednu společnou částku za všechny vstupy. Appka sama sečte
+     noci i cenu, uživatel jen přidává řádky. Počet lidí se předvyplní
+     z Trezoru, zbytek jsou rozumné výchozí hodnoty. Nic se neposílá nikam
+     ven, jen sčítání v prohlížeči a uložení do localStorage.              */
+  var STORAGE_ROZPOCET = "nezOdletisRozpocet";
+  var ROZPOCET_POLE = [
+    { klic: "lidi", label: "Kolik lidí jede", jednotka: "osob" },
+    { klic: "letenka", label: "Letenka na osobu", jednotka: "Kč" },
+    { klic: "auto", label: "Půjčovné na celou dobu", jednotka: "Kč" },
+    { klic: "benzin", label: "Benzín na celou dobu", jednotka: "Kč" },
+    { klic: "jidlo", label: "Jídlo na osobu a den", jednotka: "Kč" },
+    { klic: "spropitne", label: "Spropitné k jídlu", jednotka: "%" },
+    { klic: "pojisteni", label: "Pojištění celkem", jednotka: "Kč" },
+    { klic: "rezerva", label: "Rezerva na nečekané výdaje", jednotka: "%" }
+  ];
+
+  function rpPocetNoci(n) { return n === 1 ? "noc" : (n >= 2 && n <= 4 ? "noci" : "nocí"); }
+
+  /* Vykreslí a napojí jeden opakovací seznam (ubytování nebo aktivity).
+     typ "uby" má navíc sloupec nocí, typ "akt" jen popis a cenu.
+     Vrací funkci spocitejCastku(), kterou zavolá hlavní přepočet appky. */
+  function rpVytvorSeznam(opts) {
+    var kontejner = document.getElementById(opts.kontejnerId);
+    var seznam = opts.seznam;
+
+    function radekHtml(u) {
+      var noci = opts.typ === "uby"
+        ? '<input type="number" min="0" data-pole="noci" value="' + u.noci + '">' : '';
+      return '<div class="rozpocet-radek' + (opts.typ === "akt" ? " rozpocet-radek--2" : "") + '">' +
+               '<input type="text" data-pole="popis" placeholder="' + opts.placeholder +
+                 '" value="' + (u.popis || "").replace(/"/g, "&quot;") + '">' +
+               noci +
+               '<input type="number" min="0" data-pole="cena" value="' + u.cena + '">' +
+               '<button type="button" class="rozpocet-radek-smazat" aria-label="Smazat řádek">✕</button>' +
+             '</div>';
+    }
+
+    function vykresli() {
+      kontejner.innerHTML = seznam.map(radekHtml).join('');
+      napoj();
+    }
+    function napoj() {
+      kontejner.querySelectorAll("input").forEach(function (inp) {
+        inp.addEventListener("input", opts.naZmenu);
+      });
+      kontejner.querySelectorAll(".rozpocet-radek-smazat").forEach(function (btn, i) {
+        btn.addEventListener("click", function () {
+          if (seznam.length <= 1) return;
+          seznam.splice(i, 1);
+          vykresli();
+          opts.naZmenu();
+        });
+      });
+    }
+    function cisti() {
+      kontejner.querySelectorAll(".rozpocet-radek").forEach(function (radek, i) {
+        var obj = {
+          popis: radek.querySelector('[data-pole="popis"]').value,
+          cena: Math.max(0, Number(radek.querySelector('[data-pole="cena"]').value) || 0)
+        };
+        if (opts.typ === "uby") obj.noci = Math.max(0, Number(radek.querySelector('[data-pole="noci"]').value) || 0);
+        seznam[i] = obj;
+      });
+    }
+    document.getElementById(opts.pridatId).addEventListener("click", function () {
+      seznam.push(opts.typ === "uby" ? { popis: "", noci: 1, cena: 2000 } : { popis: "", cena: 500 });
+      vykresli();
+      opts.naZmenu();
+    });
+
+    vykresli();
+    return { cisti: cisti, nahradit: function (novy) { seznam.length = 0; novy.forEach(function (x) { seznam.push(x); }); vykresli(); } };
+  }
+
+  function initRozpocet() {
+    var box = document.getElementById("rozpocet-kalk");
+    if (!box) return;
+
+    var setup = loadSetup();
+    var pocetLidi = Math.max(1, loadTravelers().length || 1);
+    var pocetNoci = 7;
+    if (setup && setup.datum && setup.datumNavrat) {
+      var rozdil = Math.round((new Date(setup.datumNavrat) - new Date(setup.datum)) / 86400000);
+      if (rozdil > 0) pocetNoci = rozdil;
+    }
+
+    var vychozi = { lidi: pocetLidi, letenka: 16000, auto: 6500, benzin: 3000, jidlo: 1200, spropitne: 18, pojisteni: 1500, rezerva: 10 };
+    var vychoziUbytovani = [
+      { popis: "Noc v letadle", noci: 1, cena: 0 },
+      { popis: "Ubytování", noci: Math.max(0, pocetNoci - 1), cena: 2200 }
+    ];
+    var vychoziAktivity = [
+      { popis: "Vstupy do parků", cena: 3000 },
+      { popis: "e-SIM", cena: 600 },
+      { popis: "Doprava na letiště a zpět doma", cena: 800 },
+      { popis: "Suvenýry a dárky", cena: 2000 }
+    ];
+
+    var ulozene = {};
+    try { ulozene = JSON.parse(nacti(STORAGE_ROZPOCET) || "{}"); } catch (e) {}
+    var hodnoty = {};
+    Object.keys(vychozi).forEach(function (k) {
+      hodnoty[k] = (ulozene[k] !== undefined) ? ulozene[k] : vychozi[k];
+    });
+    var ubytovani = (Array.isArray(ulozene.ubytovani) && ulozene.ubytovani.length) ? ulozene.ubytovani : vychoziUbytovani.slice();
+    var aktivity = (Array.isArray(ulozene.aktivity) && ulozene.aktivity.length) ? ulozene.aktivity : vychoziAktivity.slice();
+
+    box.innerHTML =
+      '<div class="rozpocet-grid">' +
+        ROZPOCET_POLE.map(function (p) {
+          return '<div class="rozpocet-pole">' +
+                   '<label for="rp-' + p.klic + '">' + p.label + '</label>' +
+                   '<div class="rozpocet-input-wrap">' +
+                     '<input type="number" min="0" inputmode="numeric" id="rp-' + p.klic +
+                       '" value="' + hodnoty[p.klic] + '">' +
+                     '<span class="rozpocet-unit">' + p.jednotka + '</span>' +
+                   '</div>' +
+                 '</div>';
+        }).join('') +
+      '</div>' +
+      '<div class="rozpocet-sekce-nadpis">Ubytování, noc po noci</div>' +
+      '<div class="rozpocet-radky" id="rozpocet-uby-radky"></div>' +
+      '<button type="button" class="rozpocet-pridat" id="rozpocet-uby-pridat">+ Přidat další ubytování</button>' +
+      '<div class="rozpocet-soucet" id="rozpocet-uby-soucet"></div>' +
+      '<div class="rozpocet-sekce-nadpis">Vstupy a aktivity, položka po položce</div>' +
+      '<div class="rozpocet-radky" id="rozpocet-akt-radky"></div>' +
+      '<button type="button" class="rozpocet-pridat" id="rozpocet-akt-pridat">+ Přidat aktivitu nebo vstup</button>' +
+      '<div class="rozpocet-soucet" id="rozpocet-akt-soucet"></div>' +
+      '<div class="rozpocet-vysledek" id="rozpocet-vysledek"></div>' +
+      '<button type="button" class="rozpocet-reset" id="rozpocet-reset">Vrátit na výchozí hodnoty</button>';
+
+    var soucetUbyEl = document.getElementById("rozpocet-uby-soucet");
+    var soucetAktEl = document.getElementById("rozpocet-akt-soucet");
+    var vysledekEl = document.getElementById("rozpocet-vysledek");
+
+    var ubySeznam = rpVytvorSeznam({
+      kontejnerId: "rozpocet-uby-radky", pridatId: "rozpocet-uby-pridat",
+      seznam: ubytovani, typ: "uby", placeholder: "např. hotel v Miami", naZmenu: spocitej
+    });
+    var aktSeznam = rpVytvorSeznam({
+      kontejnerId: "rozpocet-akt-radky", pridatId: "rozpocet-akt-pridat",
+      seznam: aktivity, typ: "akt", placeholder: "např. vstup do Everglades", naZmenu: spocitej
+    });
+
+    function spocitej() {
+      ubySeznam.cisti();
+      aktSeznam.cisti();
+      var v = {};
+      ROZPOCET_POLE.forEach(function (p) {
+        v[p.klic] = Math.max(0, Number(document.getElementById("rp-" + p.klic).value) || 0);
+      });
+      var lidi = Math.max(1, v.lidi);
+      var ubytNoci = 0, ubytCelkem = 0;
+      ubytovani.forEach(function (u) { ubytNoci += u.noci; ubytCelkem += u.noci * u.cena; });
+      var aktCelkem = 0;
+      aktivity.forEach(function (a) { aktCelkem += a.cena; });
+
+      var jidloCelkem = v.jidlo * ubytNoci * lidi;
+      var spropitneCastka = jidloCelkem * (v.spropitne / 100);
+      var zaklad = v.letenka * lidi + ubytCelkem + v.auto + v.benzin +
+                   jidloCelkem + spropitneCastka + aktCelkem + v.pojisteni;
+      var rezervaCastka = zaklad * (v.rezerva / 100);
+      var celkem = zaklad + rezervaCastka;
+
+      soucetUbyEl.textContent = "Celkem " + ubytNoci + " " + rpPocetNoci(ubytNoci) + " za " + formatKc(ubytCelkem);
+      soucetAktEl.textContent = "Celkem za aktivity: " + formatKc(aktCelkem);
+      vysledekEl.innerHTML =
+        '<div class="rozpocet-vysledek-cislo">' + formatKc(celkem) + '</div>' +
+        '<div class="rozpocet-vysledek-osoba">' + formatKc(celkem / lidi) + ' na osobu</div>' +
+        '<div class="rozpocet-vysledek-rozpis">' +
+          '+ spropitné ' + formatKc(spropitneCastka) + ' · + rezerva ' + formatKc(rezervaCastka) +
+        '</div>';
+
+      var k = {}; Object.keys(v).forEach(function (kk) { k[kk] = v[kk]; });
+      k.ubytovani = ubytovani;
+      k.aktivity = aktivity;
+      uloz(STORAGE_ROZPOCET, JSON.stringify(k));
+    }
+
+    box.querySelectorAll(".rozpocet-grid input").forEach(function (inp) {
+      inp.addEventListener("input", spocitej);
+    });
+    document.getElementById("rozpocet-reset").addEventListener("click", function () {
+      Object.keys(vychozi).forEach(function (k) {
+        var el = document.getElementById("rp-" + k);
+        if (el) el.value = vychozi[k];
+      });
+      ubySeznam.nahradit(vychoziUbytovani.slice());
+      aktSeznam.nahradit(vychoziAktivity.slice());
+      spocitej();
+    });
+
+    spocitej();
   }
 
   /* Verdikt k termínu, který člověk zadal v úvodu. Bere měsíc odletu
@@ -5368,6 +5669,7 @@
                 '<div class="kviz" id="kviz"></div>';
       }
 
+
       /* osobní poznámka podle výsledku kvízu: ukáže se jen tomu typu,
          pro který dává smysl */
       if (step.hintProTyp) {
@@ -5788,6 +6090,7 @@
     initKviz();
     initMapa();
     initVoda();
+    initRozpocet();
     initTerminCheck();
     initMonthPicker();
     initStayPicker();
@@ -5906,6 +6209,8 @@
       });
     });
   })();
+
+  initRozpocet();
 
   /* ── start ── */
   if (loadSetup()) { renderHome(); goTo("s-uvod"); }
