@@ -4,10 +4,12 @@ Appka videa **nehostuje nikde na internetu**, přehrává je z týhle složky. D
 
 ## Co appka hledá
 
-| Soubor | Kde se objeví | Stav |
-|---|---|---|
-| `uvitani.mp4` + `uvitani-poster.jpg` | úvodní obrazovka | ⬜ čeká na natočení |
-| `letenky-jak-kupuju.mp4` + `letenky-jak-kupuju-poster.jpg` | Letenky, krok 3 „Tři funkce, které dělají celý rozdíl" | ⬜ čeká na natočení |
+Číslo kroku je ve tvaru **modul.krok**, stejné jako appka ukazuje v pravém sloupci „V téhle lekci".
+
+| Krok | Soubor | Kde se objeví | Stav |
+|---|---|---|---|
+| × | `uvitani.mp4` + `uvitani-poster.jpg` | úvodní obrazovka | ⬜ čeká na natočení |
+| 3.3 | `letenky-jak-kupuju.mp4` + `letenky-jak-kupuju-poster.jpg` | Letenky, krok 3 „Tři funkce, které dělají celý rozdíl" | ⬜ čeká na natočení |
 
 ## Jak to nahrát
 

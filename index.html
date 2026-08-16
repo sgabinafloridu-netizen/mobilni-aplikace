@@ -873,6 +873,20 @@
   }
   .lesson-hook p + p { margin-top: var(--s4); }
   .lesson-hook strong { color: var(--text); }
+  /* volitelná fotka, kterou text v úvodu modulu obtéká, stejný princip
+     jako u step.ilustrace, jen pro modulový hook místo kroku */
+  .lesson-hook::after { content: ""; display: block; clear: both; }
+  .lesson-hook .hook-foto {
+    float: right; width: 42%; max-width: 190px; margin: 2px 0 var(--s4) var(--s5);
+    border-radius: var(--r-lg); box-shadow: var(--sh-2);
+  }
+  @media (max-width: 640px) {
+    .lesson-hook { text-align: left; }
+    .lesson-hook .hook-foto {
+      float: none; display: block; width: 150px; height: 150px; object-fit: cover;
+      margin: 0 auto var(--s4);
+    }
+  }
 
   /* ── krok = barevná karta ── */
   .module-steps { display: flex; flex-direction: column; gap: var(--s6); }
@@ -2044,7 +2058,9 @@
       id: "destinace",
       balicek: "zaklad",
       hero: { src: "images/hlavicky/hero-kdy-a-kam.jpg", alt: "Ostrov u Key West z ptačí perspektivy, tyrkysová voda a palmy",
-             popis: "sem někam se za pár měsíců díváš z letadla" },
+             popis: "i tohle možná uvidíš z letadla" },
+      hookFoto: "images/gabi-foto.jpg",
+      hookFotoAlt: "Gábi na lodi u floridského pobřeží",
 
       ikona: "images/ikony/highlight-prezij-ameriku.svg",
       dashboard: true,
@@ -2057,13 +2073,15 @@
       desc: "Florida, New York nebo parky. Kdy vyrazit a čemu se v tom termínu vyhnout.",
       prep: "<strong>Nic, co je potřeba shánět.</strong> Stačí to, co už víš: kam a kdy přibližně letíš.",
       hook: [
-        "Tyhle 3 destinace jsem si nevymyslela od stolu. <strong>Každou znám z vlastního života, ne z prospektu.</strong>",
-        "Floridu znám, protože v ní bydlím. Dům 4 minuty od oceánu, manžel, kus života, který se nedá sbalit do kufru.",
-        "Jihozápad znám, protože jsme dřív bydleli v Coloradu. Manžel je zapálený golfista <strong>(já zase zapálená do všeho kolem hřiště, jen ne do golfu)</strong>.",
-        "Víkendy jsme místo osmnácti jamek trávili v autě: Nové Mexiko, Arizona, Utah. <strong>Kaňony jsem neviděla na fotkách. Projela jsem je.</strong>",
-        "New York znám jinak. 2 roky jsem jako au pair a studentka hry na saxofon žila v Connecticutu, a do města jsem jezdila skoro každý víkend, užít si jeho divokost. A nákupy.",
-        "Každé z těch míst jsem poznala v jiném věku, s jinýma očima, v jiné roli. <strong>Přesně proto se v tomhle modulu neradí od stolu.</strong> Radí se ze zkušenosti.",
-        "Který z těch 3 příběhů je nejblíž tomu tvému?"
+        "Tyhle 3 destinace jsem nevybrala jen podle mapy. Každou znám <strong>z vlastního života</strong>.",
+        "Floridu asi nejlíp. Bydlím tam. <strong>Čtyři minuty od oceánu</strong>, s manželem. Rozhodnutí přestěhovat se jsme udělali před 4 lety.",
+        "Neměnila bych.",
+        "Jihozápad znám z doby, kdy jsme žili v Coloradu. Tehdy jsme víkendy trávili v autě. Nové Mexiko, Arizona, Utah. Projeli jsme parky a já vím, <strong>kde mají v Moabu nejlepší zmrzlinu</strong>.",
+        "<strong>(To druhé je důležitější, než to zní.)</strong>",
+        "A New York? Ten jsem poznala jako <strong>au pair a studentka saxofonu</strong>. Bydlela jsem v sousedním Connecticutu a do New Yorku jezdila skoro každý víkend. Za městem, jeho energií, atmosférou. A samozřejmě za nákupy.",
+        "Každé místo v jiném věku. Trochu <strong>jinýma očima</strong>.",
+        "Proto v tomhle modulu neradím podle toho, co jsem si přečetla. <strong>Předávám to, co jsem sama zažila.</strong>",
+        "Tak jdeme na to."
       ],
       praise: {
         emoji: "🌴",
@@ -2152,6 +2170,14 @@
           icon: "🌀",
           title: "Hurikánová sezóna: kde, kdy a jak moc to řešit",
           ilustrace: { src: "images/sceny/pani-cokdyz-radar.svg", popis: "paní Cokdyž si pořídila meteoradar" },
+          media: {
+            kicker: "K poslechu",
+            src: "audio/pani-cokdyz-v-noci.mp3",
+            titulek: "Co říct paní Cokdyž, když přijde v noci",
+            delka: "asi 6 minut",
+            obrazek: "images/sceny/pani-cokdyz-radar.svg",
+            popis: "Pusť si to večer, kdy tě hurikán začne strašit ve 3 ráno. Řeknu ti přesně to samé, co bych řekla sama sobě, a čísla, po kterých se dá zase spát."
+          },
           bloky: [
             { text: ["Hurikán. Stačí ho vyslovit a spousta lidí zavře prohlížeč s letenkami. Tak pojďme rovnou k faktům, protože na tenhle strach neplatí uklidňování, platí konkrétní informace."] },
             { stat: "1× za pár let", popis: "tak často v průměru zasáhne konkrétní bouře konkrétní místo, a to za celých 6 měsíců sezóny." },
@@ -3213,6 +3239,13 @@
         {
           icon: "🎒",
           title: "Co musí být v příručním, ať se stane cokoliv",
+          media: {
+            kicker: "K poslechu",
+            src: "audio/co-musi-byt-v-prirucnim.mp3",
+            titulek: "Balím s tebou, nahlas",
+            delka: "asi 7 minut",
+            popis: "Pusť si to, zatímco baluješ kufr. Projdu s tebou nahlas celý tenhle krok, ať u toho nemusíš střídat pohled mezi telefonem a hromadou oblečení."
+          },
           lead: [
             "Odbavený kufr se ztratí zhruba jednomu z dvou set cestujících. Většinou se najde do dvou dnů.",
             "Ty dva dny ale musíš z něčeho žít. A hlavně se s něčím dostat přes imigrační kontrolu.",
@@ -3459,6 +3492,13 @@
         {
           icon: "📇",
           title: "Co mít po ruce, aby se to řešilo snadno",
+          media: {
+            kicker: "K poslechu",
+            src: "audio/kdyz-se-neco-pokazi.mp3",
+            titulek: "Co mít v hlavě, než se něco pokazí",
+            delka: "asi 8 minut",
+            popis: "Pusť si to klidně týden před odletem, cestou autem nebo MHD. Shrnu všech 5 situací z tohohle modulu, ať je slyšíš aspoň jednou v klidu, ne poprvé ve stresu."
+          },
           lead: [
             "Všechny situace výš mají jedno společné: řeší se telefonem a papírem.",
             "Když máš tyhle údaje pohromadě, je z krize nepříjemné odpoledne. Když je nemáš, je z ní ztracený den."
@@ -5675,7 +5715,10 @@
     var hookEl = document.getElementById("module-hook");
     if (mod.hook && odemceno) {
       var hookParas = Array.isArray(mod.hook) ? mod.hook : [mod.hook];
-      hookEl.innerHTML = paras(hookParas);
+      var hookFotoHtml = mod.hookFoto
+        ? '<img class="hook-foto" src="' + mod.hookFoto + '" alt="' + (mod.hookFotoAlt || "") + '" loading="lazy">'
+        : "";
+      hookEl.innerHTML = hookFotoHtml + paras(hookParas);
       hookEl.style.display = "block";
     } else {
       hookEl.style.display = "none";

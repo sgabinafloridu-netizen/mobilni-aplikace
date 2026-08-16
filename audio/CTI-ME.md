@@ -4,9 +4,22 @@ Appka přehrává nahrávky **z týhle složky**, ne z internetu. Proto fungují
 
 ## Co appka hledá
 
-| Soubor | Kde se objeví | Stav |
-|---|---|---|
-| `prestup-krok-za-krokem.mp3` | Letenky, krok 4 „Proč je americký přestup jiný než evropský" | ⬜ čeká na nahrání |
+Číslo kroku je ve tvaru **modul.krok** (stejné, jaké appka ukazuje v pravém sloupci „V téhle lekci" a ve štítku nahoře v kroku), takže 1.3 = modul 1, krok 3.
+
+| Krok | Soubor | Kde se objeví | Stav |
+|---|---|---|---|
+| 1.3 | `pani-cokdyz-v-noci.mp3` | Kdy a kam, krok 3 „Hurikánová sezóna: kde, kdy a jak moc to řešit" | ⬜ čeká na nahrání |
+| 3.4 | `prestup-krok-za-krokem.mp3` | Letenky, krok 4 „Proč je americký přestup jiný než evropský" | ⬜ čeká na nahrání |
+| 6.1 | `co-musi-byt-v-prirucnim.mp3` | Checklisty, krok 1 „Co musí být v příručním, ať se stane cokoliv" | ⬜ čeká na nahrání |
+| 7.5 | `kdyz-se-neco-pokazi.mp3` | Krizové situace, krok 5 „Co mít po ruce, aby se to řešilo snadno" | ⬜ čeká na nahrání |
+
+**Proč zrovna tyhle 4 místa.** Podcast má smysl tam, kde jsou při poslechu **ruce nebo oči zaneprázdněné něčím jiným**, ne kdekoliv. Vybírala jsem podle toho:
+- **1.3** se poslouchá večer, když člověk leží v posteli a řeší si to v hlavě, ne na displeji.
+- **3.4** se poslouchá v letadle nebo cestou na letiště, kde stejně nejde nic jiného dělat.
+- **6.1** se poslouchá při balení, kdy jsou ruce plné oblečení.
+- **7.5** se poslouchá v autě nebo v MHD týden před odletem, jako klidná příprava předem.
+
+Ostatní moduly (Doklady, Ubytování, Finance) žádný takový moment nemají, tam by podcast byl navíc jen proto, aby tam byl. Když najdeš lepší místo nebo chceš přidat další, řekni, kam a na co, doplní se to sem i do dat.
 
 ## Jak to nahrát
 

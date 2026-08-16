@@ -168,6 +168,20 @@ Moduly 1 až 4 = příprava před odletem. Moduly 5 až 7 = to, co se hodí těs
 
 ⚠️ **„Doprava na místě" se odsud přesunula do průvodce „Až přistaneš"** (14. 8. 2026), kam patří obsahem. Byla jen kostra, nic se neztratilo. Zakomentovaný záznam i ikona zůstávají v `index.html`, kdyby se měla vrátit.
 
+### Číslování kroků: modul.krok
+
+Appka i tenhle dokument mluví o kroku ve tvaru **modul.krok** (2.3 = modul 2, krok 3). Appka ho počítá vždy z pozice v poli `MODULES`, ne z ručně zapsaného textu, takže se nemůže rozejít s tím, co appka skutečně ukazuje. Číslo se nikdy nezapisuje do dat ručně (žádné `kicker: "Krok 3"`), jen se dopočítá při vykreslení.
+
+| # | Modul | Kroky |
+|---|---|---|
+| 1 | Kdy a kam | 1.1 Florida, New York nebo parky · 1.2 Kdy do USA nejezdi · 1.3 Hurikánová sezóna · 1.4 Grand Canyon v létě · 1.5 Rezervace parků |
+| 2 | Doklady | 2.1 Pas, který tiše dodýchává · 2.2 Co si nachystat na formulář · 2.3 Patříš do té hrstky výjimek · 2.4 Dvě věci na hranici · 2.5 Dva doklady, co nikdo nekontroluje · 2.6 Jedna chybějící stránka |
+| 3 | Letenky | 3.1 Kdy je správná chvíle koupit · 3.2 Praha, nebo Mošnov · 3.3 Tři funkce, co dělají rozdíl · 3.4 Proč je americký přestup jiný · 3.5 Noční, nebo denní let · 3.6 Basic Economy · 3.7 Než klikneš na zaplatit |
+| 4 | Ubytování | 4.1 Kde spát podle destinace · 4.2 Kde se ze 120 stane 165 · 4.3 Blokace peněz hotelem · 4.4 Co se dohání až na místě · 4.5 Dvě věci i bez signálu |
+| 5 | Finance | 5.1 Proč nestačí jedna karta · 5.2 Kolik hotovosti · 5.3 Kolik ukousne banka · 5.4 Terminál a koruny · 5.5 Co udělat s bankou · 5.6 Kolik to celé stojí |
+| 6 | Checklisty | 6.1 Co musí být v příručním · 6.2 Co vytisknout · 6.3 Tři věci, co se zapomínají · 6.4 Co se do Ameriky nesmí · 6.5 Poslední večer |
+| 7 | Krizové situace | 7.1 Zrušený let · 7.2 Onemocníš před odletem · 7.3 Ztracený pas · 7.4 Zamítnutá ESTA · 7.5 Co mít po ruce |
+
 ---
 
 ## 6. Trezor
