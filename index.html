@@ -87,6 +87,12 @@
     background: var(--tyrkys-light); color: var(--tyrkys-dark);
   }
   .eyebrow-warm { background: var(--zluta-light); color: #8A6A00; }
+  /* štítek před interaktivním prvkem (kvíz, mapa, kalkulačka), ať je na první
+     pohled jasné, že tohle už není text k přečtení, ale věc ke kliknutí.
+     Stejná pilulka jako „ČÁST 1 · NEŽ ODLETÍŠ" nahoře, ať appka mluví jedním
+     vizuálním jazykem a člověk se v ní neztrácí. */
+  .blok-eyebrow { clear: both; display: flex; margin: var(--s6) 0 var(--s3); }
+  .blok-eyebrow.eyebrow-ruzova { background: var(--ruzova-light); color: var(--ruzova-deep); }
 
   .btn {
     display: inline-flex; align-items: center; justify-content: center; gap: 10px;
@@ -4549,7 +4555,8 @@
                                '</div><div class="blok-stat-popis">' + b.popis + '</div></div>';
       if (b.oddelovac) return '<div class="blok-oddelovac"><span class="blok-oddelovac-ikona" aria-hidden="true">' +
                                (b.ikona || '✦') + '</span></div>';
-      if (b.voda)      return '<div class="voda-kalk" id="voda-kalk"></div>';
+      if (b.voda)      return '<div class="blok-eyebrow eyebrow">💧 Kalkulačka</div>' +
+                              '<div class="voda-kalk" id="voda-kalk"></div>';
       return '';
     }).join('');
   }
@@ -5260,7 +5267,8 @@
         // evropská linka ve stejném měřítku: začíná pod prvním bodem schématu
         var euroKm = 2750, euroX1 = 100, euroX2 = euroX1 + Math.round(euroKm * MERITKO), euroY = 348;
 
-        html += '<div class="mapa" id="mapa-obal">' +
+        html += '<div class="blok-eyebrow eyebrow">🗺️ Interaktivní mapa</div>' +
+                '<div class="mapa" id="mapa-obal">' +
           '<div class="mapa-label">Klikni na oblast, uvidíš, co tě tam čeká</div>' +
           '<svg viewBox="0 0 460 392" role="img" ' +
                'aria-label="Schéma vzdáleností mezi třemi oblastmi USA, srovnané se vzdáleností z Prahy do Lisabonu">' +
@@ -5308,7 +5316,8 @@
       }
 
       if (step.kviz) {
-        html += '<div class="kviz" id="kviz"></div>';
+        html += '<div class="blok-eyebrow eyebrow eyebrow-ruzova">🎯 Kvíz · 5 otázek, minuta času</div>' +
+                '<div class="kviz" id="kviz"></div>';
       }
 
       /* osobní poznámka podle výsledku kvízu: ukáže se jen tomu typu,
