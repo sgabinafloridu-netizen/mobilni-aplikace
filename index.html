@@ -998,6 +998,43 @@
     .step-audio-body { width: 100%; }
   }
 
+  /* ── kvíz: jaký jsi cestovatel ────────────────────────────────────────── */
+  .kviz { margin-top: var(--s5); background: var(--sunken); border-radius: var(--r-lg); padding: var(--s5); }
+  .kviz-otazka { font-size: 15.5px; font-weight: 700; color: var(--text); margin-bottom: var(--s4); line-height: 1.5; }
+  .kviz-postup { font-size: 11px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase;
+                 color: var(--text-soft); margin-bottom: var(--s3); }
+  .kviz-volby { display: flex; flex-direction: column; gap: 8px; }
+  .kviz-volba {
+    width: 100%; text-align: left; font-family: inherit; font-size: 14.5px; line-height: 1.5;
+    background: var(--surface); border: 1.5px solid var(--line-strong); border-radius: var(--r-md);
+    padding: 13px var(--s4); cursor: pointer; color: var(--text);
+    transition: border-color .15s, background .15s, transform .12s;
+  }
+  .kviz-volba:hover { border-color: var(--tyrkys); background: var(--tyrkys-light, #E6F8FA); transform: translateX(2px); }
+
+  .kviz-vysledek { display: none; }
+  .kviz-vysledek.show { display: block; animation: discIn .3s ease both; }
+  .kviz-vysledek-hlava { display: flex; align-items: center; gap: var(--s4); }
+  .kviz-vysledek-hlava img { flex: 0 0 auto; width: 76px; height: 76px; border-radius: 50%; }
+  .kviz-typ { font-size: 11px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: var(--tyrkys-dark); }
+  .kviz-nazev { font-size: 21px; font-weight: 800; letter-spacing: -.02em; color: var(--text); line-height: 1.2; }
+  .kviz-popis { margin-top: var(--s4); font-size: 15px; line-height: 1.75; color: var(--text-muted); }
+  .kviz-popis p + p { margin-top: var(--s3); }
+  .kviz-znovu {
+    margin-top: var(--s4); background: none; border: none; cursor: pointer; font-family: inherit;
+    font-size: 13px; font-weight: 700; color: var(--text-faint); text-decoration: underline;
+  }
+
+  /* osobní poznámka v dalších modulech podle výsledku kvízu */
+  .step-hint {
+    display: flex; gap: var(--s4); align-items: flex-start;
+    margin-top: var(--s5); padding: var(--s4) var(--s5);
+    background: #E6F8FA; border-left: 3px solid var(--tyrkys); border-radius: 0 var(--r-md) var(--r-md) 0;
+  }
+  .step-hint img { flex: 0 0 auto; width: 40px; height: 40px; border-radius: 50%; }
+  .step-hint p { font-size: 14px; line-height: 1.65; color: #0E5A66; }
+  .step-hint strong { color: #0E5A66; }
+
   /* ── kreslená ilustrace ke kroku: kolečko značky plus popisek pod ním ── */
   .step-ilustrace { margin-top: var(--s6); text-align: center; }
   .step-ilustrace img {
@@ -1764,6 +1801,7 @@
   var STORAGE_TRAVELERS = "nezOdletisCestujici";
   var STORAGE_ANSWERS = "nezOdletisOdpovedi";
   var STORAGE_UNLOCKED = "nezOdletisOdemceno";
+  var STORAGE_TYP = "nezOdletisTypCestovatele";
 
   /* ── balíčky ──────────────────────────────────────────────────────────────
      POZOR NA DVOJÍ VÝZNAM SLOVA „MODUL":
@@ -1831,6 +1869,7 @@
           icon: "🌴",
           kicker: "Krok 1",
           title: "Florida, New York nebo parky: jak si vybrat",
+          kviz: true,
           lead: [
             "Možná už to víš. Florida, New York, nebo Grand Canyon, Zion a Bryce, kde silnice mizí za horizontem. Ten obraz máš v hlavě už nějakou dobu. <strong>Otázka není kam. Otázka je, kolik toho stihneš najednou, a kdy.</strong>",
             "A tady se většina lidí spálí, protože Amerika vypadá na fotkách stejně krásně v červnu i v lednu. Jenže za tím obrázkem se skrývají věci, které v katalogu nenajdeš: hurikánová sezóna, vyprodané kempy rok dopředu, vedro, které z výletu udělá přežití.",
@@ -1954,6 +1993,11 @@
           icon: "🚗",
           kicker: "Krok 5",
           title: "Rezervace parků: proč to nestačí zařídit týden předem",
+          hintProTyp: {
+            improvizator: "Tohle je přesně ten bod, kde tvůj styl v Americe narazí. <strong>Vstupy do parků se v Evropě neřeší, tady se vyprodají týdny dopředu.</strong> Je to jediná věc, kterou tě prosím, abys udělala předem. Zbytek klidně nech na místě.",
+            planovac: "Tenhle bod máš v malíku. Jen si k němu rovnou zapiš datum, kdy se rezervace otevírají, protože to <strong>není den před cestou, ale měsíce dopředu</strong>.",
+            snilek: "Zrovna tohle je ta nejhezčí část plánování. Otevři si Recreation.gov a podívej se na fotky míst, kam se dá vstup zarezervovat. Plánování a snění v jednom."
+          },
           lead: [
             "U nás se do přírody vyrazí tak, že se nasedne do auta a jede se. U slavných amerických parků tenhle přístup v sezóně znamená hodiny čekání, nebo plné parkoviště a otočku zpátky."
           ],
@@ -2155,7 +2199,7 @@
             "Zkontrolovat, že plánovaný pobyt nepřesáhne <strong>90 dní</strong>",
             "Ověřit, že účel cesty je turistika nebo business, <strong>ne studium či práce</strong>"
           ],
-          pochvala: "✨ A je to. Právě jsi si ověřila to, co spousta lidí zjistí až měsíc před odletem.",
+          pochvala: "✨ A je to. Tohle spousta lidí zjistí až měsíc před odletem, ty to máš teď.",
           toggleQuestions: [
             {
               id: "rizikova-zeme",
@@ -2322,6 +2366,11 @@
           icon: "📅",
           kicker: "Krok 1",
           title: "Kdy je ta správná chvíle koupit",
+          hintProTyp: {
+            planovac: "Tohle je tvoje disciplína. Nastav si <strong>hlídání ceny hned teď</strong> a do kalendáře si zapiš den, kdy začne tvoje okno. Víc dělat nemusíš, cena přijde za tebou.",
+            improvizator: "Vím, že by to počkalo na později. U letenek do Ameriky to ale <strong>nefunguje jako u last minute do Egypta</strong>: čím blíž k odletu, tím dráž. Tohle je druhá věc, kterou fakt nenechávej na poslední chvíli.",
+            opatrny: "Nemusíš hlídat ceny každý den, to je zbytečný stres. <strong>Zapni si hlídání ceny a nech to na Googlu</strong>, ozve se sám, až bude levněji."
+          },
           lead: [
             "Tuhle otázku dostávám nejčastěji ze všech.",
             "Magický den, kdy jsou letenky nejlevnější, neexistuje. Existuje okno: <strong>2 až 4 měsíce před odletem</strong>.",
@@ -2575,6 +2624,10 @@
           icon: "🗺️",
           kicker: "Krok 1",
           title: "Kde spát, když každá destinace hraje jinou hru",
+          hintProTyp: {
+            improvizator: "U měst a pláží si klidně nech volnost. <strong>U národních parků ne</strong>, tam se ubytování uvnitř rezervuje 13 měsíců dopředu a na místě se nesežene nic.",
+            snilek: "Tady si můžeš vybírat podle toho, jak si to představuješ. Jen pozor, aby ta fotka z inzerátu nebyla z jiné části pláže, než kde ubytování opravdu stojí."
+          },
           lead: [
             "Tohle je jediná část modulu, která se liší podle destinace.",
             "<strong>Spát na Floridě a spát v národním parku jsou dvě jiné disciplíny.</strong> Appka ví, kam máš namířeno, tak ti rovnou ukáže tu tvoji. Na ostatní se dá přepnout."
@@ -2923,7 +2976,7 @@
       ],
       praise: {
         emoji: "✅",
-        title: "Sbaleno. A tentokrát bez toho pocitu, že jsi na něco zapomněla.",
+        title: "Sbaleno. A tentokrát bez toho pocitu, že se na něco zapomnělo.",
         text:
           "Doklady máš v příručním, ne v kufru, který se může zdržet. Papíry máš i na papíře, " +
           "ne jen v mobilu s docházející baterkou. Do zavazadla ti nezůstalo nic, co by ti " +
@@ -3021,7 +3074,7 @@
           trap: {
             title: "Pozor na tohle",
             body: [
-              "Rozdíl mezi zabavením a pokutou nedělá to, co vezeš. Dělá ho to, <strong>jestli jsi to přiznala</strong>.",
+              "Rozdíl mezi zabavením a pokutou nedělá to, co vezeš. Dělá ho to, <strong>jestli je to přiznané</strong>.",
               "Když věc uvedeš v celním prohlášení a nesmí se dovézt, seberou ti ji a jedeš dál. Když ji neuvedeš a najdou ji, je z toho pokuta v tisících dolarů.",
               "Když si nejsi jistá, přiznej to. Vždycky."
             ]
@@ -3083,6 +3136,10 @@
           icon: "🛫",
           kicker: "Krok 1",
           title: "Zrušený nebo hodně zpožděný let",
+          hintProTyp: {
+            opatrny: "Vím, že tenhle modul čteš pozorněji než ostatní. Tak rovnou to hlavní: <strong>tohle všechno má řešení a na většinu z toho máš ze zákona nárok</strong>. Nemusíš nic vyjednávat, jen vědět, co si říct.",
+            improvizator: "Tenhle jediný modul si přečti dřív, než ho budeš potřebovat. Ne kvůli plánování, ale proto, že <strong>na letišti v cizí zemi se špatně googlí</strong>."
+          },
           lead: [
             "Nejčastější a zároveň ta nejlépe ošetřená situace. Na let odlétající z Evropy se totiž vztahují evropská pravidla, a ta jsou k cestujícím vstřícná.",
             "Při zrušení nebo zpoždění <strong>o 3 hodiny a víc</strong> máš nárok na odškodnění <strong>600 eur na osobu</strong>. U letu do USA jde vždycky o tuhle nejvyšší sazbu, protože je delší než 3 500 km.",
@@ -3169,7 +3226,7 @@
             title: "Ještě jedna věc",
             body: [
               "Právě proto se ESTA vyřizuje <strong>jako první</strong>, dřív než letenka. Když se něco pokazí, nepřijdeš u toho o peníze za letenku.",
-              "Pokud tenhle modul čteš dřív, než jsi cokoliv koupila, jsi přesně tam, kde máš být."
+              "Pokud tenhle modul čteš dřív, než jsi cokoliv koupil nebo koupila, jsi přesně tam, kde máš být."
             ]
           },
           link: {
@@ -3238,6 +3295,143 @@
     { m: "Lis", florida: ["good", "Hurikánová sezóna oficiálně končí 30. listopadu, ale reálně je listopad už bezpečný. Teploty kolem 25 až 27 stupňů, sucho, žádné bouřky. Američané ze severu začínají přijíždět na zimu a ceny hotelů pomalu stoupají. Oceán je ještě příjemně teplý: poslední šance na pohodlné koupání před zimním ochlazením vody."], newyork: ["ok", "Listopad je podzim přecházející do zimy. Teploty kolem 5 až 10 stupňů, stromy jsou holé, ale město se chystá na Vánoce. Macy's Thanksgiving Day Parade na konci listopadu přitáhne obrovské davy. Kdo chce New York bez přeplnění, ať přijede na začátek listopadu před svátky."], parky: ["ok", "Listopad je v parcích na jihozápadě stále příjemný pro denní výlety. Grand Canyon má kolem 5 až 10 stupňů přes den, ráno může mrznout. Parky na severu se začínají uzavírat nebo omezovat přístup. Zion a Bryce jsou ještě přístupné, ale kempování ve vyšších polohách se nedoporučuje."] },
     { m: "Pro", florida: ["good", "Prosinec na Floridě je ten měsíc, kdy sem přijede půlka Ameriky najednou. Sucho, 22 až 24 stupňů, žádné bouřky a Floridou se pohybují davy Američanů utíkajících před zimou. Ceny jsou nejvyšší za celý rok: hotely, restaurace, parkování. Vánoce na Floridě mají svou zvláštní atmosféru: palmové stromy ozdobené světýlky a Santa Claus v kraťasech. Oceán je nejchladnější v roce, kolem 22 stupňů, koupání spíš pro odvážnější."], newyork: ["ok", "Vánoční New York je sen. Fifth Avenue svítí, bruslení v Central Parku, vánoční trhy na každém rohu. Teploty kolem 0 až 5 stupňů, sníh možný kdykoliv. Turistů je hodně, ceny vysoké, ale atmosféra je jedinečná. Kdo chce New York jednou za život v nejkrásnější podobě, prosinec je ta správná volba: jen si přibalit teplý kabát a připravit peněženku."], parky: ["bad", "Zima, sníh, některé silnice na sezónu zavřené."] }
   ];
+
+  /* ── kvíz: jaký jsi cestovatel do USA ───────────────────────────────────
+     Výsledek se uloží a promítne se do dalších modulů jako osobní poznámka.
+     Není to hračka na jedno použití, je to nastavení celého průvodce.      */
+  var KVIZ_OTAZKY = [
+    {
+      otazka: "Máš termín a destinaci. Co uděláš jako první?",
+      volby: [
+        { text: "Založím si tabulku a začnu si psát, co všechno je potřeba", typ: "planovac" },
+        { text: "Otevřu Instagram a hodinu se dívám na fotky, kam pojedu", typ: "snilek" },
+        { text: "Nic. Do odletu je času dost, zařídí se to samo", typ: "improvizator" },
+        { text: "Začnu si dohledávat, co všechno se může pokazit", typ: "opatrny" }
+      ]
+    },
+    {
+      otazka: "Kolik míst chceš na dvoutýdenní cestě stihnout?",
+      volby: [
+        { text: "Mám je vypsaná i s počtem nocí u každého", typ: "planovac" },
+        { text: "Co nejvíc, ať to za ten let stojí", typ: "snilek" },
+        { text: "Uvidíme na místě, kam nás to zavane", typ: "improvizator" },
+        { text: "Radši míň, ať to zvládnu v klidu", typ: "opatrny" }
+      ]
+    },
+    {
+      otazka: "Rezervace vstupů do národních parků otevírají za měsíc. Ty:",
+      volby: [
+        { text: "Už mám v kalendáři připomínku na ten den", typ: "planovac" },
+        { text: "Zapíšu si to, ať na to nezapomenu", typ: "snilek" },
+        { text: "Vstupy? Vždyť je to národní park, tam se přece jde", typ: "improvizator" },
+        { text: "Radši si zjistím, co se stane, když to nestihnu", typ: "opatrny" }
+      ]
+    },
+    {
+      otazka: "Co ti na téhle cestě dělá největší vrásky?",
+      volby: [
+        { text: "Že mi něco uteče, protože jsem to nezařídila včas", typ: "planovac" },
+        { text: "Že to nebude tak nádherné, jak si to představuju", typ: "snilek" },
+        { text: "Nic. Nějak to dopadne", typ: "improvizator" },
+        { text: "Imigrační kontrola a to, že něco pokazím", typ: "opatrny" }
+      ]
+    }
+  ];
+
+  var KVIZ_TYPY = {
+    planovac: {
+      nazev: "Plánovač s tabulkou",
+      obrazek: "images/ikony/highlight-checklisty.svg",
+      popis: [
+        "Ty se neztratíš. Máš přehled, termíny hlídáš a tabulku si založíš dřív než letenku.",
+        "Tvoje jediné riziko je, že si naplánuješ víc, než se dá prožít. V Americe je vzdálenost větší, než vypadá na mapě, a nejhezčí věci se dějí, když někde zůstaneš o den dýl.",
+        "<strong>Tenhle průvodce ti tabulku nenahradí. Doplní do ní to, co se v Česku nedá vygooglit.</strong>"
+      ]
+    },
+    snilek: {
+      nazev: "Snílek s fotkami v mobilu",
+      obrazek: "images/ikony/highlight-priroda-a-plaze.svg",
+      popis: [
+        "Ty víš přesně, jak to tam má vypadat. Máš to v hlavě roky a možná i složku v telefonu.",
+        "Tvoje riziko je, že se do plánování pustíš pozdě, protože ta praktická část není zdaleka tak hezká jako ty fotky.",
+        "<strong>Proto to vezmeme po malých kouscích. Odškrtáš si to skoro mimochodem a zůstane ti čas na to snění.</strong>"
+      ]
+    },
+    improvizator: {
+      nazev: "Improvizátor",
+      obrazek: "images/ikony/highlight-prezij-ameriku.svg",
+      popis: [
+        "V Evropě ti tenhle přístup funguje a je to fajn způsob cestování. Nasedneš a jedeš.",
+        "V Americe má ale jednu slabinu, a je dost tvrdá: <strong>část věcí se tam na místě zařídit nedá</strong>. Ubytování v národním parku se rezervuje 13 měsíců dopředu a vstupy do parků bývají vyprodané týdny předem.",
+        "<strong>Neboj, nebudu z tebe dělat plánovače.</strong> Jen ti u každého kroku řeknu, co je opravdu potřeba mít dopředu a co v klidu počká."
+      ]
+    },
+    opatrny: {
+      nazev: "Opatrný, co si chce být jistý",
+      obrazek: "images/pani-cokdyz-kufr.svg",
+      popis: [
+        "Ty si zjišťuješ věci dopředu, protože nechceš být zaskočená. To není slabost, to je nejlepší možná příprava.",
+        "Riziko je jen jedno: čtení diskuzí, kde nejhlasitější jsou ti, kterým se něco pokazilo. Z toho se dá vyčíst hrůza, která se běžně neděje.",
+        "<strong>Tenhle průvodce je pro tebe psaný nejvíc.</strong> U každé věci se dozvíš, co se opravdu stává a co je jen strašení."
+      ]
+    }
+  };
+
+  function loadTyp()  { return nacti(STORAGE_TYP); }
+  function saveTyp(t) { uloz(STORAGE_TYP, t); }
+
+  function initKviz() {
+    var box = document.getElementById("kviz");
+    if (!box) return;
+
+    function vysledek(typ) {
+      var t = KVIZ_TYPY[typ];
+      if (!t) return;
+      box.innerHTML =
+        '<div class="kviz-vysledek show">' +
+          '<div class="kviz-vysledek-hlava">' +
+            '<img src="' + t.obrazek + '" alt="">' +
+            '<div><div class="kviz-typ">Jsi typ</div>' +
+            '<div class="kviz-nazev">' + t.nazev + '</div></div>' +
+          '</div>' +
+          '<div class="kviz-popis">' + paras(t.popis) + '</div>' +
+          '<button type="button" class="kviz-znovu" id="kviz-znovu">Vyplnit znovu</button>' +
+        '</div>';
+      document.getElementById("kviz-znovu").addEventListener("click", function () {
+        saveTyp(""); otazka(0, {});
+      });
+    }
+
+    function otazka(i, skore) {
+      if (i >= KVIZ_OTAZKY.length) {
+        var nej = null, max = -1;
+        Object.keys(skore).forEach(function (k) { if (skore[k] > max) { max = skore[k]; nej = k; } });
+        saveTyp(nej);
+        vysledek(nej);
+        return;
+      }
+      var o = KVIZ_OTAZKY[i];
+      box.innerHTML =
+        '<div class="kviz-postup">Otázka ' + (i + 1) + ' ze ' + KVIZ_OTAZKY.length + '</div>' +
+        '<p class="kviz-otazka">' + o.otazka + '</p>' +
+        '<div class="kviz-volby">' +
+          o.volby.map(function (v, vi) {
+            return '<button type="button" class="kviz-volba" data-i="' + vi + '">' + v.text + '</button>';
+          }).join('') +
+        '</div>';
+      box.querySelectorAll(".kviz-volba").forEach(function (b) {
+        b.addEventListener("click", function () {
+          var typ = o.volby[Number(b.dataset.i)].typ;
+          skore[typ] = (skore[typ] || 0) + 1;
+          otazka(i + 1, skore);
+        });
+      });
+    }
+
+    var ulozeny = loadTyp();
+    if (ulozeny && KVIZ_TYPY[ulozeny]) vysledek(ulozeny);
+    else otazka(0, {});
+  }
 
   /* Kde spát podle destinace. Hloubkový obsah (konkrétní čtvrti, konkrétní
      kempy) sem schválně nepatří, ten je náplní samostatných destinačních
@@ -4534,6 +4728,23 @@
                 '</div>';
       }
 
+      if (step.kviz) {
+        html += '<div class="kviz" id="kviz"></div>';
+      }
+
+      /* osobní poznámka podle výsledku kvízu: ukáže se jen tomu typu,
+         pro který dává smysl */
+      if (step.hintProTyp) {
+        var typ = loadTyp();
+        var hint = typ && step.hintProTyp[typ];
+        if (hint) {
+          html += '<div class="step-hint">' +
+                    '<img src="images/gabi-happy-plaz.svg" alt="">' +
+                    '<p>' + hint + '</p>' +
+                  '</div>';
+        }
+      }
+
       if (step.ilustrace) {
         html += '<figure class="step-ilustrace">' +
                   '<img src="' + step.ilustrace.src + '" alt="" loading="lazy">' +
@@ -4921,6 +5132,7 @@
       : '<div class="placeholder-note">Obsah tohohle modulu se ještě připravuje.<br>Tady budou kroky, vysvětlení a pasti, na které si dát pozor.</div>';
 
     initStepVideos();
+    initKviz();
     initMonthPicker();
     initStayPicker();
     initChecklists();
