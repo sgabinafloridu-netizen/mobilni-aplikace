@@ -3858,10 +3858,13 @@
   }
   function saveUnlocked(arr) { uloz(STORAGE_UNLOCKED, JSON.stringify(arr)); }
 
-  /* Jediné místo, které rozhoduje o přístupu k modulu. */
+  /* Zámky jsou dočasně vypnuté: appka ještě neumí ověřit platbu, takže
+     tvrdit uživateli "tohle je zamčené" bez skutečného odemykání byl jen
+     měkký, obejitelný zámek, co nikoho nezastaví a jen kazí první dojem.
+     Až appka bude umět skutečně poznat platbu, vrátí se sem podmínka na
+     mod.balicek. Do té doby je dostupné úplně všechno. */
   function isUnlocked(mod) {
-    if (!mod || !mod.balicek) return true;   // modul bez balíčku je vždycky dostupný
-    return loadUnlocked().indexOf(mod.balicek) !== -1;
+    return true;
   }
 
   /* Vrátí id balíčku, pokud kód sedí, jinak null. Nezáleží na velikosti písmen. */
