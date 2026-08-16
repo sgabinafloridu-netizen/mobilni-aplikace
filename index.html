@@ -1545,6 +1545,8 @@
     100% { opacity: 1; transform: none; }
   }
   .praise-emoji { font-size: 40px; line-height: 1; display: block; margin-bottom: var(--s3); animation: wiggle .7s ease .2s 2; }
+  .praise-emoji.has-img { width: 48px; height: 48px; }
+  .praise-emoji.has-img img { width: 100%; height: 100%; display: block; }
   @keyframes wiggle {
     0%,100% { transform: rotate(0) scale(1); }
     30%     { transform: rotate(-9deg) scale(1.12); }
@@ -3654,11 +3656,11 @@
   var KVIZ_OTAZKY = [
     {
       otazka: "Máš termín a destinaci. Co uděláš jako první?",
-      ikona: "images/ikony/highlight-checklisty.svg",
-      hint: "Na téhle jedné odpovědi se pozná skoro všechno ostatní. <strong>Špatná volba tu není.</strong>",
+      ikona: "images/ikony/highlight-kviz.svg",
+      hint: "Odpovídej instinktivně, ne podle toho, co by bylo správně. <strong>Tahle první otázka prozradí nejvíc ze všech pěti.</strong>",
       volby: [
         { text: "Založím si tabulku a začnu si psát, co všechno je potřeba", typ: "planovac" },
-        { text: "Nic. Sbalím se a zbytek se vyřeší cestou", typ: "svobodny" },
+        { text: "Nic, ono to nějak dopadne", typ: "svobodny" },
         { text: "Začnu hledat, kde se dá ušetřit, ať toho stihnu co nejvíc", typ: "lovec" },
         { text: "Najdu si něco u vody a tím to pro mě hasne", typ: "pohoda" },
         { text: "Sepíšu si místa, která znám z filmů a ze seriálů", typ: "motyl" }
@@ -3666,7 +3668,7 @@
     },
     {
       otazka: "Kolik toho chceš za dva týdny stihnout?",
-      ikona: "images/ikony/highlight-usa-vs-evropa.svg",
+      ikona: "images/ikony/highlight-kviz.svg",
       hint: "Amerika je větší, než vypadá na mapě. Tahle odpověď rozhodne o <strong>půlce tvojí dovolené</strong>.",
       volby: [
         { text: "Mám to rozepsané po dnech, i s počtem nocí", typ: "planovac" },
@@ -3678,7 +3680,7 @@
     },
     {
       otazka: "Kde budeš spát?",
-      ikona: "images/ikony/highlight-ubytovani.svg",
+      ikona: "images/ikony/highlight-kviz.svg",
       hint: "Spaní není detail. Je to <strong>největší položka rozpočtu</strong> hned po letence.",
       volby: [
         { text: "Mám rezervováno, a to dávno", typ: "planovac" },
@@ -3690,7 +3692,7 @@
     },
     {
       otazka: "Je pět ráno a venku začíná svítat. Ty:",
-      ikona: "images/ikony/highlight-priroda-a-plaze.svg",
+      ikona: "images/ikony/highlight-kviz.svg",
       hint: "Tady se pozná, jestli je dovolená <strong>odpočinek, nebo výprava</strong>.",
       volby: [
         { text: "Vstávám. Mám to tak v plánu", typ: "planovac" },
@@ -3702,7 +3704,7 @@
     },
     {
       otazka: "Co si z té cesty chceš odvézt?",
-      ikona: "images/ikony/highlight-my-story.svg",
+      ikona: "images/ikony/highlight-kviz.svg",
       hint: "Poslední otázka. Podle téhle se pozná, <strong>co pro tebe ta cesta vlastně je</strong>.",
       volby: [
         { text: "Že všechno vyšlo tak, jak mělo", typ: "planovac" },
@@ -5808,7 +5810,14 @@
     var title = (p && p.title) || "Hotovo. Jeden krok blíž letadlu.";
     var text = (p && p.text) || "Tenhle modul máš za sebou. Zbytek počká, až budeš mít chvíli.";
 
-    document.getElementById("praise-emoji").textContent = (p && p.emoji) || "🎉";
+    var praiseEmojiEl = document.getElementById("praise-emoji");
+    if (p && p.emojiImg) {
+      praiseEmojiEl.innerHTML = '<img src="' + p.emojiImg + '" alt="">';
+      praiseEmojiEl.classList.add("has-img");
+    } else {
+      praiseEmojiEl.textContent = (p && p.emoji) || "🎉";
+      praiseEmojiEl.classList.remove("has-img");
+    }
     document.getElementById("praise-title").textContent = title;
     document.getElementById("praise-text").textContent = text;
 

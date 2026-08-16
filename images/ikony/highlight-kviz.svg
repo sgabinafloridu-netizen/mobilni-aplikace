@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400">
+  <!-- Highlight cover: Kvíz. Bublina s otazníkem, ať je na první pohled jasné, že se něco vyplňuje. -->
+  <rect x="0" y="0" width="400" height="400" fill="#FFFFFF"/>
+  <circle cx="200" cy="200" r="185" fill="#FFF1F6"/>
+
+  <!-- jiskřičky kolem, stejný motiv jako u jiných ikon -->
+  <text x="90" y="120" font-family="Arial, sans-serif" font-size="18" fill="#1AC0CE">&#10022;</text>
+  <text x="300" y="290" font-family="Arial, sans-serif" font-size="16" fill="#FFD23F">&#10022;</text>
+
+  <!-- řečová bublina -->
+  <path d="M92 122 Q92 96 118 96 L282 96 Q308 96 308 122 L308 224 Q308 250 282 250
+           L176 250 L130 288 L140 250 L118 250 Q92 250 92 224 Z"
+        fill="#FFFFFF" stroke="#14233A" stroke-width="9" stroke-linejoin="round"/>
+
+  <!-- otazník -->
+  <path d="M168 148 Q168 118 200 118 Q232 118 232 148 Q232 168 210 180 Q198 187 198 204"
+        fill="none" stroke="#FF6FA5" stroke-width="16" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="198" cy="228" r="11" fill="#FF6FA5"/>
+
+  <!-- fajfka vedle, ze zvyku appky odškrtávat -->
+  <circle cx="320" cy="150" r="30" fill="#1AC0CE"/>
+  <path d="M306 150 L316 160 L336 138" fill="none" stroke="#FFFFFF" stroke-width="7"
+        stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
