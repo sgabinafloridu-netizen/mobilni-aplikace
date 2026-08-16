@@ -880,9 +880,14 @@
     float: right; width: 42%; max-width: 190px; margin: 2px 0 var(--s4) var(--s5);
     border-radius: var(--r-lg); box-shadow: var(--sh-2);
   }
+  /* druhá fotka uprostřed hooku plave na opačnou stranu, ať vznikne
+     rytmus a text kolem obou nesplyne v jeden blok */
+  .lesson-hook .hook-foto-vlevo {
+    float: left; margin: 2px var(--s5) var(--s4) 0;
+  }
   @media (max-width: 640px) {
     .lesson-hook { text-align: left; }
-    .lesson-hook .hook-foto {
+    .lesson-hook .hook-foto, .lesson-hook .hook-foto-vlevo {
       float: none; display: block; width: 150px; height: 150px; object-fit: cover;
       margin: 0 auto var(--s4);
     }
@@ -2076,12 +2081,13 @@
         "Tyhle 3 destinace jsem nevybrala jen podle mapy. Každou znám <strong>z vlastního života</strong>.",
         "Floridu asi nejlíp. Bydlím tam. <strong>Čtyři minuty od oceánu</strong>, s manželem. Rozhodnutí přestěhovat se jsme udělali před 4 lety.",
         "Neměnila bych.",
-        "Jihozápad znám z doby, kdy jsme žili v Coloradu. Tehdy jsme víkendy trávili v autě. Nové Mexiko, Arizona, Utah. Projeli jsme parky a já vím, <strong>kde mají v Moabu nejlepší zmrzlinu</strong>.",
+        "<img class=\"hook-foto hook-foto-vlevo\" src=\"images/gabi-moab.jpg\" alt=\"Gábi v kaňonu u Moabu v Utahu\" loading=\"lazy\">Jihozápad znám z doby, kdy jsme žili v Coloradu. Tehdy jsme víkendy trávili v autě. Nové Mexiko, Arizona, Utah. Projeli jsme parky a já vím, <strong>kde mají v Moabu nejlepší zmrzlinu</strong>.",
         "<strong>(To druhé je důležitější, než to zní.)</strong>",
         "A New York? Ten jsem poznala jako <strong>au pair a studentka saxofonu</strong>. Bydlela jsem v sousedním Connecticutu a do New Yorku jezdila skoro každý víkend. Za městem, jeho energií, atmosférou. A samozřejmě za nákupy.",
         "Každé místo v jiném věku. Trochu <strong>jinýma očima</strong>.",
         "Proto v tomhle modulu neradím podle toho, co jsem si přečetla. <strong>Předávám to, co jsem sama zažila.</strong>",
-        "Tak jdeme na to."
+        "Ale za ty roky jsem taky viděla desítky klientů řešit přesně tohle: Florida, New York, nebo kaňony. <strong>Každá varianta přináší jiné výzvy</strong>, hlavně co se týče načasování.",
+        "V tomhle modulu si projdeme všechny 3 cesty. Tak jdeme na to."
       ],
       praise: {
         emoji: "🌴",
