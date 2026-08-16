@@ -998,6 +998,34 @@
     .step-audio-body { width: 100%; }
   }
 
+  /* ── mapa: tři oblasti a vzdálenosti mezi nimi ────────────────────────── */
+  .mapa { margin-top: var(--s6); background: var(--sunken); border-radius: var(--r-lg); padding: var(--s5); }
+  .mapa-label {
+    font-size: 11px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase;
+    color: var(--text-soft); margin-bottom: var(--s4);
+  }
+  .mapa svg { display: block; width: 100%; height: auto; }
+  .mapa-oblast { cursor: pointer; }
+  .mapa-oblast circle { transition: r .18s, fill .18s; }
+  .mapa-oblast:hover circle.terc { fill: var(--tyrkys-dark); }
+  .mapa-oblast.aktivni circle.terc { fill: var(--ruzova); }
+  .mapa-oblast text { font-family: inherit; font-size: 21px; font-weight: 800; fill: #14233A; pointer-events: none; }
+  .mapa-vzdalenost text { font-family: inherit; font-size: 18px; font-weight: 700; fill: #6b5319; }
+
+  .mapa-bublina {
+    display: none; margin-top: var(--s4);
+    background: var(--surface); border-radius: var(--r-md); padding: var(--s5);
+    border-left: 3px solid var(--tyrkys);
+  }
+  .mapa-bublina.show { display: block; animation: discIn .25s ease both; }
+  .mapa-bublina-nazev { font-size: 17px; font-weight: 800; color: var(--text); margin-bottom: 6px; }
+  .mapa-bublina p { font-size: 14.5px; line-height: 1.7; color: var(--text-muted); }
+  .mapa-bublina .kdy {
+    display: inline-block; margin-top: var(--s3);
+    background: #E6F8FA; color: #0E5A66; border-radius: var(--r-pill);
+    padding: 5px 12px; font-size: 13px; font-weight: 700;
+  }
+
   /* ── kvíz: jaký jsi cestovatel ────────────────────────────────────────── */
   .kviz { margin-top: var(--s5); background: var(--sunken); border-radius: var(--r-lg); padding: var(--s5); }
   .kviz-otazka { font-size: 15.5px; font-weight: 700; color: var(--text); margin-bottom: var(--s4); line-height: 1.5; }
@@ -1905,6 +1933,7 @@
           icon: "📅",
           kicker: "Krok 2",
           title: "Kdy do USA nejezdi, a proč to cestovky neříkají",
+          mapa: true,
           ilustrace: { src: "images/sceny/florida-bourka.svg", popis: "floridské odpoledne v létě: přijde, přejde, z asfaltu se kouří" },
           lead: [
             "Doma je to jasné. Škola skončí, teploty stoupají, jede se. V Americe <strong>tenhle vzorec nefunguje</strong>. Červenec na Floridě je vedro, vlhko a hurikánová sezóna v plném proudu. Grand Canyon v srpnu má na okraji snesitelných 27 stupňů, ale kdo sejde ke dnu kaňonu, tam ho čeká <strong>přes 40 stupňů</strong> a vzduch jako z trouby. New York v létě místní opouštějí, ne navštěvují. Prázdninový termín v USA znamená <strong>nejvyšší ceny, nejhorší počasí a nejdelší fronty</strong>. Všechno najednou."
@@ -3305,6 +3334,61 @@
     { m: "Lis", florida: ["good", "Hurikánová sezóna oficiálně končí 30. listopadu, ale reálně je listopad už bezpečný. Teploty kolem 25 až 27 stupňů, sucho, žádné bouřky. Američané ze severu začínají přijíždět na zimu a ceny hotelů pomalu stoupají. Oceán je ještě příjemně teplý: poslední šance na pohodlné koupání před zimním ochlazením vody."], newyork: ["ok", "Listopad je podzim přecházející do zimy. Teploty kolem 5 až 10 stupňů, stromy jsou holé, ale město se chystá na Vánoce. Macy's Thanksgiving Day Parade na konci listopadu přitáhne obrovské davy. Kdo chce New York bez přeplnění, ať přijede na začátek listopadu před svátky."], parky: ["ok", "Listopad je v parcích na jihozápadě stále příjemný pro denní výlety. Grand Canyon má kolem 5 až 10 stupňů přes den, ráno může mrznout. Parky na severu se začínají uzavírat nebo omezovat přístup. Zion a Bryce jsou ještě přístupné, ale kempování ve vyšších polohách se nedoporučuje."] },
     { m: "Pro", florida: ["good", "Prosinec na Floridě je ten měsíc, kdy sem přijede půlka Ameriky najednou. Sucho, 22 až 24 stupňů, žádné bouřky a Floridou se pohybují davy Američanů utíkajících před zimou. Ceny jsou nejvyšší za celý rok: hotely, restaurace, parkování. Vánoce na Floridě mají svou zvláštní atmosféru: palmové stromy ozdobené světýlky a Santa Claus v kraťasech. Oceán je nejchladnější v roce, kolem 22 stupňů, koupání spíš pro odvážnější."], newyork: ["ok", "Vánoční New York je sen. Fifth Avenue svítí, bruslení v Central Parku, vánoční trhy na každém rohu. Teploty kolem 0 až 5 stupňů, sníh možný kdykoliv. Turistů je hodně, ceny vysoké, ale atmosféra je jedinečná. Kdo chce New York jednou za život v nejkrásnější podobě, prosinec je ta správná volba: jen si přibalit teplý kabát a připravit peněženku."], parky: ["bad", "Zima, sníh, některé silnice na sezónu zavřené."] }
   ];
+
+  /* ── mapa tří oblastí ───────────────────────────────────────────────────
+     Úkol mapy není ukázat zeměpis, ale vzdálenost. Text tvrdí, že mezi
+     Floridou a jihozápadem je to jako z Prahy do Lisabonu. Mapa to řekne
+     na první pohled a bez čtení.                                          */
+  var MAPA_OBLASTI = {
+    florida: {
+      nazev: "Florida",
+      x: 704, y: 408, lx: 744, ly: 414, kotva: "start",
+      veta: "Pomalá, teplá a plochá. Pláže, prameny s průzračnou vodou a večery, kdy lidi tleskají západu slunce.",
+      kdy: "Nejlíp od listopadu do dubna"
+    },
+    newyork: {
+      nazev: "New York",
+      x: 744, y: 186, lx: 744, ly: 146, kotva: "middle",
+      veta: "Rychlý, hlučný a vertikální. Za tři dny toho stihneš víc než jinde za týden, a taky tě to víc unaví.",
+      kdy: "Nejlíp v květnu, září a říjnu"
+    },
+    parky: {
+      nazev: "Jihozápad a parky",
+      x: 236, y: 292, lx: 258, ly: 250, kotva: "middle",
+      veta: "Ticho, prostor a silnice, po které jedeš hodinu bez jediného auta v protisměru. Kaňony, které mozek odmítá uvěřit.",
+      kdy: "Nejlíp v březnu, květnu a říjnu"
+    }
+  };
+
+  function initMapa() {
+    var box = document.getElementById("mapa-obal");
+    if (!box) return;
+    var bublina = document.getElementById("mapa-bublina");
+
+    function ukaz(klic) {
+      var o = MAPA_OBLASTI[klic];
+      if (!o) return;
+      box.querySelectorAll(".mapa-oblast").forEach(function (g) {
+        g.classList.toggle("aktivni", g.dataset.oblast === klic);
+      });
+      bublina.innerHTML =
+        '<div class="mapa-bublina-nazev">' + o.nazev + '</div>' +
+        '<p>' + o.veta + '</p>' +
+        '<span class="kdy">' + o.kdy + '</span>';
+      bublina.classList.add("show");
+    }
+
+    box.querySelectorAll(".mapa-oblast").forEach(function (g) {
+      g.addEventListener("click", function () { ukaz(g.dataset.oblast); });
+      g.addEventListener("keydown", function (e) {
+        if (e.key === "Enter" || e.key === " ") { e.preventDefault(); ukaz(g.dataset.oblast); }
+      });
+    });
+
+    // předvybere destinaci ze zadání cesty
+    var setup = loadSetup();
+    if (setup && MAPA_OBLASTI[setup.destinace]) ukaz(setup.destinace);
+  }
 
   /* ── kvíz: jaký jsi cestovatel do USA ───────────────────────────────────
      Výsledek se uloží a promítne se do dalších modulů jako osobní poznámka.
@@ -4818,6 +4902,49 @@
                 '</div>';
       }
 
+      if (step.mapa) {
+        html += '<div class="mapa" id="mapa-obal">' +
+          '<div class="mapa-label">Klikni na oblast, uvidíš, co tě tam čeká</div>' +
+          '<svg viewBox="0 0 900 560" role="img" aria-label="Zjednodušená mapa USA se třemi oblastmi">' +
+            // pevnina: zjednodušený obrys s poznatelnou Floridou, Texasem a severovýchodem
+            '<path d="M96 116 ' +
+                     'L330 108 L560 104 ' +                       // severní hranice
+                     'Q596 150 640 122 ' +                        // Velká jezera
+                     'L706 118 L762 100 ' +                       // severovýchod a Maine
+                     'L772 142 L750 176 L734 212 L718 252 L710 288 ' +   // východní pobřeží
+                     'L698 316 L688 330 ' +                       // Georgie
+                     'Q708 366 716 412 Q718 452 706 466 ' +       // Florida, východní strana a špička
+                     'Q694 448 692 410 Q684 366 668 336 ' +       // Florida, západní strana
+                     'L620 346 L560 352 L500 360 ' +              // pobřeží Mexického zálivu
+                     'L466 378 Q456 406 448 414 Q428 396 420 372 ' +   // Texas
+                     'L330 360 L250 352 L172 338 ' +              // jižní hranice
+                     'L140 296 L120 236 L104 172 Z" ' +           // kalifornské pobřeží
+                     'fill="#E6F8FA" stroke="#14233A" stroke-width="5" stroke-linejoin="round"/>' +
+
+            // spojnice jihozápad a Florida: ten Praha až Lisabon efekt
+            '<g class="mapa-vzdalenost">' +
+              '<line x1="266" y1="300" x2="676" y2="400" stroke="#FFD23F" stroke-width="6" ' +
+                'stroke-linecap="round" stroke-dasharray="14 12"/>' +
+              '<rect x="320" y="312" width="300" height="46" rx="23" fill="#FFF6DC" stroke="#E8DCC0" stroke-width="3"/>' +
+              '<text x="470" y="342" text-anchor="middle">jako z Prahy do Lisabonu</text>' +
+            '</g>' +
+
+            Object.keys(MAPA_OBLASTI).map(function (k) {
+              var o = MAPA_OBLASTI[k];
+              return '<g class="mapa-oblast" data-oblast="' + k + '" tabindex="0" role="button" ' +
+                       'aria-label="' + o.nazev + '">' +
+                       '<circle cx="' + o.x + '" cy="' + o.y + '" r="30" fill="#1AC0CE" opacity="0.22"/>' +
+                       '<circle class="terc" cx="' + o.x + '" cy="' + o.y + '" r="15" fill="#1AC0CE" ' +
+                         'stroke="#14233A" stroke-width="4"/>' +
+                       '<text x="' + o.lx + '" y="' + o.ly + '" text-anchor="' + o.kotva + '">' +
+                         o.nazev + '</text>' +
+                     '</g>';
+            }).join('') +
+          '</svg>' +
+          '<div class="mapa-bublina" id="mapa-bublina"></div>' +
+        '</div>';
+      }
+
       if (step.kviz) {
         html += '<div class="kviz" id="kviz"></div>';
       }
@@ -5232,6 +5359,7 @@
 
     initStepVideos();
     initKviz();
+    initMapa();
     initTerminCheck();
     initMonthPicker();
     initStayPicker();
