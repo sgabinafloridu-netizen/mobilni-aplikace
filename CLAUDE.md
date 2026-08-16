@@ -46,7 +46,7 @@ Každý krok v modulu má tři vrstvy a v tomhle pořadí se i vykresluje:
 | Vrstva | Co to je | Prvky |
 |---|---|---|
 | **1. Příběh** | Gábiným hlasem, proč to řešíme. Krátké. | `lead`, `hook` (u modulu), `companion` (ilustrace + věta) |
-| **2. Nástroj** | Uživatel něco dělá, appka reaguje. Jádro appky. | `checklist`, `checklistGroups`, `passportCheck`, `estaCheck`, `toggleQuestions`, `addressField`, `monthPicker`, `chipExample` |
+| **2. Nástroj** | Uživatel něco dělá, appka reaguje. Jádro appky. | `checklist`, `checklistGroups`, `passportCheck`, `estaCheck`, `toggleQuestions`, `addressField`, `monthPicker`, `chipExample`, `kviz`, `mapa` |
 | **3. Hloubka** | Schované, rozklikne si jen ten, kdo chce víc. | `why`, `trap`, `note` (rozbalovací `<details>`) |
 
 **Vrstva 3 má tři úrovně naléhavosti a je zakázané je zaměňovat:**
@@ -66,7 +66,7 @@ Vše je v poli `MODULES` v `index.html`. Modul má:
   prep, hook[], praise{}, dashboard: bool, steps[] }
 ```
 
-Krok (`step`) má volitelně: `icon`, `kicker`, `title`, `lead[]`, `companion{}`, `checklist[]`, `checklistGroups[]`, `passportCheck`, `bookingCheck`, `chipExample`, `estaCheck`, `toggleQuestions[]`, `addressField`, `monthPicker`, `stayPicker`, `gallery`, `quote`, `link{}`, `tip{}`, `why{}`, `trap{}`, `note{}`.
+Krok (`step`) má volitelně: `icon`, `kicker`, `title`, `media{}`, `mapa`, `kviz`, `hintProTyp{}`, `ilustrace{}`, `lead[]`, `companion{}`, `checklist[]`, `checklistGroups[]`, `passportCheck`, `bookingCheck`, `chipExample`, `estaCheck`, `toggleQuestions[]`, `addressField`, `monthPicker`, `stayPicker`, `gallery`, `quote`, `link{}`, `tip{}`, `pochvala`, `why{}`, `trap{}`, `note{}`.
 
 **Prvky, které počítají z toho, co uživatel zadal v úvodu** (tohle je jádro UX principu, ne ozdoba):
 - `passportCheck` porovná platnost pasů s datem návratu
@@ -75,6 +75,14 @@ Krok (`step`) má volitelně: `icon`, `kicker`, `title`, `lead[]`, `companion{}`
 - `kviz` zjistí typ cestovatele, výsledek se uloží do `nezOdletisTypCestovatele`
 - `hintProTyp` ukáže osobní poznámku psanou pro ten typ, který vyšel z kvízu
 - `stayPicker` předvybere destinaci, kterou uživatel zadal, ostatní jdou přepnout
+- `mapa` předvybere zadanou destinaci a rovnou k ní ukáže bublinu
+
+### Schéma vzdáleností (`mapa`)
+Není to obrys pevniny a nikdy jím být nemá. Je to **schéma**: tři body rozmístěné podle skutečných vzdáleností vzdušnou čarou, spojnice s kilometry a pod nimi linka Praha až Lisabon ve **stejném měřítku**. Úkolem není zeměpis, ale aby čtenář vzdálenost viděl místo aby o ní četl.
+
+- `MERITKO` (jednotek viewBoxu na kilometr) drží celou geometrii. **Když se změní, musí se přepočítat souřadnice v `MAPA_OBLASTI` i délka evropské linky.**
+- Souřadnice jsou napočítané tak, aby poměry stran odpovídaly `MAPA_SPOJNICE` s odchylkou do 1 procenta.
+- viewBox je držený úzký (460 jednotek) schválně: appka se čte na mobilu, kde graf dostane jen asi 260 pixelů. V širokém viewBoxu vyjdou popisky na osm pixelů a nedají se přečíst. Ze stejného důvodu má `.mapa svg` strop `max-width: 400px`, aby na desktopu popisky naopak nepřerostly běžný text.
 
 Modul s `dashboard: true` si nese vlastní nadpis v `dashboardTitle`.
 
@@ -82,9 +90,10 @@ Modul s `dashboard: true` si nese vlastní nadpis v `dashboardTitle`.
 `renderStepsHtml()` vykresluje prvky ve **fixním pořadí**, ne v pořadí, v jakém jsou zapsané v datech:
 
 ```
-lead → companion → checklist → checklistGroups → passportCheck → bookingCheck
-→ chipExample → estaCheck → toggleQuestions → addressField → monthPicker
-→ stayPicker → gallery → quote → link → tip → why → trap → note
+media → mapa → kviz → hintProTyp → ilustrace → lead → companion → checklist
+→ checklistGroups → passportCheck → bookingCheck → chipExample → estaCheck
+→ toggleQuestions → addressField → monthPicker → stayPicker → gallery
+→ quote → link → tip → why → trap → note
 ```
 
 Když má něco vyjít jinde, musí se změnit `renderStepsHtml()`, ne pořadí klíčů v datech.

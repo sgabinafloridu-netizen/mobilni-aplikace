@@ -1004,13 +1004,25 @@
     font-size: 11px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase;
     color: var(--text-soft); margin-bottom: var(--s4);
   }
-  .mapa svg { display: block; width: 100%; height: auto; }
+  /* schéma je kreslené na svoji velikost: bez stropu by na širokém okně
+     vyrostly popisky nad velikost běžného textu a diagram by přebil odstavec */
+  .mapa svg { display: block; width: 100%; max-width: 400px; height: auto; margin: 0 auto; }
   .mapa-oblast { cursor: pointer; }
   .mapa-oblast circle { transition: r .18s, fill .18s; }
   .mapa-oblast:hover circle.terc { fill: var(--tyrkys-dark); }
   .mapa-oblast.aktivni circle.terc { fill: var(--ruzova); }
-  .mapa-oblast text { font-family: inherit; font-size: 21px; font-weight: 800; fill: #14233A; pointer-events: none; }
-  .mapa-vzdalenost text { font-family: inherit; font-size: 18px; font-weight: 700; fill: #6b5319; }
+  .mapa-oblast text { font-family: inherit; font-size: 20px; font-weight: 800; fill: #14233A; pointer-events: none; }
+  .mapa-spojnice { stroke: #9FDCE4; stroke-width: 4; stroke-linecap: round; }
+  .mapa-vzd-pill { fill: #FFFFFF; stroke: #DCE6EA; stroke-width: 2; }
+  .mapa-vzd text { font-family: inherit; font-size: 18px; font-weight: 800; fill: #14233A; }
+  .mapa-euro-popisek { font-family: inherit; font-size: 17px; font-weight: 800;
+                       letter-spacing: .06em; text-transform: uppercase; fill: #6b7a85; }
+  .mapa-euro text { font-family: inherit; font-size: 18px; font-weight: 800; fill: #14233A; }
+  .mapa-pozn { margin-top: var(--s3); font-size: 12.5px; line-height: 1.6; color: var(--text-soft); }
+  /* na mobilu je každý pixel šířky znát, popisky ve schématu se jinak nedají přečíst */
+  @media (max-width: 640px) {
+    .mapa { padding: var(--s4) var(--s3); }
+  }
 
   .mapa-bublina {
     display: none; margin-top: var(--s4);
@@ -3335,30 +3347,52 @@
     { m: "Pro", florida: ["good", "Prosinec na Floridě je ten měsíc, kdy sem přijede půlka Ameriky najednou. Sucho, 22 až 24 stupňů, žádné bouřky a Floridou se pohybují davy Američanů utíkajících před zimou. Ceny jsou nejvyšší za celý rok: hotely, restaurace, parkování. Vánoce na Floridě mají svou zvláštní atmosféru: palmové stromy ozdobené světýlky a Santa Claus v kraťasech. Oceán je nejchladnější v roce, kolem 22 stupňů, koupání spíš pro odvážnější."], newyork: ["ok", "Vánoční New York je sen. Fifth Avenue svítí, bruslení v Central Parku, vánoční trhy na každém rohu. Teploty kolem 0 až 5 stupňů, sníh možný kdykoliv. Turistů je hodně, ceny vysoké, ale atmosféra je jedinečná. Kdo chce New York jednou za život v nejkrásnější podobě, prosinec je ta správná volba: jen si přibalit teplý kabát a připravit peněženku."], parky: ["bad", "Zima, sníh, některé silnice na sezónu zavřené."] }
   ];
 
-  /* ── mapa tří oblastí ───────────────────────────────────────────────────
-     Úkol mapy není ukázat zeměpis, ale vzdálenost. Text tvrdí, že mezi
-     Floridou a jihozápadem je to jako z Prahy do Lisabonu. Mapa to řekne
-     na první pohled a bez čtení.                                          */
+  /* ── schéma tří oblastí ─────────────────────────────────────────────────
+     Úkolem tohohle prvku není učit zeměpis, ale ukázat vzdálenost. Proto to
+     není obrys pevniny, ale schéma: tři body rozmístěné podle skutečných
+     vzdáleností a pod nimi evropská linka ve stejném měřítku. Tvrzení
+     „jako z Prahy do Lisabonu“ tak čtenář vidí, místo aby ho četl.
+
+     MERITKO = jednotek viewBoxu na jeden kilometr. Souřadnice bodů jsou na
+     něj napočítané, takže se s ním nesmí hýbat bez přepočtu MAPA_OBLASTI.
+     Viewbox je držený úzký schválně: appka se čte na mobilu a v širokém
+     viewBoxu by popisky vyšly na osm pixelů.                              */
+  var MERITKO = 0.09;
+
   var MAPA_OBLASTI = {
     florida: {
       nazev: "Florida",
-      x: 704, y: 408, lx: 744, ly: 414, kotva: "start",
+      x: 376, y: 222, lx: 376, ly: 262, kotva: "middle",
       veta: "Pomalá, teplá a plochá. Pláže, prameny s průzračnou vodou a večery, kdy lidi tleskají západu slunce.",
       kdy: "Nejlíp od listopadu do dubna"
     },
     newyork: {
       nazev: "New York",
-      x: 744, y: 186, lx: 744, ly: 146, kotva: "middle",
+      x: 394, y: 66, lx: 394, ly: 32, kotva: "middle",
       veta: "Rychlý, hlučný a vertikální. Za tři dny toho stihneš víc než jinde za týden, a taky tě to víc unaví.",
       kdy: "Nejlíp v květnu, září a říjnu"
     },
     parky: {
       nazev: "Jihozápad a parky",
-      x: 236, y: 292, lx: 258, ly: 250, kotva: "middle",
+      zkratka: "Jihozápad",
+      x: 100, y: 150, lx: 100, ly: 112, kotva: "middle",
       veta: "Ticho, prostor a silnice, po které jedeš hodinu bez jediného auta v protisměru. Kaňony, které mozek odmítá uvěřit.",
       kdy: "Nejlíp v březnu, květnu a říjnu"
     }
   };
+
+  /* vzdálenosti vzdušnou čarou, zaokrouhlené na stovky */
+  var MAPA_SPOJNICE = [
+    { a: "parky",   b: "newyork", km: 3400 },
+    { a: "parky",   b: "florida", km: 3200 },
+    { a: "newyork", b: "florida", km: 1750 }
+  ];
+
+  function kmText(km) {
+    return km >= 1000
+      ? String(km).slice(0, -3) + " " + String(km).slice(-3) + " km"
+      : km + " km";
+  }
 
   function initMapa() {
     var box = document.getElementById("mapa-obal");
@@ -4903,44 +4937,64 @@
       }
 
       if (step.mapa) {
+        // odznak se vzdáleností, posazený doprostřed spojnice
+        var vzdOdznak = function (ax, ay, bx, by, km) {
+          var t = kmText(km);
+          var sirka = t.length * 10 + 22;
+          var sx = (ax + bx) / 2, sy = (ay + by) / 2;
+          return '<g class="mapa-vzd">' +
+                   '<rect class="mapa-vzd-pill" x="' + (sx - sirka / 2) + '" y="' + (sy - 15) + '" ' +
+                     'width="' + sirka + '" height="30" rx="15"/>' +
+                   '<text x="' + sx + '" y="' + (sy + 6) + '" text-anchor="middle">' + t + '</text>' +
+                 '</g>';
+        };
+
+        // evropská linka ve stejném měřítku: začíná pod prvním bodem schématu
+        var euroKm = 2750, euroX1 = 100, euroX2 = euroX1 + Math.round(euroKm * MERITKO), euroY = 348;
+
         html += '<div class="mapa" id="mapa-obal">' +
           '<div class="mapa-label">Klikni na oblast, uvidíš, co tě tam čeká</div>' +
-          '<svg viewBox="0 0 900 560" role="img" aria-label="Zjednodušená mapa USA se třemi oblastmi">' +
-            // pevnina: zjednodušený obrys s poznatelnou Floridou, Texasem a severovýchodem
-            '<path d="M96 116 ' +
-                     'L330 108 L560 104 ' +                       // severní hranice
-                     'Q596 150 640 122 ' +                        // Velká jezera
-                     'L706 118 L762 100 ' +                       // severovýchod a Maine
-                     'L772 142 L750 176 L734 212 L718 252 L710 288 ' +   // východní pobřeží
-                     'L698 316 L688 330 ' +                       // Georgie
-                     'Q708 366 716 412 Q718 452 706 466 ' +       // Florida, východní strana a špička
-                     'Q694 448 692 410 Q684 366 668 336 ' +       // Florida, západní strana
-                     'L620 346 L560 352 L500 360 ' +              // pobřeží Mexického zálivu
-                     'L466 378 Q456 406 448 414 Q428 396 420 372 ' +   // Texas
-                     'L330 360 L250 352 L172 338 ' +              // jižní hranice
-                     'L140 296 L120 236 L104 172 Z" ' +           // kalifornské pobřeží
-                     'fill="#E6F8FA" stroke="#14233A" stroke-width="5" stroke-linejoin="round"/>' +
+          '<svg viewBox="0 0 460 392" role="img" ' +
+               'aria-label="Schéma vzdáleností mezi třemi oblastmi USA, srovnané se vzdáleností z Prahy do Lisabonu">' +
 
-            // spojnice jihozápad a Florida: ten Praha až Lisabon efekt
-            '<g class="mapa-vzdalenost">' +
-              '<line x1="266" y1="300" x2="676" y2="400" stroke="#FFD23F" stroke-width="6" ' +
-                'stroke-linecap="round" stroke-dasharray="14 12"/>' +
-              '<rect x="320" y="312" width="300" height="46" rx="23" fill="#FFF6DC" stroke="#E8DCC0" stroke-width="3"/>' +
-              '<text x="470" y="342" text-anchor="middle">jako z Prahy do Lisabonu</text>' +
-            '</g>' +
+            // spojnice mezi body, kreslené jako první, ať jsou pod terči
+            MAPA_SPOJNICE.map(function (s) {
+              var a = MAPA_OBLASTI[s.a], b = MAPA_OBLASTI[s.b];
+              return '<line class="mapa-spojnice" x1="' + a.x + '" y1="' + a.y + '" ' +
+                       'x2="' + b.x + '" y2="' + b.y + '"/>';
+            }).join('') +
+            MAPA_SPOJNICE.map(function (s) {
+              var a = MAPA_OBLASTI[s.a], b = MAPA_OBLASTI[s.b];
+              return vzdOdznak(a.x, a.y, b.x, b.y, s.km);
+            }).join('') +
 
             Object.keys(MAPA_OBLASTI).map(function (k) {
               var o = MAPA_OBLASTI[k];
               return '<g class="mapa-oblast" data-oblast="' + k + '" tabindex="0" role="button" ' +
                        'aria-label="' + o.nazev + '">' +
-                       '<circle cx="' + o.x + '" cy="' + o.y + '" r="30" fill="#1AC0CE" opacity="0.22"/>' +
-                       '<circle class="terc" cx="' + o.x + '" cy="' + o.y + '" r="15" fill="#1AC0CE" ' +
-                         'stroke="#14233A" stroke-width="4"/>' +
+                       '<circle cx="' + o.x + '" cy="' + o.y + '" r="22" fill="#1AC0CE" opacity="0.22"/>' +
+                       '<circle class="terc" cx="' + o.x + '" cy="' + o.y + '" r="11" fill="#1AC0CE" ' +
+                         'stroke="#14233A" stroke-width="3"/>' +
                        '<text x="' + o.lx + '" y="' + o.ly + '" text-anchor="' + o.kotva + '">' +
-                         o.nazev + '</text>' +
+                         (o.zkratka || o.nazev) + '</text>' +
                      '</g>';
             }).join('') +
+
+            // srovnání s Evropou, tentýž počet pixelů na kilometr
+            '<line x1="20" y1="282" x2="440" y2="282" stroke="#DCE6EA" stroke-width="2"/>' +
+            '<text class="mapa-euro-popisek" x="20" y="314">Ve stejném měřítku v Evropě</text>' +
+            '<g class="mapa-euro">' +
+              '<line x1="' + euroX1 + '" y1="' + euroY + '" x2="' + euroX2 + '" y2="' + euroY + '" ' +
+                'stroke="#FFD23F" stroke-width="7" stroke-linecap="round"/>' +
+              '<circle cx="' + euroX1 + '" cy="' + euroY + '" r="8" fill="#14233A"/>' +
+              '<circle cx="' + euroX2 + '" cy="' + euroY + '" r="8" fill="#14233A"/>' +
+              '<text x="' + euroX1 + '" y="' + (euroY + 28) + '" text-anchor="middle">Praha</text>' +
+              '<text x="' + euroX2 + '" y="' + (euroY + 28) + '" text-anchor="middle">Lisabon</text>' +
+              vzdOdznak(euroX1, euroY, euroX2, euroY, euroKm) +
+            '</g>' +
           '</svg>' +
+          '<p class="mapa-pozn">Body jsou rozmístěné podle skutečných vzdáleností vzdušnou čarou, ' +
+            'ne podle tvaru pevniny. Žlutá linka je stejně dlouhá jako na skutečné mapě Evropy.</p>' +
           '<div class="mapa-bublina" id="mapa-bublina"></div>' +
         '</div>';
       }
