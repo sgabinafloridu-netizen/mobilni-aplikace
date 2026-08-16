@@ -794,7 +794,9 @@
   }
   .toc-item:hover { background: var(--accent-soft); color: var(--accent); }
   .toc-num {
-    flex: 0 0 auto; width: 20px; height: 20px; border-radius: var(--r-pill);
+    /* "1.1" je širší než jedna číslice, takže odznak roste s obsahem
+       místo pevné šířky, jinak by se číslo v kolečku mačkalo */
+    flex: 0 0 auto; min-width: 20px; height: 20px; padding: 0 5px; border-radius: var(--r-pill);
     background: var(--accent-soft); color: var(--accent);
     display: grid; place-items: center; font-size: 10.5px; font-weight: 800; margin-top: 1px;
     transition: background .15s, color .15s;
@@ -1813,10 +1815,10 @@
                 <span class="side-card-ico">💡</span>
                 <span>
                   <strong>Než začneš, 2 věci, ať tě nepřekvapí.</strong> Kurz běží v prohlížeči, takže
-                  nic neinstaluješ a nikam se neregistruješ. Když si ho přidáš na plochu telefonu, otevře
-                  se ti jako aplikace a Trezor pak funguje i bez signálu. A druhá věc: časovou osu i
+                  <strong>nic neinstaluješ a nikam se neregistruješ</strong>. Když si ho přidáš na plochu telefonu, otevře
+                  se ti jako aplikace a <strong>Trezor pak funguje i bez signálu</strong>. A druhá věc: časovou osu i
                   upozornění ti kurz skládá podle tvého termínu, takže u některých modulů uvidíš
-                  poznámku, která se týká zrovna tvé cesty.
+                  <strong>poznámku, která se týká zrovna tvé cesty</strong>.
                 </span>
               </div>
             </div>
@@ -2076,7 +2078,6 @@
       steps: [
         {
           icon: "🌴",
-          kicker: "Krok 1",
           title: "Florida, New York nebo parky: jak si vybrat",
           kviz: true,
           bloky: [
@@ -2118,7 +2119,6 @@
         },
         {
           icon: "📅",
-          kicker: "Krok 2",
           title: "Kdy do USA nejezdi, a proč to cestovky neříkají",
           mapa: true,
           ilustrace: { src: "images/sceny/florida-bourka.svg", popis: "floridské odpoledne v létě: přijde, přejde, z asfaltu se kouří" },
@@ -2150,7 +2150,6 @@
         },
         {
           icon: "🌀",
-          kicker: "Krok 3",
           title: "Hurikánová sezóna: kde, kdy a jak moc to řešit",
           ilustrace: { src: "images/sceny/pani-cokdyz-radar.svg", popis: "paní Cokdyž si pořídila meteoradar" },
           bloky: [
@@ -2190,7 +2189,6 @@
         },
         {
           icon: "🥵",
-          kicker: "Krok 4",
           title: "Grand Canyon v létě: co tě čeká a co ne",
           bloky: [
             { text: ["Na fotkách to vypadá jako nekonečná, ale docela neškodná vycházka. Výhled z okraje tě vtáhne, stezka se svažuje pozvolna a vítr, co fouká nahoře na vyhlídce, <strong>tě přesvědčí, že to bude v pohodě</strong>."] },
@@ -2225,7 +2223,6 @@
         },
         {
           icon: "🚗",
-          kicker: "Krok 5",
           title: "Rezervace parků: proč to nestačí zařídit týden předem",
           hintProTyp: {
             svobodny: "Tohle je přesně to místo, kde tvůj styl v Americe narazí. <strong>Vstupy do parků se v Evropě neřeší, tady se vyprodají týdny dopředu.</strong> Je to jediná věc, kterou tě prosím udělat předem. Zbytek klidně nech na cestě.",
@@ -2309,7 +2306,6 @@
       steps: [
         {
           icon: "📘",
-          kicker: "Krok 1",
           title: "Pas, který tiše dodýchává v šuplíku",
           lead: [
             "Rodiče sedí nad formulářem ESTA v naprostém klidu. Dítěti přitom pas v šuplíku dodýchává už měsíc.",
@@ -2349,7 +2345,6 @@
         },
         {
           icon: "💻",
-          kicker: "Krok 2",
           title: "Co si nachystat, než otevřeš formulář",
           lead: [
             "Tohle je dobrá zpráva celého modulu. ESTA se vyřizuje z gauče, v teplácích, za pár minut. Žádná ambasáda, žádný pohovor.",
@@ -2431,7 +2426,6 @@
         },
         {
           icon: "🛂",
-          kicker: "Krok 3",
           title: "Patříš do té hrstky výjimek?",
           lead: [
             "Naprostá většina Čechů si s ESTA vystačí a nikdy neřeší nic dalšího.",
@@ -2472,7 +2466,6 @@
         },
         {
           icon: "🧳",
-          kicker: "Krok 4",
           title: "Dvě věci, na které se ptají na hranici",
           ilustrace: { src: "images/sceny/urednik-kafe.svg", popis: "úředník krátce před kafem, ještě tři lidi" },
           lead: [
@@ -2501,7 +2494,6 @@
         },
         {
           icon: "🚑",
-          kicker: "Krok 5",
           title: "Dva doklady, které nikdo nekontroluje. Dokud je nepotřebuješ",
           lead: [
             "Na hranici ti je nikdo nezkontroluje. Přesně proto je skoro každý podcení.",
@@ -2538,7 +2530,6 @@
         },
         {
           icon: "👨‍👩‍👧",
-          kicker: "Krok 6",
           title: "Jedna chybějící stránka, a zůstaneš na letišti",
           ilustrace: { src: "images/sceny/scena-razitko.svg", popis: "razítko, které se den předem nesežene" },
           lead: [
@@ -2607,7 +2598,6 @@
       steps: [
         {
           icon: "📅",
-          kicker: "Krok 1",
           title: "Kdy je ta správná chvíle koupit",
           hintProTyp: {
             planovac: "Tohle je tvoje disciplína. Nastav si <strong>hlídání ceny hned teď</strong> a do kalendáře si zapiš den, kdy začne tvoje okno. Víc dělat nemusíš, cena přijde za tebou.",
@@ -2644,7 +2634,6 @@
         },
         {
           icon: "🗺️",
-          kicker: "Krok 2",
           title: "Letíš z Prahy, nebo z Mošnova?",
           lead: [
             "Tuhle vrstvu většina rad vynechá, protože je psaná z Prahy.",
@@ -2668,7 +2657,6 @@
         },
         {
           icon: "🔎",
-          kicker: "Krok 3",
           title: "Tři funkce, které dělají celý rozdíl",
           lead: [
             "Hledat letenky umí každý.",
@@ -2703,7 +2691,6 @@
         },
         {
           icon: "🔄",
-          kicker: "Krok 4",
           title: "Proč je americký přestup jiný než evropský",
           lead: [
             "Jestli si máš z modulu odnést jedinou věc, ať je to tahle.",
@@ -2745,7 +2732,6 @@
         },
         {
           icon: "🌙",
-          kicker: "Krok 5",
           title: "Noční, nebo denní let?",
           lead: [
             "Na tohle se skoro nikdo neptá. Přitom to rozhoduje, v jakém stavu dorazíš k imigrační kontrole.",
@@ -2768,7 +2754,6 @@
         },
         {
           icon: "🧳",
-          kicker: "Krok 6",
           title: "Proč je Basic Economy dražší, než vypadá",
           lead: [
             "Nejlevnější tarif ve výsledcích se skoro vždycky jmenuje Basic Economy. Vypadá to jako výhra.",
@@ -2794,7 +2779,6 @@
         },
         {
           icon: "💳",
-          kicker: "Krok 7",
           title: "Než klikneš na zaplatit",
           lead: [
             "Poslední kontrola, než pustíš peníze.",
@@ -2870,7 +2854,6 @@
       steps: [
         {
           icon: "🗺️",
-          kicker: "Krok 1",
           title: "Kde spát, když každá destinace hraje jinou hru",
           hintProTyp: {
             svobodny: "U měst a pláží si klidně nech volnost. <strong>U národních parků ne</strong>, tam se ubytování uvnitř rezervuje 13 měsíců dopředu a na místě se nesežene nic.",
@@ -2899,7 +2882,6 @@
         },
         {
           icon: "🧾",
-          kicker: "Krok 2",
           title: "Kde se z pokoje za 120 dolarů stane 165",
           lead: [
             "Tady vzniká ten rozdíl mezi částkou na srovnávači a tou na účtu.",
@@ -2929,7 +2911,6 @@
         },
         {
           icon: "💳",
-          kicker: "Krok 3",
           title: "Až ti hotel zablokuje peníze, nelekej se",
           ilustrace: { src: "images/sceny/scena-karta-blokace.svg", popis: "nejsou pryč, jen je někdo na pár dní zamkl" },
           lead: [
@@ -2965,7 +2946,6 @@
         },
         {
           icon: "📋",
-          kicker: "Krok 4",
           title: "Co se špatně dohání až na místě",
           lead: [
             "Pár drobností, které se na místě dohánějí špatně.",
@@ -2987,7 +2967,6 @@
         },
         {
           icon: "🔒",
-          kicker: "Krok 5",
           title: "Dvě věci, které musíš mít i bez signálu",
           lead: [
             "Poslední krok, a je krátký.",
@@ -3055,7 +3034,6 @@
       steps: [
         {
           icon: "💳",
-          kicker: "Krok 1",
           title: "Proč do Ameriky nestačí jedna karta",
           lead: [
             "V Česku vystačíš s jednou kartou roky. V Americe je jedna karta riziko.",
@@ -3079,7 +3057,6 @@
         },
         {
           icon: "💵",
-          kicker: "Krok 2",
           title: "Kolik hotovosti si vzít",
           lead: [
             "Amerika je zemí karet. Zaplatíš jimi kafe za dva dolary i benzín uprostřed ničeho.",
@@ -3102,7 +3079,6 @@
         },
         {
           icon: "🏦",
-          kicker: "Krok 3",
           title: "Kolik si z každé platby ukousne banka",
           lead: [
             "Tady se ztrácejí ty peníze, o kterých nikdo nemluví. Ne po stovkách, ale po procentech z každé jednotlivé platby.",
@@ -3132,7 +3108,6 @@
         },
         {
           icon: "⚠️",
-          kicker: "Krok 4",
           title: "Až se tě terminál zeptá na koruny, řekni ne",
           lead: [
             "Tomuhle říkám <strong>korunová past</strong> a je to nejdražší dvě vteřiny celé dovolené.",
@@ -3156,7 +3131,6 @@
         },
         {
           icon: "📞",
-          kicker: "Krok 5",
           title: "Co udělat s bankou, než odletíš",
           lead: [
             "Deset minut v aplikaci banky večer před odletem. Nic víc to není.",
@@ -3179,7 +3153,6 @@
         },
         {
           icon: "🧮",
-          kicker: "Krok 6",
           title: "Kolik to celé bude stát",
           lead: [
             "Zbývá poslední otázka, a je ta největší: kolik si mám vlastně připravit?",
@@ -3239,7 +3212,6 @@
       steps: [
         {
           icon: "🎒",
-          kicker: "Krok 1",
           title: "Co musí být v příručním, ať se stane cokoliv",
           lead: [
             "Odbavený kufr se ztratí zhruba jednomu z dvou set cestujících. Většinou se najde do dvou dnů.",
@@ -3265,7 +3237,6 @@
         },
         {
           icon: "🖨️",
-          kicker: "Krok 2",
           title: "Co si vytisknout, i když máš všechno v mobilu",
           lead: [
             "Ano, i v roce 2026. A není to z nedůvěry k technice.",
@@ -3289,7 +3260,6 @@
         },
         {
           icon: "🔌",
-          kicker: "Krok 3",
           title: "Tři věci, na které se zapomíná nejčastěji",
           lead: [
             "Oblečení si sbalíš sama a líp než já. Tyhle tři věci se ale zapomínají tak spolehlivě, že si zaslouží vlastní krok."
@@ -3310,7 +3280,6 @@
         },
         {
           icon: "🚫",
-          kicker: "Krok 4",
           title: "Co se do Ameriky nesmí, ani v kufru",
           lead: [
             "Tady se to lidem kazí nejčastěji, a skoro vždycky s tou nejlepší vůlí. Vezmou si na cestu domácí klobásu nebo babiččin domácí kompot.",
@@ -3335,7 +3304,6 @@
         },
         {
           icon: "🌙",
-          kicker: "Krok 5",
           title: "Poslední večer: pět minut a jdeš spát",
           lead: [
             "Poslední kontrola, kterou uděláš s kufrem už zavřeným.",
@@ -3388,7 +3356,6 @@
       steps: [
         {
           icon: "🛫",
-          kicker: "Krok 1",
           title: "Zrušený nebo hodně zpožděný let",
           hintProTyp: {
             svobodny: "Tenhle jediný modul si přečti dřív, než ho budeš potřebovat. Ne kvůli plánování, ale proto, že <strong>na letišti v cizí zemi se špatně googlí</strong>.",
@@ -3420,7 +3387,6 @@
         },
         {
           icon: "🤒",
-          kicker: "Krok 2",
           title: "Onemocníš pár dní před odletem",
           lead: [
             "Tohle je situace, kde se rozhoduje o desítkách tisíc, a rozhodlo se o nich už ve chvíli, kdy se kupovalo pojištění.",
@@ -3443,7 +3409,6 @@
         },
         {
           icon: "📕",
-          kicker: "Krok 3",
           title: "Ztratíš pas nebo ti propadl",
           lead: [
             "Vypadá to jako konec cesty. Není.",
@@ -3466,7 +3431,6 @@
         },
         {
           icon: "🚫",
-          kicker: "Krok 4",
           title: "Zamítnutá ESTA",
           lead: [
             "Stane se to zřídka, ale stane. A je to jediná z těchhle situací, kterou nejde vyřešit rychle.",
@@ -3494,7 +3458,6 @@
         },
         {
           icon: "📇",
-          kicker: "Krok 5",
           title: "Co mít po ruce, aby se to řešilo snadno",
           lead: [
             "Všechny situace výš mají jedno společné: řeší se telefonem a papírem.",
@@ -4743,7 +4706,7 @@
       if (polozka) {
         polozka.classList.toggle("done", hotovo);
         var cislo = polozka.querySelector(".toc-num");
-        if (cislo) cislo.textContent = hotovo ? "✓" : String(i + 1);
+        if (cislo) cislo.textContent = hotovo ? "✓" : cislo.dataset.cislo;
       }
     });
   }
@@ -5178,13 +5141,17 @@
   }
 
   function renderStepsHtml(steps, moduleId) {
+    // Číslo kroku je vždy "modul.krok" (např. 2.3), ať sedí s pravým
+    // sloupcem „V téhle lekci“. Ignoruje se tím uložené step.kicker,
+    // který v datech stejně vždy jen opakoval pořadí kroku.
+    var modCislo = MODULES.findIndex(function (m) { return m.id === moduleId; }) + 1;
     return steps.map(function (step, i) {
       var html = '<article class="step-card" id="krok-' + (i + 1) + '">';
 
       html += '<div class="step-head">' +
                 '<span class="step-badge" aria-hidden="true">' + (step.icon || '•') + '</span>' +
                 '<span class="step-titles">' +
-                  '<span class="step-kicker">' + (step.kicker || ('Krok ' + (i + 1))) + '</span>' +
+                  '<span class="step-kicker">Krok ' + modCislo + '.' + (i + 1) + '</span>' +
                   '<span class="step-name">' + step.title + '</span>' +
                 '</span>' +
                 '<span class="step-hotovo">✓ Hotovo</span>' +
@@ -5750,11 +5717,13 @@
     toc.innerHTML = "";
     if (mod.steps && mod.steps.length) {
       tocCard.hidden = false;
+      var modCislo = MODULES.indexOf(mod) + 1;
       mod.steps.forEach(function (step, i) {
         var b = document.createElement("button");
         b.type = "button";
         b.className = "toc-item";
-        b.innerHTML = '<span class="toc-num">' + (i + 1) + '</span><span>' + step.title + '</span>';
+        b.innerHTML = '<span class="toc-num" data-cislo="' + modCislo + '.' + (i + 1) + '">' +
+                         modCislo + '.' + (i + 1) + '</span><span>' + step.title + '</span>';
         b.addEventListener("click", function () {
           var target = document.getElementById("krok-" + (i + 1));
           if (target) target.scrollIntoView({ behavior: "smooth", block: "start" });
