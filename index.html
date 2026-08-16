@@ -905,19 +905,23 @@
      i když nad nimi ještě obtéká ilustrace z `step.ilustrace`.          */
   .blok-text + .blok-text { margin-top: var(--s4); }
 
+  /* flex-wrap + min-width na popisu: když vedle sebe nezbyde aspoň ~180px
+     na text, sám se přesune na vlastní řádek pod číslo, místo aby se
+     mačkal do úzkého sloupce po jednom slově na řádek. Delší slovní
+     statistiky ("1× za pár let") navíc nesmí mít nowrap, jinak by si
+     vynutily šířku a stiskly popis samy. */
   .blok-stat {
-    clear: both; display: flex; align-items: center; gap: var(--s4);
+    clear: both; display: flex; flex-wrap: wrap; align-items: center; gap: var(--s3) var(--s4);
     margin: var(--s6) 0; padding: var(--s5);
     background: linear-gradient(135deg, var(--tyrkys-light) 0%, var(--ruzova-light) 100%);
     border-radius: var(--r-lg);
   }
   .blok-stat-cislo {
-    flex: 0 0 auto; font-size: clamp(28px, 5vw, 40px); font-weight: 800; line-height: 1;
+    flex: 0 1 auto; max-width: 100%; font-size: clamp(26px, 5vw, 40px); font-weight: 800; line-height: 1.1;
     background: linear-gradient(135deg, var(--tyrkys-dark), var(--ruzova-deep));
     -webkit-background-clip: text; background-clip: text; color: transparent;
-    white-space: nowrap;
   }
-  .blok-stat-popis { font-size: 14.5px; line-height: 1.6; color: var(--text); font-weight: 600; }
+  .blok-stat-popis { flex: 1 1 200px; min-width: 180px; font-size: 14.5px; line-height: 1.6; color: var(--text); font-weight: 600; }
   .blok-stat-popis strong { color: var(--inkoust); }
 
   .blok-oddelovac { clear: both; display: flex; align-items: center; gap: var(--s3); margin: var(--s6) 0; }
@@ -948,14 +952,12 @@
   .voda-volba.vybrana { border-color: var(--tyrkys); background: var(--tyrkys-light); color: var(--tyrkys-dark); }
   .voda-vysledek { display: none; }
   .voda-vysledek.show {
-    display: flex; align-items: center; gap: var(--s4); margin-top: var(--s5); animation: discIn .3s ease both;
+    display: flex; flex-wrap: wrap; align-items: center; gap: var(--s2) var(--s4);
+    margin-top: var(--s5); animation: discIn .3s ease both;
     background: var(--surface); border-radius: var(--r-md); padding: var(--s4) var(--s5); border-left: 3px solid var(--zluta);
   }
-  .voda-vysledek-cislo { flex: 0 0 auto; font-size: 30px; font-weight: 800; color: var(--inkoust); white-space: nowrap; }
-  .voda-vysledek-text { font-size: 14px; line-height: 1.6; color: var(--text-muted); }
-  @media (max-width: 520px) {
-    .voda-vysledek.show { flex-direction: column; align-items: flex-start; gap: var(--s2); }
-  }
+  .voda-vysledek-cislo { flex: 0 1 auto; font-size: 30px; font-weight: 800; color: var(--inkoust); }
+  .voda-vysledek-text { flex: 1 1 200px; min-width: 180px; font-size: 14px; line-height: 1.6; color: var(--text-muted); }
 
   /* ── rozklikávací bloky ── */
   .disc {
