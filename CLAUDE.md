@@ -90,7 +90,7 @@ Modul s `dashboard: true` si nese vlastní nadpis v `dashboardTitle`.
 `renderStepsHtml()` vykresluje prvky ve **fixním pořadí**, ne v pořadí, v jakém jsou zapsané v datech:
 
 ```
-lead → media → mapa → kviz → hintProTyp → ilustrace → companion → checklist
+(lead nebo bloky) → media → mapa → kviz → hintProTyp → ilustrace → companion → checklist
 → checklistGroups → passportCheck → bookingCheck → chipExample → estaCheck
 → toggleQuestions → addressField → monthPicker → stayPicker → gallery
 → quote → link → tip → why → trap → note
@@ -113,6 +113,16 @@ Kvíz „jaký jsi cestovatel" má **záměrně stejný vzhled jako kalkulačka*
 | primární tlačítko | přechod `#FF6FA5 → #FF9E6B`, rádius 50 px, stín `0 4px 20px rgba(255,111,165,.4)` |
 
 Pod 520 px se ilustrace i nadpis zmenšují a karta si bere míň odsazení. **Když se kalkulačka předělá, musí se předělat i tohle**, jinak se produkty rozejdou.
+
+### `bloky`: text prokládaný rytmem, ne jedna esej
+Krok může mít `bloky` místo `lead`. Je to pole prvků, které se vykreslí v pořadí, v jakém jsou zapsané (jediná výjimka z pravidla pevného pořadí, protože je to čistě vnitřní rytmus jednoho textového bloku, ne governance nad tím, které komponenty se v kroku objeví):
+
+- `{ text: [...] }` odstavce, stejně jako dřív `lead`
+- `{ stat: "45 °C", popis: "..." }` vytažené číslo jako vizuální oddělovač, gradientové písmo
+- `{ oddelovac: true, ikona: "💧" }` čistě grafická pauza mezi tématy, bez textu
+- `{ voda: true }` kalkulačka vody (`initVoda()`), zatím jen v kroku o Grand Canyonu
+
+Použít vždy, když by `lead` jinak byl jeden dlouhý odstavec nebo víc než 3 odstavce v řadě bez přerušení. Krátký krok s 1 až 2 odstavci `bloky` nepotřebuje, tam zůstává `lead`.
 
 ### Kdy ilustraci nedávat
 Obrázek nesmí opakovat to, co hned pod ním appka ukáže doopravdy. Kreslený kalendář nad `bookingCheck`, který počítá dny do odletu, čtenáře jen zdrží. **Ilustrace patří k textu, ne k nástroji.**
