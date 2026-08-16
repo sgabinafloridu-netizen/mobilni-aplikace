@@ -71,7 +71,9 @@ Krok (`step`) má volitelně: `icon`, `kicker`, `title`, `lead[]`, `companion{}`
 **Prvky, které počítají z toho, co uživatel zadal v úvodu** (tohle je jádro UX principu, ne ozdoba):
 - `passportCheck` porovná platnost pasů s datem návratu
 - `bookingCheck` z data odletu určí, jestli je zrovna nákupní okno na letenku (bere v úvahu hlavní sezónu)
-- `monthPicker` se otevře na měsíci skutečného odletu
+- `monthPicker` dá verdikt k termínu a destinaci, které uživatel zadal, a pod ním nechá rozkliknout přehled všech 12 měsíců pro všechny 3 destinace
+- `kviz` zjistí typ cestovatele, výsledek se uloží do `nezOdletisTypCestovatele`
+- `hintProTyp` ukáže osobní poznámku psanou pro ten typ, který vyšel z kvízu
 - `stayPicker` předvybere destinaci, kterou uživatel zadal, ostatní jdou přepnout
 
 Modul s `dashboard: true` si nese vlastní nadpis v `dashboardTitle`.

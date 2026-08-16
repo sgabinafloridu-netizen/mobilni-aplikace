@@ -4145,6 +4145,59 @@
     return arr.map(function (p) { return '<p>' + p + '</p>'; }).join('');
   }
 
+  /* Verdikt k termínu, který člověk zadal v úvodu. Bere měsíc odletu
+     a jeho destinaci a řekne rovnou, jestli je to dobrá volba a proč.
+     Text počasí je ten samý, který je v přehledu ostatních měsíců. */
+  function initTerminCheck() {
+    var box = document.getElementById("termin-check");
+    if (!box) return;
+
+    var setup = loadSetup();
+    if (!setup || !setup.datum || !setup.destinace) {
+      box.innerHTML = '<p><strong>Chybí termín nebo destinace.</strong> Doplň je v nastavení cesty ' +
+                      'a rovnou uvidíš, jestli je ten termín dobrá volba.</p>';
+      return;
+    }
+
+    var mesic = new Date(setup.datum + "T00:00:00").getMonth();
+    var radek = MONTH_WEATHER[mesic];
+    var udaj = radek && radek[setup.destinace];
+    if (!udaj) { box.innerHTML = ''; return; }
+
+    var tier = udaj[0], text = udaj[1];
+    var nazvyMesicu = ["Leden","Únor","Březen","Duben","Květen","Červen",
+                       "Červenec","Srpen","Září","Říjen","Listopad","Prosinec"];
+    var kam = DEST_LABELS[setup.destinace] || setup.destinace;
+
+    var cls, nadpis;
+    if (tier === "good") {
+      cls = "ok";
+      nadpis = nazvyMesicu[mesic] + " je pro " + kamVe(setup.destinace) + " skvělá volba.";
+    } else if (tier === "ok") {
+      cls = "wait";
+      nadpis = nazvyMesicu[mesic] + " je pro " + kamVe(setup.destinace) + " rozumný kompromis.";
+    } else {
+      cls = "bad";
+      nadpis = nazvyMesicu[mesic] + " je pro " + kamVe(setup.destinace) + " ten nejtěžší termín.";
+    }
+
+    box.innerHTML =
+      '<p class="pc-verdict-line ' + cls + '"><strong>' + nadpis + '</strong></p>' +
+      '<p>' + text + '</p>' +
+      (tier === "bad"
+        ? '<p style="font-size:13.5px;color:var(--text-faint);margin-top:var(--s3);">' +
+          'Neznamená to, že nemáš letět. Znamená to, že o tom víš dopředu a můžeš se na to připravit.</p>'
+        : '');
+  }
+
+  // „pro Floridu", „pro New York", „pro národní parky"
+  function kamVe(dest) {
+    if (dest === "florida") return "Floridu";
+    if (dest === "newyork") return "New York";
+    if (dest === "parky")   return "národní parky";
+    return DEST_LABELS[dest] || dest;
+  }
+
   function initMonthPicker() {
     var wrap = document.getElementById("mp-months");
     var result = document.getElementById("mp-result");
@@ -4841,11 +4894,20 @@
       }
 
       if (step.monthPicker) {
-        html += '<div class="month-picker">' +
-                  '<div class="mp-label">Vyber měsíc, uvidíš všechny 3 destinace vedle sebe</div>' +
-                  '<div class="mp-months" id="mp-months"></div>' +
-                  '<div class="mp-result" id="mp-result"></div>' +
-                '</div>';
+        // verdikt k termínu, který člověk zadal, a pod ním celý přehled
+        // ostatních měsíců, aby se nic z popisků neztratilo
+        html += '<div class="passport-check" id="termin-check"></div>' +
+                '<details class="disc disc-why">' +
+                  '<summary><span class="d-ico">📅</span>Chci vidět i ostatní měsíce a destinace' +
+                  '<span class="d-chev" aria-hidden="true">▾</span></summary>' +
+                  '<div class="d-body">' +
+                    '<div class="month-picker" style="margin-top:0">' +
+                      '<div class="mp-label">Vyber měsíc, uvidíš všechny 3 destinace vedle sebe</div>' +
+                      '<div class="mp-months" id="mp-months"></div>' +
+                      '<div class="mp-result" id="mp-result"></div>' +
+                    '</div>' +
+                  '</div>' +
+                '</details>';
       }
 
       if (step.stayPicker) {
@@ -5133,6 +5195,7 @@
 
     initStepVideos();
     initKviz();
+    initTerminCheck();
     initMonthPicker();
     initStayPicker();
     initChecklists();
