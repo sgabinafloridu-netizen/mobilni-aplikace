@@ -1,7 +1,7 @@
 // Minimální service worker — jen ať appka (a hlavně Trezor) funguje bez signálu,
 // když si ji uživatel přidá na plochu. Až přibudou další soubory (obrázky, další
 // stránky modulů), přidej je do CACHE_FILES.
-var CACHE_NAME = "nez-odletis-v51";
+var CACHE_NAME = "nez-odletis-v52";
 var CACHE_FILES = [
   "./", "./index.html", "./manifest.json",
   "./video/uvitani.mp4", "./video/uvitani-poster.jpg",
