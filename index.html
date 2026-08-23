@@ -1584,7 +1584,7 @@
      sůl-karta na prodejce, protože jde vždycky o reálné jméno a reálný
      důsledek, ne o obecnou radu. ── */
   .historka {
-    margin-top: var(--s5); display: flex; align-items: flex-start; gap: var(--s4);
+    margin-top: var(--s5); display: flex; align-items: center; gap: var(--s5);
     padding: var(--s5); border-radius: var(--r-lg);
     background: linear-gradient(160deg, #14233A 0%, #0E5A66 100%);
   }
@@ -1592,7 +1592,20 @@
     flex: 0 0 auto; width: 52px; height: 52px; border-radius: 50%; object-fit: cover;
     box-shadow: 0 0 0 3px var(--gold, #C9A24B);
   }
-  .historka-text { position: relative; }
+  /* skutečná bublina, ne jen barevná karta: plocha o odstín světlejší než
+     pozadí karty, se špičkou vedenou k ústům na fotce. */
+  .historka-text {
+    position: relative; flex: 1 1 auto;
+    background: rgba(255,255,255,.09);
+    border: 1px solid rgba(255,255,255,.14);
+    border-radius: 18px; padding: 14px 18px;
+  }
+  .historka-text::before {
+    content: ""; position: absolute; left: -8px; top: 50%; transform: translateY(-50%);
+    width: 15px; height: 15px; background: rgba(255,255,255,.09);
+    border-left: 1px solid rgba(255,255,255,.14); border-bottom: 1px solid rgba(255,255,255,.14);
+    clip-path: polygon(100% 0, 0 100%, 100% 100%);
+  }
   .historka-text p {
     margin: 0 0 var(--s3); font-size: 15px; line-height: 1.7; color: rgba(255,255,255,.9); font-style: italic;
   }
@@ -1956,7 +1969,7 @@
         </div>
         <div class="parts-spojka" aria-hidden="true"></div>
         <div class="part-card part-locked">
-          <span class="part-badge part-badge-locked" id="welcome-pristanes-kdy">🔒 Vychází na jaře 2027</span>
+          <span class="part-badge part-badge-locked" id="welcome-pristanes-kdy">🔒 Bude koncem roku 2026</span>
           <div class="part-ico">🛬</div>
           <div class="part-cislo">Část 2</div>
           <div class="part-nazev">Až přistaneš</div>
@@ -2400,7 +2413,7 @@
         <!-- 8) AŽ PŘISTANEŠ (náhled druhého průvodce) -->
         <div class="screen" id="s-pristanes">
           <div class="page-head">
-            <span class="eyebrow eyebrow-warm" id="pristanes-kdy">🔒 Vychází na jaře 2027</span>
+            <span class="eyebrow eyebrow-warm" id="pristanes-kdy">🔒 Bude koncem roku 2026</span>
             <h1>Až přistaneš</h1>
             <p class="sub">Než odletíš tě dovede až k letadlu. Až přistaneš pokračuje tam, kde tahle appka končí: doprava, nakupování, stravování a další.</p>
           </div>
@@ -2473,7 +2486,7 @@
     { emoji: "🆘", name: "Krizové situace na místě", desc: "Nehoda, krádež nebo problém s ubytováním: klidný postup na místě." }
   ];
   var PRISTANES_ODKAZ = "";   // e-mailové přihlášení na "dej mi vědět, až to vyjde", zatím prázdné
-  var PRISTANES_KDY = "jaře 2027";   // jedno místo pravdy pro termín, ať appka neříká na dvou místech dvě různé věty
+  var PRISTANES_KDY = "koncem roku 2026";   // jedno místo pravdy pro termín, ať appka neříká na dvou místech dvě různé věty
 
   var MODULES = [
     {
@@ -3091,10 +3104,10 @@
         "Zamítnutá ESTA se totiž neobchází a zaplacená letenka ti ji nevrátí. Proto je tenhle modul až druhý v řadě.",
         "Klienti mi pak posílají screenshoty s jedinou otázkou: je tohle dobrá cena? <strong>(A na tu otázku skoro nikdy neodpovím hned.)</strong>",
         "Já se na cenu nedívám první. Dívám se na <strong>přestup</strong>.",
-        "Nejdražší letenka, jakou si můžeš koupit, je ta levná s hodinou a půl v Americe.",
+        "Levná letenka s krátkým přestupem totiž není úspora. Je to riziko, které si nakonec připlatíš na místě.",
         "Tam se totiž nepřestupuje jako v Evropě. Kdo to neví, stojí odpoledne u pásu s kufrem v ruce a kouká, jak mu druhé letadlo odlétá bez něj.",
         "Projdeme kdy kupovat, čím hledat, jak dlouhý přestup si nechat a kde letenku rozhodně nekupovat.",
-        "Kolik hodin má ten tvůj plánovaný přestup?"
+        "Tak jak dlouhý přestup si necháváš ty?"
       ],
       praise: {
         emoji: "✈️",
@@ -7125,7 +7138,7 @@
      obrazovka, sidebar, cesta, tahle stránka), ať appka neříká na dvou místech
      dvě různé věty. */
   function renderPristanes() {
-    var kdyLabel = "🔒 Vychází na " + PRISTANES_KDY;
+    var kdyLabel = "🔒 Bude " + PRISTANES_KDY;
     var kdyEl = document.getElementById("pristanes-kdy");
     if (kdyEl) kdyEl.textContent = kdyLabel;
     var welcomeKdyEl = document.getElementById("welcome-pristanes-kdy");
