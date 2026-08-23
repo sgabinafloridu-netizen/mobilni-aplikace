@@ -90,8 +90,8 @@ Modul s `dashboard: true` si nese vlastní nadpis v `dashboardTitle`.
 `renderStepsHtml()` vykresluje prvky ve **fixním pořadí**, ne v pořadí, v jakém jsou zapsané v datech:
 
 ```
-(lead nebo bloky) → media → mapa → kviz → hintProTyp → ilustrace → companion → checklist
-→ checklistGroups → passportCheck → bookingCheck → chipExample → estaCheck
+(lead nebo bloky) → media → mapa → kviz → hintProTyp → ilustrace → companion → historka
+→ checklist → checklistGroups → passportCheck → bookingCheck → chipExample → estaCheck
 → toggleQuestions → addressField → monthPicker → stayPicker → gallery
 → quote → link → tip → why → trap → note
 ```
@@ -197,9 +197,11 @@ Adresa první noci se plní i z modulu 2 (prvek `addressField`), obojí míří 
 ## 7. Offline režim
 
 - `manifest.json` — PWA manifest, standalone, portrait, theme `#1AC0CE`
-- `sw.js` — service worker, cache `nez-odletis-v1`, strategie cache-first s fallbackem na `index.html`
+- `sw.js` — service worker, cache `nez-odletis-v39`, strategie cache-first s fallbackem na `index.html`
 
 ⚠️ **Když přibude nový soubor** (obrázek, ikona), musí se přidat do `CACHE_FILES` v `sw.js` a povýšit `CACHE_NAME`, jinak se offline nenačte.
+
+⚠️ **`CACHE_NAME` se musí povýšit při KAŽDÉM nasazení, které mění `index.html`**, ne jen při přidání souboru. Service worker servíruje `index.html` cache-first, takže vracející se návštěvník (i appka přidaná na plochu) uvidí starou verzi appky, dokud se `CACHE_NAME` nezmění. Objeveno 16. 8. 2026, kdy několik nasazení po sobě zůstalo neviditelných kvůli neposunuté verzi cache.
 
 ---
 

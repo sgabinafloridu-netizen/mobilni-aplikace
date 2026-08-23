@@ -1,0 +1,39 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400">
+  <!-- Stan na pláži, ke Kempu v přepínači destinací Ubytování/Florida. -->
+  <circle cx="200" cy="200" r="185" fill="#E6F8FA"/>
+  <text x="70" y="110" font-family="Arial, sans-serif" font-size="18" fill="#FFD23F">&#10022;</text>
+  <text x="320" y="150" font-family="Arial, sans-serif" font-size="16" fill="#FF6FA5">&#10022;</text>
+
+  <!-- more -->
+  <path d="M0 300 Q100 288 200 300 T400 300 V400 H0 Z" fill="#1AC0CE"/>
+  <path d="M0 300 Q100 288 200 300 T400 300" fill="none" stroke="#14233A" stroke-width="6" stroke-linecap="round"/>
+  <!-- odlesky na vode -->
+  <path d="M60 320 L90 320 M300 330 L336 330" stroke="#FFFFFF" stroke-width="6" stroke-linecap="round" opacity="0.55"/>
+
+  <!-- pisek -->
+  <path d="M0 300 Q120 330 200 322 Q290 314 400 300 V0 H0 Z" fill="#FFFFFF" opacity="0"/>
+  <path d="M-10 340 Q140 300 200 306 Q280 300 410 336 V410 H-10 Z" fill="#FFF6E4"/>
+  <path d="M-10 340 Q140 300 200 306 Q280 300 410 336" fill="none" stroke="#14233A" stroke-width="6" stroke-linecap="round"/>
+
+  <!-- palma vlevo -->
+  <path d="M64 340 Q60 268 84 224" fill="none" stroke="#14233A" stroke-width="9" stroke-linecap="round"/>
+  <path d="M84 224 Q50 200 30 214 Q56 232 84 224 Z" fill="#1AC0CE" stroke="#14233A" stroke-width="6" stroke-linejoin="round"/>
+  <path d="M84 224 Q52 214 40 190 Q68 200 84 224 Z" fill="#1AC0CE" stroke="#14233A" stroke-width="6" stroke-linejoin="round"/>
+  <path d="M84 224 Q96 194 84 168 Q64 196 84 224 Z" fill="#1AC0CE" stroke="#14233A" stroke-width="6" stroke-linejoin="round"/>
+  <path d="M84 224 Q116 202 138 214 Q110 232 84 224 Z" fill="#1AC0CE" stroke="#14233A" stroke-width="6" stroke-linejoin="round"/>
+
+  <!-- stan -->
+  <path d="M164 336 L228 240 L292 336 Z" fill="#FF6FA5" stroke="#14233A" stroke-width="8" stroke-linejoin="round"/>
+  <path d="M228 240 L228 336" stroke="#14233A" stroke-width="5"/>
+  <path d="M210 336 L228 276 L246 336 Z" fill="#E85892" stroke="#14233A" stroke-width="6" stroke-linejoin="round"/>
+  <!-- kolik do zeme -->
+  <path d="M164 336 L150 344 M292 336 L306 344" stroke="#14233A" stroke-width="5" stroke-linecap="round"/>
+
+  <!-- piknikovy stolek -->
+  <rect x="304" y="308" width="56" height="8" rx="3" fill="#FFFFFF" stroke="#14233A" stroke-width="4"/>
+  <path d="M312 316 L306 336 M352 316 L358 336" stroke="#14233A" stroke-width="5" stroke-linecap="round"/>
+  <path d="M296 330 L318 322 M346 322 L368 330" stroke="#14233A" stroke-width="5" stroke-linecap="round"/>
+
+  <!-- slunce -->
+  <circle cx="330" cy="90" r="22" fill="#FFD23F" stroke="#14233A" stroke-width="6"/>
+</svg>

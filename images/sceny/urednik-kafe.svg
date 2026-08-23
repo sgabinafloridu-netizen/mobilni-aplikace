@@ -10,9 +10,6 @@
     <text x="56" y="76" font-family="Arial, sans-serif" font-size="22" fill="#FF6FA5">&#10022;</text>
     <text x="330" y="120" font-family="Arial, sans-serif" font-size="16" fill="#1AC0CE">&#10022;</text>
 
-    <!-- myšlenka -->
-    <text x="270" y="180" font-family="Arial, sans-serif" font-style="italic" font-size="16" fill="#14233A" transform="rotate(8 270 180)">ještě tři lidi&#8230;</text>
-
     <!-- tělo: uniforma -->
     <path d="M120 385 L120 310 Q120 262 168 258 L232 258 Q280 262 280 310 L280 385 Z" fill="#14233A"/>
     <!-- límec -->

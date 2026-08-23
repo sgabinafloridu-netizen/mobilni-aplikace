@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400">
+  <!-- Peněženka s bankovkou a mincemi. Kolik si vzít, kolik sebere banka. -->
+  <circle cx="200" cy="200" r="185" fill="#E6F8FA"/>
+
+  <!-- bankovka vyčnívající -->
+  <g transform="rotate(-8 215 146)">
+    <rect x="150" y="110" width="130" height="72" rx="8" fill="#FF6FA5" stroke="#14233A" stroke-width="7"/>
+    <circle cx="215" cy="146" r="17" fill="#FFFFFF" opacity="0.9"/>
+    <text x="215" y="154" font-family="Arial, sans-serif" font-weight="700" font-size="20" fill="#FF6FA5" text-anchor="middle">$</text>
+  </g>
+
+  <!-- peněženka -->
+  <rect x="108" y="162" width="184" height="122" rx="18" fill="#FFFFFF" stroke="#14233A" stroke-width="9"/>
+  <path d="M108 196 h184" stroke="#14233A" stroke-width="9"/>
+  <rect x="108" y="162" width="184" height="34" rx="18" fill="#1AC0CE"/>
+  <circle cx="256" cy="230" r="17" fill="#FFD23F" stroke="#14233A" stroke-width="6"/>
+
+  <!-- mince -->
+  <circle cx="128" cy="308" r="21" fill="#FFD23F" stroke="#14233A" stroke-width="6"/>
+  <text x="128" y="315" font-family="Arial, sans-serif" font-weight="700" font-size="18" fill="#14233A" text-anchor="middle">¢</text>
+  <circle cx="168" cy="320" r="15" fill="#FFD23F" stroke="#14233A" stroke-width="5"/>
+</svg>

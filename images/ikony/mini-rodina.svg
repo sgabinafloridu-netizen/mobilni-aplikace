@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
+  <!-- Rodina (rodič + dítě), nahrazuje emoji 👨‍👩‍👧 u kroku o chybějícím souhlasu. -->
+  <circle cx="8" cy="6" r="3" fill="#1AC0CE"/>
+  <path d="M2 20c0-4 3-6.5 6-6.5s6 2.5 6 6.5" fill="#1AC0CE"/>
+  <circle cx="17.5" cy="9" r="2.3" fill="#FF6FA5"/>
+  <path d="M13.5 20c0-3.2 2-5.2 4-5.2s4 2 4 5.2" fill="#FF6FA5"/>
+</svg>

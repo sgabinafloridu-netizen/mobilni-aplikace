@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Než odletíš | Do USA bez cestovky</title>
 <meta name="description" content="Část 1: Než odletíš. Kurz, co tě krok za krokem provede přípravou na první samostatný let do USA.">
+<meta name="robots" content="noindex, nofollow">
 
 <!-- ─── PWA / přidání na plochu ───
      Pozn. pro Gábi: chybí reálné ikony. Až budou hotové (brand tyrkys/růžová,
@@ -35,6 +36,7 @@
 
     --surface: #FFFFFF;
     --page: #F5FAFC;
+    --wash: #F1FAFB;
     --sunken: #EEF7F9;
     --tyrkys-light: #E6F8FA;
     --ruzova-light: #FFF1F6;
@@ -66,7 +68,7 @@
   html { -webkit-text-size-adjust: 100%; }
   body {
     font-family: 'Poppins', system-ui, sans-serif;
-    background: var(--page);
+    background: linear-gradient(180deg, var(--tyrkys-light) 0%, var(--page) 420px);
     color: var(--text);
     min-height: 100vh;
     -webkit-font-smoothing: antialiased;
@@ -107,6 +109,7 @@
   .btn-xl { padding: 22px 40px; font-size: 18.5px; }
   .btn:hover { transform: translateY(-1px); filter: saturate(1.06); }
   .btn:active { transform: translateY(1px); }
+  .btn[hidden] { display: none; }
 
   .screen { display: none; }
   .screen.active { display: block; animation: rise .28s ease both; }
@@ -117,13 +120,46 @@
      ══════════════════════════════════════════════ */
   #onboarding { min-height: 100vh; display: grid; place-items: center; padding: var(--s7) var(--s5); }
   .onb-card {
-    width: 100%; max-width: 620px; background: var(--surface);
+    width: 100%; max-width: 620px;
+    background: linear-gradient(165deg, var(--surface) 0%, var(--surface) 55%, var(--tyrkys-light) 140%);
     border: 1px solid var(--line); border-radius: var(--r-xl);
     padding: clamp(28px, 5vw, 52px); box-shadow: var(--sh-2);
   }
   .onb-card h1, .onb-card h2 { margin-top: var(--s5); }
   .onb-lede { margin-top: var(--s5); display: flex; flex-direction: column; gap: var(--s4); }
   .onb-cta { margin-top: var(--s7); }
+
+  /* ── dva díly průvodce, viditelné hned na úvodní obrazovce ── */
+  .parts-overview { display: flex; align-items: stretch; gap: var(--s4); margin-top: var(--s6); }
+  .parts-spojka {
+    flex: 0 0 auto; width: 22px; align-self: center; height: 2px;
+    background-image: repeating-linear-gradient(90deg, var(--line-strong) 0 6px, transparent 6px 12px);
+  }
+  .part-card {
+    flex: 1 1 0; min-width: 0; border-radius: var(--r-lg); padding: var(--s5) var(--s4);
+    display: flex; flex-direction: column; align-items: center; text-align: center; gap: 3px;
+  }
+  .part-active {
+    background: linear-gradient(165deg, var(--tyrkys-light) 0%, var(--surface) 78%);
+    border: 1.5px solid var(--tyrkys); box-shadow: var(--sh-teal);
+  }
+  .part-locked { background: var(--gold-light); border: 1.5px dashed var(--gold); }
+  .part-badge {
+    font-size: 10px; font-weight: 800; letter-spacing: .07em; text-transform: uppercase;
+    padding: 4px 10px; border-radius: var(--r-pill); background: var(--tyrkys); color: #fff; margin-bottom: 2px;
+    white-space: nowrap;
+  }
+  .part-badge-locked { background: var(--gold); }
+  .part-ico { font-size: 28px; margin: 3px 0; }
+  .part-cislo { font-size: 10.5px; font-weight: 700; letter-spacing: .09em; text-transform: uppercase; color: var(--text-soft); }
+  .part-locked .part-cislo { color: #8A6A00; }
+  .part-nazev { font-size: 16.5px; font-weight: 800; }
+  .part-info { font-size: 12px; line-height: 1.5; color: var(--text-faint); margin-top: 2px; }
+  @media (max-width: 480px) {
+    .parts-overview { flex-direction: column; align-items: center; }
+    .parts-spojka { width: 2px; height: 18px; background-image: repeating-linear-gradient(180deg, var(--line-strong) 0 6px, transparent 6px 12px); }
+    .part-card { width: 100%; }
+  }
 
   /* maskot v rohu nadpisu: mění výraz podle toho, jestli je klient tu poprvé, nebo se vrací */
   /* fotka hned vedle textu, ne odstrčená až na okraj stránky */
@@ -348,7 +384,7 @@
   .rail-plane {
     position: absolute; top: 50%; left: 8px; z-index: 2;
     /* letí kousek nad linkou, ať nepřekrývá zastávku pod sebou */
-    transform: translate(-50%, -86%); font-size: 18px; line-height: 1;
+    transform: translate(-50%, -86%); width: 19px; height: 19px; display: block;
     transition: left .75s cubic-bezier(.4,0,.2,1);
     filter: drop-shadow(0 2px 4px rgba(17,58,70,.28));
   }
@@ -364,7 +400,7 @@
     .rail { padding: 9px var(--s4) 11px; }
     .rail-inner { gap: var(--s3); }
     .rail-count .rc-word { display: none; }
-    .rail-plane { font-size: 16px; }
+    .rail-plane { width: 17px; height: 17px; }
   }
   .icon-btn {
     width: 38px; height: 38px; border-radius: var(--r-md); flex: 0 0 auto;
@@ -684,6 +720,8 @@
     border-radius: 50%; display: grid; place-items: center; font-size: 24px;
     background: var(--surface); border: 3px solid var(--line-strong); transition: all .2s;
   }
+  .journey-node.has-img { padding: 10px; }
+  .journey-node.has-img img { width: 100%; height: 100%; object-fit: contain; display: block; }
   .journey-item.done .journey-node { background: var(--tyrkys); border-color: var(--tyrkys); color: #fff; font-size: 22px; }
   .journey-item.current .journey-node { border-color: var(--accent, var(--tyrkys)); box-shadow: 0 0 0 6px color-mix(in srgb, var(--accent, var(--tyrkys)) 16%, transparent); }
   .journey-item.future .journey-node { opacity: .5; }
@@ -725,6 +763,10 @@
     flex: 0 0 auto; display: inline-flex; align-items: center; gap: 5px;
     font-size: 12.5px; font-weight: 700; color: var(--tyrkys-dark);
   }
+
+  /* pokračování cesty za den odletu: ochutnávka druhého průvodce, ne modul appky */
+  .journey-item.pristanes .journey-node { opacity: .55; border-style: dashed; }
+  .journey-item.pristanes .journey-card { border-style: dashed; opacity: .85; }
 
   /* ── pravý sloupec: rychlé statusy ── */
   .home-layout { display: block; }
@@ -849,9 +891,37 @@
   }
   @media (max-width: 620px) { .lesson-hero img { height: 148px; } }
 
-  .lesson-head { padding-bottom: var(--s6); margin-bottom: var(--s7); border-bottom: 1px solid var(--line); }
+  .lesson-head { padding-bottom: var(--s6); margin-bottom: var(--s7); border-bottom: 1px solid var(--line); position: relative; }
   .lesson-head .eyebrow { margin-bottom: var(--s4); background: var(--accent-soft); color: var(--accent); }
   .lesson-head h1 { display: flex; align-items: center; gap: var(--s4); }
+  .btn-print {
+    display: inline-flex; align-items: center; gap: 6px; margin-top: var(--s4);
+    padding: 9px 16px; border-radius: var(--r-pill); border: 1.5px solid var(--line-strong);
+    background: var(--page); color: var(--text-muted); font-size: 13.5px; font-weight: 600; cursor: pointer;
+  }
+  .btn-print:hover { border-color: var(--accent); color: var(--accent); }
+  .btn-print[hidden] { display: none; }
+
+  .module-tahak {
+    margin-top: var(--s7); padding: var(--s6); border-radius: 20px;
+    background: linear-gradient(135deg, var(--accent-soft), var(--page));
+    border: 1.5px solid var(--accent);
+  }
+  .tahak-eyebrow {
+    font-size: 11px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase;
+    color: var(--accent); margin-bottom: var(--s3);
+  }
+  .tahak-title { font-size: 19px; font-weight: 800; color: var(--text); margin-bottom: var(--s5); }
+  .tahak-list { list-style: none; counter-reset: tahak; display: flex; flex-direction: column; gap: var(--s4); }
+  .tahak-list li {
+    counter-increment: tahak; position: relative; padding-left: 40px;
+    font-size: 15px; line-height: 1.7; color: var(--text-muted);
+  }
+  .tahak-list li::before {
+    content: counter(tahak); position: absolute; left: 0; top: 0;
+    width: 28px; height: 28px; border-radius: 50%; background: var(--accent); color: #fff;
+    display: grid; place-items: center; font-size: 13px; font-weight: 800;
+  }
   .lesson-icon {
     flex: 0 0 auto; width: 56px; height: 56px; border-radius: 18px;
     background: var(--accent-soft); display: grid; place-items: center; font-size: 28px;
@@ -872,7 +942,6 @@
     font-size: 17px; line-height: 1.8; color: var(--text-muted);
     background: var(--accent-soft); border-radius: var(--r-lg);
     padding: var(--s6); margin-bottom: var(--s8);
-    text-align: justify;
   }
   .lesson-hook p + p { margin-top: var(--s4); }
   .lesson-hook strong { color: var(--text); }
@@ -889,7 +958,6 @@
     float: left; margin: 2px var(--s5) var(--s4) 0;
   }
   @media (max-width: 640px) {
-    .lesson-hook { text-align: left; }
     .lesson-hook .hook-foto, .lesson-hook .hook-foto-vlevo {
       float: none; display: block; width: 150px; height: 150px; object-fit: cover;
       margin: 0 auto var(--s4);
@@ -931,7 +999,14 @@
     display: block; font-size: clamp(19px, 2.4vw, 23px); font-weight: 800;
     line-height: 1.25; letter-spacing: -.02em; text-wrap: balance;
   }
-  .step-lead { font-size: 16.5px; line-height: 1.8; color: var(--text-muted); }
+  /* teplý celoškolní pruh, jako u prodejky (Vrstva 1: příběh), edge to edge v rámci karty kroku */
+  .step-lead {
+    font-size: 16.5px; line-height: 1.8; color: var(--text-muted);
+    margin: 0 calc(var(--s6) * -1) var(--s2); padding: var(--s5) var(--s6);
+    background: linear-gradient(135deg, var(--sand) 0%, var(--ruzova-light) 100%);
+  }
+  .step-lead.measure { max-width: none; }
+  .step-lead p { max-width: 68ch; }
   .step-lead p + p { margin-top: var(--s4); }
 
   /* ── bloky uvnitř kroku ───────────────────────────────────────────────
@@ -1033,6 +1108,21 @@
      (noc v letadle, hotel, Airbnb...) a aktivity/vstupy po položkách.
      Stejné třídy pro obě, .rozpocet-radek--2 jen vynechá sloupec nocí. */
   .rozpocet-sekce-nadpis { font-size: 12px; font-weight: 700; color: var(--text-soft); margin: var(--s5) 0 var(--s3); }
+  .prevodnik-wrap { clear: both; margin: var(--s6) 0; display: flex; flex-direction: column; gap: var(--s5); }
+  .prevodnik-sekce { border-radius: var(--r-lg); padding: var(--s5); }
+  .prevodnik-sekce.tyrkys { background: var(--tyrkys-light); }
+  .prevodnik-sekce.zluta { background: var(--zluta-light); }
+  .prevodnik-sekce.ruzova { background: var(--ruzova-light); }
+  .prevodnik-sekce .rozpocet-grid { margin-top: var(--s4); }
+  .prevodnik-sekce .rozpocet-pole input { background: #fff; }
+  .prevodnik-hint { margin-top: var(--s3); font-size: 12.5px; color: var(--text-faint); }
+  .prevodnik-hint-top { margin-top: 0; }
+  .prevodnik-tip-btns { display: flex; flex-wrap: wrap; gap: 8px; margin-top: var(--s4); }
+  .prevodnik-tip-btn {
+    padding: 9px 16px; border-radius: var(--r-pill); border: 1.5px solid var(--line-strong);
+    background: var(--surface); font-size: 14px; font-weight: 700; color: var(--text-muted); cursor: pointer;
+  }
+  .prevodnik-tip-btn.active { background: var(--tyrkys); border-color: var(--tyrkys); color: #fff; }
   .rozpocet-radky { display: flex; flex-direction: column; gap: 8px; }
   .rozpocet-radek {
     display: grid; grid-template-columns: 1fr 74px 100px 26px; gap: 8px; align-items: center;
@@ -1100,11 +1190,13 @@
   .disc-why { background: var(--accent-soft); border-color: color-mix(in srgb, var(--accent) 20%, transparent); }
   .disc-why > summary { color: color-mix(in srgb, var(--accent) 78%, #14233A); }
 
-  /* pozor na tohle: vždycky růžová, ať je past poznat na dálku */
-  .disc-trap { background: var(--ruzova-light); border-color: #FFD3E4; }
-  .disc-trap > summary { color: #B23A65; }
-  .disc-trap .d-body { color: #7E3555; }
-  .disc-trap .d-chev { color: var(--ruzova); }
+  /* pozor na tohle: tmavá a syté červená, ať je past poznat na dálku
+     a má váhu odpovídající reálnému riziku (zmeškaný let, zamítnutý vstup) */
+  .disc-trap { background: linear-gradient(160deg, #4A1830 0%, #7E2A44 100%); border-color: transparent; }
+  .disc-trap > summary { color: #FFD3E4; }
+  .disc-trap > summary:hover { background: rgba(255,255,255,.06); }
+  .disc-trap .d-body { color: rgba(255,255,255,.86); }
+  .disc-trap .d-chev { color: #FFD3E4; }
 
   /* ── klidnější varianta pro plánovací tipy, ne skutečná rizika ── */
   .disc-note { background: var(--gold-light); border-color: #E8D5A8; }
@@ -1315,7 +1407,7 @@
     margin-top: var(--s5); padding: var(--s4) var(--s5);
     background: #E6F8FA; border-left: 3px solid var(--tyrkys); border-radius: 0 var(--r-md) var(--r-md) 0;
   }
-  .step-hint img { flex: 0 0 auto; width: 40px; height: 40px; border-radius: 50%; }
+  .step-hint img { flex: 0 0 auto; width: 40px; height: 40px; border-radius: 50%; object-fit: cover; }
   .step-hint p { font-size: 14px; line-height: 1.65; color: #0E5A66; }
   .step-hint strong { color: #0E5A66; }
 
@@ -1367,12 +1459,14 @@
     display: flex; align-items: center; gap: 8px;
     font-size: 14.5px; font-weight: 800; color: var(--text); margin-bottom: 4px;
   }
+  .stay-opt-name img { width: 22px; height: 22px; flex: 0 0 auto; display: block; }
   .stay-opt-text { font-size: 14px; line-height: 1.65; color: var(--text-muted); }
   .stay-note {
     margin-top: var(--s4); padding: var(--s3) var(--s4);
     background: #F3E9D3; color: #5c4a1f; border-radius: var(--r-md);
     font-size: 13.5px; line-height: 1.6; font-weight: 600;
   }
+  .stay-note + .stay-note { margin-top: 6px; }
 
   /* citát paní Cokdyž */
   .step-quote { position: relative; margin: var(--s5) 0 0; padding: var(--s2) 0 var(--s2) var(--s5); }
@@ -1478,9 +1572,33 @@
   .chip-example p { margin: 0; font-size: 14px; line-height: 1.6; color: var(--text-muted); }
 
   /* ── kreslená společnice/společník u dlouhých checklistů ── */
-  .companion { margin-top: var(--s5); display: flex; align-items: center; gap: var(--s4); padding: var(--s4); border-radius: var(--r-lg); background: var(--accent-soft); }
+  .companion {
+    margin-top: var(--s5); display: flex; align-items: center; gap: var(--s4);
+    padding: var(--s5); border-radius: var(--r-lg);
+    background: linear-gradient(160deg, #14233A 0%, #0E5A66 100%);
+  }
   .companion img { flex: 0 0 auto; width: 64px; height: 64px; border-radius: 50%; background: #fff; box-shadow: 0 0 0 3px var(--gold, #C9A24B); }
-  .companion p { margin: 0; font-size: 14px; line-height: 1.6; color: var(--text); font-style: italic; }
+  .companion p { margin: 0; font-size: 14px; line-height: 1.6; color: rgba(255,255,255,.9); font-style: italic; }
+
+  /* ── Historka: osobní příhoda, foto + bublina s citací. Tmavá jako
+     sůl-karta na prodejce, protože jde vždycky o reálné jméno a reálný
+     důsledek, ne o obecnou radu. ── */
+  .historka {
+    margin-top: var(--s5); display: flex; align-items: flex-start; gap: var(--s4);
+    padding: var(--s5); border-radius: var(--r-lg);
+    background: linear-gradient(160deg, #14233A 0%, #0E5A66 100%);
+  }
+  .historka img {
+    flex: 0 0 auto; width: 52px; height: 52px; border-radius: 50%; object-fit: cover;
+    box-shadow: 0 0 0 3px var(--gold, #C9A24B);
+  }
+  .historka-text { position: relative; }
+  .historka-text p {
+    margin: 0 0 var(--s3); font-size: 15px; line-height: 1.7; color: rgba(255,255,255,.9); font-style: italic;
+  }
+  .historka-text p:last-child { margin-bottom: 0; }
+  .historka-text p:first-child::before { content: "\201E"; }
+  .historka-text p:last-child::after { content: "\201C"; }
 
   /* ── ESTA per cestující, navazuje na seznam z Kroku 1 ── */
   .esta-check { margin-top: var(--s5); display: flex; flex-direction: column; gap: 2px; }
@@ -1534,6 +1652,7 @@
   .rc-list-item:hover { background: var(--sunken); }
   .rc-item-text { display: flex; flex-direction: column; gap: 2px; }
   .rc-krok-tag { font-size: 10.5px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; color: var(--text-faint); }
+  .rc-label { line-height: 1.45; }
   .rc-list-item.blocking { background: var(--gold-light); }
   .rc-list-item.blocking .dot { background: var(--gold); }
   .rc-list-item.blocking .rc-krok-tag { color: #6b5319; }
@@ -1646,6 +1765,54 @@
   .praise-text { font-size: 16px; line-height: 1.8; color: var(--text-muted); }
   .praise-next { margin-top: var(--s6); }
 
+  /* ── velký finiš: zobrazí se místo běžné pochvaly, jen když je hotových
+     všech 7 modulů, ne jen poslední v pořadí. Osobní vzkaz, ne odznak. ── */
+  .course-complete {
+    display: none; margin-top: var(--s7); padding-top: var(--s7);
+    border-top: 2px dashed var(--line-strong); text-align: center;
+  }
+  .course-complete.show { display: block; animation: praisePop .6s cubic-bezier(.2,1.4,.4,1) both; }
+  .course-complete-foto-wrap { margin: 0 0 var(--s5); }
+  .course-complete-foto {
+    width: 100%; max-width: 320px; border-radius: 18px; object-fit: cover;
+    margin: 0 auto; display: block; box-shadow: var(--sh-2);
+  }
+  .course-complete-foto-caption {
+    font-family: 'Caveat', cursive; font-size: 17px; color: var(--text-faint);
+    text-align: center; margin-top: var(--s3);
+  }
+  .course-complete-eyebrow {
+    display: inline-flex; align-items: center; gap: 6px; margin-bottom: var(--s4);
+    font-size: 11px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase;
+    padding: 6px 14px; border-radius: var(--r-pill); background: var(--zluta-light); color: #8A6A00;
+  }
+  .course-complete-title {
+    font-size: clamp(24px, 4vw, 32px); font-weight: 800; letter-spacing: -.02em;
+    line-height: 1.2; margin-bottom: var(--s5); text-wrap: balance; color: var(--text);
+  }
+  .course-complete-text { max-width: 52ch; margin: 0 auto; text-align: left; font-size: 16px; line-height: 1.85; color: var(--text-muted); }
+  .course-complete-text p + p { margin-top: var(--s4); }
+  .course-complete-text strong { color: var(--text); }
+  .course-complete-podpis { margin-top: var(--s5); font-family: "Caveat", cursive; font-size: 26px; color: var(--ruzova-deep); }
+  .course-complete-upsell {
+    margin-top: var(--s6); padding: var(--s6); max-width: 52ch; margin-left: auto; margin-right: auto;
+    text-align: left; background: var(--page); border: 2px solid var(--ruzova-light); border-radius: 20px;
+  }
+  .cc-upsell-eyebrow {
+    font-size: 11px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase;
+    color: var(--ruzova-deep); margin-bottom: var(--s3);
+  }
+  .course-complete-upsell p { font-size: 15px; line-height: 1.8; color: var(--text-muted); margin: 0 0 var(--s3); }
+  .course-complete-upsell p:last-of-type { margin-bottom: var(--s4); }
+  .cc-upsell-lead { color: var(--text); }
+  .cc-upsell-btn {
+    display: inline-flex; align-items: center; gap: 6px; padding: 13px 26px; border-radius: 50px;
+    background: linear-gradient(135deg, #FF6FA5, #FF9E6B); color: #fff; font-weight: 700; font-size: 15px;
+    text-decoration: none; box-shadow: 0 4px 20px rgba(255,111,165,.4);
+  }
+  .cc-upsell-meta { margin-top: var(--s4); font-size: 13px; color: var(--text-faint); }
+  @media (max-width: 640px) { .course-complete-upsell { padding: var(--s5); } }
+
   /* konfety */
   #confetti {
     position: fixed; inset: 0; width: 100%; height: 100%;
@@ -1666,6 +1833,30 @@
   .trezor-item textarea:focus { border-color: var(--tyrkys); box-shadow: 0 0 0 4px rgba(26,192,206,.14); }
   .trezor-saved { font-size: 12px; font-weight: 700; color: var(--tyrkys-dark); margin-top: var(--s1); height: 16px; opacity: 0; transition: opacity .2s; }
   .trezor-saved.show { opacity: 1; }
+
+  /* ══ AŽ PŘISTANEŠ (náhled druhého průvodce) ══ */
+  .pristanes-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: var(--s5); margin-top: var(--s7); }
+  .pristanes-item {
+    display: flex; gap: var(--s4); align-items: flex-start; padding: var(--s5);
+    background: var(--surface); border: 1.5px dashed var(--line-strong); border-radius: var(--r-lg); opacity: .82;
+  }
+  .pristanes-ico {
+    flex: 0 0 auto; width: 46px; height: 46px; border-radius: 50%; display: grid; place-items: center;
+    font-size: 20px; background: var(--sunken);
+  }
+  .pristanes-ico.has-img { padding: 9px; }
+  .pristanes-ico.has-img img { width: 100%; height: 100%; object-fit: contain; display: block; }
+  .pristanes-body { min-width: 0; }
+  .pristanes-name { display: flex; align-items: center; gap: 6px; font-size: 14.5px; font-weight: 800; }
+  .pristanes-desc { font-size: 13px; line-height: 1.55; color: var(--text-faint); margin-top: 3px; }
+  .pristanes-note {
+    margin-top: var(--s7); font-size: 13.5px; color: var(--text-faint); line-height: 1.6;
+  }
+  .pristanes-cta {
+    display: inline-block; margin-top: var(--s5); padding: 12px 22px; border-radius: var(--r-pill);
+    font-size: 14px; font-weight: 700; color: #fff; text-decoration: none;
+    background: linear-gradient(135deg, #FF6FA5 0%, #FF9E6B 100%); box-shadow: 0 8px 22px rgba(255,111,165,.32);
+  }
 
   /* ══ RESPONZIVITA ══ */
   /* ══ ŠIROKÁ OBRAZOVKA: skutečné desktopové rozložení ══ */
@@ -1718,9 +1909,30 @@
   @media (prefers-reduced-motion: reduce) {
     *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; }
   }
+
+  /* ─── Tisk checklistu ───
+     #print-area je mimo appku, na obrazovce vždy skrytá. Při tisku appku
+     schová visibility trik a ukáže se jen tahle jedna oblast. */
+  #print-area { display: none; }
+  .pa-modul { font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: #888; margin-bottom: 4px; }
+  .pa-nadpis { font-size: 22px; font-weight: 800; margin-bottom: 24px; color: #14233A; }
+  .pa-krok { break-inside: avoid; margin-bottom: 18px; }
+  .pa-krok-titulek { font-size: 14.5px; font-weight: 700; color: #14233A; margin-bottom: 6px; }
+  .pa-skupina { font-size: 12px; font-weight: 700; color: #666; margin: 8px 0 4px; }
+  .pa-polozka { display: flex; align-items: flex-start; gap: 9px; font-size: 13.5px; line-height: 1.5; padding: 3px 0; color: #222; }
+  .pa-box { flex: 0 0 auto; width: 13px; height: 13px; border: 1.6px solid #333; border-radius: 3px; margin-top: 2px; }
+
+  @media print {
+    body * { visibility: hidden; }
+    #print-area, #print-area * { visibility: visible; }
+    #print-area { display: block; position: absolute; left: 0; top: 0; width: 100%; }
+  }
 </style>
 </head>
 <body>
+<!-- Tiskový výstup: naplní se JS až při kliknutí na Vytisknout checklist,
+     zbytek appky se při tisku schová přes visibility, viz CSS #print-area. -->
+<div id="print-area"></div>
 
 <!-- ═══════════ ONBOARDING ═══════════ -->
 <div id="onboarding">
@@ -1730,6 +1942,28 @@
     <div class="onb-card">
       <span class="eyebrow">Část 1 · Než odletíš</span>
       <h1>Do USA <span class="marker">bez cestovky</span>.</h1>
+
+      <!-- Průvodce má dvě části, obě viditelné hned tady, ne schované v menu.
+           Část 2 dostává vlastní identitu (zlatá, přistávající letadlo), ne jen
+           šeď s textem, ať čtenář vidí, kam to celé směřuje, ne jen co mu chybí. -->
+      <div class="parts-overview" role="group" aria-label="Průvodce má dvě části">
+        <div class="part-card part-active">
+          <span class="part-badge">Teď jsi tady</span>
+          <div class="part-ico">✈️</div>
+          <div class="part-cislo">Část 1</div>
+          <div class="part-nazev">Než odletíš</div>
+          <div class="part-info">7 modulů na přípravu, od termínu po den letu.</div>
+        </div>
+        <div class="parts-spojka" aria-hidden="true"></div>
+        <div class="part-card part-locked">
+          <span class="part-badge part-badge-locked" id="welcome-pristanes-kdy">🔒 Vychází na jaře 2027</span>
+          <div class="part-ico">🛬</div>
+          <div class="part-cislo">Část 2</div>
+          <div class="part-nazev">Až přistaneš</div>
+          <div class="part-info">Doprava, nakupování, stravování a další po příletu.</div>
+        </div>
+      </div>
+
       <div class="onb-lede">
         <p class="sub">
           Ahoj, tady Gábi. Než jsem před 30 lety poprvé letěla sama do Ameriky, seděla jsem
@@ -1741,7 +1975,7 @@
         <p class="sub">Řekni mi, kdy a kam letíš, a já ti z toho postavím <strong>tvůj osobní plán</strong>, krok za krokem, co tě čeká a v jakém pořadí.</p>
       </div>
       <div class="onb-cta">
-        <button class="btn btn-t btn-block btn-xl" id="btn-start">Začít →</button>
+        <button class="btn btn-p btn-block btn-xl" id="btn-start">Začít →</button>
       </div>
     </div>
   </div>
@@ -1782,7 +2016,7 @@
         </div>
         <div class="err" id="setup-err">Vyber prosím datum odletu i destinaci, ať mám z čeho tu cestu poskládat.</div>
         <div style="margin-top:var(--s7)">
-          <button type="submit" class="btn btn-t btn-block" id="btn-setup-submit">Ukázat mi můj kurz →</button>
+          <button type="submit" class="btn btn-p btn-block" id="btn-setup-submit">Ukázat mi můj kurz →</button>
         </div>
       </form>
       <p class="fine" id="setup-fine">Žádná registrace, žádné heslo. Kurz si to jen zapamatuje v tomhle prohlížeči.</p>
@@ -1834,7 +2068,7 @@
                aria-label="Postup kurzem">
             <div class="rail-line"></div>
             <div class="rail-fill" id="rail-fill"></div>
-            <span class="rail-plane" id="rail-plane" aria-hidden="true">✈️</span>
+            <img class="rail-plane" id="rail-plane" aria-hidden="true" src="images/ikony/mini-letadlo.svg" alt="">
           </div>
         </div>
       </div>
@@ -1885,13 +2119,18 @@
                 <span class="vm-cam">🎥</span><span class="vm-spinner"></span>
               </div>
               <div class="vm-note">
-                Až ho natočíš, ulož ho jako <strong>video/uvitani.mp4</strong> a náhledový obrázek
-                jako <strong>video/uvitani-poster.jpg</strong>. Přehrávač se objeví sám, nic dalšího
-                se nastavovat nemusí.
+                Video se právě chystá, přidám ho sem během pár dní.
               </div>
             </div>
           </div>
           <p class="video-caption">pojď, ukážu ti to ↓</p>
+          <a class="step-link" href="https://youtu.be/AgOhwXJ3H6s" target="_blank" rel="noopener">
+            <span class="step-link-text">
+              <strong>Sledovat na YouTube</strong>
+              <span>Video se právě chystá i přímo do appky, tohle mezitím funguje, když máš signál.</span>
+            </span>
+            <span class="step-link-arrow">↗</span>
+          </a>
           </div>
 
           <div class="side-stack">
@@ -2038,6 +2277,9 @@
                 <span class="lesson-icon" id="module-icon" aria-hidden="true">📍</span>
                 <span id="module-title">Název modulu</span>
               </h1>
+              <button type="button" class="btn-print" id="btn-print-checklist" hidden>
+                <span aria-hidden="true">🖨️</span> Vytisknout checklist
+              </button>
             </div>
 
             <div class="lesson-hook measure" id="module-hook" style="display:none;"></div>
@@ -2048,6 +2290,12 @@
               <div class="placeholder-note">
                 Obsah tohohle modulu se ještě připravuje.<br>Tady budou kroky, vysvětlení a pasti, na které si dát pozor.
               </div>
+            </div>
+
+            <div class="module-tahak" id="module-tahak" style="display:none;">
+              <div class="tahak-eyebrow">📌 Tahák na závěr</div>
+              <div class="tahak-title">Tři věci, co si z týhle lekce vzít</div>
+              <ol class="tahak-list" id="tahak-list"></ol>
             </div>
 
             <div class="lesson-foot">
@@ -2062,6 +2310,30 @@
               <div class="praise-text" id="praise-text"></div>
               <div class="praise-next">
                 <button class="btn btn-t" id="btn-praise-next">Jdeme na další modul →</button>
+              </div>
+
+              <div class="course-complete" id="course-complete">
+                <figure class="course-complete-foto-wrap">
+                  <img class="course-complete-foto" src="images/hlavicky/hero-doklady.jpg" alt="Jespáci na mokrém písku u vody">
+                  <figcaption class="course-complete-foto-caption">a tohle jsou jespáci, kteří se ti budou motat pod nohama, až vyrazíš na ranní procházku po pláži</figcaption>
+                </figure>
+                <div class="course-complete-eyebrow">🎉 Celý kurz hotový</div>
+                <h2 class="course-complete-title">Všech 7 modulů máš za sebou. JSI READY.</h2>
+                <div class="course-complete-text">
+                  <p>Za sebou máš doklady, letenky, ubytování, peníze, balení i to, co dělat, kdyby se něco pokazilo. Teď víš věci, které jsem se sama učila roky, a to za jedno odpoledne.</p>
+                  <p>Paní Cokdyž dnes v noci nemá o čem přemýšlet. <strong>(Poprvé za dlouho.)</strong></p>
+                  <p>Zbývá jediné: sbalit kufr a jet. <strong>Uvidíme se v Americe.</strong></p>
+                </div>
+                <div class="course-complete-podpis">Gábi</div>
+
+                <div class="course-complete-upsell">
+                  <div class="cc-upsell-eyebrow">Ještě jedna věc</div>
+                  <p class="cc-upsell-lead">Máš za sebou celou přípravu. Jedna věc ale rozhoduje o tom, jak to celé začne. <strong>Imigrační kontrola.</strong></p>
+                  <p>Pokud chceš vědět přesně, co úředník řekne, co odpovědět a co nikdy neříkat, mám pro tebe ještě jeden krok.</p>
+                  <p><strong>Přes imigrační v klidu:</strong> video průvodce, tahák na 16 stranách a seznam frází s fonetickým přepisem. <strong>11 minut a víš všechno.</strong></p>
+                  <a class="cc-upsell-btn" href="https://pres-imigracni-v-klidu.netlify.app" target="_blank" rel="noopener">Chci to vědět předem ↗</a>
+                  <div class="cc-upsell-meta">297 Kč · okamžitý přístup · 30denní záruka</div>
+                </div>
               </div>
             </div>
           </div>
@@ -2115,6 +2387,28 @@
           <div class="rozpocet-kalk" id="rozpocet-kalk"></div>
         </div>
 
+        <!-- 7) PŘEVODNÍK -->
+        <div class="screen" id="s-prevodnik">
+          <div class="page-head">
+            <span class="eyebrow">Počítá se samo</span>
+            <h1>Převodník</h1>
+            <p class="sub">Měna, jednotky a spropitné, spočítané rovnou v appce, i bez signálu a bez dat.</p>
+          </div>
+          <div class="prevodnik-wrap" id="prevodnik-kalk"></div>
+        </div>
+
+        <!-- 8) AŽ PŘISTANEŠ (náhled druhého průvodce) -->
+        <div class="screen" id="s-pristanes">
+          <div class="page-head">
+            <span class="eyebrow eyebrow-warm" id="pristanes-kdy">🔒 Vychází na jaře 2027</span>
+            <h1>Až přistaneš</h1>
+            <p class="sub">Než odletíš tě dovede až k letadlu. Až přistaneš pokračuje tam, kde tahle appka končí: doprava, nakupování, stravování a další.</p>
+          </div>
+          <div class="pristanes-grid" id="pristanes-grid"></div>
+          <p class="pristanes-note">Sedm modulů, stejně podrobných jako tenhle průvodce. Nic z nich teď nejde koupit ani odemknout, appka jen ukazuje, co je na cestě.</p>
+          <div id="pristanes-cta-wrap"></div>
+        </div>
+
       </div>
     </div>
   </div>
@@ -2157,12 +2451,29 @@
      nezobrazí a zůstane jen zadání kódu.                                    */
   var BALICKY = {
     zaklad:    { nazev: "Příprava před odletem", rozsah: "moduly 1 až 4",
-                 cena: "690 Kč", odkaz: "" },
+                 cena: "890 Kč", odkaz: "" },
     rozsireni: { nazev: "Celý průvodce Než odletíš", rozsah: "moduly 5 až 7 navíc",
-                 cena: "1 490 Kč", odkaz: "" }
+                 cena: "590 Kč", odkaz: "" }
   };
   var VYCHOZI_BALICKY = ["zaklad"];         // co má kupující odemčené rovnou
   var KODY = { "CELY": "rozsireni" };       // kód → balíček
+
+  /* Náhled druhého průvodce "Až přistaneš" (usa-bez-cestovky-cast2/KOSTRA.md).
+     Není to modul appky, jen ochutnávka: appka sama žádný obsah těchhle
+     7 položek nemá, jen jméno a jednu větu. Proto se neúčastní MODULES,
+     progress, checklistů ani isUnlocked. Dokud je PRISTANES_ODKAZ prázdný,
+     appka nenabízí žádnou akci, jen slib. Stejný vzor jako BALICKY.odkaz. */
+  var PRISTANES_MODULY = [
+    { emoji: "🛂", name: "Imigrační kontrola", desc: "Co přesně čeká za dveřmi, jak vypadá fronta a co u toho říct." },
+    { emoji: "🧳", name: "Výdej zavazadel a celnice", desc: "Kdy se kufry vyzvedávají znovu a co nahlásit celníkovi." },
+    { emoji: "🚗", ikona: "images/ikony/highlight-doprava.svg", name: "Doprava na místě", desc: "Půjčení auta, dálniční poplatky a provoz podle amerických pravidel." },
+    { emoji: "🛒", name: "Nakupování a peníze", desc: "Sales tax u pokladny, platby kartou a kde nakoupit levněji." },
+    { emoji: "🍽️", name: "Stravování", desc: "Tipping kultura, čtení menu a kdy se vyplatí happy hour." },
+    { emoji: "📶", name: "Praktické věci na místě", desc: "eSIM, lékárna a co dělat, když se ztratíš." },
+    { emoji: "🆘", name: "Krizové situace na místě", desc: "Nehoda, krádež nebo problém s ubytováním: klidný postup na místě." }
+  ];
+  var PRISTANES_ODKAZ = "";   // e-mailové přihlášení na "dej mi vědět, až to vyjde", zatím prázdné
+  var PRISTANES_KDY = "jaře 2027";   // jedno místo pravdy pro termín, ať appka neříká na dvou místech dvě různé věty
 
   var MODULES = [
     {
@@ -2206,6 +2517,11 @@
           "člověkem, který jen doufá, že to vyjde, a člověkem, <strong>který ví, do čeho jde</strong>. Paní Cokdyž dnes " +
           "v noci nebude mít o čem mluvit."
       },
+      shrnuti: [
+        "<strong>Florida, New York a národní parky</strong> jsou tři různé dovolené. Nemíchej je do jednoho itineráře.",
+        "Vyhni se americkým prázdninám, konec června až začátek září, Spring Break, Thanksgiving, Vánoce. Tam je všechno nejdražší a nejplnější.",
+        "Vstupy do národních parků na hlavní sezónu se rezervují <strong>měsíce dopředu</strong>, ne týden."
+      ],
       steps: [
         {
           iconImg: "images/ikony/highlight-priroda-a-plaze.svg",
@@ -2244,7 +2560,7 @@
               "Největší chyba při plánování dovolené v USA je přesvědčení, že <strong>víc zastávek znamená lepší dovolenou</strong>. Je to pochopitelné: když už člověk pracně naplánuje cestu přes Atlantik, chce toho vidět co nejvíc. Ale v USA platí tohle pravidlo víc než kdekoliv jinde: <strong>méně je více</strong>.",
               "6 parků v desetidenním výletu nejsou zážitky. Je to <strong>jeden vyčerpaný člověk, který už ani neví, co je na fotce ze včerejška</strong>.",
               "Grand Canyon není zastávka na cestě. Je to místo, kde stojíš na okraji a <strong>mozek odmítá uvěřit tomu, co vidí</strong>. Grand Canyon potřebuje aspoň 1 den, ideálně 2: první na to, vzpamatovat se z výhledu, druhý na to, prožít ho naplno.",
-              "Totéž platí pro Floridu. Daleko víc si ji užiješ, když si vybereš: buď západ se Sarasotou a okolím, nebo jih s Key Westem, nebo Canaveral National Seashore u Cocoa Beach na východě. Obojí najednou za týden? <strong>Strávíš půlku dovolené v autě a druhou půlku litováním, že jsi nikde nezůstal déle.</strong>",
+              "Totéž platí pro Floridu. Daleko víc si ji užiješ, když si vybereš: buď západ se Sarasotou a okolím, nebo jih s Key Westem, nebo Canaveral National Seashore u Cocoa Beach na východě. Obojí najednou za týden? <strong>Strávíš půlku dovolené v autě a druhou půlku litováním, že jsi nikde nezůstal/a déle.</strong>",
               "Plánuj podle počasí, ale hlavně podle sebe. Nesnášíš vedro? Tak žádná Florida v červenci. Bez ranní kávy z pořádného hrnku se neobejdeš? Tak žádný týden v kempu uprostřed Utahu.",
               "<strong>Méně míst, více zážitků.</strong> Tenhle princip ti hned na začátku ušetří nejvíc zklamání."
             ]
@@ -2297,6 +2613,15 @@
             { stat: "1× za pár let", popis: "tak často v průměru zasáhne konkrétní bouře konkrétní místo, a to za celých 6 měsíců sezóny." },
             { text: ["Než k nim dojdeme, poznej <strong>paní Cokdyž</strong>. Je to hlas v hlavě, co se nastěhuje ke každému, kdo si koupí letenku do Ameriky. Nikdy se neohlásí, nikdy nezaplatí kauci, a na noční směnu nastupuje přesně v 00:47."] }
           ],
+          historka: {
+            foto: "images/gabi-hlavicka.jpg",
+            text: [
+              "Než jsme se přestěhovali na Floridu, měli jsme jeden společný strach. Co budeme dělat, když přijde hurikán? Nakonec jsme zariskovali víc, než jsme plánovali, bydlíme totiž v zóně s <strong>povinnou evakuací</strong>.",
+              "Když se blíží bouře, nemáme na výběr. Vypnout vodu, pytle s pískem před garáž, a vyrazit.",
+              "Máme štěstí. Ve vnitrozemí bydlí kámoš Dave, co nás nechá přespat, a sousedka Joan, co tam žije 40 let a pracuje v NASA. <strong>„Proč myslíš, že je NASA zrovna tady? Protože tady ty fatální hurikány nejsou. Na rozdíl od západního pobřeží.“</strong>",
+              "I tak ale naši sousedi nedělají hrdiny. Přijde varování, a oni prostě jdou. <strong>Žádné čekání na poslední chvíli.</strong> V tom jsou daleko zodpovědnější než Češi při povodních."
+            ]
+          },
           quote: {
             text: "„A co když přijde hurikán zrovna v našem termínu?“",
             who: "Paní Cokdyž, dnes v 00:47"
@@ -2419,7 +2744,7 @@
       id: "doklady",
       balicek: "zaklad",
       hero: { src: "images/hlavicky/hero-doklady.jpg", alt: "Jespáci na mokrém písku u vody",
-             popis: "a tohle je ráno, kterému papíry stojí za to" },
+             popis: "a tohle jsou jespáci, kteří se ti budou motat pod nohama, až vyrazíš na ranní procházku po pláži" },
 
       ikona: "images/ikony/highlight-doklady.svg",
       name: "Doklady a formálnosti: co musíš mít vyřízené, než nastoupíš do letadla",
@@ -2432,14 +2757,18 @@
       desc: "ESTA, pas, pojištění. Co vyřídit, v jakém pořadí a jak dlouho to trvá.",
       prep: "<strong>Cestovní pas po ruce.</strong> Nic dalšího zatím shánět nemusíš, tenhle modul ti řekne přesně co a v jakém pořadí.",
       hook: [
-        "Lidi se mě pořád ptají, jestli fakt stačí jen pas a ESTA. <strong>(Odpovídám na to tak často, že bych to slovo skoro mohla mít vytesané na vizitce.)</strong>",
-        "Skoro vždycky ano. Jenže <strong>to slovo skoro dokáže na letišti pokazit celou dovolenou</strong>.",
-        "Viděla jsem klienty, co doletěli až do Miami a <strong>hned je posadili zpátky do letadla domů</strong>. Jednou kvůli ESTA, které vypršelo před 2 dny. Podruhé proto, že na imigrační kontrole neuměli říct adresu první noci.",
+        "Lidi se mě pořád ptají, jestli fakt stačí jen pas a ESTA. <strong>(Odpovídám na to tak často, že to mám uložené jako rychlou odpověď v telefonu.)</strong>",
+        "Skoro vždycky ano. <strong>Jenže někdy třeba taky NE.</strong>",
+        "Viděla jsem klienty, co se ani nedostali na palubu. <strong>Dvakrát, ze dvou různých důvodů.</strong>",
+        "Jednou kvůli ESTA, které vypršelo před 2 dny. <strong>Letecká společnost to chytla při odbavení na Ruzyni</strong>, a bylo po dovolené.",
+        "Podruhé přistáli v pořádku, ale u imigrační kontroly neuměli říct adresu první noci. Úředník je poslal na sekundární kontrolu.",
+        "<strong>4 hodiny v místnosti, kde sedí lidi, u kterých „něco nesedí“.</strong> Zbytek toho dne byl ztracený.",
         "Projdeme, co musíš mít vyřízené, v jakém pořadí, a hlavně co si internet plete.",
         "Víš to o sobě jistě, nebo ti v hlavě právě bliká slovo skoro?"
       ],
       praise: {
         emoji: "📄",
+        emojiImg: "images/ikony/highlight-doklady.svg",
         title: "Doklady máš srovnané. Teď už tě na letišti nic nepřekvapí.",
         text:
           "Biometrický pas nestačí jen mít. Musí platit celý pobyt. " +
@@ -2447,15 +2776,34 @@
           "A na otázku, kde spíš tu první noc, budeš mít odpověď dřív, než ji stihnou položit. " +
           "Paní Cokdyž si tentokrát bude muset najít jiné téma."
       },
+      shrnuti: [
+        "Pas musí platit <strong>po celou dobu pobytu</strong>, ne 6 měsíců po návratu, jak se traduje.",
+        "ESTA vyřiď <strong>jako první</strong>, dřív než cokoliv koupíš. Jedině oficiálně na esta.cbp.dhs.gov, za 40,27 dolarů.",
+        "Zpáteční letenka a adresa první noci jsou dvě věci, na který se ptají na hranici, měj je připravené."
+      ],
       steps: [
         {
           icon: "📘",
           title: "Pas, který tiše dodýchává v šuplíku",
+          hintProTyp: {
+            svobodny: "Tohle je jedna z mála věcí v celém průvodci, co se fakt nedá nechat na cestu. <strong>Zkontroluj to teď</strong>, dokud máš ještě čas na nový pas, kdyby byl potřeba.",
+            planovac: "Tohle už máš pravděpodobně dávno v hlavě vyřešené. Jen nezapomeň zkontrolovat i ty, co jedou s tebou, appka to spočítá <strong>zvlášť pro každého</strong>.",
+            lovec: "Pár vteřin práce, a máš klid. Přesně tvůj styl, <strong>rychle to odškrtni</strong> a jeď dál.",
+            motyl: "Fotka z vyhlídky nestojí za nic, když tě na hranici zastaví kvůli propadlému pasu. <strong>Zkontroluj to teď</strong>, dokud na to myslíš.",
+            pohoda: "Vím, chce se ti spíš plánovat pláž než datum na pasu. Zabere to ale <strong>jednu minutu</strong>, tak to máš rovnou z krku."
+          },
           lead: [
             "Rodiče sedí nad formulářem ESTA v naprostém klidu. Dítěti přitom pas v šuplíku dodýchává už měsíc.",
-            "Viděla jsem to tolikrát, že to u mě má vlastní jméno: <strong>šuplíkový pas</strong>.",
+            "Viděla jsem to tolikrát, a říkám tomu <strong>šuplíkový pas</strong>.",
             "Zadej jméno a datum konce platnosti pro sebe i pro každého, kdo jede s tebou. Appka to porovná s datem návratu a rovnou uvidíš, čí pas je v pořádku a čí ne."
           ],
+          historka: {
+            foto: "images/gabi-hlavicka.jpg",
+            text: [
+              "Nejlepší kamarádi mého manžela, Pehy, Pahy a Roman, plánovali cestu za ním do Ameriky tři měsíce, v hospodě, do detailu. Romana pak zastavili na letišti v Madridu. <strong>Zkušený cestovatel, co projel desítky zemí, a do USA měl propadlý pas.</strong>",
+              "Dodnes před ním slovo Utah nebo Colorado nemůžeme ani vyslovit. <strong>(Musela jsem to sem dát, Romčo promiň.)</strong>"
+            ]
+          },
           passportCheck: true,
           chipExample: true,
           checklist: [
@@ -2466,9 +2814,9 @@
             title: "Proč je to důležité",
             body: [
               "Skoro každý, s kým mluvím o pasu, mi řekne to samé: musí platit ještě 6 měsíců po návratu.",
-              "Sama jsem tomu věřila tak dlouho, až jsem si ten mýtus pěstovala jako pokojovou rostlinu. <em>(Zalévala jsem ho pravidelně.)</em>",
+              "Sama jsem tomu věřila tak dlouho, až jsem si ten mýtus pěstovala jako pokojovou rostlinu. Zalévala jsem ho pravidelně.",
               "Česko patří do <strong>Six Month Clubu</strong>. Pas ti stačí platný po dobu pobytu v USA.",
-              "Naslepo bych se na to ale nespoléhala. Odbavovací systémy aerolinek tu výjimku občas neznají a <strong>pár měsíců rezervy tě nic nestojí</strong>."
+              "Přesto si datum zkontroluj ještě doma. Odbavovací systémy aerolinek tu výjimku občas neznají a <strong>pár měsíců rezervy tě nic nestojí</strong>."
             ]
           },
           trap: {
@@ -2489,7 +2837,7 @@
         },
         {
           icon: "💻",
-          title: "Co si nachystat, než otevřeš formulář",
+          title: "Dvacet minut hledání, kterým se dá předejít",
           lead: [
             "Tohle je dobrá zpráva celého modulu. ESTA se vyřizuje z gauče, v teplácích, za pár minut. Žádná ambasáda, žádný pohovor.",
             "Jednu věc mi ale klienti kazí pořád dokola: myslí si, že stačí jedna ESTA na celou rodinu. Nestačí. <strong>Potřebuje ji úplně každý, kdo letí.</strong>",
@@ -2514,14 +2862,14 @@
               items: [
                 "Napiš si přesnou adresu trvalého bydliště, <strong>včetně PSČ</strong>",
                 "Připrav telefonní číslo a e-mail, na e-mail ti přijde <strong>potvrzení o podání i o schválení</strong>",
-                "Vzpomeň si na jména obou rodičů, křestní i příjmení, <strong>i když spolu nežijí nebo už nežijí</strong>. Ano, i to jméno, co si nikdy nepamatuješ, jak se přesně píše"
+                "Vzpomeň si na jména obou rodičů, křestní i příjmení, <strong>i když spolu nežijí nebo už nežijí</strong>. Ano, i to jméno, co nikdy neumíš napsat napoprvé správně, a vždycky ho radši opisuješ z dokladu"
               ]
             },
             {
               heading: "Údaje o zaměstnání",
               items: [
                 "Najdi <strong>název a adresu zaměstnavatele</strong>, případně školy nebo vlastní firmy",
-                "Pokud jsi nezaměstnaný nebo v důchodu, nic nehledej, formulář na to má <strong>vlastní kolonku</strong>"
+                "Pokud nemáš zaměstnání nebo jsi v důchodu, nic nehledej, formulář na to má <strong>vlastní kolonku</strong>"
               ]
             },
             {
@@ -2535,7 +2883,7 @@
             {
               heading: "Platba",
               items: [
-                "Měj po ruce platební kartu (Visa, Mastercard, Amex) nebo PayPal, poplatek je <strong>40,27 dolarů za osobu</strong>, ne těch bájných 21, co pořád straší internet"
+                "Měj po ruce platební kartu (Visa, Mastercard, Amex) nebo PayPal, poplatek je <strong>40,27 dolarů za osobu</strong>, ne těch bájných 21, co pořád někde visí na internetu"
               ]
             },
             {
@@ -2570,11 +2918,15 @@
         },
         {
           icon: "🛂",
-          title: "Patříš do té hrstky výjimek?",
+          title: "Platí to i pro tebe?",
           lead: [
             "Naprostá většina Čechů si s ESTA vystačí a nikdy neřeší nic dalšího.",
             "Existuje ale hrstka výjimek. Tenhle krok ti řekne, jestli do ní nepatříš."
           ],
+          companion: {
+            src: "images/gabi-happy-plaz.svg",
+            text: "Tuhle otázku proletí devět z deseti lidí za pár vteřin a mají po starosti. Kdyby ses ale ocitl/a v té desáté, chci, abys to věděl/a dřív, než utratíš korunu za cokoliv nevratného."
+          },
           checklist: [
             "Zkontrolovat, že plánovaný pobyt nepřesáhne <strong>90 dní</strong>",
             "Ověřit, že účel cesty je turistika nebo business, <strong>ne studium či práce</strong>"
@@ -2610,12 +2962,16 @@
         },
         {
           icon: "🧳",
-          title: "Dvě věci, na které se ptají na hranici",
-          ilustrace: { src: "images/sceny/urednik-kafe.svg", popis: "úředník krátce před kafem, ještě tři lidi" },
+          title: "Tohle se tě zeptají cestou do Ameriky",
+          ilustrace: { src: "images/sceny/urednik-kafe.svg", popis: "úředník, který to chce mít za sebou a dát si další kafe" },
           lead: [
             "Kde sehnat nejlevnější letenku, to řeší jiný modul.",
             "Tohle je o dvou konkrétních věcech, které po tobě bude chtít vidět letecká společnost i imigrační úředník. Ještě než nastoupíš."
           ],
+          companion: {
+            src: "images/gabi-happy-plaz.svg",
+            text: "Tohle jsou přesně ty dvě otázky, který slyším od klientů těsně před odletem, v panice, protože si na ně vzpomenou až u odbavení. Vyřeš je radši teď, v klidu, u počítače."
+          },
           checklist: [
             "Mít <strong>zpáteční letenku</strong>, nebo letenku do destinace mimo Severní Ameriku"
           ],
@@ -2638,11 +2994,15 @@
         },
         {
           icon: "🚑",
-          title: "Dva doklady, které nikdo nekontroluje. Dokud je nepotřebuješ",
+          title: "Dva doklady, které nikdo nekontroluje. Ale ty si je vyřiď stejně.",
           lead: [
             "Na hranici ti je nikdo nezkontroluje. Přesně proto je skoro každý podcení.",
             "Dokud je nepotřebuje."
           ],
+          companion: {
+            src: "images/gabi-happy-plaz.svg",
+            text: "Manžel řídí, takže mezinárodní řidičák byl vždycky jeho starost, ne moje. Loni jsem ale musela sednout za volant sama, a byla jsem ráda, že ho mám. Vyřiď ho, i kdyby řídil jen ten druhý."
+          },
           checklist: [
             "Mám pojištění s limitem aspoň <strong>3 000 000 Kč</strong> na léčebné výlohy",
             "Mít s sebou <strong>fyzickou kreditní kartu</strong>, ne jen debetní"
@@ -2674,12 +3034,17 @@
         },
         {
           icon: "👨‍👩‍👧",
+          iconImg: "images/ikony/mini-rodina.svg",
           title: "Jedna chybějící stránka, a zůstaneš na letišti",
           ilustrace: { src: "images/sceny/scena-razitko.svg", popis: "razítko, které se den předem nesežene" },
           lead: [
             "Tenhle bod se netýká všech.",
             "Kdo ho ale přehlédne a zrovna se ho týká, může kvůli jedné chybějící stránce papíru zůstat stát na letišti. Zatímco zbytek rodiny už sedí v letadle."
           ],
+          companion: {
+            src: "images/gabi-happy-plaz.svg",
+            text: "Viděla jsem rodinu, kde táta zůstal stát u odbavení, zatímco máma s dětmi už seděla v letadle. Nenech to dojít tak daleko, tenhle papír zabere jedno odpoledne."
+          },
           checklist: [
             "Připravit písemný, <strong>notářsky ověřený souhlas</strong> druhého rodiče, v angličtině"
           ],
@@ -2709,7 +3074,7 @@
       id: "letenky",
       balicek: "zaklad",
       hero: { src: "images/hlavicky/hero-letenky.jpg", alt: "Starý most na cestě na Key West, oceán na obě strany",
-             popis: "letenka je jen cesta sem" },
+             popis: "tahle cesta začíná pracným hledáním letenky, a končí přesně tímhle výhledem" },
 
       ikona: "images/ikony/highlight-let-do-usa.svg",
       name: "Letenky: kdy koupit, kde hledat a proč o všem rozhoduje přestup",
@@ -2726,12 +3091,14 @@
         "Zamítnutá ESTA se totiž neobchází a zaplacená letenka ti ji nevrátí. Proto je tenhle modul až druhý v řadě.",
         "Klienti mi pak posílají screenshoty s jedinou otázkou: je tohle dobrá cena? <strong>(A na tu otázku skoro nikdy neodpovím hned.)</strong>",
         "Já se na cenu nedívám první. Dívám se na <strong>přestup</strong>.",
-        "Nejdražší letenka, jakou si můžeš koupit, je ta levná s hodinou a půl v Americe. Tam se nepřestupuje jako v Evropě. Kdo to neví, stojí odpoledne u pásu s kufrem v ruce a kouká, jak mu druhé letadlo odlétá bez něj.",
+        "Nejdražší letenka, jakou si můžeš koupit, je ta levná s hodinou a půl v Americe.",
+        "Tam se totiž nepřestupuje jako v Evropě. Kdo to neví, stojí odpoledne u pásu s kufrem v ruce a kouká, jak mu druhé letadlo odlétá bez něj.",
         "Projdeme kdy kupovat, čím hledat, jak dlouhý přestup si nechat a kde letenku rozhodně nekupovat.",
         "Kolik hodin má ten tvůj plánovaný přestup?"
       ],
       praise: {
         emoji: "✈️",
+        emojiImg: "images/ikony/highlight-let-do-usa.svg",
         title: "Letenka je vyřešená a přestup ti drží.",
         text:
           "Víš, kdy kupovat a kdy jen zbytečně koukáš na ceny. Víš, že se kufr vyzvedává " +
@@ -2739,6 +3106,11 @@
           "srovnávači, ale kupuje u aerolinky. " +
           "Datum máš potvrzené. Teď se dá řešit, kde budeš spát."
       },
+      shrnuti: [
+        "Nejlepší okno na koupi letenky je <strong>2 až 4 měsíce před odletem</strong>, ne rok dopředu, ne týden.",
+        "Kup vždycky <strong>na webu aerolinky</strong>, ne přes srovnávač jako Skyscanner nebo Kiwi.",
+        "Na přestup v USA si nech <strong>aspoň 2 až 3 hodiny</strong>, kufr se tam vyzvedává a znovu odbavuje."
+      ],
       steps: [
         {
           icon: "📅",
@@ -2784,6 +3156,10 @@
             "Z Moravy se do Ameriky létá jinak. Ostrava-Mošnov nemá přímé dálkové linky, takže se přestupuje tak jako tak. Jenom jinde, za jiné peníze a s jinak dlouhým čekáním.",
             "Odkud fakticky poletíš ty?"
           ],
+          companion: {
+            src: "images/gabi-happy-plaz.svg",
+            text: "Tohle porovnání dělám i klientům z Prahy, protože se vyplatí skoro vždycky. Deset minut u počítače, a víš, jestli ti ušetří tisíce, nebo ne."
+          },
           checklist: [
             "Porovnat <strong>Prahu i Vídeň</strong>, z Moravy bývá Vídeň blíž než Praha",
             "Zkusit trasy přes <strong>Varšavu, Frankfurt a Amsterdam</strong>, každá má jinou cenu i jinou délku přestupu",
@@ -2804,8 +3180,22 @@
           title: "Tři funkce, které dělají celý rozdíl",
           lead: [
             "Hledat letenky umí každý.",
-            "Rozdíl mezi drahou a levnou letenkou dělají tři funkce Google Flights, které většina lidí nikdy neotevře."
+            "Rozdíl mezi drahou a levnou letenkou dělají tři funkce Google Flights, které většina lidí nikdy neotevře.",
+            "A pak je tu ještě jedna věc, která není funkce, ale způsob uvažování: <strong>nehledej letenku, hledej celou cestu</strong>."
           ],
+          why: {
+            title: "Proč nehledám letenku, ale celou cestu",
+            body: [
+              "Letiště na Floridě jsou zaměnitelná. Auto si stejně budeš půjčovat, takže je skoro jedno, na kterém z nich přistaneš. Z Orlanda do Tampy je to <strong>hodina a půl</strong>, a rozdíl v ceně letenky mezi floridskými letišti bývá <strong>i 8 000 Kč</strong>. To je na osobu. Ve čtyřech je z toho částka za týden ubytování.",
+              "Stejně se dá uvažovat i o celém výletu. Když se objeví akce třeba z Krakova do Miami, dá se ta cesta začít v Miami, i když míříš na druhou stranu Floridy. Auto se v Americe <strong>vrací i v jiném městě</strong>, než ve kterém sis ho vyzvedneš. U národních parků je to úplně stejné, je jedno, ve kterém městě cesta začne.",
+              "<strong>Ale zadarmo to není.</strong> Za vrácení auta jinde si půjčovna připočítá poplatek. A z Miami se na druhou stranu Floridy jede: do Orlanda <strong>3,5 hodiny</strong>, do Tampy ještě o kus dál. To není výlet, to je den cesty.",
+              "Právě proto se to má spočítat. Poplatek za jednosměrnou výpůjčku a den za volantem si polož vedle toho, kolik ušetříš na letenkách krát počet lidí. Někdy vyhraje poplatek. U opravdu levné akce a ve čtyřech obvykle ne."
+            ]
+          },
+          companion: {
+            src: "images/gabi-happy-plaz.svg",
+            text: "Tyhle tři funkce používám při každém hledání letenek, i po těch letech. Není to trik, je to zvyk, který se vyplatí naučit se jednou a používat pořád."
+          },
           checklist: [
             "<strong>Flexibilní kalendář</strong>: uvidíš celý měsíc najednou, a že úterý místo pátku umí být o 4 000 Kč levnější",
             "<strong>Hlídání ceny</strong>: zapneš ho a Google ti sám napíše, když cena klesne",
@@ -2817,8 +3207,19 @@
             src: "video/letenky-jak-kupuju.mp4",
             poster: "video/letenky-jak-kupuju-poster.jpg",
             titulek: "Jak kupuju letenky já",
-            popis: "Projdu s tebou svoje hledání od začátku do konce. Ukážu, kam klikám, čeho si všímám ve výsledcích, a řeknu i to, na co se mě ptáte úplně nejčastěji."
+            popis: "Proč se na cenu letenky nedá odpovědět ze screenshotu, co dělám při každém hledání jinak, a co si můžu dovolit já, ale ty radši ne."
           },
+          gallery: [
+            { src: "images/flights/flights-kalendar.jpg",
+              alt: "Google Flights, zobrazení celého měsíce s barevnou mřížkou cen",
+              caption: "Flexibilní kalendář: přepni na celý měsíc a ceny se seřadí vedle sebe" },
+            { src: "images/flights/flights-hlidani-ceny.jpg",
+              alt: "Google Flights, přepínač sledování ceny u vybraného spojení",
+              caption: "Hlídání ceny: jeden přepínač a Google se ozve sám" },
+            { src: "images/flights/flights-vic-letist.jpg",
+              alt: "Google Flights, pole s několika letišti zadanými najednou",
+              caption: "Víc letišť najednou: Tampa, Orlando a Fort Lauderdale v jednom hledání" }
+          ],
           trap: {
             title: "Pozor na tohle",
             body: [
@@ -2827,11 +3228,18 @@
               "Najdi si spoj kde chceš. Kup ho <strong>na webu aerolinky</strong>."
             ]
           },
-          link: {
-            title: "Google Flights",
-            sub: "Flexibilní kalendář, hlídání ceny a hledání přes víc letišť najednou.",
-            url: "https://www.google.com/travel/flights"
-          }
+          link: [
+            {
+              title: "Google Flights",
+              sub: "Flexibilní kalendář, hlídání ceny a hledání přes víc letišť najednou.",
+              url: "https://www.google.com/travel/flights"
+            },
+            {
+              title: "Sledovat na YouTube",
+              sub: "Video se právě chystá i přímo do appky, tohle mezitím funguje, když máš signál.",
+              url: "https://youtu.be/nZqux39fLXA"
+            }
+          ]
         },
         {
           icon: "🔄",
@@ -2843,13 +3251,30 @@
             "Kolik hodin máš mezi přílety ty?"
           ],
           ilustrace: { src: "images/sceny/scena-prestup.svg", popis: "kufr si vyzvedneš i při přestupu, proto ty dvě až tři hodiny" },
-          media: {
+          media: [{
+            kicker: "Proč pod tři hodiny nejdu",
+            src: "video/letenky-prestup.mp4",
+            poster: "video/letenky-prestup-poster.jpg",
+            titulek: "Proč pod tři hodiny nejdu",
+            popis: "Dvě minuty o tom, jak jsem spala na letišti v Chicagu, a o jednom pravidle, které od té doby neporušuju."
+          }, {
             kicker: "K poslechu",
             src: "audio/prestup-krok-za-krokem.mp3",
             titulek: "Přestup krok za krokem",
             delka: "asi 8 minut",
             obrazek: "images/sceny/scena-prestup.svg",
             popis: "Pusť si to cestou na letiště nebo v letadle. Provedu tě celým přestupem od přistání po nástup do navazujícího letu, ať víš, co bude následovat, ještě než se otevřou dveře."
+          }],
+          historka: {
+            foto: "images/gabi-hlavicka.jpg",
+            text: [
+              "O přestupech v Americe bych mohla napsat celou brožuru. Ale to nejdůležitější se vejde na půl stránky.",
+              "Přestup v USA totiž není jako v Amsterdamu nebo Frankfurtu. Nikdy nevíš, jak dlouhá bude fronta na imigračním, u zavazadel nebo na novém odbavení, i když letíš dál třeba do Denveru nebo Chicaga.",
+              "Já si trasu promýšlím dopředu, a přesto se mi víckrát stalo, že mi navazující let ujel a spala jsem na letišti v Chicagu nebo Washingtonu. <strong>Proto mám jedno pevné pravidlo: pod 3 hodiny na přestup nejdu.</strong> Nestojí mi to za to. A vybírám letiště, která znám.",
+              "Když už to nevychází a vypadá to, že to nestihneš, začni jednat ještě v letadle. Půl hodiny před přistáním sbal všechno z přihrádky nad sebou a požádej letušku, jestli tě může pustit ven jako první.",
+              "A pak platí jediné pravidlo. <strong>Žádné záchody, žádná zmrzlina, žádné kafe, žádná voda.</strong> Utíkej.",
+              "Co dělat, když to fakt ujede, to podrobně popisuju v druhém díle průvodce, Až přistaneš."
+            ]
           },
           toggleQuestions: [
             {
@@ -2880,8 +3305,12 @@
           lead: [
             "Na tohle se skoro nikdo neptá. Přitom to rozhoduje, v jakém stavu dorazíš k imigrační kontrole.",
             "Noční let z Evropy přistává v Americe dopoledne. Vyspaný v letadle nikdo není, hlavu máš vatovou, a před tebou je fronta a úředník s otázkami.",
-            "Denní let přistává večer. Dorazíš unavená, zato při smyslech, a jdeš rovnou spát v místním čase."
+            "Denní let přistává večer. Dorazíš unavený/á, zato při smyslech, a jdeš rovnou spát v místním čase."
           ],
+          companion: {
+            src: "images/gabi-happy-plaz.svg",
+            text: "Naposledy jsem letěla nočním letem a první den v Miami strávila spíš v polospánku než na pláži. Vyber si podle sebe, ne podle toho, co je zrovna levnější."
+          },
           checklist: [
             "U nočního letu počítat s tím, že <strong>první den v USA je odepsaný</strong>",
             "Odpovědi pro imigrační kontrolu mít <strong>promyšlené předem</strong>, ne je vymýšlet s vatovou hlavou",
@@ -2904,6 +3333,10 @@
             "Je to nejdražší způsob, jak koupit levnou letenku."
           ],
           ilustrace: { src: "images/sceny/scena-vaha-kufr.svg", popis: "23 kg, a rozhoduje se u odbavení" },
+          companion: {
+            src: "images/gabi-happy-plaz.svg",
+            text: "Basic Economy mě jednou dostala až u brány, kde mi chtěli nechat kufřík doma. Radši si to over dopředu, než abys tohle řešil/a se zavazadlem v ruce."
+          },
           checklist: [
             "Ověřit počet <strong>odbavených zavazadel v ceně</strong>, zvlášť pro cestu tam a zvlášť zpátky",
             "Ověřit, co smíš vzít <strong>do kabiny</strong>, u Basic Economy se to liší aerolinka od aerolinky",
@@ -2967,7 +3400,7 @@
       id: "ubytovani",
       balicek: "zaklad",
       hero: { src: "images/hlavicky/hero-ubytovani.jpg", alt: "Houpačka zavěšená na uschlém stromě přímo v mělké vodě",
-             popis: "první ráno, kdy nikam nemusíš" },
+             popis: "tahle houpačka je na Key Westu, mám na ní super fotky, a ty je můžeš mít taky" },
 
       ikona: "images/ikony/highlight-ubytovani.svg",
       name: "Ubytování: kde spát a co se k ceně ještě připočte",
@@ -2980,14 +3413,18 @@
       desc: "Kde spát podle destinace, co je resort fee a proč hotel zablokuje peníze na kartě.",
       prep: "<strong>Nic shánět nemusíš.</strong> Stačí vědět, kam letíš, a to už appka ví z úvodu.",
       hook: [
-        "Ubytování je jediná položka rozpočtu, u které lidi pravidelně počítají s jinou částkou, než nakonec zaplatí.",
-        "<strong>Rezervuješ za 120 dolarů a na účtu vidíš 165.</strong> Nikdo tě nepodvedl. Jen se v Americe k ceně za pokoj připočítávají věci, které u nás nikdo nezná.",
-        "A pak ti recepce při příjezdu zablokuje na kartě dalších pár set. Úplně zbytečné leknutí, protože to nejsou tvoje peníze pryč. <strong>(Mně se to stalo taky. První rok jsem tomu vůbec nerozuměla.)</strong>",
-        "Projdeme kde spát podle toho, kam jedeš, a co všechno se k té ceně přilepí.",
-        "Kolik za ubytování čekáš, že nakonec zaplatíš?"
+        "Zavři oči. Ráno otevřeš dveře pokoje, a za nimi je oceán. Nebo houpačka zavěšená přímo nad vodou, přesně jako <strong>ta moje na Key Westu</strong>.",
+        "Tohle je ta část přípravy, kde i paní Cokdyž na chvíli vypne.",
+        "Než se tam ale dostaneš, je dobré vědět jednu věc. Ubytování je jediná položka rozpočtu, u které lidé pravidelně počítají s jinou částkou, než nakonec zaplatí.",
+        "<strong>Rezervuješ pokoj za 120 dolarů a na účtu pak vidíš 165.</strong> Nikdo tě nepodvedl. Jen se v Americe k ceně pokoje připočítávají poplatky, které u nás většinou neznáme.",
+        "A pak ti při příjezdu recepce zablokuje na kartě ještě <strong>několik set dolarů</strong>. Zbytečné leknutí. Tyhle peníze ti nikdo nebere, jen jsou dočasně zablokované.",
+        "Mně se to stalo taky. Vůbec jsem netušila, co se děje. <strong>A to mám tedy nacestováno...</strong> Takže klid.",
+        "Ukážu ti, kde spát podle toho, kam jedeš, kolik ubytování skutečně stojí a jaké další poplatky tě můžou překvapit.",
+        "Kolik myslíš, že za ubytování nakonec zaplatíš?"
       ],
       praise: {
         emoji: "🏨",
+        emojiImg: "images/ikony/highlight-ubytovani.svg",
         title: "Ubytování máš vybrané a víš, co doopravdy zaplatíš.",
         text:
           "Víš, co dává smysl zrovna u tvojí destinace. Víš, že cena na srovnávači nemusí " +
@@ -2995,6 +3432,11 @@
           "zpátky. " +
           "Paní Cokdyž si může jít počítat něco jiného."
       },
+      shrnuti: [
+        "Cena na srovnávači <strong>není konečná cena</strong>, připočti si resort fee a místní daně.",
+        "Hotel ti při příjezdu <strong>zablokuje peníze na kartě</strong>, to je normální, ne podvod, vrátí se.",
+        "Adresu první noci a potvrzovací číslo ulož do <strong>Trezoru</strong>, ptají se na ně bez signálu."
+      ],
       steps: [
         {
           icon: "🗺️",
@@ -3007,20 +3449,33 @@
             planovac: "Rezervuj brzy, hlavně v zimní sezóně na Floridě. <strong>Storno podmínky si přečti dřív, než zaplatíš</strong>, ať máš prostor plán změnit."
           },
           lead: [
-            "Tohle je jediná část modulu, která se liší podle destinace.",
-            "<strong>Spát na Floridě a spát v národním parku jsou dvě jiné disciplíny.</strong> Appka ví, kam máš namířeno, tak ti rovnou ukáže tu tvoji. Na ostatní se dá přepnout."
+            "Tři místa, <strong>tři úplně jiné logiky ubytování</strong>. Co funguje v jednom, v druhém vyjde draho, nebo vůbec.",
+            "Appka ví, kam máš namířeno, tak ti rovnou ukáže tu tvoji. Na ostatní se dá přepnout."
           ],
           stayPicker: true,
-          gallery: [
-            { src: "images/pobrezi-shora.jpg", alt: "Floridské pobřeží shora, hotely a apartmány podél pláže",
-              caption: "první řada u vody stojí nejvíc, druhá o pár bloků dál klidně polovinu" }
-          ],
           why: {
             title: "Proč je to důležité",
             body: [
               "U ubytování rozhoduje načasování víc než u čehokoliv jiného. A pro každou destinaci vypadá jinak.",
               "Na Floridě se vyprodává <strong>zimní sezóna</strong>, protože v ní Američané ze severu utíkají před mrazem. V New Yorku ceny skáčou podle svátků a akcí ve městě. V parcích jde o <strong>13 měsíců dopředu</strong>, protože ubytování uvnitř parku je omezené a víc ho nikdo nepostaví.",
               "Univerzální pravidlo neexistuje. Existuje jen to, <strong>které platí zrovna tam, kam letíš</strong>."
+            ]
+          },
+          trap: {
+            title: "Pozor na tohle",
+            body: [
+              "Vidím to z obou stran. Když k nám jezdí Američani, jsou nadšení z úrovně služeb, co u nás bereme jako samozřejmost. Když pak jedu na dovolenou po Americe já, říkám si spíš: <strong>za tyhle peníze bych v Česku měla luxusní hotel se snídaní</strong>.",
+              "Čtyři hvězdičky v Americe a čtyři hvězdičky v Česku jsou dvě různé věci. My jsme ze Zlínského kraje, kde jsou ubytovací služby jedny z nejlepších v republice, a <strong>někdy se fakt nestačím divit</strong>. Už několikrát jsme si zamluvili čtyřhvězdičkový hotel a dostali pokoj, který by se v Česku za tu cenu vůbec neprodal.",
+              "Než klikneš na rezervovat, ověř si dvě věci, na které v Česku člověka nikdy nenapadne myslet.",
+              "<strong>Kriminalita čtvrti.</strong> Zadej název místa do vyhledávače, nebo se zeptej rovnou umělé inteligence na míru kriminality v okolí. Když je vysoká, hledej hotel o pár kilometrů dál, nestojí to za to.",
+              "<strong>Čistota.</strong> Americké hotely mají jiné standardy než evropské, koupelna, která by se v Česku za tu cenu vůbec neprodala, tam dostane hvězdičky bez mrknutí oka. Čti recenze a hledej zmínky o čistotě konkrétně, ne jen celkové hodnocení."
+            ]
+          },
+          note: {
+            title: "Ještě jedna věc",
+            body: [
+              "Horký tip na úsporu, pokud jedeš s dětmi. Hledej pokoj s popiskem <strong>Double Queen</strong>, dvě postele queen size v jednom pokoji.",
+              "Vejdou se do něj pohodlně 4 lidé, a pokud dětem nevadí spát v jedné místnosti s rodiči, zaplatíš míň než za dva samostatné pokoje."
             ]
           }
         },
@@ -3031,10 +3486,14 @@
             "Tady vzniká ten rozdíl mezi částkou na srovnávači a tou na účtu.",
             "<strong>Nic z toho není podvod.</strong> Jsou to běžné americké poplatky. Jen o nich předem nikdo neřekne."
           ],
+          companion: {
+            src: "images/gabi-happy-plaz.svg",
+            text: "Kontroluju si tohle u každé rezervace, i po letech na Floridě. Resort fee se v inzerátu často neobjeví vůbec, najdeš ho až v podmínkách rezervace."
+          },
           checklist: [
             "Ověřit, jestli se platí <strong>resort fee</strong>, povinný denní poplatek, který zaplatíš, i když bazén ani posilovnu nevyužiješ",
-            "Připočítat <strong>místní daně</strong>, v New Yorku dělají skoro 15 procent z ceny pokoje",
-            "Zjistit cenu <strong>parkování</strong>, v centrech měst se platí zvlášť a bývá pořádně drahé"
+            "Připočítat <strong>místní daně</strong>, v New Yorku dělají dohromady asi 14,75 procenta z ceny pokoje plus pevný poplatek kolem 3,50 dolaru za noc",
+            "Zjistit cenu <strong>parkování</strong>, ve velkých městech jako New York, Miami, San Francisco nebo Chicago stojí <strong>40 až 80 dolarů za noc</strong>"
           ],
           pochvala: "✨ Hotovo. Cena na účtu tě teď nepřekvapí, protože ji znáš dopředu.",
           why: {
@@ -3048,8 +3507,15 @@
           note: {
             title: "Ještě jedna věc",
             body: [
-              "Resort fee bývá <strong>25 až 50 dolarů za noc</strong> a účtují ho i hotely, které jako resort vůbec nevypadají.",
+              "Resort fee bývá <strong>20 až 50 dolarů za noc</strong> a účtují ho i hotely, které jako resort vůbec nevypadají. Levnější motely mívají spíš k té dvacítce, resorty klidně na horní hranici i výš.",
               "U týdenního pobytu je to rozdíl v tisících korun. Porovnávej proto až konečné ceny, ne ty na první stránce."
+            ]
+          },
+          trap: {
+            title: "Pozor na tohle",
+            body: [
+              "Resort fee se nemusí platit předem online. Řada hotelů ho účtuje až na recepci, v podmínkách označené jako <strong>„pay at property“</strong>, takže ho na potvrzení rezervace vůbec neuvidíš.",
+              "A když k tomu připočteš parkování, celková částka snadno přeskočí <strong>200 dolarů za noc</strong>, i za pokoj, co na srovnávači vypadal na 120."
             ]
           }
         },
@@ -3060,7 +3526,7 @@
           lead: [
             "Přijedeš na recepci, podáš kartu a hotel si na ní <strong>zablokuje několik set dolarů</strong>.",
             "V tu chvíli se sevře žaludek každému, kdo to nečeká.",
-            "Nejsou to peníze pryč. Je to jistota pro případ, že se v pokoji něco rozbije nebo zmizí celý minibar."
+            "Nic nezmizelo. Je to jistota pro případ, že se v pokoji něco rozbije nebo zmizí celý minibar."
           ],
           companion: {
             src: "images/gabi-happy-plaz.svg",
@@ -3083,7 +3549,7 @@
             title: "Pozor na tohle",
             body: [
               "Vyrazit na dvoutýdenní cestu s debetní kartou a přesně spočítaným rozpočtem.",
-              "Hotel zablokuje 150 dolarů. Půjčovna auta klidně 500. A ty <strong>nemáš čím zaplatit večeři</strong>, přestože peníze na účtu formálně máš.",
+              "Hotel zablokuje 100 až 200 dolarů. Půjčovna auta klidně 500. A ty <strong>nemáš čím zaplatit večeři</strong>, přestože peníze na účtu formálně máš.",
               "Tohle je nejčastější důvod, proč lidi v Americe zůstanou bez prostředků."
             ]
           }
@@ -3095,17 +3561,36 @@
             "Pár drobností, které se na místě dohánějí špatně.",
             "Zaberou chvilku teď a ušetří překvapení po dvanácti hodinách v letadle."
           ],
+          companion: {
+            src: "images/gabi-happy-plaz.svg",
+            text: "Tahle pravidla se liší ubytování od ubytování, tak si je vždycky přečti u toho konkrétního místa. Mně se párkrát stalo, že jsem na to zapomněla, a čekala jsem pak hodinu v hale, než šel pokoj uklidit."
+          },
           checklist: [
-            "Přečíst <strong>storno podmínky</strong>, nevratná sazba bývá levnější jen o pár dolarů, ale zavře ti všechny dveře",
+            "Přečíst <strong>storno podmínky</strong>, nevratná sazba bývá levnější jen o <strong>10 až 20 dolarů za noc</strong>, ale zavře ti všechny dveře",
             "Zkontrolovat <strong>čas příjezdu</strong>, běžný check-in bývá až od 15 hodin a po nočním letu jsi na místě dávno předtím",
             "Ověřit <strong>minimální věk hosta</strong>, řada amerických ubytování ubytuje až od 21 let"
           ],
           pochvala: "✨ Hotovo. Žádné překvapení na recepci po dvanácti hodinách v letadle.",
+          why: {
+            title: "Proč je to důležité",
+            body: [
+              "Dálkové lety z Evropy přistávají v Americe často dopoledne nebo brzo odpoledne, přesně v době, kdy pokoj po předchozím hostovi ještě není uklizený.",
+              "Časnější check-in si někde připlatíš, jinde ho nedostaneš vůbec, ať nabízíš cokoliv."
+            ]
+          },
+          trap: {
+            title: "Pozor na tohle",
+            body: [
+              "Rezervovat pokoj na jméno partnera nebo kamarádky, která nakonec na check-in nedorazí, a čekat, že to na recepci nikdo neřeší.",
+              "Recepce chce doklad totožnosti, který sedí na jméno v rezervaci. Když nesedí, řeší se to na místě, a ne vždycky ve tvůj prospěch.",
+              "Stejně tak minimální věk hosta. Ověří ho podle dokladu, ne podle toho, kdo rezervaci zaplatil a na čí kartě je záloha."
+            ]
+          },
           note: {
             title: "Ještě jedna věc",
             body: [
               "Přiletíš ráno, pokoj bude až odpoledne. Recepce ti <strong>skoro vždycky nechá zavazadla</strong> a ty vyrazíš do města nalehko.",
-              "Stačí o to říct. Je to běžná služba a nic za ni nechtějí."
+              "Oficiálně za to nic nechtějí, ale <strong>1 až 2 dolary spropitného na kufr</strong> tomu, kdo ti je vydá zpátky, se hodí."
             ]
           }
         },
@@ -3116,6 +3601,10 @@
             "Poslední krok, a je krátký.",
             "<strong>Adresu prvního ubytování</strong> po tobě budou chtít na imigrační kontrole. Potvrzovací číslo pak na recepci. Obojí ve chvíli, kdy nemusíš mít signál ani nabitý telefon."
           ],
+          companion: {
+            src: "images/gabi-happy-plaz.svg",
+            text: "Tohle jsou přesně ty dvě věci, které chci, abys měl/a vyplněné dřív, než zavřeš kufr. V letadle na to nebudeš mít hlavu."
+          },
           checklist: [
             "Uložit <strong>adresu první noci</strong> do Trezoru, ptají se na ni na imigrační kontrole",
             "Uložit <strong>potvrzovací číslo rezervace</strong>, ať ho najdeš i bez internetu"
@@ -3168,6 +3657,7 @@
       ],
       praise: {
         emoji: "💳",
+        emojiImg: "images/ikony/highlight-florida-levneji.svg",
         title: "Peníze máš srovnané a nikdo si z nich neukousne víc, než musí.",
         text:
           "Víš, kterou kartu vytáhnout a kterou nechat doma. Víš, kolik ti sebere banka " +
@@ -3175,6 +3665,11 @@
           "A víš, co udělat s bankou, než odletíš. " +
           "To je za jeden večer u stolu docela slušný výnos."
       },
+      shrnuti: [
+        "Vezmi si <strong>aspoň dvě karty</strong> od různých bank, jednu z nich kreditní.",
+        "Na terminálu i v bankomatu vždycky vyber <strong>platbu v dolarech</strong>, nikdy v korunách.",
+        "Nahlas bance, že <strong>budeš platit v USA</strong>, ať ti kartu nezablokuje jako podezřelou platbu."
+      ],
       steps: [
         {
           icon: "💳",
@@ -3184,6 +3679,10 @@
             "Ne proto, že by tam byly nebezpečné bankomaty. Ale protože se karta umí zablokovat, ztratit, nebo prostě zůstat v půjčovně aut jako záloha.",
             "Kolik karet máš v peněžence teď?"
           ],
+          companion: {
+            src: "images/gabi-happy-plaz.svg",
+            text: "Jednou kamarádce zůstala jediná karta zaseknutá v bankomatu v Orlandu, o víkendu, kdy banka nezvedala telefon. Od tý doby jezdím vždycky s dvěma, a tobě radím to samé."
+          },
           checklist: [
             "Vzít si <strong>aspoň dvě karty</strong> od různých bank, ne dvě od jedné",
             "Aspoň jedna z nich musí být <strong>kreditní</strong>, kvůli zálohám v hotelu a v půjčovně",
@@ -3207,6 +3706,10 @@
             "Přesto se bez hotovosti neobejdeš. Ne kvůli nákupům, ale kvůli lidem: <strong>spropitné, nosič, pokojská, parkovací automat</strong>.",
             "Rozumná částka na dva týdny jsou <strong>200 až 300 dolarů</strong>, a hlavně v malých bankovkách."
           ],
+          companion: {
+            src: "images/gabi-happy-plaz.svg",
+            text: "Beru si vždycky menší bankovky, i teď, po letech na Floridě. Stodolarovka je tu skoro k ničemu, leda na to, aby na tebe prodavač koukal divně."
+          },
           checklist: [
             "Vzít si <strong>200 až 300 dolarů</strong> na dva týdny, spíš míň než víc",
             "Nechat si je rozměnit na <strong>jednodolarovky a pětky</strong>, ne stodolarovky",
@@ -3236,6 +3739,10 @@
               yesWarning: "Pak ji ber jako <strong>hlavní kartu na běžné placení</strong> a bankovní kartu měj jako zálohu. Jen si na ni pošli peníze ve všední den, o víkendu si Revolut Standard přidává 1 procento k převodu měny."
             }
           ],
+          companion: {
+            src: "images/gabi-happy-plaz.svg",
+            text: "Tohle je ta položka rozpočtu, o který nikdo nemluví, protože ji nikdo nevidí. Podívej se na ni teď, ať tě nepřekvapí až ve výpisu doma."
+          },
           checklist: [
             "Zjistit u své banky, <strong>kolik si účtuje za platbu v cizí měně</strong>",
             "Zvážit <strong>Revolut nebo Wise</strong> jako hlavní kartu na běžné placení",
@@ -3280,6 +3787,10 @@
             "Deset minut v aplikaci banky večer před odletem. Nic víc to není.",
             "A ušetří to ten nejnepříjemnější scénář: stojíš u pokladny, karta neprojde a ty nevíš proč."
           ],
+          companion: {
+            src: "images/gabi-happy-plaz.svg",
+            text: "Tohle dělám před každým letem, i teď. Deset minut v appce banky mi ušetřilo nejmíň dvakrát noční telefonát domů kvůli zablokované kartě."
+          },
           checklist: [
             "Nahlásit bance, že <strong>budeš platit v USA</strong>, ať platbu nevyhodnotí jako podvodnou",
             "Zkontrolovat <strong>denní limity</strong> na platby i na výběry a případně si je zvýšit",
@@ -3302,6 +3813,10 @@
             "Zbývá poslední otázka, a je ta největší: kolik si mám vlastně připravit?",
             "Appka to umí spočítat sama. Najdeš to v levém menu dole, v sekci <strong>Tvoje věci → Můj rozpočet</strong>, ať se ti to nikde neztratí a máš to po ruce i mimo tenhle modul."
           ],
+          companion: {
+            src: "images/gabi-happy-plaz.svg",
+            text: "Číslo, co ti appka spočítá, není odhad z internetu. Je to tvoje číslo, pro tvůj termín a tvoje lidi, a přesně takhle si rozpočet počítám i já."
+          },
           checklist: [
             "Spočítat si <strong>rozpočet</strong> pro svůj konkrétní termín a počet lidí",
             "Přidat si do něj <strong>rezervu na blokace</strong> na kartě, hotel i půjčovna si je berou"
@@ -3340,12 +3855,13 @@
       hook: [
         "Balení je jediná část cesty, kterou nejde udělat v předstihu. A přesně proto se dělá pozdě večer a ve spěchu.",
         "Tenhle modul není o tom, kolik triček si vzít. To už dávno víš.",
-        "Je o čtyřech věcech, které lidem dělají problém pokaždé: <strong>co musí být v příručním, co se vyplatí vytisknout, co se do Ameriky nesmí a co se dokupuje až na místě</strong>. <strong>(Klobásu jsem v kufru nikdy nevezla. Ale první rok jsem tam měla naditý slaninový guláš. Ano, fakt.)</strong>",
+        "Je o čtyřech věcech, které lidem dělají problém pokaždé: <strong>co musí být v příručním, co se vyplatí vytisknout, co se do Ameriky nesmí a co se dokupuje až na místě</strong>. <strong>(Klobásu jsem v kufru nikdy nevezla. Ale první rok jsem tam měla kvasnice. Ano, fakt.)</strong>",
         "Projdi si to s kufrem u nohou, ne v posteli.",
         "Máš už kufr otevřený, nebo to na tebe teprve čeká?"
       ],
       praise: {
         emoji: "✅",
+        emojiImg: "images/ikony/highlight-checklisty.svg",
         title: "Sbaleno. A tentokrát bez toho pocitu, že se na něco zapomnělo.",
         text:
           "Doklady máš v příručním, ne v kufru, který se může zdržet. Papíry máš i na papíře, " +
@@ -3353,6 +3869,11 @@
           "na celnici zabavili. " +
           "Zbývá jediné: dojet na letiště."
       },
+      shrnuti: [
+        "Doklady, léky a powerbanka patří <strong>do příručního</strong>, nikdy do odbaveného kufru.",
+        "Adresu první noci, ESTA a čísla rezervací si <strong>vytiskni na papír</strong>, i vedle appky.",
+        "Žádné maso, čerstvé ovoce ani měkké sýry, americká celnice je na jídlo <strong>přísná</strong>."
+      ],
       steps: [
         {
           icon: "🎒",
@@ -3377,6 +3898,11 @@
             "<strong>Brýle, čočky a nabíječka na telefon</strong>, tedy věci, bez kterých se neobejdeš"
           ],
           pochvala: "✨ Hotovo. I kdyby se kufr zdržel, tvoje cesta se nezastaví.",
+          link: {
+            title: "Stáhnout: Co si zabalit do USA",
+            sub: "Celý tenhle seznam na jedné stránce ke stažení a vytištění, ať ho máš po ruce i mimo appku.",
+            url: "soubory/co-si-zabalit-do-usa.pdf"
+          },
           trap: {
             title: "Pozor na tohle",
             body: [
@@ -3393,6 +3919,10 @@
             "Ano, i v roce 2026. A není to z nedůvěry k technice.",
             "Je to proto, že po dvanácti hodinách v letadle máš 4 procenta baterky, letištní wifi nefunguje a před tebou stojí úředník, který čeká."
           ],
+          companion: {
+            src: "images/gabi-happy-plaz.svg",
+            text: "Vytiskni si to fakt na papír, i když ti to přijde jako věc z minulého století. Sama mám v tašce pořád jeden list, co jsem si tiskla ještě před prvním letem, a použila jsem ho víckrát, než jsem čekala."
+          },
           checklist: [
             "<strong>Adresa první noci</strong> včetně jména ubytování a telefonu",
             "<strong>Potvrzení o ESTA</strong> a čísla letů tam i zpět",
@@ -3413,8 +3943,12 @@
           icon: "🔌",
           title: "Tři věci, na které se zapomíná nejčastěji",
           lead: [
-            "Oblečení si sbalíš sama a líp než já. Tyhle tři věci se ale zapomínají tak spolehlivě, že si zaslouží vlastní krok."
+            "Oblečení si sbalíš sám/sama a líp než já. Tyhle tři věci se ale zapomínají tak spolehlivě, že si zaslouží vlastní krok."
           ],
+          companion: {
+            src: "images/gabi-happy-plaz.svg",
+            text: "Adaptér jsem zapomněla přesně jednou a koupila si ho na letišti v Miami za trojnásobek. Radši si ho zkontroluj teď, dokud je čas zajet do obchodu."
+          },
           checklist: [
             "<strong>Adaptér do americké zásuvky</strong>, americké zásuvky mají jiné kolíky i jiné napětí",
             "<strong>Opalovací krém s vysokým faktorem</strong>, floridské slunce je jinde než české",
@@ -3425,7 +3959,8 @@
             title: "Ještě jedna věc",
             body: [
               "Adaptér kupuj doma. Na americkém letišti stojí <strong>několikanásobek</strong> a v hotelu ho většinou nemají.",
-              "A ověř si, jestli tvoje nabíječka zvládá <strong>110 voltů</strong>. Většina moderních nabíječek ano, ale žehlička na vlasy z Česka umí v Americe doslova shořet."
+              "A ověř si, jestli tvoje nabíječka zvládá <strong>110 voltů</strong>. Většina moderních nabíječek ano, ale žehlička na vlasy z Česka umí v Americe doslova shořet.",
+              "Opalovací krém je jiný případ, ten naopak <strong>kupuj klidně až na Floridě</strong>. Vyjde tam levněji než v Česku, tak si s sebou nemusíš tahat plnou lahev z domova."
             ]
           }
         },
@@ -3437,6 +3972,20 @@
             "Americká celnice je na jídlo <strong>mimořádně přísná</strong> a nejde o šikanu. Jde o zavlečení nákazy a škůdců.",
             "Nedeklarovaná zakázaná potravina znamená pokutu <strong>až 10 000 dolarů</strong>."
           ],
+          companion: {
+            src: "images/gabi-happy-plaz.svg",
+            text: "Klobásu jsem v kufru fakt nikdy neměla, ale kvasnice první rok ano. Radši zkontroluj kufr ještě jednou, než ho zavřeš."
+          },
+          historka: {
+            foto: "images/gabi-hlavicka.jpg",
+            text: [
+              "Znám kamaráda z Denveru, co si odvážně vezl z Kolumbie <strong>šunkovou kýtu</strong>. Pokuta byla astronomická. Nepřišel jen o tu kýtu, ale i o pořádný balík peněz.",
+              "Pravidlo je jednoduché, i když ho spousta lidí ignoruje. <strong>Maso, ovoce, zelenina, mléčné výrobky a rostliny do USA nesmí.</strong> Bez výjimky, ani v zavazadle, ani v příručním.",
+              "Kafe vozit můžeš, zabalené průmyslové potraviny většinou taky. Vždycky si ale ověř aktuální seznam na webu CBP, pravidla se mění.",
+              "A ještě jedna věc, co vypadá jako maličkost, ale není. Když se tě na hranici zeptají, jestli vezeš jídlo, zvaž, co odpovíš, i přiznané oplatky tě umí poslat na kontrolu zavazadel a další frontu.",
+              "Nejjednodušší řešení? <strong>Fakt nic nevoz.</strong> V Americe je všechno."
+            ]
+          },
           checklist: [
             "Nebrat <strong>žádné maso a výrobky z něj</strong>, ani konzervy, ani sušené, ani klobásu",
             "Nebrat <strong>čerstvé ovoce a zeleninu</strong>, ani sušené, ani doma zavařené",
@@ -3449,9 +3998,27 @@
             body: [
               "Rozdíl mezi zabavením a pokutou nedělá to, co vezeš. Dělá ho to, <strong>jestli je to přiznané</strong>.",
               "Když věc uvedeš v celním prohlášení a nesmí se dovézt, seberou ti ji a jedeš dál. Když ji neuvedeš a najdou ji, je z toho pokuta v tisících dolarů.",
-              "Když si nejsi jistá, přiznej to. Vždycky."
+              "Když si nejsi jistý/á, přiznej to. Vždycky."
             ]
           }
+        },
+        {
+          icon: "📶",
+          title: "Internet v Americe: eSIM, ne roaming",
+          lead: [
+            "Roaming z českého tarifu v USA umí stát závratné peníze.",
+            "Řešení je jednoduché: <strong>eSIM</strong>, digitální SIM kartu si aktivuješ ještě doma, ještě než nastoupíš do letadla."
+          ],
+          checklist: [
+            "<strong>Aktivovat eSIM doma</strong>, ne až ve frontě na letišti bez signálu",
+            "Telefon zůstane dosažitelný na tvé <strong>české číslo</strong>, fyzickou kartu neměníš",
+            "Data v USA vyjdou <strong>zlomek ceny roamingu</strong>"
+          ],
+          pochvala: "✨ Hotovo. Na letišti v Americe už jen zapneš data, nic neřešíš.",
+          link: [
+            { title: "Airalo", sub: "Jedna z nejrozšířenějších eSIM služeb, nabídka pro celé USA.", url: "https://www.airalo.com/cs" },
+            { title: "Saily", sub: "Druhá prověřená eSIM, od stejného týmu jako NordVPN.", url: "https://saily.com/" }
+          ]
         },
         {
           icon: "🌙",
@@ -3498,12 +4065,18 @@
       ],
       praise: {
         emoji: "🆘",
+        emojiImg: "images/ikony/highlight-krize.svg",
         title: "Plán B máš připravený a doufejme, že ho nikdy nepoužiješ.",
         text:
           "Víš, na co máš nárok při zrušeném letu a kolik to dělá. Víš, co udělat, když onemocníš " +
           "nebo přijdeš o pas pár dní před odletem. A víš, že ani zamítnutá ESTA neznamená konec cesty. " +
           "Tohle je ten modul, který si přeješ nepotřebovat. Ale je lepší ho mít."
       },
+      shrnuti: [
+        "Při zrušeném nebo hodně zpožděném letu máš nárok na <strong>600 eur odškodnění</strong>, řeš to přímo u aerolinky.",
+        "Storno pojištění se dá sjednat jen <strong>krátce po koupi letenky</strong>, později už ne.",
+        "Ztracený pas i zamítnutá ESTA mají řešení, jen <strong>počítej s dny navíc</strong>, ne s hodinami."
+      ],
       steps: [
         {
           icon: "🛫",
@@ -3520,6 +4093,10 @@
             "Při zrušení nebo zpoždění <strong>o 3 hodiny a víc</strong> máš nárok na odškodnění <strong>600 eur na osobu</strong>. U letu do USA jde vždycky o tuhle nejvyšší sazbu, protože je delší než 3 500 km.",
             "Odškodnění je navíc k tomu, že tě aerolinka musí dopravit do cíle nebo vrátit peníze."
           ],
+          companion: {
+            src: "images/gabi-happy-plaz.svg",
+            text: "Tohle přesně kontroluju klientům, když se jim to fakt stane, telefonicky, někdy uprostřed noci. Nejsi v tom sám/sama, jen postupuj bod po bodu."
+          },
           checklist: [
             "Nikam neodcházet, dokud <strong>nemám od aerolinky písemně</strong>, co se s letem děje",
             "<strong>Vyfotit informační tabuli</strong> se zpožděním a schovat palubenky",
@@ -3543,6 +4120,10 @@
             "Tohle je situace, kde se rozhoduje o desítkách tisíc, a rozhodlo se o nich už ve chvíli, kdy se kupovalo pojištění.",
             "Klíčové slovo je <strong>storno pojištění</strong>. To není totéž co pojištění léčebných výloh."
           ],
+          companion: {
+            src: "images/gabi-happy-plaz.svg",
+            text: "Tohle se stalo klientce týden před odletem, a díky storno pojištění nepřišla ani o korunu. Zkontroluj si to teď, kdy ještě nic neřešíš ve spěchu."
+          },
           checklist: [
             "Zjistit, jestli mám <strong>připojištění storna</strong>, ne jen léčebné výlohy",
             "Při onemocnění jít <strong>hned k lékaři</strong> a nechat si vystavit potvrzení s datem",
@@ -3565,6 +4146,10 @@
             "Vypadá to jako konec cesty. Není.",
             "Existuje zrychlené vydání pasu, a to i na poslední chvíli. Stojí to peníze, ale funguje."
           ],
+          companion: {
+            src: "images/gabi-happy-plaz.svg",
+            text: "Tohle jsem řešila s klientem, kterému ukradli tašku i s pasem tři dny před odletem. Nakonec odletěl podle plánu."
+          },
           checklist: [
             "Při ztrátě <strong>nahlásit to policii</strong> a nechat si vystavit potvrzení",
             "Zajít na <strong>úřad obce s rozšířenou působností</strong> a požádat o zrychlené vydání",
@@ -3587,6 +4172,10 @@
             "Stane se to zřídka, ale stane. A je to jediná z těchhle situací, kterou nejde vyřešit rychle.",
             "<strong>Zamítnutou ESTA nemá smysl podávat znovu.</strong> Systém si žádost pamatuje a další pokus dopadne stejně."
           ],
+          companion: {
+            src: "images/gabi-happy-plaz.svg",
+            text: "Tahle situace je vzácná, ale když nastane, chci, abys věděl/a, že to není konec, jen jiná a delší cesta. Projdeme ji spolu, krok po kroku."
+          },
           checklist: [
             "Nepodávat <strong>opakovanou žádost o ESTA</strong>, výsledek bude stejný",
             "Požádat o <strong>klasické vízum B1/B2</strong> na americké ambasádě",
@@ -3870,8 +4459,8 @@
       nazev: "Sociální motýl",
       obrazek: "images/ikony/highlight-my-story.svg",
       popis: [
-        "Jedeš proto, aby ti bylo co vyprávět a co ukázat. Znáš každé místo z Netflixu a chceš stát přesně tam, kde stál tvůj oblíbený herec. Universal Studios, South Beach, selfie z Brooklynského mostu.",
-        "<strong>Co ti tady pomůže:</strong> vybrat termín, kdy ta místa nejsou k udušení plná, a naplánovat je tak, aby se stihla i v denním světle.",
+        "Jedeš za zážitky, které znáš z Netflixu, a chceš je konečně zažít naživo. Universal Studios, South Beach, selfie z Brooklynského mostu.",
+        "<strong>Co ti tady pomůže:</strong> vybrat termín, kdy ta místa nejsou přecpaná, a naplánovat trasu tak, aby šlo všechno stihnout i v denním světle.",
         "<strong>Na co pozor:</strong> na vstupy, které se kupují dopředu. Nejfotogeničtější místa Ameriky mívají frontu i rezervační systém."
       ]
     }
@@ -3963,25 +4552,39 @@
      produktů. Tady jde o to, mezi čím se vůbec rozhoduje. */
   var STAY_BY_DEST = {
     florida: {
-      lead: "Na Floridě se neplatí ani tak za pokoj, jako za to, <strong>jak daleko je od vody</strong>. Pár bloků do vnitrozemí umí srazit cenu skoro na polovinu, a na pláž stejně dojdeš pěšky.",
+      lead: "Na Floridě se neplatí ani tak za pokoj, jako za to, <strong>jak daleko je od vody</strong>. Pár bloků do vnitrozemí umí srazit cenu skoro na polovinu, a na pláž se dá dojet autem, nebo na kole.",
       options: [
-        { ico: "🏖️", name: "Hotel přímo u pláže",
-          text: "Nejdražší varianta a <strong>v zimě se vyprodává měsíce dopředu</strong>, protože přijedou snowbirdi ze severu. Platíš za výhled a za to, že vyjdeš z pokoje rovnou na písek." },
-        { ico: "🏠", name: "Kondo nebo apartmán s kuchyní",
-          text: "Tohle doporučuju rodinám nejčastěji. <strong>Vlastní kuchyň</strong> znamená, že nemusíš třikrát denně do restaurace, a to je na Floridě ta úplně největší úspora." },
-        { ico: "🛣️", name: "Motel u silnice",
-          text: "Levné, čisté a naprosto v pořádku <strong>na jednu přejezdovou noc</strong>. Na celý týden bych to nechtěla, ale mezi dvěma místy je to praktické." }
+        { icoImg: "images/ikony/mini-hotel-plaz.svg", name: "Hotel přímo u pláže",
+          text: "Nejdražší varianta, a <strong>v zimě zmizí z nabídky měsíce dopředu</strong>, snowbirdi ze severu si ji zaberou dřív než ty. Platíš za výhled. A za to, že z pokoje vyjdeš rovnou na písek, klidně v pantoflích." },
+        { icoImg: "images/ikony/mini-kondo.svg", name: "Kondo nebo apartmán s kuchyní",
+          text: "Rodinám doporučuju skoro pokaždé. <strong>Vlastní kuchyň</strong> znamená, že nesedíš třikrát denně v restauraci, a to je na Floridě ta jediná úspora, co se fakt pozná na výpisu z karty." },
+        { icoImg: "images/ikony/mini-auto.svg", name: "Bydlet dál od vody, dojíždět autem",
+          text: "Chytrá varianta na úsporu. Ubytuješ se hlouběji ve vnitrozemí, klidně za polovinu, na pláž dojedeš autem a zaplatíš celodenní parkování. <strong>Pořád to vyjde levněji.</strong>" },
+        { icoImg: "images/ikony/mini-stan.svg", name: "Kemp",
+          text: "Američané na Floridě kempují rádi, a úroveň kempů překvapí. Sprchy tam jsou luxus, na jaký z Evropy nejsi zvyklý/á. <em>(Ano, fakt jsem to napsala o kempu.)</em> Everglades nebo Bahia Honda jsou dobrý start i pro někoho, kdo stan v životě nerozbalil." }
       ],
-      note: "Ceny na Floridě jdou nahoru <strong>v zimě, ne v létě</strong>. Je to přesně naopak, než jsme zvyklí z Evropy."
+      note: [
+        "Auto na Floridě potřebuješ vždycky. Kolo je jen bonus, ne náhrada. <strong>100 dolarů za noc pro dva</strong> je solidní základ, slušný pokoj nebo čistý motel, víc není nutnost. A ceny jdou nahoru <strong>v zimě, ne v létě</strong>, přesně naopak, než jsme zvyklí z Evropy.",
+        "Západ Floridy hraje jinou hru než východ. Na <strong>Sanibel, Captiva nebo Anna Maria Island</strong> počítej se vstupným nebo parkovným u pláže, a není to symbolická částka. Na východním pobřeží je situace různá, záleží na místě. Cocoa Beach nebo Daytona jsou většinou zdarma, Miami Beach tě parkováním překvapí.",
+        "Než si vybereš ubytování, zkontroluj konkrétní pláže v okolí. <strong>Jeden Google dotaz</strong> tě může ušetřit zbytečné zklamání první ráno."
+      ],
+      ilustrace: { src: "images/sceny/scena-kemp-plaz.svg", popis: "stan kousek od vody, přesně takhle vypadá kemp na floridském pobřeží" },
+      historka: {
+        foto: "images/gabi-hlavicka.jpg",
+        text: [
+          "Jedna z nejkrásnějších nocí, co jsem v Americe zažila, byla na kempu <strong>Bahia Honda</strong>. Přijedeš na plošinu přímo nad oceánem, s vlastním grilem a židlemi, postavíš stan, a ráno se probudíš rovnou do výhledu na moře.",
+          "Místo se rezervuje i <strong>rok dopředu</strong>, a přesto stojí jen <strong>10 dolarů</strong>. Kdo nestihne, může zkusit štěstí na poslední chvíli, uvolní se to častěji, než by člověk čekal. A je to nesrovnatelně levnější, než bys čekal/a z Česka."
+        ]
+      }
     },
     newyork: {
       lead: "V New Yorku platíš za metry čtvereční a za <strong>vzdálenost od metra</strong>. Pokoj velikosti koupelny je tady běžný standard, ne podvod, a nikdo se za něj neomlouvá.",
       options: [
-        { ico: "🏙️", name: "Hotel na Manhattanu",
+        { icoImg: "images/ikony/mini-manhattan.svg", name: "Hotel na Manhattanu",
           text: "Nejdražší, zato ušetříš čas i nervy na přejíždění. Počítej s malým pokojem a s tím, že se k ceně připočte <strong>skoro 15 procent na daních</strong>." },
-        { ico: "🌉", name: "Brooklyn nebo Queens",
+        { icoImg: "images/ikony/mini-most.svg", name: "Brooklyn nebo Queens",
           text: "Za stejné peníze dostaneš znatelně víc prostoru. Jen si předem ověř, <strong>kolik zastávek metrem</strong> to je do centra: 20 minut je pohoda, 50 minut začne po pár dnech otravovat." },
-        { ico: "🛏️", name: "Hostel nebo sdílený pokoj",
+        { icoImg: "images/ikony/mini-postel-patrova.svg", name: "Hostel nebo sdílený pokoj",
           text: "Pro sólo cestovatele a mladší partu. V New Yorku je to <strong>jedna z mála cest, jak se vejít do rozumného rozpočtu</strong> a přitom bydlet blízko centra." }
       ],
       note: "Auto v New Yorku nepotřebuješ a parkování u hotelu stojí klidně <strong>60 dolarů za noc</strong>. Tohle je jediná destinace ze tří, kde je auto spíš přítěž."
@@ -3989,13 +4592,13 @@
     parky: {
       lead: "V parcích nerozhoduje ani tak cena, jako to, <strong>jestli vůbec něco zbylo</strong>. Ubytování přímo v parku se rezervuje 13 měsíců dopředu a nejlepší termíny mizí během minut.",
       options: [
-        { ico: "🏞️", name: "Lodge přímo v parku",
+        { icoImg: "images/ikony/mini-srub.svg", name: "Lodge přímo v parku",
           text: "Nejlepší varianta a zároveň nejtěžší k sehnání. Rezervace se otevírají <strong>13 měsíců dopředu</strong>, vždycky prvního dne v měsíci, a oblíbené termíny jsou pryč během pár minut. Za ranní výhled bez davů to ale stojí." },
-        { ico: "⛺", name: "Kemp",
+        { icoImg: "images/ikony/mini-stan.svg", name: "Kemp",
           text: "Levné a nejblíž přírodě, rezervuje se přes <strong>Recreation.gov</strong>. Počítej s tím, že v noci bývá chladno i v létě, hlavně v Utahu, kde se přes den peče a nad ránem klidně mrzne." },
-        { ico: "🚐", name: "Obytný vůz",
+        { icoImg: "images/ikony/mini-obytny-vuz.svg", name: "Obytný vůz",
           text: "Ubytování a doprava v jednom, oblíbené hlavně na okruzích mezi parky. <strong>Místo v kempu s přípojkou si musíš zajistit dopředu</strong>, jen tak zaparkovat kdekoliv nejde." },
-        { ico: "🏨", name: "Motel v přilehlém městě",
+        { icoImg: "images/ikony/mini-motel.svg", name: "Motel v přilehlém městě",
           text: "Když lodge nevyjde, tohle je záchrana. Bydlíš <strong>20 až 40 minut od brány parku</strong>, což znamená ranní vstávání, zato je to reálně k sehnání." }
       ],
       note: "U parků platí jediné pravidlo: <strong>čím dřív, tím líp</strong>. Rezervace tady nejsou o penězích, ale o tom, kdo si první zapsal datum do kalendáře."
@@ -4141,7 +4744,8 @@
     screens.forEach(function (s) { s.classList.toggle("active", s.id === screenId); });
 
     var inShell = (screenId === "s-uvod" || screenId === "s-home" ||
-                   screenId === "s-module" || screenId === "s-trezor" || screenId === "s-rozpocet");
+                   screenId === "s-module" || screenId === "s-trezor" || screenId === "s-rozpocet" ||
+                   screenId === "s-prevodnik" || screenId === "s-pristanes");
     onboarding.hidden = inShell;
     onboarding.style.display = inShell ? "none" : "grid";
     shell.hidden = !inShell;
@@ -4152,11 +4756,14 @@
     else if (screenId === "s-home") topbarTitle.textContent = "Přehled";
     else if (screenId === "s-trezor") topbarTitle.textContent = "Trezor";
     else if (screenId === "s-rozpocet") topbarTitle.textContent = "Můj rozpočet";
+    else if (screenId === "s-prevodnik") topbarTitle.textContent = "Převodník";
+    else if (screenId === "s-pristanes") topbarTitle.textContent = "Až přistaneš";
 
-    // osa s moduly patří jen k modulovému postupu, na Trezoru a v rozpočtu
-    // nic neznázorňuje, tak tam jen mate
+    // osa s moduly patří jen k modulovému postupu, na Trezoru, v rozpočtu
+    // a v náhledu druhého průvodce nic neznázorňuje, tak tam jen mate
     var railEl = document.getElementById("rail");
-    if (railEl) railEl.hidden = (screenId === "s-trezor" || screenId === "s-rozpocet");
+    if (railEl) railEl.hidden = (screenId === "s-trezor" || screenId === "s-rozpocet" ||
+                                  screenId === "s-prevodnik" || screenId === "s-pristanes");
 
     closeMenu();
     renderSidebar();
@@ -4299,6 +4906,12 @@
       });
     });
 
+    item({
+      ico: "🔒", title: "Až přistaneš", meta: "7 modulů · " + PRISTANES_KDY,
+      active: currentScreen === "s-pristanes", locked: true,
+      onClick: function () { goTo("s-pristanes"); }
+    });
+
     var lbl2 = document.createElement("div");
     lbl2.className = "side-group-label";
     lbl2.textContent = "Tvoje věci";
@@ -4313,6 +4926,11 @@
       ico: "🧮", title: "Můj rozpočet", meta: "Kolik to celé bude stát",
       active: currentScreen === "s-rozpocet",
       onClick: function () { goTo("s-rozpocet"); }
+    });
+    item({
+      ico: "🔁", title: "Převodník", meta: "Měna, jednotky, spropitné",
+      active: currentScreen === "s-prevodnik",
+      onClick: function () { goTo("s-prevodnik"); }
     });
   }
 
@@ -4422,6 +5040,38 @@
     return Math.round((new Date(dateStr + "T00:00:00") - today) / 86400000);
   }
 
+  /* Nejnaléhavější úkol na obrazovce Přehled, spočítaný z dní do odletu
+     a toho, co už je vyplněné v Trezoru. Má přednost před sezónním tipem,
+     protože tohle se mění den ze dne, sezóna ne. Vrací null, když nic
+     nehoří, appka pak spadne zpátky na personalizedWarning. */
+  function homeUrgentNudge(setup) {
+    var dnu = daysUntil(setup.datum);
+    if (dnu < 0) return null;
+
+    var trezor = loadTrezor();
+    var estaReady = !!(trezor.esta && trezor.esta.trim());
+    var letenkyReady = !!(trezor.letenky && trezor.letenky.trim());
+    var rezervaceReady = !!(trezor.rezervace && trezor.rezervace.trim());
+
+    var mesic = new Date(setup.datum + "T00:00:00").getMonth();
+    var sezona = (mesic >= 5 && mesic <= 7) || mesic === 11;
+    var pozdeLetenka = sezona ? 75 : 55;
+
+    if (!estaReady) {
+      return "Ještě nemáš vyřízenou ESTA, a bez ní se nedá na jistotu koupit letenka. Vyřiď ji jako první, zabere to 20 minut.";
+    }
+    if (!letenkyReady && dnu <= pozdeLetenka) {
+      return "Do odletu zbývá " + dnu + " " + dnuPlural(dnu) + " a letenku pořád nemáš koupenou. Nákupní okno se zavírá, kupuj co nejdřív.";
+    }
+    if (!rezervaceReady && dnu <= 30) {
+      return "Do odletu zbývá " + dnu + " " + dnuPlural(dnu) + " a ubytování ještě nemáš zajištěné v Trezoru. Radši to nenechávej na poslední chvíli.";
+    }
+    if (dnu <= 3) {
+      return "Zbývá " + dnu + " " + dnuPlural(dnu) + ". Projdi si checklisty a zkontroluj Trezor, ať máš všechno po ruce.";
+    }
+    return null;
+  }
+
   function personalizedWarning(destinace, dateStr) {
     var month = new Date(dateStr + "T00:00:00").getMonth() + 1;
     if (destinace === "florida" && month >= 6 && month <= 11) {
@@ -4479,9 +5129,15 @@
       }
 
       var bal = BALICKY[mod.balicek];
+      var nodeContent;
+      if (locked) nodeContent = "🔒";
+      else if (done) nodeContent = "✓";
+      else if (mod.ikona) nodeContent = '<img src="' + mod.ikona + '" alt="">';
+      else nodeContent = mod.emoji;
+      var nodeClass = "journey-node" + (!locked && !done && mod.ikona ? " has-img" : "");
       item.innerHTML =
-        '<div class="journey-node" style="' + (state !== "done" ? "background:" + (mod.accentSoft || "") + ";color:" + (mod.accent || "") + ";" : "") + '">' +
-          (locked ? "🔒" : (done ? "✓" : mod.emoji)) +
+        '<div class="' + nodeClass + '" style="' + (state !== "done" ? "background:" + (mod.accentSoft || "") + ";color:" + (mod.accent || "") + ";" : "") + '">' +
+          nodeContent +
         '</div>' +
         '<div class="journey-card" style="--accent:' + (mod.accent || "") + ';--accent-soft:' + (mod.accentSoft || "") + '">' +
           '<div class="journey-body">' +
@@ -4511,8 +5167,26 @@
       '</div>';
     journey.appendChild(dEl);
 
+    // cesta pokračuje i po dni odletu: náhled druhého průvodce, ne modul appky
+    var pEl = document.createElement("div");
+    pEl.className = "journey-item pristanes";
+    pEl.innerHTML =
+      '<div class="journey-node">🔒</div>' +
+      '<div class="journey-card">' +
+        '<div class="journey-body">' +
+          '<span class="journey-when">Po přistání</span>' +
+          '<span class="journey-name">Až přistaneš</span>' +
+          '<span class="journey-meta">7 modulů, ' + PRISTANES_KDY + '</span>' +
+        '</div>' +
+        '<button type="button" class="journey-cta is-ghost" data-pristanes="1">Nahlédnout →</button>' +
+      '</div>';
+    journey.appendChild(pEl);
+
     journey.querySelectorAll(".journey-cta").forEach(function (btn) {
-      btn.addEventListener("click", function () { openModule(btn.dataset.mod); });
+      btn.addEventListener("click", function () {
+        if (btn.dataset.pristanes) goTo("s-pristanes");
+        else openModule(btn.dataset.mod);
+      });
     });
 
     // výplň osy sahá až k aktuálnímu kroku (nebo na konec, když je vše hotovo)
@@ -4668,9 +5342,12 @@
     hero.classList.toggle("has-photo", !!photo);
 
     var warnBox = document.getElementById("hc-warning");
-    var warning = personalizedWarning(setup.destinace, setup.datum);
+    var urgent = homeUrgentNudge(setup);
+    var warning = urgent || personalizedWarning(setup.destinace, setup.datum);
     if (warning) {
-      warnBox.innerHTML = '<span class="ico">💡</span><span><strong>Než začneš, 1 věc.</strong> ' + warning + '</span>';
+      var eyebrow = urgent ? "Nejdůležitější teď." : "Než začneš, 1 věc.";
+      var ico = urgent ? "⏰" : "💡";
+      warnBox.innerHTML = '<span class="ico">' + ico + '</span><span><strong>' + eyebrow + '</strong> ' + warning + '</span>';
     }
     warnBox.classList.toggle("show", !!warning);
 
@@ -4942,6 +5619,148 @@
     spocitej();
   }
 
+  /* Převodník: měna, jednotky a spropitné. Nic se neukládá do localStorage,
+     přepočítává se to za běhu, appka funguje offline i bez dat. */
+  function initPrevodnik() {
+    var box = document.getElementById("prevodnik-kalk");
+    if (!box) return;
+
+    box.innerHTML =
+      '<div class="prevodnik-sekce tyrkys">' +
+        '<div class="blok-eyebrow eyebrow">💵 Měna</div>' +
+        '<div class="rozpocet-grid">' +
+          '<div class="rozpocet-pole"><label for="pv-kurz">Kurz, Kč za 1 dolar</label>' +
+            '<div class="rozpocet-input-wrap"><input type="number" min="0" step="0.1" inputmode="decimal" id="pv-kurz" value="21"><span class="rozpocet-unit">Kč</span></div></div>' +
+        '</div>' +
+        '<div class="rozpocet-grid">' +
+          '<div class="rozpocet-pole"><label for="pv-usd">Dolary</label>' +
+            '<div class="rozpocet-input-wrap"><input type="number" min="0" inputmode="decimal" id="pv-usd" value="100"><span class="rozpocet-unit">$</span></div></div>' +
+          '<div class="rozpocet-pole"><label for="pv-czk">Koruny</label>' +
+            '<div class="rozpocet-input-wrap"><input type="number" min="0" inputmode="decimal" id="pv-czk" value="2100"><span class="rozpocet-unit">Kč</span></div></div>' +
+        '</div>' +
+        '<p class="prevodnik-hint">Appka je offline, takže kurz nestahuje sama. Uprav si ho podle aktuálního stavu, než odletíš.</p>' +
+      '</div>' +
+
+      '<div class="prevodnik-sekce zluta">' +
+        '<div class="blok-eyebrow eyebrow eyebrow-warm">📏 Jednotky</div>' +
+        '<p class="prevodnik-hint prevodnik-hint-top">86 °F na floridské pláži zní hrozivěji, než 30 °C. Klid, je to to samé.</p>' +
+        '<div class="rozpocet-grid">' +
+          '<div class="rozpocet-pole"><label for="pv-f">Fahrenheity</label>' +
+            '<div class="rozpocet-input-wrap"><input type="number" inputmode="decimal" id="pv-f" value="86"><span class="rozpocet-unit">°F</span></div></div>' +
+          '<div class="rozpocet-pole"><label for="pv-c">Celsia</label>' +
+            '<div class="rozpocet-input-wrap"><input type="number" inputmode="decimal" id="pv-c" value="30"><span class="rozpocet-unit">°C</span></div></div>' +
+        '</div>' +
+        '<div class="rozpocet-grid">' +
+          '<div class="rozpocet-pole"><label for="pv-mi">Míle</label>' +
+            '<div class="rozpocet-input-wrap"><input type="number" min="0" inputmode="decimal" id="pv-mi" value="10"><span class="rozpocet-unit">mi</span></div></div>' +
+          '<div class="rozpocet-pole"><label for="pv-km">Kilometry</label>' +
+            '<div class="rozpocet-input-wrap"><input type="number" min="0" inputmode="decimal" id="pv-km" value="16.1"><span class="rozpocet-unit">km</span></div></div>' +
+        '</div>' +
+        '<div class="rozpocet-grid">' +
+          '<div class="rozpocet-pole"><label for="pv-gal">Galony</label>' +
+            '<div class="rozpocet-input-wrap"><input type="number" min="0" inputmode="decimal" id="pv-gal" value="10"><span class="rozpocet-unit">gal</span></div></div>' +
+          '<div class="rozpocet-pole"><label for="pv-l">Litry</label>' +
+            '<div class="rozpocet-input-wrap"><input type="number" min="0" inputmode="decimal" id="pv-l" value="37.9"><span class="rozpocet-unit">l</span></div></div>' +
+        '</div>' +
+        '<div class="rozpocet-grid">' +
+          '<div class="rozpocet-pole"><label for="pv-lb">Libry</label>' +
+            '<div class="rozpocet-input-wrap"><input type="number" min="0" inputmode="decimal" id="pv-lb" value="23"><span class="rozpocet-unit">lb</span></div></div>' +
+          '<div class="rozpocet-pole"><label for="pv-kg">Kila</label>' +
+            '<div class="rozpocet-input-wrap"><input type="number" min="0" inputmode="decimal" id="pv-kg" value="10.4"><span class="rozpocet-unit">kg</span></div></div>' +
+        '</div>' +
+      '</div>' +
+
+      '<div class="prevodnik-sekce ruzova">' +
+        '<div class="blok-eyebrow eyebrow eyebrow-ruzova">💸 Spropitné</div>' +
+        '<p class="prevodnik-hint prevodnik-hint-top">V USA je spropitné skoro povinnost, ne laskavost. 18 % je slušnost, 15 % je už tak trochu drzost.</p>' +
+        '<div class="rozpocet-grid">' +
+          '<div class="rozpocet-pole"><label for="pv-ucet">Účet v restauraci</label>' +
+            '<div class="rozpocet-input-wrap"><input type="number" min="0" inputmode="decimal" id="pv-ucet" value="50"><span class="rozpocet-unit">$</span></div></div>' +
+          '<div class="rozpocet-pole"><label for="pv-lidi">Počet lidí</label>' +
+            '<div class="rozpocet-input-wrap"><input type="number" min="1" inputmode="numeric" id="pv-lidi" value="1"><span class="rozpocet-unit">os.</span></div></div>' +
+        '</div>' +
+        '<div class="prevodnik-tip-btns" id="pv-tip-btns">' +
+          [15, 18, 20, 22].map(function (p) {
+            return '<button type="button" class="prevodnik-tip-btn' + (p === 18 ? ' active' : '') + '" data-tip="' + p + '">' + p + ' %</button>';
+          }).join('') +
+          '<div class="rozpocet-input-wrap" style="width:90px;"><input type="number" min="0" max="100" inputmode="numeric" id="pv-tip-vlastni" placeholder="vlastní"><span class="rozpocet-unit">%</span></div>' +
+        '</div>' +
+        '<div class="rozpocet-vysledek" id="pv-tip-vysledek"></div>' +
+      '</div>';
+
+    // --- měna ---
+    var kurzEl = document.getElementById("pv-kurz");
+    var usdEl = document.getElementById("pv-usd");
+    var czkEl = document.getElementById("pv-czk");
+    var zamek = false;
+    function kurz() { return Math.max(0, Number(kurzEl.value) || 0); }
+    usdEl.addEventListener("input", function () {
+      if (zamek) return;
+      zamek = true; czkEl.value = Math.round((Number(usdEl.value) || 0) * kurz() * 100) / 100; zamek = false;
+    });
+    czkEl.addEventListener("input", function () {
+      if (zamek) return;
+      var k = kurz();
+      zamek = true; usdEl.value = k ? Math.round(((Number(czkEl.value) || 0) / k) * 100) / 100 : 0; zamek = false;
+    });
+    kurzEl.addEventListener("input", function () {
+      zamek = true; czkEl.value = Math.round((Number(usdEl.value) || 0) * kurz() * 100) / 100; zamek = false;
+    });
+
+    // --- jednotky, obecná dvojice s převodním vzorcem oběma směry ---
+    function dvojice(idA, idB, aDoB, bDoA) {
+      var elA = document.getElementById(idA), elB = document.getElementById(idB);
+      var z = false;
+      elA.addEventListener("input", function () {
+        if (z) return;
+        z = true; elB.value = Math.round(aDoB(Number(elA.value) || 0) * 100) / 100; z = false;
+      });
+      elB.addEventListener("input", function () {
+        if (z) return;
+        z = true; elA.value = Math.round(bDoA(Number(elB.value) || 0) * 100) / 100; z = false;
+      });
+    }
+    dvojice("pv-f", "pv-c", function (f) { return (f - 32) * 5 / 9; }, function (c) { return c * 9 / 5 + 32; });
+    dvojice("pv-mi", "pv-km", function (mi) { return mi * 1.60934; }, function (km) { return km / 1.60934; });
+    dvojice("pv-gal", "pv-l", function (g) { return g * 3.78541; }, function (l) { return l / 3.78541; });
+    dvojice("pv-lb", "pv-kg", function (lb) { return lb * 0.453592; }, function (kg) { return kg / 0.453592; });
+
+    // --- spropitné ---
+    var ucetEl = document.getElementById("pv-ucet");
+    var lidiEl = document.getElementById("pv-lidi");
+    var vlastniEl = document.getElementById("pv-tip-vlastni");
+    var tipBtns = document.querySelectorAll(".prevodnik-tip-btn");
+    var vybranyTip = 18;
+
+    function spocitejTip() {
+      var ucet = Math.max(0, Number(ucetEl.value) || 0);
+      var lidi = Math.max(1, Number(lidiEl.value) || 1);
+      var tipCastka = ucet * (vybranyTip / 100);
+      var celkem = ucet + tipCastka;
+      var naOsobu = celkem / lidi;
+      document.getElementById("pv-tip-vysledek").innerHTML =
+        '<div class="rozpocet-vysledek-cislo">' + formatKc(tipCastka).replace("Kč", "$") + ' spropitné</div>' +
+        '<div class="rozpocet-vysledek-osoba">Celkem ' + formatKc(celkem).replace("Kč", "$") + ', ' + formatKc(naOsobu).replace("Kč", "$") + ' na osobu</div>';
+    }
+    tipBtns.forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        vybranyTip = Number(btn.dataset.tip);
+        vlastniEl.value = "";
+        tipBtns.forEach(function (b) { b.classList.toggle("active", b === btn); });
+        spocitejTip();
+      });
+    });
+    vlastniEl.addEventListener("input", function () {
+      if (vlastniEl.value === "") return;
+      vybranyTip = Math.max(0, Number(vlastniEl.value) || 0);
+      tipBtns.forEach(function (b) { b.classList.remove("active"); });
+      spocitejTip();
+    });
+    ucetEl.addEventListener("input", spocitejTip);
+    lidiEl.addEventListener("input", spocitejTip);
+    spocitejTip();
+  }
+
   /* Verdikt k termínu, který člověk zadal v úvodu. Bere měsíc odletu
      a jeho destinaci a řekne rovnou, jestli je to dobrá volba a proč.
      Text počasí je ten samý, který je v přehledu ostatních měsíců. */
@@ -5127,13 +5946,26 @@
         '<p class="stay-lead">' + d.lead + '</p>' +
         '<div class="stay-list">' +
           d.options.map(function (o) {
+            var icoHtml = o.icoImg ? '<img src="' + o.icoImg + '" alt="">' : '<span aria-hidden="true">' + o.ico + '</span>';
             return '<div class="stay-opt">' +
-                     '<div class="stay-opt-name"><span aria-hidden="true">' + o.ico + '</span>' + o.name + '</div>' +
+                     '<div class="stay-opt-name">' + icoHtml + o.name + '</div>' +
                      '<div class="stay-opt-text">' + o.text + '</div>' +
                    '</div>';
           }).join('') +
         '</div>' +
-        (d.note ? '<p class="stay-note">' + d.note + '</p>' : '');
+        (d.note
+          ? (Array.isArray(d.note)
+              ? d.note.map(function (p) { return '<p class="stay-note">' + p + '</p>'; }).join('')
+              : '<p class="stay-note">' + d.note + '</p>')
+          : '') +
+        (d.ilustrace
+          ? '<figure class="step-ilustrace stay-ilustrace"><img src="' + d.ilustrace.src + '" alt="" loading="lazy"><figcaption>' + d.ilustrace.popis + '</figcaption></figure>'
+          : '') +
+        (d.historka
+          ? '<div class="historka"><img src="' + d.historka.foto + '" alt="Gábi"><div class="historka-text">' +
+              d.historka.text.map(function (p) { return '<p>' + p + '</p>'; }).join('') +
+            '</div></div>'
+          : '');
     }
 
     wrap.querySelectorAll(".mp-month").forEach(function (btn) {
@@ -5489,7 +6321,7 @@
       ? '<div class="rc-list">' + r.outstanding.slice(0, 6).map(function (o) {
           return '<button type="button" class="rc-list-item' + (o.blocking ? ' blocking' : '') + '" data-step="' + o.stepIndex + '">' +
                    '<span class="dot"></span>' +
-                   '<span class="rc-item-text"><span class="rc-krok-tag">Krok ' + (o.stepIndex + 1) + '</span>' + o.label + '</span>' +
+                   '<span class="rc-item-text"><span class="rc-krok-tag">Krok ' + (o.stepIndex + 1) + '</span><span class="rc-label">' + o.label + '</span></span>' +
                  '</button>';
         }).join('') + '</div>'
       : '<p class="rc-all-done">Všechno hotovo. Doklady máš v pořádku.</p>';
@@ -5560,7 +6392,7 @@
       /* Video nebo podcast. Rozliší se podle přípony: .mp3 je poslech, zbytek video.
          Dokud soubor neexistuje, zůstane na jeho místě dlaždice s návodem. */
       if (step.media) {
-        var med = step.media;
+        [].concat(step.media).forEach(function (med) {
         var jeZvuk = /\.mp3$/i.test(med.src);
         html += '<div class="step-video">' +
                   '<div class="step-video-head"><span aria-hidden="true">' +
@@ -5573,8 +6405,7 @@
                       '<div class="step-audio-title">' + med.titulek + '</div>' +
                       (med.delka ? '<div class="step-audio-delka">' + med.delka + '</div>' : '') +
                       '<audio controls preload="metadata" src="' + med.src + '"></audio>' +
-                      '<div class="step-audio-ceka">Nahrávka se teprve chystá. Až bude, ulož ji jako ' +
-                        '<strong>' + med.src + '</strong> a přehrávač se objeví sám.</div>' +
+                      '<div class="step-audio-ceka">Tahle nahrávka se právě chystá, přidám ji sem brzy.</div>' +
                     '</div>' +
                   '</div>';
         } else {
@@ -5589,15 +6420,14 @@
                       '<div class="vm-loading" aria-hidden="true">' +
                         '<span class="vm-cam">🎥</span><span class="vm-spinner"></span>' +
                       '</div>' +
-                      '<div class="vm-note">Až ho natočíš, ulož ho jako <strong>' + med.src +
-                        '</strong> a náhled jako <strong>' + med.poster +
-                        '</strong>. Přehrávač se objeví sám.</div>' +
+                      '<div class="vm-note">Tohle video se právě chystá, přidám ho sem brzy.</div>' +
                     '</div>' +
                   '</div>';
         }
 
         html += (med.popis ? '<p class="step-video-popis">' + med.popis + '</p>' : '') +
                 '</div>';
+        });
       }
 
       if (step.mapa) {
@@ -5677,7 +6507,7 @@
         var hint = typ && step.hintProTyp[typ];
         if (hint) {
           html += '<div class="step-hint">' +
-                    '<img src="images/gabi-happy-plaz.svg" alt="">' +
+                    '<img src="images/gabi-hlavicka.jpg" alt="Gábi">' +
                     '<p>' + hint + '</p>' +
                   '</div>';
         }
@@ -5698,8 +6528,16 @@
                 '</div>';
       }
 
+      if (step.historka) {
+        var histParas = Array.isArray(step.historka.text) ? step.historka.text : [step.historka.text];
+        html += '<div class="historka">' +
+                  '<img src="' + step.historka.foto + '" alt="Gábi">' +
+                  '<div class="historka-text">' + paras(histParas) + '</div>' +
+                '</div>';
+      }
+
       if (step.checklist) {
-        html += '<p class="checklist-hint">✓ Jakmile položku splníš, rovnou si ji tady odškrtni.</p>';
+        html += '<p class="checklist-hint">✓ Jakmile máš hotovo, rovnou si to tady odškrtni.</p>';
         html += '<div class="checklist-group">' +
                   '<div class="step-checklist">' + step.checklist.map(function (item, ci) {
                     var key = moduleId + '-k' + i + '-' + ci;
@@ -5713,7 +6551,7 @@
       }
 
       if (step.checklistGroups) {
-        html += '<p class="checklist-hint">✓ Jakmile položku splníš, rovnou si ji tady odškrtni.</p>';
+        html += '<p class="checklist-hint">✓ Jakmile máš hotovo, rovnou si to tady odškrtni.</p>';
         var flatCi = 0;
         html += step.checklistGroups.map(function (group) {
           var rows = group.items.map(function (item) {
@@ -5817,13 +6655,16 @@
       }
 
       if (step.link) {
-        html += '<a class="step-link" href="' + step.link.url + '" target="_blank" rel="noopener">' +
-                  '<span class="step-link-text">' +
-                    '<strong>' + step.link.title + '</strong>' +
-                    '<span>' + step.link.sub + '</span>' +
-                  '</span>' +
-                  '<span class="step-link-arrow">↗</span>' +
-                '</a>';
+        var odkazy = Array.isArray(step.link) ? step.link : [step.link];
+        html += odkazy.map(function (l) {
+          return '<a class="step-link" href="' + l.url + '" target="_blank" rel="noopener">' +
+                   '<span class="step-link-text">' +
+                     '<strong>' + l.title + '</strong>' +
+                     '<span>' + l.sub + '</span>' +
+                   '</span>' +
+                   '<span class="step-link-arrow">↗</span>' +
+                 '</a>';
+        }).join('');
       }
 
       if (step.tip) {
@@ -6130,7 +6971,65 @@
     refreshHotoveKroky();
     initTocSledovani();
 
+    var printBtn = document.getElementById("btn-print-checklist");
+    var printGroups = moduleChecklistGroups(mod);
+    printBtn.hidden = printGroups.length === 0;
+    printBtn.onclick = function () { printModuleChecklist(mod); };
+
+    var tahak = document.getElementById("module-tahak");
+    if (mod.shrnuti && mod.shrnuti.length) {
+      document.getElementById("tahak-list").innerHTML =
+        mod.shrnuti.map(function (t) { return "<li>" + t + "</li>"; }).join("");
+      tahak.style.display = "block";
+    } else {
+      tahak.style.display = "none";
+    }
+
     goTo("s-module");
+  }
+
+  // Sesbírá checklist a checklistGroups položky ze všech kroků modulu,
+  // ať je z čeho postavit tiskovou verzi. Krok bez checklistu se přeskočí.
+  function moduleChecklistGroups(mod) {
+    var out = [];
+    (mod.steps || []).forEach(function (step, i) {
+      var rows = [];
+      if (step.checklist) {
+        step.checklist.forEach(function (t) { rows.push({ text: t }); });
+      }
+      if (step.checklistGroups) {
+        step.checklistGroups.forEach(function (g) {
+          rows.push({ heading: g.heading });
+          (g.items || []).forEach(function (t) { rows.push({ text: t }); });
+        });
+      }
+      if (rows.length) out.push({ index: i + 1, title: step.title, rows: rows });
+    });
+    return out;
+  }
+
+  function printModuleChecklist(mod) {
+    var groups = moduleChecklistGroups(mod);
+    if (!groups.length) return;
+    var modCislo = MODULES.indexOf(mod) + 1;
+    var html = '<div class="pa-modul">Než odletíš · Modul ' + modCislo + '</div>' +
+               '<div class="pa-nadpis">' + mod.name + '</div>';
+    if (mod.shrnuti && mod.shrnuti.length) {
+      html += '<div class="pa-krok"><div class="pa-krok-titulek">Tři věci, co si odsud vzít</div>' +
+              mod.shrnuti.map(function (t) { return '<div class="pa-polozka"><span>· ' + t + '</span></div>'; }).join('') +
+              '</div>';
+    }
+    groups.forEach(function (g) {
+      html += '<div class="pa-krok"><div class="pa-krok-titulek">' + modCislo + '.' + g.index + ' ' + g.title + '</div>';
+      g.rows.forEach(function (r) {
+        html += r.heading
+          ? '<div class="pa-skupina">' + r.heading + '</div>'
+          : '<div class="pa-polozka"><span class="pa-box"></span><span>' + r.text + '</span></div>';
+      });
+      html += '</div>';
+    });
+    document.getElementById("print-area").innerHTML = html;
+    window.print();
   }
 
   function showPraise(mod, animate) {
@@ -6150,15 +7049,26 @@
     document.getElementById("praise-title").textContent = title;
     document.getElementById("praise-text").textContent = text;
 
-    // poslední modul zavírá celou část, tam se dál nepokračuje
-    var isLast = MODULES.indexOf(mod) === MODULES.length - 1;
+    // "hotovo" se pozná podle skutečného počtu dokončených modulů, ne podle
+    // pozice v poli, protože moduly jde dokončit i v jiném pořadí
+    var progress = loadProgress();
+    var doneCount = MODULES.filter(function (m) { return progress[m.id]; }).length;
+    var allDone = doneCount >= MODULES.length;
+
     var nextBtn = document.getElementById("btn-praise-next");
-    nextBtn.hidden = isLast;
+    nextBtn.hidden = allDone;
     nextBtn.textContent = "Jdeme na další modul →";
+
+    var finish = document.getElementById("course-complete");
+    finish.classList.toggle("show", allDone);
 
     praise.classList.remove("show");
     if (animate) void praise.offsetWidth;   // restart animace
     praise.classList.add("show");
+
+    if (allDone && animate) {
+      setTimeout(fireConfetti, 350);   // druhá vlna konfet přesně na dokončovací kartu
+    }
   }
 
   document.getElementById("btn-praise-next").addEventListener("click", function () {
@@ -6210,7 +7120,45 @@
     });
   })();
 
+  /* obsah je pevný, žádný vstup uživatele, stačí vykreslit jednou při startu.
+     PRISTANES_KDY se odsud rozlévá na všechna místa, co termín zmiňují (úvodní
+     obrazovka, sidebar, cesta, tahle stránka), ať appka neříká na dvou místech
+     dvě různé věty. */
+  function renderPristanes() {
+    var kdyLabel = "🔒 Vychází na " + PRISTANES_KDY;
+    var kdyEl = document.getElementById("pristanes-kdy");
+    if (kdyEl) kdyEl.textContent = kdyLabel;
+    var welcomeKdyEl = document.getElementById("welcome-pristanes-kdy");
+    if (welcomeKdyEl) welcomeKdyEl.textContent = kdyLabel;
+
+    var grid = document.getElementById("pristanes-grid");
+    if (!grid) return;
+    grid.innerHTML = PRISTANES_MODULY.map(function (m) {
+      var ico = m.ikona
+        ? '<div class="pristanes-ico has-img"><img src="' + m.ikona + '" alt=""></div>'
+        : '<div class="pristanes-ico">' + m.emoji + '</div>';
+      return (
+        '<div class="pristanes-item">' +
+          ico +
+          '<div class="pristanes-body">' +
+            '<div class="pristanes-name">🔒 ' + m.name + '</div>' +
+            '<div class="pristanes-desc">' + m.desc + '</div>' +
+          '</div>' +
+        '</div>'
+      );
+    }).join('');
+
+    var ctaWrap = document.getElementById("pristanes-cta-wrap");
+    if (ctaWrap) {
+      ctaWrap.innerHTML = PRISTANES_ODKAZ
+        ? '<a class="pristanes-cta" href="' + PRISTANES_ODKAZ + '" target="_blank" rel="noopener">Chci vědět jako první →</a>'
+        : '';
+    }
+  }
+  renderPristanes();
+
   initRozpocet();
+  initPrevodnik();
 
   /* ── start ── */
   if (loadSetup()) { renderHome(); goTo("s-uvod"); }

@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48">
+  <!-- mini ikona: srub/lodge, pro "Lodge primo v parku" -->
+  <path d="M6 22 L24 8 L42 22 V40 H6 Z" fill="#FFD23F" stroke="#14233A" stroke-width="2.6" stroke-linejoin="round"/>
+  <path d="M24 8 L24 22" stroke="#14233A" stroke-width="1.8"/>
+  <rect x="20" y="28" width="8" height="12" fill="#FFFFFF" stroke="#14233A" stroke-width="2.2"/>
+  <line x1="6" y1="22" x2="42" y2="22" stroke="#14233A" stroke-width="1.8"/>
+  <path d="M0 24 L24 6 L48 24" fill="none" stroke="#14233A" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

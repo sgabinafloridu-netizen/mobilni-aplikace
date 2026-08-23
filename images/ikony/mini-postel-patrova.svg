@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48">
+  <!-- mini ikona: patrova postel, pro "Hostel nebo sdileny pokoj" -->
+  <rect x="8" y="8" width="32" height="12" rx="2" fill="#FF6FA5" stroke="#14233A" stroke-width="2.4" stroke-linejoin="round"/>
+  <rect x="11" y="11" width="8" height="6" rx="1" fill="#FFFFFF" stroke="#14233A" stroke-width="1.6"/>
+  <rect x="8" y="24" width="32" height="12" rx="2" fill="#1AC0CE" stroke="#14233A" stroke-width="2.4" stroke-linejoin="round"/>
+  <rect x="11" y="27" width="8" height="6" rx="1" fill="#FFFFFF" stroke="#14233A" stroke-width="1.6"/>
+  <line x1="8" y1="40" x2="8" y2="8" stroke="#14233A" stroke-width="2.6" stroke-linecap="round"/>
+  <line x1="40" y1="40" x2="40" y2="8" stroke="#14233A" stroke-width="2.6" stroke-linecap="round"/>
+</svg>

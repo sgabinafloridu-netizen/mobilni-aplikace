@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48">
+  <!-- mini ikona: domek s oknem, pro "Kondo nebo apartman s kuchyni" -->
+  <path d="M8 22 L24 9 L40 22 V40 H8 Z" fill="#FFD23F" stroke="#14233A" stroke-width="2.6" stroke-linejoin="round"/>
+  <rect x="20" y="28" width="8" height="12" fill="#FFFFFF" stroke="#14233A" stroke-width="2.2"/>
+  <rect x="13" y="24" width="7" height="7" rx="1" fill="#FFFFFF" stroke="#14233A" stroke-width="2.2"/>
+</svg>

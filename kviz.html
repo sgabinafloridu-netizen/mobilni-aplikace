@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Zvládneš dojet do USA bez cestovky?</title>
+<meta name="description" content="6 otázek, jeden vždycky stejný výsledek. Zjisti, na co se appka Než odletíš zaměří první.">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Caveat:wght@500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --tyrkys: #1AC0CE;
+    --tyrkys-dark: #12A2AF;
+    --ruzova: #FF6FA5;
+    --inkoust: #14233A;
+    --papir: #F5FAFC;
+    --tyrkys-light: #E6F8FA;
+    --ruzova-light: #FFF1F6;
+    --text: #3a5060;
+    --text-muted: #5a6b7a;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Poppins', sans-serif;
+    background: var(--papir);
+    color: var(--inkoust);
+    min-height: 100vh;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 24px 16px 60px;
+  }
+  .container { max-width: 480px; width: 100%; }
+  .card {
+    background: #fff;
+    border: 2px solid var(--tyrkys-light);
+    border-radius: 22px;
+    padding: 28px 24px;
+    box-shadow: 0 14px 34px rgba(20,35,58,.08);
+  }
+  .screen { display: none; }
+  .screen.active { display: block; }
+
+  .badge {
+    display: inline-block;
+    background: var(--tyrkys);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    padding: 5px 14px;
+    border-radius: 50px;
+    margin-bottom: 18px;
+  }
+  h1 { font-size: 26px; font-weight: 800; line-height: 1.3; margin-bottom: 12px; }
+  .sub { font-size: 15px; color: var(--text); line-height: 1.65; margin-bottom: 22px; }
+  .pills { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 26px; }
+  .pill { background: var(--tyrkys-light); border-radius: 50px; padding: 6px 14px; font-size: 13px; color: var(--tyrkys-dark); font-weight: 600; }
+  .handle { font-family: 'Caveat', cursive; font-size: 16px; color: #aac4cc; text-align: center; margin-top: 16px; }
+
+  .btn {
+    display: block; width: 100%; border: none; border-radius: 50px; padding: 16px;
+    font-family: 'Poppins', sans-serif; font-size: 16px; font-weight: 700; cursor: pointer;
+    text-align: center; text-decoration: none; color: #fff;
+  }
+  .btn-t { background: linear-gradient(135deg, #1AC0CE 0%, #12A2AF 100%); box-shadow: 0 4px 18px rgba(26,192,206,.35); }
+  .btn-p { background: linear-gradient(135deg, #FF6FA5 0%, #FF9E6B 100%); box-shadow: 0 4px 20px rgba(255,111,165,.4); }
+  .btn:disabled { opacity: .6; cursor: not-allowed; }
+
+  .progress-wrap { margin-bottom: 22px; }
+  .progress-label { display: flex; justify-content: space-between; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .6px; color: #9ab8c0; margin-bottom: 8px; }
+  .progress-bar { height: 6px; background: var(--tyrkys-light); border-radius: 10px; overflow: hidden; }
+  .progress-fill { height: 100%; background: linear-gradient(90deg, var(--tyrkys), var(--ruzova)); border-radius: 10px; transition: width .35s; }
+
+  .q-modul { font-size: 11px; font-weight: 700; color: var(--ruzova); letter-spacing: .8px; text-transform: uppercase; margin-bottom: 10px; }
+  .q-anekdota { font-size: 14px; color: var(--text-muted); line-height: 1.6; font-style: italic; margin-bottom: 18px; padding-bottom: 18px; border-bottom: 1.5px solid var(--tyrkys-light); }
+  .q-text { font-size: 20px; font-weight: 800; line-height: 1.35; margin-bottom: 20px; }
+  .options { display: flex; flex-direction: column; gap: 10px; }
+  .option {
+    background: #fff; border: 2px solid var(--tyrkys-light); border-radius: 16px; padding: 14px 16px;
+    cursor: pointer; font-family: 'Poppins', sans-serif; font-size: 14.5px; font-weight: 500;
+    color: var(--inkoust); text-align: left; line-height: 1.5; transition: border-color .15s, background .15s;
+  }
+  .option:hover, .option.selected { border-color: var(--tyrkys); background: var(--tyrkys-light); }
+
+  .result-badge { font-size: 21px; font-weight: 800; text-align: center; margin-bottom: 6px; }
+  .h2-underline { width: 56px; height: 4px; border-radius: 4px; margin: 0 auto 18px; background: linear-gradient(90deg, var(--tyrkys), var(--ruzova)); }
+  .result-text { font-size: 15px; color: var(--text); line-height: 1.75; margin-bottom: 24px; text-align: center; }
+  .result-text b { color: var(--inkoust); }
+  .fine { text-align: center; font-size: 12.5px; color: #9ab8c0; margin-top: 14px; }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- INTRO -->
+  <div class="screen active" id="s-intro">
+    <div class="card">
+      <span class="badge">Než odletíš</span>
+      <h1>Zvládneš dojet do USA bez cestovky?</h1>
+      <p class="sub">6 krátkých otázek. Výsledek je pokaždé stejný, ale cestou k němu se
+      nejspíš poznáš.</p>
+      <div class="pills">
+        <span class="pill">2 minuty</span>
+        <span class="pill">6 otázek</span>
+        <span class="pill">výsledek hned</span>
+      </div>
+      <button class="btn btn-t" id="btn-start">Spustit kvíz</button>
+      <p class="handle">@s.gabi.na.floridu</p>
+    </div>
+  </div>
+
+  <!-- QUIZ -->
+  <div class="screen" id="s-quiz">
+    <div class="card">
+      <div class="progress-wrap">
+        <div class="progress-label">
+          <span id="p-text">Otázka 1 z 6</span>
+          <span id="p-pct">17 %</span>
+        </div>
+        <div class="progress-bar"><div class="progress-fill" id="p-fill" style="width:17%"></div></div>
+      </div>
+      <div class="q-modul" id="q-modul"></div>
+      <div class="q-anekdota" id="q-anekdota"></div>
+      <div class="q-text" id="q-text"></div>
+      <div class="options" id="q-options"></div>
+    </div>
+  </div>
+
+  <!-- RESULT -->
+  <div class="screen" id="s-result">
+    <div class="card">
+      <div class="result-badge">Ano. Zvládneš dojet do USA bez cestovky.</div>
+      <div class="h2-underline"></div>
+      <div class="result-text" id="r-text"></div>
+      <a href="prodejka.html" class="btn btn-p">Chci vědět přesně co a kdy →</a>
+      <p class="fine">Žádná registrace. Appka běží v prohlížeči a funguje i v letadle bez signálu.</p>
+    </div>
+  </div>
+
+</div>
+<script>
+(function () {
+  var questions = [
+    {
+      modul: "Checklisty",
+      anekdota: "Kamarád Máchal si jednou vezl do USA šunkovou kýtu. Stálo ho to majlant a o kýtu stejně přišel, celnice ji dál nepustila.",
+      text: "Co myslíš, že se do USA nesmí vozit?",
+      opts: [
+        { text: "Uzeniny a čerstvé maso, to vím jistě.", bucket: "a" },
+        { text: "Nějaké jídlo asi ne, ale netuším přesně které.", bucket: "b" },
+        { text: "Radši nevozím nic, co by mohlo být sporné.", bucket: "c" },
+        { text: "Netuším, ale kamarád Máchal by mi teď asi poradil. Pozdě.", bucket: "d" }
+      ]
+    },
+    {
+      modul: "Letenky",
+      anekdota: "Klienti mi posílají screenshoty s jedinou otázkou: je tohle dobrá cena? Já se na cenu nedívám první. Dívám se na přestup. V Americe se totiž nepřestupuje jako v Evropě. Kdo to neví, stojí odpoledne u pásu s kufrem v ruce a kouká, jak mu druhé letadlo odlétá bez něj.",
+      text: "Kolik času bys nechal/a na přestup v USA?",
+      opts: [
+        { text: "Aspoň 3 hodiny. Radši počkám, než abych běžel/a.", bucket: "a" },
+        { text: "2 hodiny, to snad stačí.", bucket: "b" },
+        { text: "Hodinu a půl, letadla přece nemeškají.", bucket: "c" },
+        { text: "Nevím, vybíral/a jsem podle ceny.", bucket: "d" }
+      ]
+    },
+    {
+      modul: "Finance",
+      anekdota: "Lidi se na cestu připraví do posledního papíru: pas, ESTA, pojištění, adresa první noci. A pak zaplatí první večeři a nechají v ní o čtyři stovky víc, než museli. (Přesně tohle se stalo i mně, a servírce jsem ještě poděkovala.)",
+      text: "Kolik spropitného necháš v americké restauraci?",
+      opts: [
+        { text: "Přesně tolik, kolik se sluší, mám to spočítané.", bucket: "a" },
+        { text: "Nějakou rozumnou částku, tak od oka.", bucket: "b" },
+        { text: "Cokoliv mi vyjde v hlavě, ve stresu z čtení účtenky.", bucket: "c" },
+        { text: "Spropitné? Netušil/a jsem, že je potřeba.", bucket: "d" }
+      ]
+    },
+    {
+      modul: "Ubytování",
+      anekdota: "Rezervuješ pokoj za 120 dolarů. Na účtu pak vidíš 165. Nikdo tě nepodvedl, jen se v Americe k ceně připočítávají poplatky, co u nás neznáme. (Mně se to stalo taky, a to mám prý nacestováno.)",
+      text: "Co uděláš, když ti hotel zablokuje na kartě navíc pár set dolarů?",
+      opts: [
+        { text: "Vím, že je to dočasné, mám to spočítané dopředu.", bucket: "a" },
+        { text: "Zavolám recepci a zeptám se, o co jde.", bucket: "b" },
+        { text: "Zpanikařím a přepočítávám zůstatek na účtu.", bucket: "c" },
+        { text: "Nevěděl/a jsem, že se tohle vůbec děje.", bucket: "d" }
+      ]
+    },
+    {
+      modul: "Doklady",
+      anekdota: "Znám dva lidi, co se nedostali na palubu. Jednomu vypršela ESTA dva dny předtím. Druhý nevěděl u kontroly adresu první noci a strávil 4 hodiny v místnosti, kde sedí lidi, u kterých „něco nesedí\". Zbytek toho dne byl ztracený.",
+      text: "Kdy sis naposledy zkontroloval/a platnost ESTA?",
+      opts: [
+        { text: "Před chvílí, mám to jako připomínku v kalendáři.", bucket: "a" },
+        { text: "Minulý týden, jednou to snad stačí.", bucket: "b" },
+        { text: "Nevěděl/a jsem, že se to dá zkontrolovat.", bucket: "c" },
+        { text: "Nevím, ale věřím tomu.", bucket: "d" }
+      ]
+    },
+    {
+      modul: "Poslední otázka",
+      anekdota: "",
+      text: "Kdyby ti teď někdo řekl přesně, co dělat první, druhé a třetí, co bys udělal/a?",
+      opts: [
+        { text: "Poslechl/a bych. Konečně by mi to řekl někdo jiný než internet.", bucket: "a" },
+        { text: "Zkontroloval/a bych si to aspoň proti tomu, co už vím.", bucket: "b" },
+        { text: "Konečně bych zavřel/a těch 30 záložek. Jednu po druhé, jako pomstu.", bucket: "c" },
+        { text: "Nejspíš bych stejně dohledával/a. Paní Cokdyž by mi to jen tak nedala.", bucket: "d" }
+      ]
+    }
+  ];
+
+  var currentQ = 0;
+  var busy = false;
+  var counts = { a: 0, b: 0, c: 0, d: 0 };
+
+  function showScreen(id) {
+    var screens = document.querySelectorAll('.screen');
+    for (var i = 0; i < screens.length; i++) screens[i].classList.remove('active');
+    document.getElementById(id).classList.add('active');
+    window.scrollTo(0, 0);
+  }
+
+  function renderQ() {
+    var q = questions[currentQ];
+    var pct = Math.round((currentQ + 1) / questions.length * 100);
+    document.getElementById('p-text').textContent = 'Otázka ' + (currentQ + 1) + ' z ' + questions.length;
+    document.getElementById('p-pct').textContent = pct + ' %';
+    document.getElementById('p-fill').style.width = pct + '%';
+    document.getElementById('q-modul').textContent = q.modul;
+
+    var anekEl = document.getElementById('q-anekdota');
+    if (q.anekdota) {
+      anekEl.style.display = 'block';
+      anekEl.textContent = q.anekdota;
+    } else {
+      anekEl.style.display = 'none';
+    }
+
+    document.getElementById('q-text').textContent = q.text;
+
+    var wrap = document.getElementById('q-options');
+    wrap.innerHTML = '';
+    for (var i = 0; i < q.opts.length; i++) {
+      (function (opt) {
+        var btn = document.createElement('button');
+        btn.className = 'option';
+        btn.textContent = opt.text;
+        btn.addEventListener('click', function () {
+          if (busy) return;
+          busy = true;
+          btn.classList.add('selected');
+          setTimeout(function () {
+            counts[opt.bucket]++;
+            currentQ++;
+            if (currentQ < questions.length) {
+              busy = false;
+              renderQ();
+            } else {
+              showResult();
+            }
+          }, 300);
+        });
+        wrap.appendChild(btn);
+      })(q.opts[i]);
+    }
+    busy = false;
+  }
+
+  function showResult() {
+    showScreen('s-result');
+    var klidne = counts.a;
+    var prostredni = counts.b + counts.c;
+    var uzkostne = counts.d;
+    var text;
+    if (uzkostne >= klidne && uzkostne > prostredni) {
+      text = "Třicet záložek znám líp, než by se slušelo. <i>(Bývala jsem na čtyřicítce, tak klid.)</i> Přesně proto existuje průvodce, co řekne: <b>tohle teď, tohle potom.</b>";
+    } else if (klidne > prostredni && klidne > uzkostne) {
+      text = "Vypadá to, že už teď víš dost. Jen to zatím nikdo nedal na jednu hromadu. <b>Tak to teď někdo udělá.</b>";
+    } else {
+      text = "Máš to v hlavě. Jen rozsypané po záložkách. <b>Appka to jen srovná do pořadí</b>, ty už u toho jenom škrtáš.";
+    }
+    document.getElementById('r-text').innerHTML = text;
+  }
+
+  document.getElementById('btn-start').addEventListener('click', function () {
+    showScreen('s-quiz');
+    renderQ();
+  });
+})();
+</script>
+</body>
+</html>

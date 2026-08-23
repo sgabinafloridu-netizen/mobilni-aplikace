@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48">
+  <!-- mini ikona: obytny vuz z boku, pro "Obytny vuz" -->
+  <path d="M4 30 L4 18 Q4 15 7 15 L30 15 Q34 15 36 18 L44 24 V30 Z" fill="#FFD23F" stroke="#14233A" stroke-width="2.4" stroke-linejoin="round"/>
+  <rect x="8" y="19" width="8" height="7" rx="1" fill="#E6F8FA" stroke="#14233A" stroke-width="1.8"/>
+  <rect x="19" y="19" width="8" height="7" rx="1" fill="#E6F8FA" stroke="#14233A" stroke-width="1.8"/>
+  <rect x="4" y="30" width="40" height="3" fill="#14233A"/>
+  <circle cx="13" cy="34" r="4" fill="#14233A"/>
+  <circle cx="35" cy="34" r="4" fill="#14233A"/>
+  <circle cx="13" cy="34" r="1.4" fill="#FF6FA5"/>
+  <circle cx="35" cy="34" r="1.4" fill="#FF6FA5"/>
+</svg>

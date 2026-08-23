@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Než odletíš | Zvládneš to i bez cestovky</title>
+<meta name="description" content="Průvodce, co ti krok za krokem řekne, co dělat teď, co za týden a co v den letu do USA. Bez cestovky, bez paniky.">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=Caveat:wght@600&display=swap" rel="stylesheet">
+<style>
+  /* POZNÁMKA K TÓNU: tahle stránka běží schválně v hovorové češtině, jako jediná
+     výjimka z pravidla appky "spisovná čeština, žádná hovorovost" (CLAUDE.md,
+     sekce 8). Potvrzeno Gábi vědomě, jako rozhodnutí platné jen pro tuhle
+     prodejní stránku, ne pro zbytek appky, kvízu ani appky "Než odletíš" samotné. */
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --tyrkys: #1AC0CE;
+    --tyrkys-dark: #0B7C87;
+    --ruzova: #FF6FA5;
+    --zluta: #FFD23F;
+    --inkoust: #14233A;
+    --papir: #F5FAFC;
+    --tyrkys-light: #E6F8FA;
+    --ruzova-light: #FFF1F6;
+    --sand: #FFF6E9;
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family: 'Poppins', sans-serif; background: var(--papir); color: var(--inkoust); }
+  img { max-width: 100%; display: block; }
+  section { padding: 64px 20px; }
+  .inner { max-width: 720px; margin: 0 auto; }
+  .inner-wide { max-width: 920px; margin: 0 auto; }
+
+  h2 { font-size: clamp(26px, 5vw, 40px); font-weight: 800; line-height: 1.2; text-align: center; margin-bottom: 14px; }
+  .h2-underline { width: 64px; height: 5px; border-radius: 4px; margin: 0 auto 34px; background: linear-gradient(90deg, var(--tyrkys), var(--ruzova)); }
+  .lead { font-size: 17px; line-height: 1.7; text-align: center; max-width: 560px; margin: 0 auto 30px; }
+  p.p3 { font-size: 16px; line-height: 1.75; margin-bottom: 14px; max-width: 640px; }
+  p.p3.center { text-align: center; margin-left: auto; margin-right: auto; }
+
+  .btn {
+    display: inline-block; background: linear-gradient(135deg, #FF6FA5 0%, #FF9E6B 100%);
+    color: #fff; font-family: 'Poppins', sans-serif; font-size: 18px; font-weight: 700;
+    padding: 19px 46px; border-radius: 50px; text-decoration: none; border: none; cursor: pointer;
+    box-shadow: 0 6px 24px rgba(255,111,165,.42); transition: transform .15s, box-shadow .15s;
+  }
+  .btn:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(255,111,165,.5); }
+  .btn-wrap { text-align: center; margin: 30px 0; }
+  .btn-note { display: block; margin-top: 12px; font-size: 13px; opacity: .65; }
+
+  /* ─── HERO ─── */
+  .hero {
+    background: linear-gradient(160deg, rgba(20,35,58,.90) 0%, rgba(14,90,102,.86) 100%), url('images/houpacka-v-more.jpg');
+    background-size: cover; background-position: center 65%;
+    color: #fff; padding: 54px 20px 60px; text-align: center;
+  }
+  .eyebrow { font-size: 13px; font-weight: 700; letter-spacing: 1px; color: var(--tyrkys); background: rgba(26,192,206,.14); border: 1px solid rgba(26,192,206,.4); display: inline-block; padding: 8px 18px; border-radius: 50px; margin-bottom: 24px; max-width: 480px; }
+  .hero h1 { font-size: clamp(28px, 5.4vw, 46px); font-weight: 800; line-height: 1.28; max-width: 720px; margin: 0 auto 18px; }
+  .hero h1 .barva { color: var(--tyrkys); }
+  .hero-sub { font-size: 18px; line-height: 1.7; max-width: 560px; margin: 0 auto 8px; opacity: .88; }
+
+  /* ─── VIDEO ─── */
+  .video-sekce { background: #fff; text-align: center; }
+  .video-placeholder { max-width: 560px; margin: 0 auto; background: var(--tyrkys-light); border: 2px solid var(--tyrkys); border-radius: 20px; padding: 34px 30px; }
+  .video-placeholder .play { width: 64px; height: 64px; border-radius: 50%; background: var(--tyrkys); color: #fff; font-size: 22px; display: flex; align-items: center; justify-content: center; margin: 0 auto 18px; }
+  .video-placeholder h3 { font-size: 18px; font-weight: 700; margin-bottom: 6px; }
+  .video-placeholder p { font-size: 14px; color: #4C6373; }
+
+  /* ─── PŘÍBĚH (warm) ─── */
+  .pribeh { background: linear-gradient(180deg, var(--sand) 0%, var(--ruzova-light) 100%); }
+  .pribeh-wrap { display: flex; gap: 34px; align-items: center; max-width: 840px; margin: 0 auto; }
+  .pribeh-wrap img { width: 220px; border-radius: 20px; flex: none; box-shadow: 0 16px 34px rgba(20,35,58,.18); }
+  .pribeh-text .caveat { font-family: 'Caveat', cursive; font-size: 24px; color: var(--ruzova); margin-bottom: 6px; }
+  @media (max-width: 680px) { .pribeh-wrap { flex-direction: column; } .pribeh-wrap img { width: 180px; } }
+
+  /* ─── SŮL DO RÁNY (dark) ─── */
+  .sul { background: #14233A; color: #fff; }
+  .sul h2 { color: #fff; }
+  .sul p.p3 { color: rgba(255,255,255,.82); }
+  .sul-karty { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 18px; max-width: 880px; margin: 34px auto 0; }
+  .sul-karta { background: rgba(255,255,255,.06); border: 1px solid rgba(26,192,206,.28); border-radius: 16px; padding: 24px 22px; }
+  .sul-karta .znam { font-family: 'Caveat', cursive; color: var(--tyrkys); font-size: 19px; margin-bottom: 8px; }
+  .sul-karta p { font-size: 14.5px; line-height: 1.65; color: rgba(255,255,255,.86); }
+  .pop-t { color: var(--tyrkys); font-weight: 700; }
+  .pop-r { color: var(--ruzova); font-weight: 700; }
+  .sul-badge { display: block; width: fit-content; margin: 26px auto; background: rgba(26,192,206,.12); border: 1.5px solid var(--tyrkys); border-radius: 50px; padding: 10px 24px; font-size: 14.5px; color: var(--tyrkys); font-weight: 600; }
+
+  /* ─── ŘEŠENÍ (light tyrkys) ─── */
+  .reseni { background: var(--tyrkys-light); }
+  .reseni-list { max-width: 620px; margin: 0 auto; list-style: none; }
+  .reseni-list li { display: flex; gap: 14px; align-items: flex-start; font-size: 16px; line-height: 1.65; padding: 12px 0; }
+  .reseni-list li .fajfka { flex: none; width: 28px; height: 28px; border-radius: 50%; background: var(--tyrkys); color: #fff; font-weight: 700; display: flex; align-items: center; justify-content: center; font-size: 14px; }
+
+  /* ─── MODULY (white) ─── */
+  .moduly-sekce { background: #fff; }
+  .moduly { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; max-width: 900px; margin: 0 auto; }
+  .modul-item { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 8px; padding: 20px 14px; background: #fff; border: 1px solid var(--tyrkys-light); border-radius: 16px; box-shadow: 0 6px 18px rgba(20,35,58,.07); }
+  .modul-item .kolecko { width: 56px; height: 56px; border-radius: 50%; overflow: hidden; flex: none; border: 2.5px solid var(--tyrkys); background: #fff; box-shadow: 0 4px 10px rgba(26,192,206,.25); }
+  .modul-item .kolecko img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .modul-item .kolecko.scena { background: var(--tyrkys-light); }
+  .modul-item .kolecko.scena img { object-fit: contain; padding: 9px; }
+  .modul-item .kolecko.emoji { display: flex; align-items: center; justify-content: center; font-size: 24px; background: var(--tyrkys-light); }
+  .modul-item .cislo { font-size: 10.5px; font-weight: 700; color: var(--ruzova); text-transform: uppercase; letter-spacing: .5px; }
+  .modul-item h3 { font-size: 14px; font-weight: 700; }
+  .modul-item p { font-size: 12px; line-height: 1.45; color: #4C6373; }
+  @media (max-width: 760px) { .moduly { grid-template-columns: repeat(2, 1fr); gap: 12px; } .modul-item p { font-size: 13px; line-height: 1.5; } .modul-item h3 { font-size: 15px; } }
+  @media (max-width: 460px) { .moduly { grid-template-columns: 1fr; } .modul-item { flex-direction: row; text-align: left; padding: 16px; } .modul-item .kolecko { width: 48px; height: 48px; } }
+
+  /* ─── REFERENCE (sand) ─── */
+  .reference { background: var(--sand); }
+  .ref-karty { display: flex; flex-wrap: wrap; gap: 18px; justify-content: center; max-width: 880px; margin: 0 auto; }
+  .ref-karta { background: #fff; border-radius: 16px; padding: 24px 22px; flex: 1 1 260px; max-width: 300px; font-size: 14px; line-height: 1.6; color: #4C6373; box-shadow: 0 8px 20px rgba(20,35,58,.06); }
+  .ref-karta .hvezdy { color: var(--zluta); font-size: 15px; margin-bottom: 10px; letter-spacing: 2px; }
+  .ref-karta .autor { display: flex; align-items: center; gap: 10px; margin-top: 14px; }
+  .ref-karta .avatar { width: 36px; height: 36px; border-radius: 50%; flex: none; background: linear-gradient(135deg, var(--tyrkys), var(--ruzova)); color: #fff; font-weight: 700; font-size: 14px; display: flex; align-items: center; justify-content: center; }
+  .ref-karta .jmeno { font-size: 12.5px; font-weight: 700; color: var(--inkoust); }
+
+  /* ─── CENA (white, bold cards) ─── */
+  .cena-sekce { background: #fff; text-align: center; }
+  .cena-karty { display: flex; flex-wrap: wrap; gap: 22px; justify-content: center; max-width: 660px; margin: 0 auto; }
+  .cena-karta { background: var(--papir); border: 3px solid var(--tyrkys-light); border-radius: 22px; padding: 32px 28px; flex: 1 1 250px; max-width: 290px; }
+  .cena-karta.hlavni { border-color: var(--tyrkys); position: relative; box-shadow: 0 14px 34px rgba(26,192,206,.18); }
+  .cena-karta.hlavni::before { content: "NEJVÍC OBLÍBENÝ"; position: absolute; top: -14px; left: 50%; transform: translateX(-50%); background: var(--ruzova); color: #fff; font-size: 11px; font-weight: 700; letter-spacing: .6px; padding: 6px 16px; border-radius: 50px; white-space: nowrap; }
+  .cena-karta .jmeno { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: .8px; color: var(--tyrkys-dark); margin-bottom: 10px; }
+  .cena-karta .obsahuje { font-size: 13.5px; color: #4C6373; line-height: 1.55; margin-bottom: 20px; min-height: 40px; }
+  .cena-karta .castka { font-size: 42px; font-weight: 800; margin-bottom: 20px; }
+  .cena-karta .castka span { font-size: 14px; font-weight: 400; color: #9ab8c0; }
+  .cena-karta .btn { width: 100%; text-align: center; padding: 15px 20px; font-size: 15.5px; }
+  .rodina-note { max-width: 500px; margin: 30px auto 0; background: var(--tyrkys-light); border-radius: 14px; padding: 16px 20px; font-size: 14px; line-height: 1.6; color: #0e5a66; }
+  .naslapane { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; max-width: 700px; margin: 16px auto 0; }
+  .naslapana-vec { background: #fff; border: 1.5px solid var(--tyrkys-light); border-radius: 50px; padding: 10px 18px; font-size: 13.5px; color: var(--inkoust); box-shadow: 0 4px 12px rgba(20,35,58,.05); }
+
+  /* ─── CENA FINAL (dark, těsně před závěrem) ─── */
+  .cena-final { background: #14233A; text-align: center; }
+  .cena-final h2 { color: #fff; }
+  .cena-final-karty { display: flex; flex-wrap: wrap; gap: 22px; justify-content: center; max-width: 660px; margin: 0 auto; }
+  .cena-final-karta { background: rgba(255,255,255,.06); border: 2px solid rgba(255,255,255,.14); border-radius: 22px; padding: 32px 28px; flex: 1 1 250px; max-width: 290px; position: relative; }
+  .cena-final-karta .jmeno { font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: .8px; color: var(--tyrkys); margin-bottom: 10px; }
+  .cena-final-karta .castka-stara { font-size: 15px; color: rgba(255,255,255,.45); text-decoration: line-through; }
+  .cena-final-karta .castka { font-size: 40px; font-weight: 800; color: #fff; margin-bottom: 4px; }
+  .cena-final-karta .castka span { font-size: 14px; font-weight: 400; color: rgba(255,255,255,.55); }
+  .cena-final-karta .rozdil { font-size: 12.5px; font-weight: 700; color: var(--ruzova); margin-top: 6px; }
+  .cena-final-karta .rozdil-t { color: var(--tyrkys); }
+  .cena-final-karta p { font-size: 13.5px; line-height: 1.55; color: rgba(255,255,255,.75); margin: 14px 0 22px; min-height: 58px; }
+  .cena-final-karta .btn { width: 100%; text-align: center; padding: 14px 20px; font-size: 15px; }
+  .cena-final-karta.hlavni { border-color: var(--ruzova); background: rgba(255,111,165,.08); }
+  .cena-final-karta .stitek { position: absolute; top: -14px; left: 50%; transform: translateX(-50%); background: var(--ruzova); color: #fff; font-size: 11px; font-weight: 700; letter-spacing: .6px; padding: 6px 16px; border-radius: 50px; white-space: nowrap; }
+  .bundle-nabidka { max-width: 560px; margin: 30px auto 0; background: rgba(255,255,255,.05); border: 1px dashed rgba(255,255,255,.25); border-radius: 16px; padding: 20px 22px; text-align: left; }
+  .bundle-text { font-size: 13.5px; line-height: 1.6; color: rgba(255,255,255,.8); margin-bottom: 12px; }
+  .bundle-text b { color: #fff; }
+  .bundle-link { display: inline-block; font-size: 13.5px; font-weight: 700; color: var(--tyrkys); text-decoration: none; }
+  .bundle-link:hover { text-decoration: underline; }
+  .cena-final-poznamka { margin: 28px auto 0; font-size: 13px; color: rgba(255,255,255,.6); }
+  .cena-final-garance { max-width: 480px; margin: 16px auto 0; background: rgba(26,192,206,.12); border: 1.5px solid var(--tyrkys); border-radius: 14px; padding: 14px 20px; font-size: 14px; line-height: 1.55; color: #fff; }
+
+  /* ─── KDO JE GÁBI (warm) ─── */
+  .o-gabi { background: linear-gradient(180deg, var(--ruzova-light) 0%, var(--sand) 100%); }
+  .gabi-wrap { display: flex; gap: 34px; align-items: center; max-width: 780px; margin: 0 auto; }
+  .gabi-wrap img { width: 170px; height: 170px; border-radius: 50%; object-fit: cover; flex: none; border: 4px solid #fff; box-shadow: 0 14px 30px rgba(20,35,58,.18); }
+  .gabi-fakta { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
+  .gabi-fakta span { background: #fff; border-radius: 50px; padding: 7px 16px; font-size: 13px; font-weight: 600; color: var(--tyrkys-dark); box-shadow: 0 4px 12px rgba(20,35,58,.08); }
+  @media (max-width: 680px) { .gabi-wrap { flex-direction: column; text-align: center; } .gabi-fakta { justify-content: center; } }
+
+  /* ─── ZÁVĚR (dark, bookend s hero) ─── */
+  .zaver { background: linear-gradient(160deg, #14233A 0%, #0E5A66 100%); color: #fff; text-align: center; }
+  .zaver h2 { color: #fff; }
+  .zaver p.p3 { color: rgba(255,255,255,.82); }
+
+  footer { background: #0d1b2a; color: rgba(255,255,255,.4); text-align: center; padding: 30px 20px; font-size: 12px; line-height: 1.8; }
+  footer a { color: rgba(255,255,255,.5); }
+
+  /* ─── STICKY CTA ─── */
+  .sticky-cta { position: fixed; left: 0; right: 0; bottom: 0; z-index: 900; display: none; background: rgba(20,35,58,.97); box-shadow: 0 -4px 20px rgba(0,0,0,.28); padding: 10px 14px calc(10px + env(safe-area-inset-bottom)); text-align: center; }
+  .sticky-cta a { display: block; background: linear-gradient(135deg, #FF6FA5 0%, #FF9E6B 100%); color: #fff; font-weight: 700; font-size: 16px; text-decoration: none; padding: 14px; border-radius: 50px; box-shadow: 0 4px 16px rgba(255,111,165,.45); }
+  @media (max-width: 680px) { .sticky-cta.visible { display: block; } body.has-sticky { padding-bottom: 90px; } }
+</style>
+</head>
+<body>
+
+<!-- 1-2-3: BLESKOVÝ NADNADPIS, HLAVNÍ NADPIS, PODNADPIS -->
+<section class="hero">
+  <span class="eyebrow">✈️ Pro ty, co chtějí do USA bez cestovky a myslí si, že individuální cesta přes oceán je sci-fi.</span>
+  <h1>S touhle appkou dáš Ameriku jako výlet do Brna. I když je tvůj strop zatím Chorvatsko a netušíš, kde začít.</h1>
+  <p class="hero-sub">Žádné strachy. Zadáš termín a aplikace tě povede krok za krokem.</p>
+
+  <!-- 5: CTA 1 -->
+  <div class="btn-wrap" style="margin-top:34px;">
+    <a href="index.html" class="btn">Chci průvodce →</a>
+    <span class="btn-note" style="color:rgba(255,255,255,.6);">Běží v prohlížeči. Nikam se neinstaluje. Funguje i offline.</span>
+  </div>
+</section>
+
+<!-- 6: PŘÍBĚH AUTORKY -->
+<section class="pribeh">
+  <div class="inner">
+    <h2>Poprvé jsem letěla do USA sama před třiceti lety</h2>
+    <div class="h2-underline"></div>
+    <div class="pribeh-wrap">
+      <img src="images/gabi-hlavicka.jpg" alt="Gábi">
+      <div class="pribeh-text">
+        <p class="p3">Svíral se mi žaludek z té neznámé dálky, ale paradoxně to bylo v čemsi jednodušší: prostě jsem musela věřit, že to dopadne dobře.</p>
+        <p class="p3">Uběhlo třicet let. A víš, co se změnilo?</p>
+        <p class="p3"><b>Nic.</b></p>
+        <p class="p3"><i>(Tedy kromě toho, že dneska u toho zmatkování máme vysokorychlostní internet.)</i></p>
+        <p class="p3">Přesně tenhle stav teď žije moje kamarádka Hanka. Chystá se do Ameriky poprvé na vlastní pěst. Sedí po nocích u počítače. Třicet otevřených záložek, fóra, blogy, a čím víc toho přečte, tím míň má jasno.</p>
+        <p class="p3"><b>A přesně tenhle zmatek, co znám z obou stran, jsem chtěla appkou vyřešit.</b></p>
+      </div>
+    </div>
+
+    <!-- 4: VIDEO (přesunuto z hero, tady už má návštěvník důvěru, ne pochybnost) -->
+    <div class="video-placeholder" style="margin-top:36px;">
+      <img src="images/gabi-happy-plaz.svg" alt="" style="width:56px;height:56px;margin:0 auto 12px;display:block;">
+      <h3>Video ode mě je na cestě</h3>
+      <p>Mezitím čti dál, appka nezahálí.</p>
+    </div>
+  </div>
+</section>
+
+<!-- 7: SŮL DO RÁNY -->
+<section class="sul">
+  <div class="inner">
+    <h2>Znám to. Fakt znám</h2>
+    <div class="h2-underline"></div>
+    <p class="p3 center"><span class="pop-t">Věci se dějí.</span> I těm, co mají všechno srovnané.</p>
+    <p class="p3 center">Bojíš se, že ti u kontroly někdo promluví rychleji, než stihneš v hlavě přeložit? Stává se to i lidem, co anglicky umí líp, než si myslíš.</p>
+    <p class="p3 center">A kolik si vzít peněz, ať to stačí a nic nepřeplatíš? To taky nemusí být hádanka.</p>
+    <p class="p3 center">Co třeba dělat, když máš <span class="pop-r">dvě hodiny na přestup</span>, na imigračním je fronta jak za socíků na toaletní papír. A ty víš, že se v Americe nesmí předbíhat.</p>
+    <p class="p3 center">Tohle se nedozvíš z nějakého blogu. V mém průvodci to ale najdeš jako dobrou radu na cestu.</p>
+    <p class="p3 center">Do Česka můžeš dovézt kde co, ale do USA je to jinak. Své by o tom mohl vyprávět kamarád Michal, který vezl z <span class="pop-t">Kolumbie do Denveru</span> šunkovou kýtu. <span class="pop-r">Pokuta byla astronomická.</span></p>
+    <p class="p3 center">A o kýtu přišel taky. Co dalšího se nesmí vozit?</p>
+    <span class="sul-badge">📖 Píšu o tom v jednom z modulů.</span>
+    <p class="p3 center">Kde sháním letenky? A na co se mě lidi ptají nejčastěji?</p>
+    <p class="p3 center">Teda kromě politiky, samozřejmě. Ty se taky o sobě něco dozvíš, třeba <span class="pop-t">jaký jsi cestovatelský typ</span>, a co tě díky tomu může v USA překvapit.</p>
+  </div>
+</section>
+
+<!-- 8: PŘEDSTAVENÍ ŘEŠENÍ -->
+<section class="reseni">
+  <div class="inner">
+    <h2>Takhle to vypadá, když to víš dopředu</h2>
+    <div class="h2-underline"></div>
+    <ul class="reseni-list">
+      <li><span class="fajfka">✓</span> Stojíš na letišti a víš přesně, co máš v ruce a proč. Žádné zoufalé hledání dokladu ve frontě.</li>
+      <li><span class="fajfka">✓</span> Doklady i termíny má appka spočítané za tebe, i za všechny, co jedou s tebou.</li>
+      <li><span class="fajfka">✓</span> Víš, kdy koupit letenku a proč se přestup v Americe chová jinak než v Evropě.</li>
+      <li><span class="fajfka">✓</span> Na imigrační kontrole nestojíš s prázdnou hlavou. Víš, co tě čeká.</li>
+      <li><span class="fajfka">✓</span> Když se něco pokazí, sáhneš po appce, ne po panice.</li>
+    </ul>
+  </div>
+</section>
+
+<!-- 9: CO PŘESNĚ ZÍSKÁŠ -->
+<section class="moduly-sekce">
+  <div class="inner-wide">
+    <h2>Co přesně dostaneš</h2>
+    <div class="h2-underline"></div>
+    <div class="moduly">
+      <div class="modul-item"><div class="kolecko scena"><img src="images/sceny/scena-kdy-a-kam.svg" alt=""></div><div class="telo"><div class="cislo">Modul 1</div><h3>Kdy a kam</h3><p>Zjistíš, jaká destinace ti sedne na míru a kterému období se vyhnout.</p></div></div>
+      <div class="modul-item"><div class="kolecko scena"><img src="images/sceny/scena-razitko.svg" alt=""></div><div class="telo"><div class="cislo">Modul 2</div><h3>Doklady a formálnosti</h3><p>Aplikace sama porovná platnost pasu s datem návratu. Za tebe i za každého, kdo jede s tebou.</p></div></div>
+      <div class="modul-item"><div class="kolecko scena"><img src="images/sceny/scena-prestup.svg" alt=""></div><div class="telo"><div class="cislo">Modul 3</div><h3>Letenky</h3><p>Zjistíš, kdy přesně nakupovat i kde hledat. A proč o tvém pohodlí rozhoduje délka přestupu.</p></div></div>
+      <div class="modul-item"><div class="kolecko scena"><img src="images/sceny/scena-karta-blokace.svg" alt=""></div><div class="telo"><div class="cislo">Modul 4</div><h3>Ubytování</h3><p>Nenechá tě překvapit poplatky navíc ani blokací na kartě, o které nikdo dopředu neřekne.</p></div></div>
+      <div class="modul-item"><div class="kolecko scena"><img src="images/sceny/scena-penezenka.svg" alt=""></div><div class="telo"><div class="cislo">Modul 5</div><h3>Finance a placení</h3><p>Budeš přesně vědět, kolik hotovosti vzít a kolik si ze zisku ukousne banka. Dřív, než ti z účtu zmizí první tisícovka.</p></div></div>
+      <div class="modul-item"><div class="kolecko scena"><img src="images/sceny/scena-vaha-kufr.svg" alt=""></div><div class="telo"><div class="cislo">Modul 6</div><h3>Checklisty</h3><p>Přesně víš, co sbalit, co vytisknout a co do Ameriky vůbec nesmí.</p></div></div>
+      <div class="modul-item"><div class="kolecko scena"><img src="images/sceny/florida-bourka.svg" alt=""></div><div class="telo"><div class="cislo">Modul 7</div><h3>Krizové situace</h3><p>Zrušený let, ztracený pas, zamítnutá ESTA: pro každou situaci klidný postup, ne panika.</p></div></div>
+      <div class="modul-item"><div class="kolecko emoji">🔒</div><div class="telo"><div class="cislo">Plus</div><h3>Trezor</h3><p>Offline schránka na ESTU, letenky a rezervace. Funguje i bez signálu.</p></div></div>
+    </div>
+
+    <p class="p3 center" style="margin-top:30px;font-weight:700;">A appka není jen text. Je pěkně našlapaná:</p>
+    <div class="naslapane">
+      <div class="naslapana-vec">🔁 <b>Převodník</b> měny, jednotek a spropitného</div>
+      <div class="naslapana-vec">🧮 <b>Kalkulačka rozpočtu</b>, kolik to celé bude stát</div>
+      <div class="naslapana-vec">🎥 <b>Videa</b> u vybraných kroků</div>
+      <div class="naslapana-vec">🎧 <b>Podcastové vsuvky</b>, pustíš si to i s rukama v kufru</div>
+      <div class="naslapana-vec">🖨️ <b>Checklisty na tisk</b>, ať je máš i bez telefonu</div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA 2 -->
+<section style="background:#fff;padding-top:0;">
+  <div class="btn-wrap">
+    <a href="index.html" class="btn">Chci appku vyzkoušet →</a>
+  </div>
+</section>
+
+<!-- 10: BONUSY - zatím se nepíšou, žádné bonusy k appce ještě neexistují,
+     viz PLAN-spusteni.md ("Bonus za celek se teprve vymýšlí"). Sekce se
+     doplní, až budou skutečné, ne dřív. -->
+
+<!-- 11: REFERENCE -->
+<section class="reference">
+  <div class="inner-wide">
+    <h2>Co na to lidi, co to zkusili</h2>
+    <div class="h2-underline"></div>
+    <div class="ref-karty">
+      <div class="ref-karta"><div class="hvezdy">★★★★★</div>„Upřímně, když jsme se s manželem rozhodli, že poletíme do Států, byla jsem z toho na infarkt. Plánování je totiž u nás doma vždycky na mně. Appka mě při něm nejen hlídala, ale taky mě to moc bavilo. Na místě jsem pak hodně využila kalkulačku na spropitné, to se hodilo pořád."<div class="autor"><div class="avatar">S</div><div class="jmeno">Simona · Hradec nad Moravicí</div></div></div>
+      <div class="ref-karta"><div class="hvezdy">★★★★★</div>„Vůbec jsem netušil, co čekat, koupil jsem jen první modul. Ale jak jsem to tak četl, dokoupil jsem i zbytek, protože je to fakt dobře udělané. Hlavně ty historky a příklady jsou fajn. Ještě jsme teda neleteli, ale teď už vím, že to dáme. Nejvíc se mi hodil podrobný popis, jak letět z Moravy, a to o imigračním mě fakt uklidnilo."<div class="autor"><div class="avatar">R</div><div class="jmeno">Radek · Havířov</div></div></div>
+      <div class="ref-karta"><div class="hvezdy">★★★★★</div>„Já jsem teda zmatkář, když něco plánuju, takže tohle bylo přesně pro mě. Appka mě hlídala, připomínala co a jak. My jsme letěli dost narychlo, ale i tak se to hodilo. Super jsou ty checklisty do letadla, tam byly věci, co by mě ani nenapadly! Díky, Gábi."<div class="autor"><div class="avatar">L</div><div class="jmeno">Ludmila · Brno</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 15: KDO JE GÁBI -->
+<section class="o-gabi">
+  <div class="inner">
+    <h2>Kdo tě tím vlastně provede</h2>
+    <div class="h2-underline"></div>
+    <div class="gabi-wrap">
+      <img src="images/gabi-zapad-plaz.jpg" alt="Gábi">
+      <div>
+        <p class="p3">Jsem Gábi. Napůl žiju na Floridě, napůl v Česku. Můj manžel je v USA už 27 let, a já pořád lítám tam a zpět.</p>
+        <p class="p3">O létání bych mohla napsat knihu plnou historek, protože se to pořád trochu jinak zamotá.</p>
+        <p class="p3">Vystudovala jsem cestovní ruch, ale nejsem žádná cestovka. Jsem ta, co ti řekne, co bych chtěla slyšet já, kdybych letěla poprvé do Ameriky.</p>
+        <div class="gabi-fakta">
+          <span>💍 manžel 27 let v USA</span>
+          <span>🛂 40+ imigračních kontrol</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CENOVÁ SEKCE (těsně před závěrečné CTA, tmavá, ať se vizuálně odliší) -->
+<section class="cena-final">
+  <div class="inner">
+    <h2>Kolik to stojí</h2>
+    <div class="h2-underline"></div>
+    <div class="cena-final-karty">
+      <div class="cena-final-karta">
+        <div class="jmeno">Moduly 1 až 4</div>
+        <div class="castka">890 <span>Kč</span></div>
+        <div class="rozdil rozdil-t">Zbytek kdykoliv dokoupíš za 590 Kč</div>
+        <p>Zvládneš doklady, letenky a ubytování. Ideální, když odlétáš za víc než 3 měsíce.</p>
+        <a href="index.html" class="btn">Chci základ →</a>
+      </div>
+      <div class="cena-final-karta hlavni">
+        <div class="stitek">Nejoblíbenější</div>
+        <div class="jmeno">Celý průvodce</div>
+        <div class="castka-stara">1 890 Kč</div>
+        <div class="castka">1 490 <span>Kč</span></div>
+        <div class="rozdil">Jen +600 Kč za 3 moduly navíc a Trezor</div>
+        <p>Kompletní příprava od destinace až po krizový plán. Včetně Trezoru.</p>
+        <a href="index.html" class="btn">Chci celý průvodce →</a>
+      </div>
+    </div>
+
+    <!-- BUNDLE cross-sell: Než odletíš + Přes imigrační v klidu. OTEVŘENO:
+         dokud nemá appka spojený checkout s "Přes imigrační v klidu" (každý
+         produkt má teď vlastní SimpleShop), nejde čestně nabídnout jedno
+         tlačítko se spojenou slevovou cenou. Až vznikne bundle SKU v
+         SimpleShopu, sem doplnit skutečnou sníženou cenu a jedno CTA na
+         spojený nákup. Zatím jen informační odkaz na reálnou stránku. -->
+    <div class="bundle-nabidka">
+      <div class="bundle-text"><b>Chystáš se i na imigrační kontrolu?</b> Než odletíš appku skvěle doplňuje <b>Přes imigrační v klidu</b> (297 Kč), video a tahák přesně na tu jednu chvíli, co lidem dělá starosti nejvíc.</div>
+      <a href="https://pres-imigracni-v-klidu.netlify.app" class="bundle-link">Chci se podívat →</a>
+    </div>
+
+    <!-- Náhled druhého průvodce "Až přistaneš". Zatím se neprodává (kostra
+         v usa-bez-cestovky-cast2/KOSTRA.md), takže žádné tlačítko koupit,
+         jen slib. Stejný vzor jako appka: appka/CLAUDE.md, sekce 10. -->
+    <div class="bundle-nabidka">
+      <div class="bundle-text"><b>Než odletíš pokračuje i po přistání.</b> Druhý průvodce <b>Až přistaneš</b> (doprava, nakupování, stravování a další) se teď připravuje. V appce ho uvidíš jako náhled hned vedle sedmi hotových modulů.</div>
+    </div>
+
+    <p class="cena-final-poznamka">Ceny jsou s DPH. Přístup dostaneš okamžitě po zaplacení.</p>
+    <div class="cena-final-garance">✓ 30denní záruka spokojenosti. Když ti průvodce nepomůže, vrátím ti peníze. Bez otázek. <b>Gabi.</b></div>
+  </div>
+</section>
+
+<!-- 16: ZÁVĚREČNÉ CTA -->
+<section class="zaver">
+  <div class="inner">
+    <h2>Konec chaosu na obrazovce i v hlavě.</h2>
+    <p class="p3 center">Třicet otevřených záložek k ničemu nevedlo. Stačí jedna aplikace a někdo, kdo tím už prošel.</p>
+    <div class="btn-wrap">
+      <a href="index.html" class="btn">Chci appku místo záložek →</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  © 2026 Gabriela Hykl · sgabinafloridu · gabi@sgabinafloridu.cz<br>
+  <a href="obchodni-podminky.html">Obchodní podmínky</a>
+</footer>
+
+<!-- STICKY CTA (mobil) -->
+<div class="sticky-cta" id="stickyCta">
+  <a href="index.html">Chci appku vyzkoušet →</a>
+</div>
+<script>
+  window.addEventListener('scroll', function () {
+    var bar = document.getElementById('stickyCta');
+    if (window.scrollY > 480) {
+      bar.classList.add('visible');
+      document.body.classList.add('has-sticky');
+    } else {
+      bar.classList.remove('visible');
+      document.body.classList.remove('has-sticky');
+    }
+  });
+</script>
+</body>
+</html>
