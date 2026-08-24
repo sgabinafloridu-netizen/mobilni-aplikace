@@ -1,11 +1,11 @@
 # Scénář: Proč pod tři hodiny nejdu
 
 **Krok v appce:** 3.4, Letenky, „Proč je americký přestup jiný než evropský"
-**Soubor:** `video/letenky-prestup.mp4` + `video/letenky-prestup-poster.jpg`
-**Formát:** mluvíš přímo do kamery, žádný screencast
+**Soubor:** `audio/proc-pod-tri-hodiny-nejdu.mp3`
+**Formát:** audio, ne video, nahráváš jen hlas
 **Délka:** cca 2 minuty
 
-V tomhle kroku už je podcast „Přestup krok za krokem" na osm minut, který vysvětluje mechaniku. Video ho nemá opakovat. **Video má dát důvod, proč si ten podcast vůbec pustit.** Mechanika je v podcastu, tady je historka a pravidlo.
+V tomhle kroku už je podcast „Přestup krok za krokem" na osm minut, který vysvětluje mechaniku. Tohle ho nemá opakovat. **Tohle má dát důvod, proč si ten podcast vůbec pustit.** Mechanika je v podcastu, tady je historka a pravidlo.
 
 ---
 
@@ -66,13 +66,11 @@ Tak si teď otevři svoje spojení a spočítej si ty hodiny. Kolik ti vyšlo?"
 
 ---
 
-## Poznámky k natáčení
+## Poznámky k nahrávání
 
-- Tahle historka je nejsilnější věc v celém modulu. **Nespěchej.** Klidně ať video trvá dvě a půl minuty, když ti to bude přirozeně plynout.
-- **Neomlouvej se za to, že se ti to stalo.** Přiznaná chyba uprostřed výkladu je to, co dělá video důvěryhodným. Řekni to jako fakt, ne jako provinění.
+- Tahle historka je nejsilnější věc v celém modulu. **Nespěchej.** Klidně ať nahrávka trvá dvě a půl minuty, když ti to bude přirozeně plynout.
+- **Neomlouvej se za to, že se ti to stalo.** Přiznaná chyba uprostřed výkladu je to, co dělá nahrávku důvěryhodnou. Řekni to jako fakt, ne jako provinění.
 - Detail „žádná zmrzlina" nevynechávej, i když zní hloupě. Přesně tyhle konkrétní věci si lidé pamatují.
-- Natoč s prostorem kolem hlavy, ať jde záběr ořezat na výšku pro Instagram.
-- Náhled (`letenky-prestup-poster.jpg`) ze snímku, kde mluvíš, ne z prvního záběru.
 
 ---
 
