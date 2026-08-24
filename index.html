@@ -17,7 +17,7 @@
 <meta name="apple-mobile-web-app-title" content="Než odletíš">
 <link rel="apple-touch-icon" href="icons/icon-192.png">
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Caveat:wght@500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
   /* ══════════════════════════════════════════════
      TOKENY  (barvy a písma podle design manuálu)
@@ -47,7 +47,7 @@
     --text: #14233A;
     --text-muted: #4C6373;
     --text-soft: #6C8593;
-    --text-faint: #94ABB6;
+    --text-faint: #5F7885;
 
     --s1: 4px;  --s2: 8px;  --s3: 12px; --s4: 16px;
     --s5: 20px; --s6: 24px; --s7: 32px; --s8: 44px; --s9: 60px;
@@ -189,7 +189,7 @@
   .welcome-cta-main { margin: var(--s7) 0; text-align: center; }
   .welcome-cta-main .btn { padding: 20px 32px; font-size: 17.5px; }
   .welcome-cta-hint { font-size: 13px; color: var(--text-faint); margin-top: var(--s3); }
-  .signature { font-family: 'Caveat', cursive; font-size: 21px; color: var(--text-faint); margin-top: var(--s5); text-align: right; }
+  .signature { font-style: italic; font-weight: 600; font-size: 15px; color: var(--text-faint); margin-top: var(--s5); text-align: right; }
 
   .form-stack { display: flex; flex-direction: column; gap: var(--s6); margin-top: var(--s7); }
   .field-label {
@@ -525,16 +525,16 @@
   @keyframes vm-spin { to { transform: rotate(360deg); } }
   @media (prefers-reduced-motion: reduce) { .vm-spinner { animation: none; } }
   .video-missing .vm-note { font-size: 13.5px; color: rgba(255,255,255,.7); line-height: 1.65; max-width: 42ch; }
-  .video-caption { font-family: 'Caveat', cursive; font-size: 19px; color: var(--text-faint); text-align: center; margin-top: calc(var(--s7) * -1 + var(--s4)); margin-bottom: var(--s7); }
+  .video-caption { font-style: italic; font-weight: 600; font-size: 14px; color: var(--text-faint); text-align: center; margin-top: calc(var(--s7) * -1 + var(--s4)); margin-bottom: var(--s7); }
 
-  /* ── skutečné fotky z Floridy, podle design manuálu: zaoblení, stín, Caveat popisek ── */
+  /* ── skutečné fotky z Floridy, podle design manuálu: zaoblení, stín, popisek ── */
   .photo-figure { margin: 0; }
   .photo-figure img {
     width: 100%; display: block; border-radius: 18px; object-fit: cover;
     box-shadow: var(--sh-2);
   }
   .photo-figure figcaption {
-    font-family: 'Caveat', cursive; font-size: 17px; color: var(--text-faint);
+    font-style: italic; font-weight: 500; font-size: 13px; color: var(--text-faint);
     text-align: center; margin-top: var(--s3);
   }
 
@@ -556,7 +556,11 @@
     font-size: 11px; font-weight: 800; letter-spacing: .13em; text-transform: uppercase;
     color: var(--text-soft); margin-bottom: var(--s4);
   }
-  .trip-edit { background: none; border: none; cursor: pointer; font-family: inherit; font-weight: 700; font-size: 11px; color: var(--tyrkys-dark); letter-spacing: normal; text-transform: none; position: relative; z-index: 1; }
+  .trip-edit {
+    background: none; border: none; cursor: pointer; font-family: inherit; font-weight: 700; font-size: 11px;
+    color: var(--tyrkys-dark); letter-spacing: normal; text-transform: none; position: relative; z-index: 1;
+    padding: 4px 6px; border-radius: var(--r-sm);
+  }
   /* karta Moje cesta: jemný mapový výřez na pozadí + letadélko v rohu, ne holá barva */
   .side-card.tone-tyrkys {
     position: relative; overflow: hidden;
@@ -605,7 +609,7 @@
   }
   @media (prefers-reduced-motion: reduce) { .tw-pulse { animation: none; } }
   .trip-teaser {
-    font-family: 'Caveat', cursive; font-size: 17px; color: var(--tyrkys-dark);
+    font-style: italic; font-weight: 600; font-size: 13.5px; color: var(--tyrkys-dark);
     margin-top: var(--s3); padding-top: var(--s3); border-top: 1px solid rgba(20,35,58,.08);
   }
 
@@ -648,7 +652,7 @@
     font-style: italic;
     font-size: clamp(19px, 2.5vw, 24px); line-height: 1.5; color: var(--text);
   }
-  .pull-quote .pq-who { display: block; margin-top: var(--s3); font-family: 'Caveat', cursive; font-size: 19px; color: #C4275A; }
+  .pull-quote .pq-who { display: block; margin-top: var(--s3); font-style: italic; font-weight: 700; font-size: 14px; color: #C4275A; }
   .pull-quote-top { margin-top: 0; }
 
   /* mřížka modulů na uvítací stránce */
@@ -885,7 +889,7 @@
   .lesson-hero figcaption {
     position: absolute; left: 0; right: 0; bottom: 0;
     padding: var(--s6) var(--s5) var(--s4);
-    font-family: 'Caveat', cursive; font-size: 21px; color: #fff;
+    font-style: italic; font-weight: 700; font-size: 16px; color: #fff;
     text-shadow: 0 1px 10px rgba(0,0,0,.5);
     background: linear-gradient(180deg, transparent, rgba(10,25,35,.62));
   }
@@ -1256,7 +1260,10 @@
   .step-audio-body { flex: 1 1 auto; min-width: 0; }
   .step-audio-title { font-size: 16px; font-weight: 800; color: var(--text); margin-bottom: 4px; }
   .step-audio-delka { font-size: 12.5px; font-weight: 700; color: var(--text-faint); }
-  .step-audio audio { width: 100%; margin-top: var(--s3); }
+  .step-audio audio {
+    width: 100%; margin-top: var(--s3); accent-color: var(--accent, var(--tyrkys));
+    border-radius: var(--r-pill); background: rgba(255,255,255,.55);
+  }
   .step-audio.missing audio { display: none; }
   .step-audio-ceka {
     display: none; margin-top: var(--s3); font-size: 13.5px; line-height: 1.6; color: var(--text-muted);
@@ -1478,7 +1485,7 @@
     font-family: Georgia, 'Times New Roman', serif; font-style: italic;
     font-size: clamp(18px, 2.2vw, 21px); line-height: 1.5; color: var(--text);
   }
-  .step-quote .who { display: block; margin-top: var(--s2); font-family: 'Caveat', cursive; font-size: 18px; color: #C4275A; }
+  .step-quote .who { display: block; margin-top: var(--s2); font-style: italic; font-weight: 700; font-size: 14px; color: #C4275A; }
 
   /* odkaz na skutečný rezervační systém, ne jen text o tom, že rezervace existují */
   .step-link {
@@ -1791,7 +1798,7 @@
     margin: 0 auto; display: block; box-shadow: var(--sh-2);
   }
   .course-complete-foto-caption {
-    font-family: 'Caveat', cursive; font-size: 17px; color: var(--text-faint);
+    font-style: italic; font-weight: 500; font-size: 13px; color: var(--text-faint);
     text-align: center; margin-top: var(--s3);
   }
   .course-complete-eyebrow {
@@ -1806,7 +1813,7 @@
   .course-complete-text { max-width: 52ch; margin: 0 auto; text-align: left; font-size: 16px; line-height: 1.85; color: var(--text-muted); }
   .course-complete-text p + p { margin-top: var(--s4); }
   .course-complete-text strong { color: var(--text); }
-  .course-complete-podpis { margin-top: var(--s5); font-family: "Caveat", cursive; font-size: 26px; color: var(--ruzova-deep); }
+  .course-complete-podpis { margin-top: var(--s5); font-style: italic; font-weight: 700; font-size: 18px; color: var(--ruzova-deep); }
   .course-complete-upsell {
     margin-top: var(--s6); padding: var(--s6); max-width: 52ch; margin-left: auto; margin-right: auto;
     text-align: left; background: var(--page); border: 2px solid var(--ruzova-light); border-radius: 20px;
