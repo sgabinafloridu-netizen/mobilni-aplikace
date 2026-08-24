@@ -82,6 +82,15 @@
   .sub strong { color: var(--tyrkys-dark); font-weight: 700; }
   .marker { background: linear-gradient(180deg, transparent 58%, rgba(255,111,165,.45) 58%); padding: 0 3px; border-radius: 2px; }
 
+  /* ── appkové ikony (ico()) místo systémových emoji ──
+     Výchozí velikost pro inline použití v textu a tlačítkách, ico-lg pro
+     hlavičky karet a zvýrazněné momenty. Vždy dědí barvu okolního textu. */
+  .ico { width: 1.15em; height: 1.15em; flex: 0 0 auto; vertical-align: -0.22em; margin-right: 6px; }
+  .ico:last-child { margin-right: 0; }
+  .ico-lg { width: 28px; height: 28px; vertical-align: middle; margin-right: 8px; }
+  .ico-xl { width: 32px; height: 32px; }
+  .ico-side { width: 15px; height: 15px; margin: 0; }
+
   .eyebrow {
     display: inline-flex; align-items: center; gap: 6px;
     font-size: 11px; font-weight: 700; letter-spacing: .15em; text-transform: uppercase;
@@ -150,7 +159,10 @@
     white-space: nowrap;
   }
   .part-badge-locked { background: var(--gold); }
-  .part-ico { font-size: 28px; margin: 3px 0; }
+  .part-ico { margin: 3px 0; }
+  .part-ico .ico { width: 30px; height: 30px; margin: 0; }
+  .part-active .part-ico { color: var(--tyrkys-dark); }
+  .part-locked .part-ico { color: #8A6A00; }
   .part-cislo { font-size: 10.5px; font-weight: 700; letter-spacing: .09em; text-transform: uppercase; color: var(--text-soft); }
   .part-locked .part-cislo { color: #8A6A00; }
   .part-nazev { font-size: 16.5px; font-weight: 800; }
@@ -270,8 +282,9 @@
   .brand-mark {
     width: 42px; height: 42px; border-radius: 13px; flex: 0 0 auto;
     background: linear-gradient(135deg, var(--tyrkys) 0%, var(--tyrkys-dark) 100%);
-    display: grid; place-items: center; font-size: 21px; box-shadow: var(--sh-teal);
+    display: grid; place-items: center; font-size: 21px; box-shadow: var(--sh-teal); color: #fff;
   }
+  .brand-mark .ico { width: 21px; height: 21px; margin: 0; }
   .brand-text .brand-name { font-size: 16px; font-weight: 800; letter-spacing: -.02em; line-height: 1.2; }
   .brand-text .brand-sub { font-size: 12px; color: var(--text-faint); margin-top: 2px; }
 
@@ -574,8 +587,11 @@
     background-color: var(--tyrkys-light);
   }
   .side-card.tone-tyrkys::after {
-    content: '✈️'; position: absolute; top: 10px; right: 12px; font-size: 20px;
+    content: ''; position: absolute; top: 8px; right: 10px; width: 22px; height: 22px;
     opacity: .16; transform: rotate(35deg);
+    -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3.5 15.5l7-2.3M17 8l3.6-1a1.4 1.4 0 0 1 1.7 1.9l-1.5 3.3-3 1M13.2 13.2L11 20l-2-1 .6-4.6M10.8 10.8L4 8.8l1-2 4.6-.6'/%3E%3Cpath d='M17 8L9.5 15.5'/%3E%3C/svg%3E") center / contain no-repeat;
+    mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23000' stroke-width='1.7' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3.5 15.5l7-2.3M17 8l3.6-1a1.4 1.4 0 0 1 1.7 1.9l-1.5 3.3-3 1M13.2 13.2L11 20l-2-1 .6-4.6M10.8 10.8L4 8.8l1-2 4.6-.6'/%3E%3Cpath d='M17 8L9.5 15.5'/%3E%3C/svg%3E") center / contain no-repeat;
+    background-color: var(--tyrkys-dark);
   }
   .side-card.tone-tyrkys > * { position: relative; z-index: 1; }
   .trip-row {
@@ -1770,7 +1786,8 @@
     0%   { opacity: 0; transform: scale(.94) translateY(10px); }
     100% { opacity: 1; transform: none; }
   }
-  .praise-emoji { font-size: 40px; line-height: 1; display: block; margin-bottom: var(--s3); animation: wiggle .7s ease .2s 2; }
+  .praise-emoji { font-size: 40px; line-height: 1; display: block; margin-bottom: var(--s3); animation: wiggle .7s ease .2s 2; color: var(--ruzova); }
+  .praise-emoji .ico { width: 40px; height: 40px; }
   .praise-emoji.has-img { width: 48px; height: 48px; }
   .praise-emoji.has-img img { width: 100%; height: 100%; display: block; }
   @keyframes wiggle {
@@ -1969,15 +1986,15 @@
       <div class="parts-overview" role="group" aria-label="Průvodce má dvě části">
         <div class="part-card part-active">
           <span class="part-badge">Teď jsi tady</span>
-          <div class="part-ico">✈️</div>
+          <div class="part-ico"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 15.5l7-2.3M17 8l3.6-1a1.4 1.4 0 0 1 1.7 1.9l-1.5 3.3-3 1M13.2 13.2L11 20l-2-1 .6-4.6M10.8 10.8L4 8.8l1-2 4.6-.6"/><path d="M17 8L9.5 15.5"/></svg></div>
           <div class="part-cislo">Část 1</div>
           <div class="part-nazev">Než odletíš</div>
           <div class="part-info">7 modulů na přípravu, od termínu po den letu.</div>
         </div>
         <div class="parts-spojka" aria-hidden="true"></div>
         <div class="part-card part-locked">
-          <span class="part-badge part-badge-locked" id="welcome-pristanes-kdy">🔒 Bude koncem roku 2026</span>
-          <div class="part-ico">🛬</div>
+          <span class="part-badge part-badge-locked" id="welcome-pristanes-kdy">Bude koncem roku 2026</span>
+          <div class="part-ico"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20.5 8.5l-7 2.3M7 16l-3.6 1a1.4 1.4 0 0 1-1.7-1.9l1.5-3.3 3-1M10.8 10.8L13 4l2 1-.6 4.6M13.2 13.2l6.8 2 -1 2-4.6.6"/><path d="M7 16l7.5-7.5"/></svg></div>
           <div class="part-cislo">Část 2</div>
           <div class="part-nazev">Až přistaneš</div>
           <div class="part-info">Doprava, nakupování, stravování a další po příletu.</div>
@@ -2054,7 +2071,7 @@
   <aside class="sidebar" id="sidebar">
     <div class="side-brand">
       <div class="brand-row">
-        <div class="brand-mark" aria-hidden="true">✈️</div>
+        <div class="brand-mark" aria-hidden="true"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 15.5l7-2.3M17 8l3.6-1a1.4 1.4 0 0 1 1.7 1.9l-1.5 3.3-3 1M13.2 13.2L11 20l-2-1 .6-4.6M10.8 10.8L4 8.8l1-2 4.6-.6"/><path d="M17 8L9.5 15.5"/></svg></div>
         <div class="brand-text">
           <div class="brand-name">Do USA bez cestovky</div>
           <div class="brand-sub">Část 1 · Než odletíš</div>
@@ -2065,7 +2082,7 @@
     <nav class="side-nav" id="side-nav"><!-- vygenerováno JS --></nav>
 
     <div class="side-foot">
-      <button class="side-foot-btn" id="btn-edit-setup">⚙️ Upravit termín a destinaci</button>
+      <button class="side-foot-btn" id="btn-edit-setup"><svg class="ico" style="margin-right:5px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 3.5v2.3M12 18.2v2.3M20.5 12h-2.3M5.8 12H3.5M18 6l-1.6 1.6M7.6 16.4L6 18M18 18l-1.6-1.6M7.6 7.6L6 6"/></svg> Upravit termín a destinaci</button>
     </div>
   </aside>
 
@@ -2106,7 +2123,7 @@
           <div class="welcome-title-row">
             <div>
               <h1 id="uvod-title">Ten hlas, co říká, že na to nemáš, se dneska plete.</h1>
-              <div class="title-sep" aria-hidden="true"><span>✈️</span></div>
+              <div class="title-sep" aria-hidden="true"><span><svg class="ico" style="margin:0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 15.5l7-2.3M17 8l3.6-1a1.4 1.4 0 0 1 1.7 1.9l-1.5 3.3-3 1M13.2 13.2L11 20l-2-1 .6-4.6M10.8 10.8L4 8.8l1-2 4.6-.6"/><path d="M17 8L9.5 15.5"/></svg></span></div>
             </div>
             <img class="welcome-mascot" id="uvod-mascot" src="images/gabi-appka.jpeg"
                  alt="Gábi" loading="lazy">
@@ -2136,7 +2153,7 @@
               <div class="play-mark" aria-hidden="true">▶</div>
               <div class="vm-title">Tady bude tvoje uvítací video</div>
               <div class="vm-loading" aria-hidden="true">
-                <span class="vm-cam">🎥</span><span class="vm-spinner"></span>
+                <span class="vm-cam"><svg class="ico" style="margin:0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="6.5" width="12" height="11" rx="1.8"/><path d="M15.5 10.8l5-2.7v8l-5-2.7z"/></svg></span><span class="vm-spinner"></span>
               </div>
               <div class="vm-note">
                 Video se právě chystá, přidám ho sem během pár dní.
@@ -2157,7 +2174,7 @@
 
             <div class="side-card tone-tyrkys">
               <div class="side-card-head">
-                <span>🧭 Moje cesta</span>
+                <span><svg class="ico" style="margin:0 5px 0 0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M15 9l-2 6-6 2 2-6z"/></svg>Moje cesta</span>
                 <button class="trip-edit" id="trip-edit">Upravit →</button>
               </div>
               <div class="trip-row">
@@ -2186,7 +2203,7 @@
 
             <div class="side-card tone-yellow">
               <div class="side-card-row">
-                <span class="side-card-ico">💡</span>
+                <span class="side-card-ico"><img src="images/ikony/mini-zarovka.svg" alt="" style="width:20px;height:20px"></span>
                 <span>
                   <strong>Než začneš, 2 věci, ať tě nepřekvapí.</strong> Kurz běží v prohlížeči, takže
                   <strong>nic neinstaluješ a nikam se neregistruješ</strong>. Když si ho přidáš na plochu telefonu, otevře
@@ -2198,7 +2215,7 @@
             </div>
 
             <button class="side-card tone-peach side-card-link" id="lr-trezor">
-              <span class="side-card-ico">🔒</span>
+              <span class="side-card-ico"><svg class="ico ico-lg" style="margin:0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="4.5" y="10.5" width="15" height="10" rx="2.3"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"/></svg></span>
               <span class="side-card-link-text"><strong>Trezor čeká.</strong> ESTA, letenky a rezervace po ruce i bez signálu na letišti.</span>
               <span class="side-card-arrow">→</span>
             </button>
@@ -2246,15 +2263,15 @@
                 <div class="aside-title">Rychlé statusy</div>
                 <div class="status-row">
                   <span class="status-label">ESTA</span>
-                  <span class="status-pill" id="st-esta">⏳ Čeká</span>
+                  <span class="status-pill" id="st-esta">Čeká</span>
                 </div>
                 <div class="status-row">
                   <span class="status-label">Letenky</span>
-                  <span class="status-pill" id="st-letenky">⏳ Čeká</span>
+                  <span class="status-pill" id="st-letenky">Čeká</span>
                 </div>
                 <div class="status-row">
                   <span class="status-label">Rezervace</span>
-                  <span class="status-pill" id="st-rezervace">⏳ Čeká</span>
+                  <span class="status-pill" id="st-rezervace">Čeká</span>
                 </div>
                 <button class="status-trezor-link" id="st-trezor-link">Otevřít Trezor →</button>
               </div>
@@ -2294,11 +2311,11 @@
             <div class="lesson-head">
               <span class="eyebrow" id="module-badge">Modul</span>
               <h1>
-                <span class="lesson-icon" id="module-icon" aria-hidden="true">📍</span>
+                <span class="lesson-icon" id="module-icon" aria-hidden="true"></span>
                 <span id="module-title">Název modulu</span>
               </h1>
               <button type="button" class="btn-print" id="btn-print-checklist" hidden>
-                <span aria-hidden="true">🖨️</span> Vytisknout checklist
+                <svg class="ico" style="margin:0 6px 0 0" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="8.5" width="14" height="8" rx="1.6"/><path d="M7.5 8.5V4.5h9v4"/><path d="M7.5 16.5v3h9v-3"/></svg> Vytisknout checklist
               </button>
             </div>
 
@@ -2313,7 +2330,7 @@
             </div>
 
             <div class="module-tahak" id="module-tahak" style="display:none;">
-              <div class="tahak-eyebrow">📌 Tahák na závěr</div>
+              <div class="tahak-eyebrow"><svg class="ico" style="width:13px;height:13px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s7-6.1 7-11.5A7 7 0 0 0 5 9.5C5 14.9 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.3"/></svg>Tahák na závěr</div>
               <div class="tahak-title">Tři věci, co si z týhle lekce vzít</div>
               <ol class="tahak-list" id="tahak-list"></ol>
             </div>
@@ -2325,7 +2342,7 @@
             <p class="done-hint" id="done-hint">Klikni, až si tím projdeš. Letadélko nahoře popojede.</p>
 
             <div class="praise" id="module-praise">
-              <span class="praise-emoji" id="praise-emoji">🎉</span>
+              <span class="praise-emoji" id="praise-emoji"><svg class="ico ico-xl" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.5l2.4 6.1 6.6.5-5 4.3 1.6 6.4L12 16.3l-5.6 3.5 1.6-6.4-5-4.3 6.6-.5L12 2.5z"/></svg></span>
               <div class="praise-title" id="praise-title"></div>
               <div class="praise-text" id="praise-text"></div>
               <div class="praise-next">
@@ -2337,7 +2354,7 @@
                   <img class="course-complete-foto" src="images/hlavicky/hero-doklady.jpg" alt="Jespáci na mokrém písku u vody">
                   <figcaption class="course-complete-foto-caption">a tohle jsou jespáci, kteří se ti budou motat pod nohama, až vyrazíš na ranní procházku po pláži</figcaption>
                 </figure>
-                <div class="course-complete-eyebrow">🎉 Celý kurz hotový</div>
+                <div class="course-complete-eyebrow"><svg class="ico ico-side" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.5l2.4 6.1 6.6.5-5 4.3 1.6 6.4L12 16.3l-5.6 3.5 1.6-6.4-5-4.3 6.6-.5L12 2.5z"/></svg> Celý kurz hotový</div>
                 <h2 class="course-complete-title">Všech 7 modulů máš za sebou. JSI READY.</h2>
                 <div class="course-complete-text">
                   <p>Za sebou máš doklady, letenky, ubytování, peníze, balení i to, co dělat, kdyby se něco pokazilo. Teď víš věci, které jsem se sama učila roky, a to za jedno odpoledne.</p>
@@ -2420,7 +2437,7 @@
         <!-- 8) AŽ PŘISTANEŠ (náhled druhého průvodce) -->
         <div class="screen" id="s-pristanes">
           <div class="page-head">
-            <span class="eyebrow eyebrow-warm" id="pristanes-kdy">🔒 Bude koncem roku 2026</span>
+            <span class="eyebrow eyebrow-warm" id="pristanes-kdy">Bude koncem roku 2026</span>
             <h1>Až přistaneš</h1>
             <p class="sub">Než odletíš tě dovede až k letadlu. Až přistaneš pokračuje tam, kde tahle appka končí: doprava, nakupování, stravování a další.</p>
           </div>
@@ -2478,19 +2495,79 @@
   var VYCHOZI_BALICKY = ["zaklad"];         // co má kupující odemčené rovnou
   var KODY = { "CELY": "rozsireni" };       // kód → balíček
 
+  /* ── ikony appky: liniové SVG místo systémových emoji ──
+     Stejná gramatika jako ruční SVG v kartě "Moje cesta", jen sesbíraná na
+     jedno místo: viewBox 24×24, stroke="currentColor", šířka 1.7-1.8, ať
+     ikona vždycky zdědí barvu textu kolem sebe a appka nepůsobí jako
+     tabulka nesourodých emoji z různých systémů. Volá se přes ico("jmeno").
+     Velikost a odsazení řeší CSS třída .ico (viz níže).
+     Pozor: musí být definované dřív než cokoliv, co ico() volá (PRISTANES_MODULY
+     i MODULES), jinak je ICO_SVG v době volání ještě undefined. */
+  var ICO_SVG = {
+    sparkle: '<path d="M12 3l1.6 5.4L19 10l-5.4 1.6L12 17l-1.6-5.4L5 10l5.4-1.6L12 3z"/>',
+    star: '<path d="M12 2.5l2.4 6.1 6.6.5-5 4.3 1.6 6.4L12 16.3l-5.6 3.5 1.6-6.4-5-4.3 6.6-.5L12 2.5z"/>',
+    lock: '<rect x="4.5" y="10.5" width="15" height="10" rx="2.3"/><path d="M8 10.5V7.5a4 4 0 0 1 8 0v3"/>',
+    planeUp: '<path d="M3.5 15.5l7-2.3M17 8l3.6-1a1.4 1.4 0 0 1 1.7 1.9l-1.5 3.3-3 1M13.2 13.2L11 20l-2-1 .6-4.6M10.8 10.8L4 8.8l1-2 4.6-.6" /><path d="M17 8L9.5 15.5"/>',
+    planeDown: '<path d="M20.5 8.5l-7 2.3M7 16l-3.6 1a1.4 1.4 0 0 1-1.7-1.9l1.5-3.3 3-1M10.8 10.8L13 4l2 1-.6 4.6M13.2 13.2l6.8 2 -1 2-4.6.6"/><path d="M7 16l7.5-7.5"/>',
+    card: '<rect x="3.5" y="6" width="17" height="12.5" rx="2"/><path d="M3.5 10.3h17"/><path d="M6.5 14.7h4"/>',
+    suitcase: '<rect x="3.5" y="8" width="17" height="11.5" rx="2"/><path d="M9 8V6a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2"/><path d="M3.5 13h17"/>',
+    calendar: '<rect x="3.5" y="5" width="17" height="15.5" rx="2.2"/><path d="M8 3v4M16 3v4M3.5 10h17"/>',
+    map: '<path d="M9 4.5L4 6.3v13.2L9 17.7l6 2 5-1.8V4.7l-5 1.8-6-2z"/><path d="M9 4.5v13.2M15 6.5v13.2"/>',
+    pin: '<path d="M12 21s7-6.1 7-11.5A7 7 0 0 0 5 9.5C5 14.9 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.3"/>',
+    hourglass: '<path d="M6 3.5h12M6 20.5h12M7 3.5v3.2c0 2 2 3.6 5 5.3 3-1.7 5-3.3 5-5.3V3.5M7 20.5v-3.2c0-2 2-3.6 5-5.3 3 1.7 5 3.3 5 5.3v3.2"/>',
+    warning: '<path d="M12 3.5L2.5 20h19L12 3.5z"/><path d="M12 10v4.5"/><circle cx="12" cy="17.3" r="1"/>',
+    check: '<circle cx="12" cy="12" r="9"/><path d="M8 12.3l2.6 2.6L16.3 9"/>',
+    cross: '<circle cx="12" cy="12" r="9"/><path d="M8.5 8.5l7 7M15.5 8.5l-7 7"/>',
+    drop: '<path d="M12 3.5S6 11 6 15a6 6 0 0 0 12 0c0-4-6-11.5-6-11.5z"/>',
+    moon: '<path d="M20 14.2A8.5 8.5 0 1 1 9.8 4a7 7 0 0 0 10.2 10.2z"/>',
+    bed: '<path d="M3.5 19v-8a2 2 0 0 1 2-2h13a2 2 0 0 1 2 2v8"/><path d="M3.5 16.5h17"/><path d="M6.5 9V6a1.5 1.5 0 0 1 1.5-1.5h2A1.5 1.5 0 0 1 11.5 6v3"/>',
+    doc: '<path d="M6.5 3.5h8l3 3v14h-11z"/><path d="M14.5 3.5v3h3"/><path d="M9 12h6M9 15.5h6"/>',
+    phone: '<path d="M6 4.5h4l1.4 4.4-2 1.5a12 12 0 0 0 5.2 5.2l1.5-2 4.4 1.4v4a1.7 1.7 0 0 1-1.9 1.7A16 16 0 0 1 4.3 6.4 1.7 1.7 0 0 1 6 4.5z"/>',
+    printer: '<rect x="5" y="8.5" width="14" height="8" rx="1.6"/><path d="M7.5 8.5V4.5h9v4"/><path d="M7.5 16.5v3h9v-3"/>',
+    signal: '<path d="M4 19V15M9.5 19v-8M15 19V9M20 19V4"/>',
+    car: '<path d="M4 16.5V13l2-4.5h12l2 4.5v3.5"/><path d="M4 16.5h16M6.5 16.5v2M17.5 16.5v2"/><circle cx="7.5" cy="16.5" r="1.4"/><circle cx="16.5" cy="16.5" r="1.4"/>',
+    headphones: '<path d="M4.5 15.5V12a7.5 7.5 0 0 1 15 0v3.5"/><rect x="3.5" y="14.5" width="4" height="6" rx="1.6"/><rect x="16.5" y="14.5" width="4" height="6" rx="1.6"/>',
+    video: '<rect x="3.5" y="6.5" width="12" height="11" rx="1.8"/><path d="M15.5 10.8l5-2.7v8l-5-2.7z"/>',
+    search: '<circle cx="10.8" cy="10.8" r="6.3"/><path d="M20 20l-4.5-4.5"/>',
+    refresh: '<path d="M20 8.5a8 8 0 1 0 1.3 6.5"/><path d="M20 3.5v5.5h-5.5"/>',
+    gear: '<circle cx="12" cy="12" r="3"/><path d="M12 3.5v2.3M12 18.2v2.3M20.5 12h-2.3M5.8 12H3.5M18 6l-1.6 1.6M7.6 16.4L6 18M18 18l-1.6-1.6M7.6 7.6L6 6"/>',
+    backpack: '<path d="M8 7V5.5a4 4 0 0 1 8 0V7"/><rect x="5.5" y="7" width="13" height="14" rx="3"/><path d="M9 12h6M9 16h6"/>',
+    medical: '<rect x="3.5" y="3.5" width="17" height="17" rx="3"/><path d="M12 8v8M8 12h8"/>',
+    people: '<circle cx="8.5" cy="8" r="3"/><path d="M3 19.5c0-3 2.5-5 5.5-5s5.5 2 5.5 5"/><circle cx="17" cy="9" r="2.3"/><path d="M15 19.5c.2-2.4 2-4.2 4-4.4"/>',
+    book: '<path d="M12 6.5c-1.6-1-4-1.5-7.5-1.5v13c3.5 0 5.9.5 7.5 1.5m0-13c1.6-1 4-1.5 7.5-1.5v13c-3.5 0-5.9.5-7.5 1.5m0-13v13"/>',
+    laptop: '<rect x="5" y="5" width="14" height="9.5" rx="1.6"/><path d="M3 18.5h18l-1.6-3H4.6z"/>',
+    receipt: '<path d="M6.5 3.5h11v17l-2-1.4-1.8 1.4-1.7-1.4-1.8 1.4-1.7-1.4-2 1.4z"/><path d="M9 8h6M9 11.5h6M9 15h4"/>',
+    target: '<circle cx="12" cy="12" r="8.5"/><circle cx="12" cy="12" r="4.5"/><circle cx="12" cy="12" r="1"/>',
+    coins: '<circle cx="9" cy="9" r="5.5"/><path d="M13 6a5.5 5.5 0 1 1 0 11"/><path d="M9 6.3v5.4M6.5 9h5"/>',
+    plug: '<path d="M9 3.5v5M15 3.5v5"/><path d="M6.5 8.5h11v3a5.5 5.5 0 0 1-11 0z"/><path d="M12 16.5v4"/>',
+    ticket: '<path d="M4 8.5a2 2 0 0 0 0 4v3.5a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V12.5a2 2 0 0 1 0-4V6a2 2 0 0 0-2-2H6a2 2 0 0 0-2 2v2.5z"/><path d="M14 5v14" stroke-dasharray="2.4 2.4"/>',
+    sun: '<circle cx="12" cy="12" r="4.5"/><path d="M12 3v2.3M12 18.7V21M21 12h-2.3M5.3 12H3M18.4 5.6l-1.6 1.6M7.2 16.8l-1.6 1.6M18.4 18.4l-1.6-1.6M7.2 7.2L5.6 5.6"/>',
+    ruler: '<rect x="3" y="9" width="18" height="6" rx="1.4" transform="rotate(-20 12 12)"/><path d="M8.6 9.8l1 2.4M11.6 8.6l1 2.4M14.6 7.4l1 2.4" transform="rotate(-20 12 12)"/>',
+    alarm: '<circle cx="12" cy="13" r="7.5"/><path d="M12 9v4l3 2"/><path d="M5 4l-2 2.3M19 4l2 2.3"/>',
+    compassArrow: '<circle cx="12" cy="12" r="9"/><path d="M15 9l-2 6-6 2 2-6z"/>',
+    cart: '<circle cx="9.5" cy="20" r="1.4"/><circle cx="17" cy="20" r="1.4"/><path d="M3.5 4.5h2.3l2 11.5h10.4l1.8-8H7"/>',
+    food: '<path d="M6 3.5v7a2.5 2.5 0 0 0 5 0v-7M8.5 3.5v6M6 3.5v6"/><path d="M17 3.5c-1.7 0-3 2-3 5s1.3 5 3 5v7"/>',
+    sos: '<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3.4"/><path d="M5.6 5.6l3.4 3.4M18.4 5.6l-3.4 3.4M5.6 18.4l3.4-3.4M18.4 18.4l-3.4-3.4"/>'
+  };
+  function ico(name, cls) {
+    var d = ICO_SVG[name] || "";
+    return '<svg class="ico' + (cls ? " " + cls : "") + '" viewBox="0 0 24 24" fill="none" stroke="currentColor" ' +
+      'stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + d + '</svg>';
+  }
+
   /* Náhled druhého průvodce "Až přistaneš" (usa-bez-cestovky-cast2/KOSTRA.md).
      Není to modul appky, jen ochutnávka: appka sama žádný obsah těchhle
      7 položek nemá, jen jméno a jednu větu. Proto se neúčastní MODULES,
      progress, checklistů ani isUnlocked. Dokud je PRISTANES_ODKAZ prázdný,
      appka nenabízí žádnou akci, jen slib. Stejný vzor jako BALICKY.odkaz. */
   var PRISTANES_MODULY = [
-    { emoji: "🛂", name: "Imigrační kontrola", desc: "Co přesně čeká za dveřmi, jak vypadá fronta a co u toho říct." },
-    { emoji: "🧳", name: "Výdej zavazadel a celnice", desc: "Kdy se kufry vyzvedávají znovu a co nahlásit celníkovi." },
-    { emoji: "🚗", ikona: "images/ikony/highlight-doprava.svg", name: "Doprava na místě", desc: "Půjčení auta, dálniční poplatky a provoz podle amerických pravidel." },
-    { emoji: "🛒", name: "Nakupování a peníze", desc: "Sales tax u pokladny, platby kartou a kde nakoupit levněji." },
-    { emoji: "🍽️", name: "Stravování", desc: "Tipping kultura, čtení menu a kdy se vyplatí happy hour." },
-    { emoji: "📶", name: "Praktické věci na místě", desc: "eSIM, lékárna a co dělat, když se ztratíš." },
-    { emoji: "🆘", name: "Krizové situace na místě", desc: "Nehoda, krádež nebo problém s ubytováním: klidný postup na místě." }
+    { emoji: ico("doc"), name: "Imigrační kontrola", desc: "Co přesně čeká za dveřmi, jak vypadá fronta a co u toho říct." },
+    { emoji: ico("suitcase"), name: "Výdej zavazadel a celnice", desc: "Kdy se kufry vyzvedávají znovu a co nahlásit celníkovi." },
+    { emoji: ico("car"), ikona: "images/ikony/highlight-doprava.svg", name: "Doprava na místě", desc: "Půjčení auta, dálniční poplatky a provoz podle amerických pravidel." },
+    { emoji: ico("cart"), name: "Nakupování a peníze", desc: "Sales tax u pokladny, platby kartou a kde nakoupit levněji." },
+    { emoji: ico("food"), name: "Stravování", desc: "Tipping kultura, čtení menu a kdy se vyplatí happy hour." },
+    { emoji: ico("signal"), name: "Praktické věci na místě", desc: "eSIM, lékárna a co dělat, když se ztratíš." },
+    { emoji: ico("sos"), name: "Krizové situace na místě", desc: "Nehoda, krádež nebo problém s ubytováním: klidný postup na místě." }
   ];
   var PRISTANES_ODKAZ = "";   // e-mailové přihlášení na "dej mi vědět, až to vyjde", zatím prázdné
   var PRISTANES_KDY = "koncem roku 2026";   // jedno místo pravdy pro termín, ať appka neříká na dvou místech dvě různé věty
@@ -2587,7 +2664,7 @@
           }
         },
         {
-          icon: "📅",
+          icon: ico("calendar"),
           title: "Kdy do USA nejezdi, a proč to cestovky neříkají",
           mapa: true,
           ilustrace: { src: "images/sceny/florida-bourka.svg", popis: "floridské odpoledne v létě: přijde, přejde, z asfaltu se kouří" },
@@ -2595,7 +2672,7 @@
             { text: ["Doma je to jasné. Škola skončí, teploty stoupají, jede se. V Americe <strong>tenhle vzorec nefunguje</strong>."] },
             { stat: "40 °C", popis: "tolik je na dně Grand Canyonu v srpnu, i když nahoře na okraji je snesitelných 27 stupňů." },
             { text: ["Červenec na Floridě je vedro, vlhko a hurikánová sezóna v plném proudu. New York v létě místní opouštějí, ne navštěvují."] },
-            { oddelovac: true, ikona: "🎫" },
+            { oddelovac: true, ikona: ico("ticket", "ico-side") },
             { text: ["Prázdninový termín v USA znamená <strong>nejvyšší ceny, nejhorší počasí a nejdelší fronty</strong>. Všechno najednou."] }
           ],
           why: {
@@ -2673,13 +2750,13 @@
           }
         },
         {
-          icon: "🥵",
+          icon: ico("sun"),
           title: "Grand Canyon v létě: co tě čeká a co ne",
           ilustrace: { src: "images/sceny/scena-lahev-voda.svg", popis: "nerezová lahev s karabinkou, věrný parťák na každý výlet" },
           bloky: [
             { text: ["Na fotkách to vypadá jako nekonečná, ale docela neškodná vycházka. Výhled z okraje tě vtáhne, stezka se svažuje pozvolna a vítr, co fouká nahoře na vyhlídce, <strong>tě přesvědčí, že to bude v pohodě</strong>."] },
             { stat: "45 °C", popis: "tolik je dole ve stínu skal, zatímco nahoře na vyhlídce příjemně fouká vítr. Nejbližší voda je hodinu chůze zpátky, a zpátky je nahoru." },
-            { oddelovac: true, ikona: "💧" },
+            { oddelovac: true, ikona: ico("drop", "ico-side") },
             { text: ["Tohle je Grand Canyon v červenci. <strong>Krásný a v létě trochu záludný.</strong> Kolik vody si vzít, aby to bylo v pohodě?"] },
             { voda: true }
           ],
@@ -2803,7 +2880,7 @@
       ],
       steps: [
         {
-          icon: "📘",
+          icon: ico("book"),
           title: "Pas, který tiše dodýchává v šuplíku",
           hintProTyp: {
             svobodny: "Tohle je jedna z mála věcí v celém průvodci, co se fakt nedá nechat na cestu. <strong>Zkontroluj to teď</strong>, dokud máš ještě čas na nový pas, kdyby byl potřeba.",
@@ -2856,7 +2933,7 @@
           }
         },
         {
-          icon: "💻",
+          icon: ico("laptop"),
           title: "Dvacet minut hledání, kterým se dá předejít",
           lead: [
             "Tohle je dobrá zpráva celého modulu. ESTA se vyřizuje z gauče, v teplácích, za pár minut. Žádná ambasáda, žádný pohovor.",
@@ -2937,7 +3014,7 @@
           }
         },
         {
-          icon: "🛂",
+          icon: ico("doc"),
           title: "Platí to i pro tebe?",
           lead: [
             "Naprostá většina Čechů si s ESTA vystačí a nikdy neřeší nic dalšího.",
@@ -2981,7 +3058,7 @@
           }
         },
         {
-          icon: "🧳",
+          icon: ico("suitcase"),
           title: "Tohle se tě zeptají cestou do Ameriky",
           ilustrace: { src: "images/sceny/urednik-kafe.svg", popis: "úředník, který to chce mít za sebou a dát si další kafe" },
           lead: [
@@ -3013,7 +3090,7 @@
           }
         },
         {
-          icon: "🚑",
+          icon: ico("medical"),
           title: "Dva doklady, které nikdo nekontroluje. Ale ty si je vyřiď stejně.",
           lead: [
             "Na hranici ti je nikdo nezkontroluje. Přesně proto je skoro každý podcení.",
@@ -3053,7 +3130,7 @@
           }
         },
         {
-          icon: "👨‍👩‍👧",
+          icon: ico("people"),
           iconImg: "images/ikony/mini-rodina.svg",
           title: "Jedna chybějící stránka, a zůstaneš na letišti",
           ilustrace: { src: "images/sceny/scena-razitko.svg", popis: "razítko, které se den předem nesežene" },
@@ -3133,7 +3210,7 @@
       ],
       steps: [
         {
-          icon: "📅",
+          icon: ico("calendar"),
           title: "Kdy je ta správná chvíle koupit",
           hintProTyp: {
             planovac: "Tohle je tvoje disciplína. Nastav si <strong>hlídání ceny hned teď</strong> a do kalendáře si zapiš den, kdy začne tvoje okno. Víc dělat nemusíš, cena přijde za tebou.",
@@ -3169,7 +3246,7 @@
           }
         },
         {
-          icon: "🗺️",
+          icon: ico("map"),
           title: "Letíš z Prahy, nebo z Mošnova?",
           lead: [
             "Tuhle vrstvu většina rad vynechá, protože je psaná z Prahy.",
@@ -3196,7 +3273,7 @@
           }
         },
         {
-          icon: "🔎",
+          icon: ico("search"),
           title: "Tři funkce, které dělají celý rozdíl",
           lead: [
             "Hledat letenky umí každý.",
@@ -3262,7 +3339,7 @@
           ]
         },
         {
-          icon: "🔄",
+          icon: ico("refresh"),
           title: "Proč je americký přestup jiný než evropský",
           lead: [
             "Jestli si máš z modulu odnést jedinou věc, ať je to tahle.",
@@ -3321,7 +3398,7 @@
           }
         },
         {
-          icon: "🌙",
+          icon: ico("moon"),
           title: "Noční, nebo denní let?",
           lead: [
             "Na tohle se skoro nikdo neptá. Přitom to rozhoduje, v jakém stavu dorazíš k imigrační kontrole.",
@@ -3347,7 +3424,7 @@
           }
         },
         {
-          icon: "🧳",
+          icon: ico("suitcase"),
           title: "Proč je Basic Economy dražší, než vypadá",
           lead: [
             "Nejlevnější tarif ve výsledcích se skoro vždycky jmenuje Basic Economy. Vypadá to jako výhra.",
@@ -3376,7 +3453,7 @@
           }
         },
         {
-          icon: "💳",
+          icon: ico("card"),
           title: "Než klikneš na zaplatit",
           lead: [
             "Poslední kontrola, než pustíš peníze.",
@@ -3460,7 +3537,7 @@
       ],
       steps: [
         {
-          icon: "🗺️",
+          icon: ico("map"),
           title: "Kde spát, když každá destinace hraje jinou hru",
           hintProTyp: {
             svobodny: "U měst a pláží si klidně nech volnost. <strong>U národních parků ne</strong>, tam se ubytování uvnitř rezervuje 13 měsíců dopředu a na místě se nesežene nic.",
@@ -3501,7 +3578,7 @@
           }
         },
         {
-          icon: "🧾",
+          icon: ico("receipt"),
           title: "Kde se z pokoje za 120 dolarů stane 165",
           lead: [
             "Tady vzniká ten rozdíl mezi částkou na srovnávači a tou na účtu.",
@@ -3541,7 +3618,7 @@
           }
         },
         {
-          icon: "💳",
+          icon: ico("card"),
           title: "Až ti hotel zablokuje peníze, nelekej se",
           ilustrace: { src: "images/sceny/scena-karta-blokace.svg", popis: "nejsou pryč, jen je někdo na pár dní zamkl" },
           lead: [
@@ -3576,7 +3653,7 @@
           }
         },
         {
-          icon: "📋",
+          icon: ico("receipt"),
           title: "Co se špatně dohání až na místě",
           lead: [
             "Pár drobností, které se na místě dohánějí špatně.",
@@ -3616,7 +3693,7 @@
           }
         },
         {
-          icon: "🔒",
+          icon: ico("lock"),
           title: "Dvě věci, které musíš mít i bez signálu",
           lead: [
             "Poslední krok, a je krátký.",
@@ -3693,7 +3770,7 @@
       ],
       steps: [
         {
-          icon: "💳",
+          icon: ico("card"),
           title: "Proč do Ameriky nestačí jedna karta",
           lead: [
             "V Česku vystačíš s jednou kartou roky. V Americe je jedna karta riziko.",
@@ -3720,7 +3797,7 @@
           }
         },
         {
-          icon: "💵",
+          icon: ico("coins"),
           title: "Kolik hotovosti si vzít",
           lead: [
             "Amerika je zemí karet. Zaplatíš jimi kafe za dva dolary i benzín uprostřed ničeho.",
@@ -3746,7 +3823,7 @@
           }
         },
         {
-          icon: "🏦",
+          icon: ico("coins"),
           title: "Kolik si z každé platby ukousne banka",
           lead: [
             "Tady se ztrácejí ty peníze, o kterých nikdo nemluví. Ne po stovkách, ale po procentech z každé jednotlivé platby.",
@@ -3779,7 +3856,7 @@
           }
         },
         {
-          icon: "⚠️",
+          icon: ico("warning"),
           title: "Až se tě terminál zeptá na koruny, řekni ne",
           lead: [
             "Tomuhle říkám <strong>korunová past</strong> a je to nejdražší dvě vteřiny celé dovolené.",
@@ -3802,7 +3879,7 @@
           }
         },
         {
-          icon: "📞",
+          icon: ico("phone"),
           title: "Co udělat s bankou, než odletíš",
           lead: [
             "Deset minut v aplikaci banky večer před odletem. Nic víc to není.",
@@ -3828,7 +3905,7 @@
           }
         },
         {
-          icon: "🧮",
+          icon: ico("coins"),
           title: "Kolik to celé bude stát",
           lead: [
             "Zbývá poslední otázka, a je ta největší: kolik si mám vlastně připravit?",
@@ -3897,7 +3974,7 @@
       ],
       steps: [
         {
-          icon: "🎒",
+          icon: ico("backpack"),
           title: "Co musí být v příručním, ať se stane cokoliv",
           media: {
             kicker: "K poslechu",
@@ -3934,7 +4011,7 @@
           }
         },
         {
-          icon: "🖨️",
+          icon: ico("printer"),
           title: "Co si vytisknout, i když máš všechno v mobilu",
           lead: [
             "Ano, i v roce 2026. A není to z nedůvěry k technice.",
@@ -3961,7 +4038,7 @@
           }
         },
         {
-          icon: "🔌",
+          icon: ico("plug"),
           title: "Tři věci, na které se zapomíná nejčastěji",
           lead: [
             "Oblečení si sbalíš sám/sama a líp než já. Tyhle tři věci se ale zapomínají tak spolehlivě, že si zaslouží vlastní krok."
@@ -3986,7 +4063,7 @@
           }
         },
         {
-          icon: "🚫",
+          icon: ico("cross"),
           title: "Co se do Ameriky nesmí, ani v kufru",
           lead: [
             "Tady se to lidem kazí nejčastěji, a skoro vždycky s tou nejlepší vůlí. Vezmou si na cestu domácí klobásu nebo babiččin domácí kompot.",
@@ -4024,7 +4101,7 @@
           }
         },
         {
-          icon: "📶",
+          icon: ico("signal"),
           title: "Internet v Americe: eSIM, ne roaming",
           lead: [
             "Roaming z českého tarifu v USA umí stát závratné peníze.",
@@ -4042,7 +4119,7 @@
           ]
         },
         {
-          icon: "🌙",
+          icon: ico("moon"),
           title: "Poslední večer: pět minut a jdeš spát",
           lead: [
             "Poslední kontrola, kterou uděláš s kufrem už zavřeným.",
@@ -4100,7 +4177,7 @@
       ],
       steps: [
         {
-          icon: "🛫",
+          icon: ico("planeUp"),
           title: "Zrušený nebo hodně zpožděný let",
           hintProTyp: {
             svobodny: "Tenhle jediný modul si přečti dřív, než ho budeš potřebovat. Ne kvůli plánování, ale proto, že <strong>na letišti v cizí zemi se špatně googlí</strong>.",
@@ -4135,7 +4212,7 @@
           }
         },
         {
-          icon: "🤒",
+          icon: ico("medical"),
           title: "Onemocníš pár dní před odletem",
           lead: [
             "Tohle je situace, kde se rozhoduje o desítkách tisíc, a rozhodlo se o nich už ve chvíli, kdy se kupovalo pojištění.",
@@ -4161,7 +4238,7 @@
           }
         },
         {
-          icon: "📕",
+          icon: ico("book"),
           title: "Ztratíš pas nebo ti propadl",
           lead: [
             "Vypadá to jako konec cesty. Není.",
@@ -4187,7 +4264,7 @@
           }
         },
         {
-          icon: "🚫",
+          icon: ico("cross"),
           title: "Zamítnutá ESTA",
           lead: [
             "Stane se to zřídka, ale stane. A je to jediná z těchhle situací, kterou nejde vyřešit rychle.",
@@ -4218,7 +4295,7 @@
           }
         },
         {
-          icon: "📇",
+          icon: ico("doc"),
           title: "Co mít po ruce, aby se to řešilo snadno",
           media: {
             kicker: "K poslechu",
@@ -4915,7 +4992,7 @@
       var locked = !isUnlocked(mod);
       var bal = BALICKY[mod.balicek];
       item({
-        ico: locked ? "🔒" : (done ? "✓" : (i + 1)),
+        ico: locked ? ico("lock", "ico-side") : (done ? "✓" : (i + 1)),
         title: mod.shortName || mod.name,
         meta: locked
           ? "balíček " + (bal ? bal.nazev : mod.balicek)
@@ -4928,7 +5005,7 @@
     });
 
     item({
-      ico: "🔒", title: "Až přistaneš", meta: "7 modulů · " + PRISTANES_KDY,
+      ico: ico("lock", "ico-side"), title: "Až přistaneš", meta: "7 modulů · " + PRISTANES_KDY,
       active: currentScreen === "s-pristanes", locked: true,
       onClick: function () { goTo("s-pristanes"); }
     });
@@ -4939,17 +5016,17 @@
     nav.appendChild(lbl2);
 
     item({
-      ico: "🔒", title: "Trezor", meta: "ESTA, letenky, rezervace",
+      ico: ico("lock", "ico-side"), title: "Trezor", meta: "ESTA, letenky, rezervace",
       active: currentScreen === "s-trezor",
       onClick: function () { goTo("s-trezor"); }
     });
     item({
-      ico: "🧮", title: "Můj rozpočet", meta: "Kolik to celé bude stát",
+      ico: ico("coins", "ico-side"), title: "Můj rozpočet", meta: "Kolik to celé bude stát",
       active: currentScreen === "s-rozpocet",
       onClick: function () { goTo("s-rozpocet"); }
     });
     item({
-      ico: "🔁", title: "Převodník", meta: "Měna, jednotky, spropitné",
+      ico: ico("refresh", "ico-side"), title: "Převodník", meta: "Měna, jednotky, spropitné",
       active: currentScreen === "s-prevodnik",
       onClick: function () { goTo("s-prevodnik"); }
     });
@@ -5151,7 +5228,7 @@
 
       var bal = BALICKY[mod.balicek];
       var nodeContent;
-      if (locked) nodeContent = "🔒";
+      if (locked) nodeContent = ico("lock");
       else if (done) nodeContent = "✓";
       else if (mod.ikona) nodeContent = '<img src="' + mod.ikona + '" alt="">';
       else nodeContent = mod.emoji;
@@ -5178,7 +5255,7 @@
     var dEl = document.createElement("div");
     dEl.className = "journey-item depart";
     dEl.innerHTML =
-      '<div class="journey-node">✈️</div>' +
+      '<div class="journey-node">' + ico("planeUp") + '</div>' +
       '<div class="journey-card">' +
         '<div class="journey-body">' +
           '<span class="journey-when">' + target.toLocaleDateString("cs-CZ", { day: "numeric", month: "long" }) + '</span>' +
@@ -5192,7 +5269,7 @@
     var pEl = document.createElement("div");
     pEl.className = "journey-item pristanes";
     pEl.innerHTML =
-      '<div class="journey-node">🔒</div>' +
+      '<div class="journey-node">' + ico("lock") + '</div>' +
       '<div class="journey-card">' +
         '<div class="journey-body">' +
           '<span class="journey-when">Po přistání</span>' +
@@ -5232,7 +5309,7 @@
     function setPill(id, filled, readyLabel) {
       var el = document.getElementById(id);
       var isReady = !!(filled && filled.trim());
-      el.textContent = isReady ? "✓ " + readyLabel : "⏳ Čeká";
+      el.innerHTML = isReady ? "✓ " + readyLabel : ico("hourglass", "ico-side") + " Čeká";
       el.classList.toggle("ready", isReady);
     }
     setPill("st-esta", trezor.esta, "Vyřízeno");
@@ -5317,7 +5394,7 @@
       card.innerHTML =
         '<span class="mg-top">' +
           '<span class="mg-label">' + (i + 1) + '. modul</span>' +
-          (locked ? '<span class="mg-lock">🔒 Zamčeno</span>'
+          (locked ? '<span class="mg-lock">' + ico("lock", "ico-side") + ' Zamčeno</span>'
                   : (isNext ? '<span class="mg-badge">Pokračuj tady</span>'
                             : (done ? '<span class="mg-check">✓ Hotovo</span>' : ''))) +
         '</span>' +
@@ -5367,8 +5444,8 @@
     var warning = urgent || personalizedWarning(setup.destinace, setup.datum);
     if (warning) {
       var eyebrow = urgent ? "Nejdůležitější teď." : "Než začneš, 1 věc.";
-      var ico = urgent ? "⏰" : "💡";
-      warnBox.innerHTML = '<span class="ico">' + ico + '</span><span><strong>' + eyebrow + '</strong> ' + warning + '</span>';
+      var icoHtml = urgent ? ico("alarm") : '<img class="ico" src="images/ikony/mini-zarovka.svg" alt="">';
+      warnBox.innerHTML = icoHtml + '<span><strong>' + eyebrow + '</strong> ' + warning + '</span>';
     }
     warnBox.classList.toggle("show", !!warning);
 
@@ -5393,7 +5470,7 @@
                                '</div><div class="blok-stat-popis">' + b.popis + '</div></div>';
       if (b.oddelovac) return '<div class="blok-oddelovac"><span class="blok-oddelovac-ikona" aria-hidden="true">' +
                                (b.ikona || '✦') + '</span></div>';
-      if (b.voda)      return '<div class="blok-eyebrow eyebrow">💧 Kalkulačka</div>' +
+      if (b.voda)      return '<div class="blok-eyebrow eyebrow">' + ico("drop", "ico-side") + ' Kalkulačka</div>' +
                               '<div class="voda-kalk" id="voda-kalk"></div>';
       return '';
     }).join('');
@@ -5648,7 +5725,7 @@
 
     box.innerHTML =
       '<div class="prevodnik-sekce tyrkys">' +
-        '<div class="blok-eyebrow eyebrow">💵 Měna</div>' +
+        '<div class="blok-eyebrow eyebrow">' + ico("coins", "ico-side") + ' Měna</div>' +
         '<div class="rozpocet-grid">' +
           '<div class="rozpocet-pole"><label for="pv-kurz">Kurz, Kč za 1 dolar</label>' +
             '<div class="rozpocet-input-wrap"><input type="number" min="0" step="0.1" inputmode="decimal" id="pv-kurz" value="21"><span class="rozpocet-unit">Kč</span></div></div>' +
@@ -5663,7 +5740,7 @@
       '</div>' +
 
       '<div class="prevodnik-sekce zluta">' +
-        '<div class="blok-eyebrow eyebrow eyebrow-warm">📏 Jednotky</div>' +
+        '<div class="blok-eyebrow eyebrow eyebrow-warm">' + ico("ruler", "ico-side") + ' Jednotky</div>' +
         '<p class="prevodnik-hint prevodnik-hint-top">86 °F na floridské pláži zní hrozivěji, než 30 °C. Klid, je to to samé.</p>' +
         '<div class="rozpocet-grid">' +
           '<div class="rozpocet-pole"><label for="pv-f">Fahrenheity</label>' +
@@ -5692,7 +5769,7 @@
       '</div>' +
 
       '<div class="prevodnik-sekce ruzova">' +
-        '<div class="blok-eyebrow eyebrow eyebrow-ruzova">💸 Spropitné</div>' +
+        '<div class="blok-eyebrow eyebrow eyebrow-ruzova">' + ico("coins", "ico-side") + ' Spropitné</div>' +
         '<p class="prevodnik-hint prevodnik-hint-top">V USA je spropitné skoro povinnost, ne laskavost. 18 % je slušnost, 15 % je už tak trochu drzost.</p>' +
         '<div class="rozpocet-grid">' +
           '<div class="rozpocet-pole"><label for="pv-ucet">Účet v restauraci</label>' +
@@ -6009,6 +6086,11 @@
   ];
   function nahodnaPochvala(poradi) {
     return POCHVALY[Math.abs(poradi) % POCHVALY.length];
+  }
+  /* texty pochval jsou psané s "✨ " na začátku, appka ho při vykreslení
+     vymění za appkovou ikonku, ať se nemusí přepisovat desítky řetězců */
+  function pochvalaHtml(text) {
+    return ico("sparkle", "ico-pochvala") + String(text).replace(/^[✨]\s*/, "");
   }
 
   function refreshGroupDone(groupEl) {
@@ -6417,7 +6499,7 @@
         var jeZvuk = /\.mp3$/i.test(med.src);
         html += '<div class="step-video">' +
                   '<div class="step-video-head"><span aria-hidden="true">' +
-                    (jeZvuk ? '🎧' : '🎬') + '</span>' + med.kicker + '</div>';
+                    (jeZvuk ? ico("headphones") : ico("video")) + '</span>' + med.kicker + '</div>';
 
         if (jeZvuk) {
           html += '<div class="step-audio missing" data-media>' +
@@ -6439,7 +6521,7 @@
                       '<div class="play-mark" aria-hidden="true">▶</div>' +
                       '<div class="vm-title">' + med.titulek + '</div>' +
                       '<div class="vm-loading" aria-hidden="true">' +
-                        '<span class="vm-cam">🎥</span><span class="vm-spinner"></span>' +
+                        '<span class="vm-cam">' + ico("video") + '</span><span class="vm-spinner"></span>' +
                       '</div>' +
                       '<div class="vm-note">Tohle video se právě chystá, přidám ho sem brzy.</div>' +
                     '</div>' +
@@ -6467,7 +6549,7 @@
         // evropská linka ve stejném měřítku: začíná pod prvním bodem schématu
         var euroKm = 2750, euroX1 = 100, euroX2 = euroX1 + Math.round(euroKm * MERITKO), euroY = 348;
 
-        html += '<div class="blok-eyebrow eyebrow">🗺️ Interaktivní mapa</div>' +
+        html += '<div class="blok-eyebrow eyebrow">' + ico("map", "ico-side") + ' Interaktivní mapa</div>' +
                 '<div class="mapa" id="mapa-obal">' +
           '<div class="mapa-label">Klikni na oblast, uvidíš, co tě tam čeká</div>' +
           '<svg viewBox="0 0 460 392" role="img" ' +
@@ -6516,7 +6598,7 @@
       }
 
       if (step.kviz) {
-        html += '<div class="blok-eyebrow eyebrow eyebrow-ruzova">🎯 Kvíz · 5 otázek, minuta času</div>' +
+        html += '<div class="blok-eyebrow eyebrow eyebrow-ruzova">' + ico("target", "ico-side") + ' Kvíz · 5 otázek, minuta času</div>' +
                 '<div class="kviz" id="kviz"></div>';
       }
 
@@ -6567,7 +6649,7 @@
                              '<span>' + item + '</span>' +
                            '</label>';
                   }).join('') + '</div>' +
-                  '<p class="checklist-group-done">' + (step.pochvala || nahodnaPochvala(i)) + '</p>' +
+                  '<p class="checklist-group-done">' + pochvalaHtml(step.pochvala || nahodnaPochvala(i)) + '</p>' +
                 '</div>';
       }
 
@@ -6586,7 +6668,7 @@
           return '<div class="checklist-group">' +
                    '<div class="checklist-group-heading">' + group.heading + '</div>' +
                    '<div class="step-checklist">' + rows + '</div>' +
-                   '<p class="checklist-group-done">' + (group.pochvala || nahodnaPochvala(flatCi)) + '</p>' +
+                   '<p class="checklist-group-done">' + pochvalaHtml(group.pochvala || nahodnaPochvala(flatCi)) + '</p>' +
                  '</div>';
         }).join('');
       }
@@ -6643,7 +6725,7 @@
         // ostatních měsíců, aby se nic z popisků neztratilo
         html += '<div class="passport-check" id="termin-check"></div>' +
                 '<details class="disc disc-why">' +
-                  '<summary><span class="d-ico">📅</span>Chci vidět i ostatní měsíce a destinace' +
+                  '<summary><span class="d-ico">' + ico("calendar") + '</span>Chci vidět i ostatní měsíce a destinace' +
                   '<span class="d-chev" aria-hidden="true">▾</span></summary>' +
                   '<div class="d-body">' +
                     '<div class="month-picker" style="margin-top:0">' +
@@ -6690,7 +6772,7 @@
 
       if (step.tip) {
         html += '<div class="step-tip">' +
-                  '<div class="step-tip-head"><span aria-hidden="true">💰</span>' + (step.tip.title || 'Tip navíc') + '</div>' +
+                  '<div class="step-tip-head"><span aria-hidden="true">' + ico("coins") + '</span>' + (step.tip.title || 'Tip navíc') + '</div>' +
                   '<div class="step-tip-body">' + paras(step.tip.body) + '</div>' +
                   (step.tip.link
                     ? '<a class="step-tip-link" href="' + step.tip.link.url + '" target="_blank" rel="noopener">' +
@@ -6709,7 +6791,7 @@
       }
       if (step.trap) {
         html += '<details class="disc disc-trap">' +
-                  '<summary><span class="d-ico">⚠️</span>' + step.trap.title +
+                  '<summary><span class="d-ico">' + ico("warning") + '</span>' + step.trap.title +
                   '<span class="d-chev" aria-hidden="true">▾</span></summary>' +
                   '<div class="d-body">' + paras(step.trap.body) + '</div>' +
                 '</details>';
@@ -6800,7 +6882,7 @@
 
     var html =
       '<div class="unlock-box">' +
-        '<span class="unlock-kicker">🔒 Balíček ' + bal.nazev + '</span>' +
+        '<span class="unlock-kicker">' + ico("lock", "ico-side") + ' Balíček ' + bal.nazev + '</span>' +
         '<h3 class="unlock-title">' + mod.name + '</h3>' +
         '<div class="unlock-lead">' +
           '<p>Tenhle modul zatím nemáš odemčený.</p>' +
@@ -7064,7 +7146,7 @@
       praiseEmojiEl.innerHTML = '<img src="' + p.emojiImg + '" alt="">';
       praiseEmojiEl.classList.add("has-img");
     } else {
-      praiseEmojiEl.textContent = (p && p.emoji) || "🎉";
+      praiseEmojiEl.innerHTML = (p && p.emoji) || ico("star", "ico-xl");
       praiseEmojiEl.classList.remove("has-img");
     }
     document.getElementById("praise-title").textContent = title;
@@ -7146,23 +7228,23 @@
      obrazovka, sidebar, cesta, tahle stránka), ať appka neříká na dvou místech
      dvě různé věty. */
   function renderPristanes() {
-    var kdyLabel = "🔒 Bude " + PRISTANES_KDY;
+    var kdyLabel = ico("lock") + " Bude " + PRISTANES_KDY;
     var kdyEl = document.getElementById("pristanes-kdy");
-    if (kdyEl) kdyEl.textContent = kdyLabel;
+    if (kdyEl) kdyEl.innerHTML = kdyLabel;
     var welcomeKdyEl = document.getElementById("welcome-pristanes-kdy");
-    if (welcomeKdyEl) welcomeKdyEl.textContent = kdyLabel;
+    if (welcomeKdyEl) welcomeKdyEl.innerHTML = kdyLabel;
 
     var grid = document.getElementById("pristanes-grid");
     if (!grid) return;
     grid.innerHTML = PRISTANES_MODULY.map(function (m) {
-      var ico = m.ikona
+      var icoHtml = m.ikona
         ? '<div class="pristanes-ico has-img"><img src="' + m.ikona + '" alt=""></div>'
         : '<div class="pristanes-ico">' + m.emoji + '</div>';
       return (
         '<div class="pristanes-item">' +
-          ico +
+          icoHtml +
           '<div class="pristanes-body">' +
-            '<div class="pristanes-name">🔒 ' + m.name + '</div>' +
+            '<div class="pristanes-name">' + ico("lock", "ico-side") + ' ' + m.name + '</div>' +
             '<div class="pristanes-desc">' + m.desc + '</div>' +
           '</div>' +
         '</div>'
