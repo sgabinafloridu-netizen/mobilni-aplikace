@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400">
+  <!-- Gábi zavírá kufr oběma rukama, vedle ní telefon s fajfkou (uloženo
+       dřív, než zavře kufr). Stejná postava jako gabi-happy-plaz.svg (hlava
+       r=76 na (200,178), stejná kšiltovka), jen jiné paže, rekvizita a
+       soustředěný výraz. Pozadí průhledné, scéna oříznutá do kolečka. -->
+
+  <clipPath id="bkfKolo"><circle cx="200" cy="200" r="185"/></clipPath>
+
+  <g clip-path="url(#bkfKolo)">
+    <rect x="0" y="0" width="400" height="400" fill="#E6F8FA"/>
+    <circle cx="60" cy="76" r="20" fill="#FFD23F"/>
+
+    <!-- obě paže tlačí na víko kufru -->
+    <g fill="none" stroke-linecap="round">
+      <path d="M148 274 Q132 296 158 316" stroke="#E9C6AB" stroke-width="26"/>
+      <path d="M252 274 Q268 296 242 316" stroke="#E9C6AB" stroke-width="26"/>
+      <path d="M148 274 Q132 296 158 316" stroke="#FFE0CC" stroke-width="20"/>
+      <path d="M252 274 Q268 296 242 316" stroke="#FFE0CC" stroke-width="20"/>
+    </g>
+
+    <!-- tělo -->
+    <path d="M118 385 L118 302 Q118 254 166 252 L234 252 Q282 254 282 302 L282 385 Z" fill="#1AC0CE"/>
+    <path d="M176 254 L200 292 L224 254 Z" fill="#F4FBFC"/>
+
+    <!-- kufr, zavírá se -->
+    <g transform="translate(200 350)">
+      <rect x="-70" y="-38" width="140" height="70" rx="10" fill="#FF6FA5"/>
+      <rect x="-70" y="-18" width="140" height="10" fill="#FFF0F6" opacity="0.85"/>
+      <rect x="-16" y="-50" width="32" height="16" rx="4" fill="none" stroke="#14233A" stroke-width="4"/>
+      <circle cx="-50" cy="34" r="7" fill="#14233A"/>
+      <circle cx="50" cy="34" r="7" fill="#14233A"/>
+    </g>
+    <circle cx="158" cy="316" r="15" fill="#FFE0CC" stroke="#E9C6AB" stroke-width="3"/>
+    <circle cx="242" cy="316" r="15" fill="#FFE0CC" stroke="#E9C6AB" stroke-width="3"/>
+
+    <!-- telefon s fajfkou, opřený o kufr -->
+    <g transform="translate(302 336) rotate(-8)">
+      <rect x="-18" y="-32" width="36" height="60" rx="6" fill="#14233A"/>
+      <rect x="-14" y="-26" width="28" height="48" rx="2" fill="#F4FBFC"/>
+      <circle cx="0" cy="-2" r="12" fill="#1AC0CE"/>
+      <path d="M-6 -2 L-1 4 L8 -8" fill="none" stroke="#FFFFFF" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+    </g>
+
+    <!-- vlasy -->
+    <path d="M200 88 Q286 88 288 186 Q290 248 272 276 Q256 254 262 206 Q262 138 200 134
+             Q138 138 138 206 Q144 254 128 276 Q110 248 112 186 Q114 88 200 88 Z" fill="#2A3550"/>
+
+    <!-- hlava -->
+    <circle cx="200" cy="178" r="76" fill="#FFE0CC"/>
+
+    <!-- kšiltovka -->
+    <clipPath id="bkfKstil"><path d="M116 130 Q116 58 200 58 Q284 58 284 130 Z"/></clipPath>
+    <g clip-path="url(#bkfKstil)">
+      <rect x="104" y="58" width="192" height="22" fill="#F4FBFC"/>
+      <rect x="104" y="80" width="192" height="13" fill="#FF6FA5"/>
+      <rect x="104" y="93" width="192" height="6"  fill="#FFD23F"/>
+      <rect x="104" y="99" width="192" height="13" fill="#F4FBFC"/>
+      <rect x="104" y="112" width="192" height="18" fill="#1AC0CE"/>
+    </g>
+    <path d="M116 130 Q116 58 200 58 Q284 58 284 130" fill="none" stroke="#14233A" stroke-width="4" stroke-linejoin="round"/>
+    <circle cx="200" cy="62" r="6" fill="#14233A"/>
+    <path d="M108 128 Q200 172 292 128 Z" fill="#0E8C97" stroke="#14233A" stroke-width="3" stroke-linejoin="round"/>
+
+    <!-- obočí, soustředěné -->
+    <path d="M150 158 Q168 150 186 158" stroke="#14233A" stroke-width="5" fill="none" stroke-linecap="round"/>
+    <path d="M250 158 Q232 150 214 158" stroke="#14233A" stroke-width="5" fill="none" stroke-linecap="round"/>
+
+    <!-- oči, bez brýlí, soustředěný pohled dolů -->
+    <path d="M152 190 Q168 196 186 190" stroke="#14233A" stroke-width="5" fill="none" stroke-linecap="round"/>
+    <path d="M214 190 Q232 196 248 190" stroke="#14233A" stroke-width="5" fill="none" stroke-linecap="round"/>
+
+    <!-- pusa, mírně zaťatá, "tlačím" -->
+    <path d="M182 227 Q200 224 218 227" stroke="#14233A" stroke-width="5" fill="none" stroke-linecap="round"/>
+
+    <!-- tváře -->
+    <ellipse cx="146" cy="212" rx="10" ry="6" fill="#FF6FA5" opacity="0.4"/>
+    <ellipse cx="254" cy="212" rx="10" ry="6" fill="#FF6FA5" opacity="0.4"/>
+  </g>
+</svg>

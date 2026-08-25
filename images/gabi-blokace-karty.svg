@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400">
+  <!-- Gábi drží platební kartu s ikonou zámku (dočasná blokace), druhá ruka
+       v gestu "klid, je to normální". Stejná postava jako gabi-happy-plaz.svg
+       (hlava r=76 na (200,178), stejná kšiltovka), jen jiné paže, rekvizita
+       a klidně uklidňující výraz. Pozadí průhledné, scéna oříznutá do
+       kolečka. -->
+
+  <clipPath id="bkKolo"><circle cx="200" cy="200" r="185"/></clipPath>
+
+  <g clip-path="url(#bkKolo)">
+    <rect x="0" y="0" width="400" height="400" fill="#E6F8FA"/>
+    <circle cx="330" cy="80" r="22" fill="#FFD23F"/>
+
+    <!-- levá paže drží kartu -->
+    <g fill="none" stroke-linecap="round">
+      <path d="M148 274 Q130 300 156 322" stroke="#E9C6AB" stroke-width="26"/>
+      <path d="M148 274 Q130 300 156 322" stroke="#FFE0CC" stroke-width="20"/>
+    </g>
+    <!-- pravá paže zvednutá, dlaň ven, gesto klidu -->
+    <g fill="none" stroke-linecap="round">
+      <path d="M252 274 Q288 254 284 210" stroke="#E9C6AB" stroke-width="26"/>
+      <path d="M252 274 Q288 254 284 210" stroke="#FFE0CC" stroke-width="20"/>
+    </g>
+    <circle cx="284" cy="202" r="17" fill="#FFE0CC" stroke="#E9C6AB" stroke-width="3"/>
+
+    <!-- tělo -->
+    <path d="M118 385 L118 302 Q118 254 166 252 L234 252 Q282 254 282 302 L282 385 Z" fill="#1AC0CE"/>
+    <path d="M176 254 L200 292 L224 254 Z" fill="#F4FBFC"/>
+
+    <!-- platební karta -->
+    <g transform="translate(158 322) rotate(-6)">
+      <rect x="-38" y="-24" width="76" height="48" rx="6" fill="#FF6FA5"/>
+      <rect x="-38" y="-10" width="76" height="10" fill="#14233A" opacity="0.85"/>
+      <rect x="-26" y="8" width="24" height="6" rx="2" fill="#FFFFFF" opacity="0.85"/>
+    </g>
+    <circle cx="156" cy="322" r="15" fill="#FFE0CC" stroke="#E9C6AB" stroke-width="3"/>
+
+    <!-- ikona zámku, jemně nad kartou -->
+    <g transform="translate(196 288)">
+      <rect x="-11" y="-2" width="22" height="16" rx="3" fill="#FFFFFF" stroke="#14233A" stroke-width="3"/>
+      <path d="M-6 -2 V-8 a6 6 0 0 1 12 0 V-2" fill="none" stroke="#14233A" stroke-width="3"/>
+    </g>
+
+    <!-- vlasy -->
+    <path d="M200 88 Q286 88 288 186 Q290 248 272 276 Q256 254 262 206 Q262 138 200 134
+             Q138 138 138 206 Q144 254 128 276 Q110 248 112 186 Q114 88 200 88 Z" fill="#2A3550"/>
+
+    <!-- hlava -->
+    <circle cx="200" cy="178" r="76" fill="#FFE0CC"/>
+
+    <!-- kšiltovka -->
+    <clipPath id="bkKstil"><path d="M116 130 Q116 58 200 58 Q284 58 284 130 Z"/></clipPath>
+    <g clip-path="url(#bkKstil)">
+      <rect x="104" y="58" width="192" height="22" fill="#F4FBFC"/>
+      <rect x="104" y="80" width="192" height="13" fill="#FF6FA5"/>
+      <rect x="104" y="93" width="192" height="6"  fill="#FFD23F"/>
+      <rect x="104" y="99" width="192" height="13" fill="#F4FBFC"/>
+      <rect x="104" y="112" width="192" height="18" fill="#1AC0CE"/>
+    </g>
+    <path d="M116 130 Q116 58 200 58 Q284 58 284 130" fill="none" stroke="#14233A" stroke-width="4" stroke-linejoin="round"/>
+    <circle cx="200" cy="62" r="6" fill="#14233A"/>
+    <path d="M108 128 Q200 172 292 128 Z" fill="#0E8C97" stroke="#14233A" stroke-width="3" stroke-linejoin="round"/>
+
+    <!-- obočí klidné -->
+    <path d="M150 160 Q168 154 186 160" stroke="#14233A" stroke-width="5" fill="none" stroke-linecap="round"/>
+    <path d="M250 160 Q232 154 214 160" stroke="#14233A" stroke-width="5" fill="none" stroke-linecap="round"/>
+
+    <!-- oči, bez brýlí, klidné -->
+    <path d="M152 190 Q168 196 186 190" stroke="#14233A" stroke-width="5" fill="none" stroke-linecap="round"/>
+    <path d="M214 190 Q232 196 248 190" stroke="#14233A" stroke-width="5" fill="none" stroke-linecap="round"/>
+
+    <!-- pusa, uklidňující úsměv -->
+    <path d="M176 226 Q200 236 224 226" stroke="#14233A" stroke-width="5" fill="none" stroke-linecap="round"/>
+
+    <!-- tváře -->
+    <ellipse cx="146" cy="212" rx="10" ry="6" fill="#FF6FA5" opacity="0.4"/>
+    <ellipse cx="254" cy="212" rx="10" ry="6" fill="#FF6FA5" opacity="0.4"/>
+  </g>
+</svg>

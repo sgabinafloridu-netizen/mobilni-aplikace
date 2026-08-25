@@ -76,9 +76,14 @@
     <path d="M150 160 Q168 154 186 160" stroke="#14233A" stroke-width="5" fill="none" stroke-linecap="round"/>
     <path d="M250 160 Q232 154 214 160" stroke="#14233A" stroke-width="5" fill="none" stroke-linecap="round"/>
 
-    <!-- oči zavřené, spokojený klid -->
-    <path d="M150 190 Q168 196 188 190" stroke="#14233A" stroke-width="5" fill="none" stroke-linecap="round"/>
-    <path d="M212 190 Q232 196 250 190" stroke="#14233A" stroke-width="5" fill="none" stroke-linecap="round"/>
+    <!-- sluneční brýle, ať je na první pohled jasné, že jde o Gábi -->
+    <line x1="142" y1="182" x2="126" y2="178" stroke="#14233A" stroke-width="6" stroke-linecap="round"/>
+    <line x1="258" y1="182" x2="274" y2="178" stroke="#14233A" stroke-width="6" stroke-linecap="round"/>
+    <rect x="141" y="174" width="56" height="38" rx="17" fill="#14233A"/>
+    <rect x="203" y="174" width="56" height="38" rx="17" fill="#14233A"/>
+    <line x1="197" y1="184" x2="203" y2="184" stroke="#14233A" stroke-width="7"/>
+    <path d="M152 180 L165 180 L150 204 L143 196 Z" fill="#FFFFFF" opacity="0.32"/>
+    <path d="M214 180 L227 180 L212 204 L205 196 Z" fill="#FFFFFF" opacity="0.32"/>
 
     <!-- pusa, spokojený úsměv -->
     <path d="M176 226 Q200 238 224 226" stroke="#14233A" stroke-width="5" fill="none" stroke-linecap="round"/>
