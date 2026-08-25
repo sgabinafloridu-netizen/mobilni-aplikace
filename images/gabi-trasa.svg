@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400">
+  <!-- Gábi drží telefon obema rukama, na displeji jednoduchá trasa mezi
+       dvěma body. Stejná postava jako gabi-happy-plaz.svg (hlava r=76 na
+       (200,178), stejná kšiltovka), jen jiné paže (dolů a k tělu, ne nahoru)
+       a soustředěný, spokojený výraz. Pozadí je průhledné, scéna oříznutá
+       do kolečka. -->
+
+  <clipPath id="trasaKolo"><circle cx="200" cy="200" r="185"/></clipPath>
+
+  <g clip-path="url(#trasaKolo)">
+    <!-- obloha -->
+    <rect x="0" y="0" width="400" height="400" fill="#E6F8FA"/>
+
+    <!-- slunce -->
+    <circle cx="330" cy="80" r="24" fill="#FFD23F"/>
+
+    <!-- paže dolů a k sobě, lokty od těla, ruce drží telefon před hrudí -->
+    <g fill="none" stroke-linecap="round">
+      <path d="M146 274 Q120 292 168 300" stroke="#E9C6AB" stroke-width="26"/>
+      <path d="M254 274 Q280 292 232 300" stroke="#E9C6AB" stroke-width="26"/>
+      <path d="M146 274 Q120 292 168 300" stroke="#FFE0CC" stroke-width="20"/>
+      <path d="M254 274 Q280 292 232 300" stroke="#FFE0CC" stroke-width="20"/>
+    </g>
+
+    <!-- tělo: tričko -->
+    <path d="M118 385 L118 302 Q118 254 166 252 L234 252 Q282 254 282 302 L282 385 Z" fill="#1AC0CE"/>
+    <path d="M176 254 L200 292 L224 254 Z" fill="#F4FBFC"/>
+
+    <!-- telefon v rukou, mírně natočený -->
+    <g transform="translate(200 305) rotate(-3)">
+      <rect x="-52" y="-38" width="104" height="76" rx="10" fill="#14233A"/>
+      <rect x="-46" y="-31" width="92" height="62" rx="4" fill="#F4FBFC"/>
+      <!-- dva body a trasa mezi nimi -->
+      <circle cx="-26" cy="12" r="6" fill="#1AC0CE"/>
+      <circle cx="30" cy="-14" r="6" fill="#FF6FA5"/>
+      <path d="M-26 12 Q0 -18 30 -14" fill="none" stroke="#14233A" stroke-width="3.5" stroke-dasharray="1 8" stroke-linecap="round"/>
+    </g>
+    <circle cx="160" cy="300" r="15" fill="#FFE0CC" stroke="#E9C6AB" stroke-width="3"/>
+    <circle cx="240" cy="300" r="15" fill="#FFE0CC" stroke="#E9C6AB" stroke-width="3"/>
+
+    <!-- vlasy -->
+    <path d="M200 88 Q286 88 288 186 Q290 248 272 276 Q256 254 262 206 Q262 138 200 134
+             Q138 138 138 206 Q144 254 128 276 Q110 248 112 186 Q114 88 200 88 Z" fill="#2A3550"/>
+
+    <!-- hlava -->
+    <circle cx="200" cy="178" r="76" fill="#FFE0CC"/>
+
+    <!-- kšiltovka -->
+    <clipPath id="trasaKstil"><path d="M116 130 Q116 58 200 58 Q284 58 284 130 Z"/></clipPath>
+    <g clip-path="url(#trasaKstil)">
+      <rect x="104" y="58" width="192" height="22" fill="#F4FBFC"/>
+      <rect x="104" y="80" width="192" height="13" fill="#FF6FA5"/>
+      <rect x="104" y="93" width="192" height="6"  fill="#FFD23F"/>
+      <rect x="104" y="99" width="192" height="13" fill="#F4FBFC"/>
+      <rect x="104" y="112" width="192" height="18" fill="#1AC0CE"/>
+    </g>
+    <path d="M116 130 Q116 58 200 58 Q284 58 284 130" fill="none" stroke="#14233A" stroke-width="4" stroke-linejoin="round"/>
+    <circle cx="200" cy="62" r="6" fill="#14233A"/>
+    <path d="M108 128 Q200 172 292 128 Z" fill="#0E8C97" stroke="#14233A" stroke-width="3" stroke-linejoin="round"/>
+
+    <!-- obočí, soustředěné, mírně dolů, ale ne zamračené -->
+    <path d="M150 158 Q168 152 186 160" stroke="#14233A" stroke-width="5" fill="none" stroke-linecap="round"/>
+    <path d="M250 158 Q232 152 214 160" stroke="#14233A" stroke-width="5" fill="none" stroke-linecap="round"/>
+
+    <!-- pohled dolů na telefon: oči jako pootevřené oblouky, bez brýlí -->
+    <path d="M148 186 Q168 196 190 186" stroke="#14233A" stroke-width="5" fill="none" stroke-linecap="round"/>
+    <path d="M210 186 Q232 196 252 186" stroke="#14233A" stroke-width="5" fill="none" stroke-linecap="round"/>
+
+    <!-- pusa, jemný spokojený úsměv -->
+    <path d="M176 226 Q200 238 224 226" stroke="#14233A" stroke-width="5" fill="none" stroke-linecap="round"/>
+
+    <!-- tváře -->
+    <ellipse cx="146" cy="212" rx="10" ry="6" fill="#FF6FA5" opacity="0.4"/>
+    <ellipse cx="254" cy="212" rx="10" ry="6" fill="#FF6FA5" opacity="0.4"/>
+  </g>
+
+  <!-- hvězdičky -->
+  <text x="52" y="130" font-family="Arial, sans-serif" font-size="16" fill="#1AC0CE">&#10022;</text>
+  <text x="342" y="170" font-family="Arial, sans-serif" font-size="14" fill="#1AC0CE">&#10022;</text>
+</svg>

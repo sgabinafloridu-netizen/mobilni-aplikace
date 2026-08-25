@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400">
+  <!-- Gábi podřimuje v letadle v noci, hlava opřená o polštářek na krk,
+       oči zavřené. Stejná postava jako gabi-happy-plaz.svg (hlava r=76 na
+       (200,178), stejná kšiltovka), jen noční scéna a ospalý výraz, žádné
+       sluneční brýle. Pozadí je průhledné, scéna oříznutá do kolečka. -->
+
+  <clipPath id="nocKolo"><circle cx="200" cy="200" r="185"/></clipPath>
+
+  <g clip-path="url(#nocKolo)">
+    <!-- noční obloha -->
+    <rect x="0" y="0" width="400" height="400" fill="#1B2A4A"/>
+
+    <!-- okénko letadla za hlavou -->
+    <ellipse cx="200" cy="170" rx="150" ry="140" fill="#2A3D66"/>
+
+    <!-- měsíc a hvězdy -->
+    <circle cx="308" cy="70" r="20" fill="#FFD23F"/>
+    <circle cx="316" cy="62" r="17" fill="#1B2A4A"/>
+    <g fill="#F4FBFC">
+      <circle cx="76" cy="64" r="2.4"/>
+      <circle cx="100" cy="90" r="1.8"/>
+      <circle cx="60" cy="110" r="2"/>
+      <circle cx="330" cy="140" r="2"/>
+    </g>
+
+    <!-- paže dole, uvolněné podél těla -->
+    <g fill="none" stroke-linecap="round">
+      <path d="M148 276 Q132 320 148 366" stroke="#E9C6AB" stroke-width="26"/>
+      <path d="M252 276 Q268 320 252 366" stroke="#E9C6AB" stroke-width="26"/>
+      <path d="M148 276 Q132 320 148 366" stroke="#FFE0CC" stroke-width="20"/>
+      <path d="M252 276 Q268 320 252 366" stroke="#FFE0CC" stroke-width="20"/>
+    </g>
+
+    <!-- tělo: tričko -->
+    <path d="M118 385 L118 302 Q118 254 166 252 L234 252 Q282 254 282 302 L282 385 Z" fill="#1AC0CE"/>
+    <path d="M176 254 L200 292 L224 254 Z" fill="#F4FBFC"/>
+
+    <!-- polštářek na krk -->
+    <path d="M132 258 Q112 240 132 218 Q150 202 174 220 Q200 236 226 220 Q250 202 268 218
+             Q288 240 268 258 Q250 274 200 268 Q150 274 132 258 Z"
+          fill="#FF6FA5" opacity="0.85"/>
+
+    <!-- vlasy -->
+    <path d="M200 88 Q286 88 288 186 Q290 248 272 276 Q256 254 262 206 Q262 138 200 134
+             Q138 138 138 206 Q144 254 128 276 Q110 248 112 186 Q114 88 200 88 Z" fill="#2A3550"/>
+
+    <!-- hlava, nakloněná stranou (o pár stupňů) -->
+    <g transform="rotate(8 200 178)">
+      <circle cx="200" cy="178" r="76" fill="#FFE0CC"/>
+
+      <!-- kšiltovka, mírně posunutá dozadu -->
+      <clipPath id="nocKstil"><path d="M116 130 Q116 58 200 58 Q284 58 284 130 Z"/></clipPath>
+      <g clip-path="url(#nocKstil)">
+        <rect x="104" y="58" width="192" height="22" fill="#F4FBFC"/>
+        <rect x="104" y="80" width="192" height="13" fill="#FF6FA5"/>
+        <rect x="104" y="93" width="192" height="6"  fill="#FFD23F"/>
+        <rect x="104" y="99" width="192" height="13" fill="#F4FBFC"/>
+        <rect x="104" y="112" width="192" height="18" fill="#1AC0CE"/>
+      </g>
+      <path d="M116 130 Q116 58 200 58 Q284 58 284 130" fill="none" stroke="#14233A" stroke-width="4" stroke-linejoin="round"/>
+      <circle cx="200" cy="62" r="6" fill="#14233A"/>
+      <path d="M108 128 Q200 172 292 128 Z" fill="#0E8C97" stroke="#14233A" stroke-width="3" stroke-linejoin="round"/>
+
+      <!-- obočí, uvolněné -->
+      <path d="M152 160 Q168 156 184 160" stroke="#14233A" stroke-width="5" fill="none" stroke-linecap="round"/>
+      <path d="M248 160 Q232 156 216 160" stroke="#14233A" stroke-width="5" fill="none" stroke-linecap="round"/>
+
+      <!-- oči zavřené, spící -->
+      <path d="M150 190 Q168 196 188 190" stroke="#14233A" stroke-width="5" fill="none" stroke-linecap="round"/>
+      <path d="M212 190 Q232 196 250 190" stroke="#14233A" stroke-width="5" fill="none" stroke-linecap="round"/>
+
+      <!-- pusa, jemně pootevřená, ospalá -->
+      <ellipse cx="200" cy="228" rx="10" ry="7" fill="#14233A"/>
+
+      <!-- tváře -->
+      <ellipse cx="146" cy="214" rx="10" ry="6" fill="#FF6FA5" opacity="0.4"/>
+      <ellipse cx="254" cy="214" rx="10" ry="6" fill="#FF6FA5" opacity="0.4"/>
+
+      <!-- "Z" spánku -->
+      <text x="266" y="130" font-family="Arial, sans-serif" font-weight="bold" font-size="20" fill="#F4FBFC">z</text>
+      <text x="284" y="108" font-family="Arial, sans-serif" font-weight="bold" font-size="15" fill="#F4FBFC">z</text>
+    </g>
+  </g>
+</svg>
