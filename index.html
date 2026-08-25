@@ -952,7 +952,18 @@
     background: linear-gradient(160deg, #4A1830 0%, #7E2A44 100%);
     box-shadow: 0 10px 28px rgba(74,24,48,.28);
   }
-  .panicokdyz-btn-foto { flex: 0 0 auto; width: 56px; height: 56px; border-radius: 50%; object-fit: cover; background: rgba(255,255,255,.14); }
+  .panicokdyz-btn-avatar { position: relative; flex: 0 0 auto; width: 56px; height: 56px; }
+  .panicokdyz-btn-foto {
+    width: 100%; height: 100%; border-radius: 50%; object-fit: cover; object-position: 50% 35%;
+    background: rgba(255,255,255,.14); display: block;
+  }
+  /* babka s otazníkem: malý odznak, ať je jasné, o koho jde, i když se
+     fotka v malém kolečku ořízne a nápis „a co když…" ze scény zmizí */
+  .panicokdyz-btn-otaznik {
+    position: absolute; right: -3px; bottom: -3px; width: 20px; height: 20px; border-radius: 50%;
+    background: #FF6FA5; border: 2px solid #4A1830; color: #fff;
+    font-size: 12px; font-weight: 800; line-height: 1; display: grid; place-items: center;
+  }
   .panicokdyz-btn-text { flex: 1 1 auto; min-width: 0; }
   .panicokdyz-btn-label { display: block; font-size: 18px; font-weight: 800; color: #fff; letter-spacing: .01em; }
   .panicokdyz-btn-sub { display: block; margin-top: 2px; font-size: 12.5px; color: #FFD3E4; line-height: 1.4; }
@@ -2600,7 +2611,10 @@
 
             <div class="panicokdyz-blok" id="module-panicokdyz" style="display:none;">
               <button type="button" class="panicokdyz-btn" id="panicokdyz-toggle">
-                <img class="panicokdyz-btn-foto" src="images/pani-cokdyz.png" alt="">
+                <span class="panicokdyz-btn-avatar">
+                  <img class="panicokdyz-btn-foto" src="images/pani-cokdyz.png" alt="">
+                  <span class="panicokdyz-btn-otaznik" aria-hidden="true">?</span>
+                </span>
                 <span class="panicokdyz-btn-text">
                   <span class="panicokdyz-btn-label">Paní Cokdyž?</span>
                   <span class="panicokdyz-btn-sub" id="panicokdyz-sub">Co tě na tomhle tématu ještě straší v 00:47, appka to už slyšela</span>
