@@ -66,7 +66,7 @@ Vše je v poli `MODULES` v `index.html`. Modul má:
   prep, hook[], praise{}, dashboard: bool, steps[] }
 ```
 
-Krok (`step`) má volitelně: `icon`, `kicker`, `title`, `media{}`, `mapa`, `kviz`, `hintProTyp{}`, `ilustrace{}`, `lead[]`, `companion{}`, `checklist[]`, `checklistGroups[]`, `passportCheck`, `bookingCheck`, `chipExample`, `estaCheck`, `toggleQuestions[]`, `addressField`, `monthPicker`, `stayPicker`, `gallery`, `quote`, `link{}`, `tip{}`, `pochvala`, `why{}`, `trap{}`, `note{}`.
+Krok (`step`) má volitelně: `icon`, `kicker`, `title`, `media{}`, `mapa`, `kviz`, `hintProTyp{}`, `ilustrace{}`, `lead[]`, `companion{}`, `checklist[]`, `checklistGroups[]`, `passportCheck`, `bookingCheck`, `chipExample`, `estaCheck`, `toggleQuestions[]`, `addressField`, `monthPicker`, `stayPicker`, `trasyPicker`, `gallery`, `quote`, `link{}`, `tip{}`, `pochvala`, `why{}`, `trap{}`, `note{}`.
 
 **Prvky, které počítají z toho, co uživatel zadal v úvodu** (tohle je jádro UX principu, ne ozdoba):
 - `passportCheck` porovná platnost pasů s datem návratu
@@ -75,6 +75,7 @@ Krok (`step`) má volitelně: `icon`, `kicker`, `title`, `media{}`, `mapa`, `kvi
 - `kviz` zjistí typ cestovatele, výsledek se uloží do `nezOdletisTypCestovatele`
 - `hintProTyp` ukáže osobní poznámku psanou pro ten typ, který vyšel z kvízu
 - `stayPicker` předvybere destinaci, kterou uživatel zadal, ostatní jdou přepnout
+- `trasyPicker` (krok 3.2, Letenky) je dvoukrokový: region, pak styl cesty, appka pak ukáže jednu kartu s konkrétní trasou z `TRASY_DATA`. Čísla a spoje v kartách jsou orientační, ověřit webem před publikováním, stejně jako ostatní cestovní fakta
 - `mapa` předvybere zadanou destinaci a rovnou k ní ukáže bublinu
 
 ### Schéma vzdáleností (`mapa`)
@@ -92,7 +93,7 @@ Modul s `dashboard: true` si nese vlastní nadpis v `dashboardTitle`.
 ```
 (lead nebo bloky) → media → mapa → kviz → hintProTyp → ilustrace → companion → historka
 → checklist → checklistGroups → passportCheck → bookingCheck → chipExample → estaCheck
-→ toggleQuestions → addressField → monthPicker → stayPicker → gallery
+→ toggleQuestions → addressField → monthPicker → stayPicker → trasyPicker → gallery
 → quote → link → tip → why → trap → note
 ```
 

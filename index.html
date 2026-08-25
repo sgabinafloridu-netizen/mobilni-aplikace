@@ -1933,6 +1933,56 @@
   }
   .itinerar-zastavka-pridat:hover { border-color: var(--tyrkys); background: var(--surface); }
 
+  /* ══ VÝBĚR TRASY DO USA (letenky, krok „odkud vyrazit") ══
+     Dva kroky voleb (region, pak styl cesty) a pod nimi karta s konkrétní
+     trasou. Statický obsah, appka nic nepočítá ani nikam nevolá, jen
+     přepíná, co je vidět. */
+  .trasy-picker { margin-top: var(--s5); }
+  .trasy-krok + .trasy-krok { margin-top: var(--s5); }
+  .trasy-krok-label { font-size: 11px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: var(--text-soft); margin-bottom: var(--s3); }
+  .trasy-btns { display: flex; flex-wrap: wrap; gap: 8px; }
+  .trasy-btn {
+    display: inline-flex; align-items: center; gap: 8px; padding: 10px 16px; border-radius: var(--r-pill);
+    border: 1.5px solid var(--line-strong); background: var(--surface); font-family: inherit;
+    font-size: 13.5px; font-weight: 700; color: var(--text-muted); cursor: pointer;
+    transition: border-color .15s, background .15s, color .15s, transform .15s;
+  }
+  .trasy-btn .ico { width: 16px; height: 16px; flex: 0 0 auto; }
+  .trasy-btn:hover { border-color: var(--tyrkys); transform: translateY(-1px); }
+  .trasy-btn.active { background: var(--tyrkys); border-color: var(--tyrkys); color: #fff; }
+  .trasy-karta { margin-top: var(--s5); }
+  .trasy-karta-prazdna { padding: var(--s5); border-radius: var(--r-lg); background: var(--sunken); font-size: 13.5px; color: var(--text-faint); text-align: center; }
+  .trasy-karta-in { padding: var(--s5); border-radius: var(--r-lg); background: var(--sunken); animation: discIn .25s ease both; }
+  .trasy-karta-eyebrow { font-size: 11px; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; color: var(--tyrkys-dark); }
+  .trasy-karta-nazev { margin-top: 4px; font-size: 19px; font-weight: 800; color: var(--text); }
+  .trasy-karta-trasa { margin-top: var(--s4); display: flex; flex-wrap: wrap; align-items: center; gap: 6px; font-size: 13px; font-weight: 700; color: var(--text-muted); }
+  .trasy-karta-trasa .tk-krok { background: var(--surface); border-radius: var(--r-sm); padding: 6px 10px; }
+  .trasy-karta-trasa .tk-sipka { color: var(--text-faint); }
+  .trasy-karta-osa { margin-top: var(--s4); display: flex; align-items: center; background: var(--surface); border-radius: var(--r-md); padding: var(--s4); }
+  .trasy-karta-osa .to-bod { flex: 1 1 auto; min-width: 0; text-align: center; }
+  .trasy-karta-osa .to-cas { font-size: 15px; font-weight: 800; color: var(--tyrkys-dark); }
+  .trasy-karta-osa .to-popis { font-size: 11px; color: var(--text-faint); margin-top: 2px; }
+  .trasy-karta-osa .to-sipka { flex: 0 0 auto; color: var(--text-faint); padding: 0 4px; }
+  .trasy-karta-sekce { margin-top: var(--s4); }
+  .trasy-karta-sekce .tks-label { font-size: 12px; font-weight: 700; color: var(--text-soft); margin-bottom: 3px; }
+  .trasy-karta-sekce p { font-size: 14px; line-height: 1.65; color: var(--text-muted); }
+  .trasy-karta-varovani {
+    margin-top: var(--s4); padding: var(--s4); border-radius: var(--r-md); display: flex; gap: 8px;
+    background: linear-gradient(160deg, #4A1830 0%, #7E2A44 100%); color: rgba(255,255,255,.9);
+    font-size: 13px; line-height: 1.6;
+  }
+  .trasy-karta-varovani .ico { flex: 0 0 auto; width: 16px; height: 16px; margin-top: 2px; color: #FFD3E4; }
+  .trasy-karta-varovani strong { color: #FFD3E4; }
+  .trasy-karta-poznamka {
+    margin-top: var(--s4); padding: var(--s4); border-radius: var(--r-md);
+    background: var(--gold-light); color: #5c4a1f; font-size: 13px; line-height: 1.6;
+  }
+  .trasy-karta-odhad {
+    margin-top: var(--s4); padding: 10px 14px; border-radius: var(--r-md);
+    background: var(--tyrkys-light); color: var(--tyrkys-dark); font-size: 13px; font-weight: 700;
+  }
+  @media (max-width: 480px) { .trasy-karta-osa { flex-wrap: wrap; } }
+
   /* ══ AŽ PŘISTANEŠ (náhled druhého průvodce) ══ */
   .pristanes-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: var(--s5); margin-top: var(--s7); }
   .pristanes-item {
@@ -3327,31 +3377,23 @@
         },
         {
           icon: ico("map"),
-          title: "Letíš z Prahy, Mošnova, Vídně, nebo Krakova?",
+          title: "Odkud vlastně vyrazit, aby to dávalo smysl",
           lead: [
             "Tuhle vrstvu většina rad vynechá, protože je psaná jen z Prahy.",
-            "Česko má ale kolem sebe víc letišť, než si člověk mimo Prahu uvědomí, a ani jedno z nich nemá přímou linku do USA, takže se stejně bude přestupovat. Otázka není jestli, ale odkud se ti to nejvíc vyplatí.",
-            "Odkud fakticky poletíš ty?"
+            "Přímá linka do USA z Česka neexistuje, takže se stejně bude přestupovat, ať vyrazíš odkudkoliv. Otázka není jestli, ale odkud se ti to vyplatí nejvíc, a to vypadá jinak z Ostravy než z Plzně.",
+            "Vyber si nejdřív region, a pak, na čem ti víc záleží: na pohodlí, na penězích, nebo na tom, aby cesta sama byla zážitek."
           ],
           companion: {
             src: "images/gabi-happy-plaz.svg",
-            text: "Tohle porovnání dělám i klientům z Prahy, protože se vyplatí skoro vždycky. Deset minut u počítače, a víš, jestli ti ušetří tisíce, nebo ne."
+            text: "Tyhle trasy jsem srovnávala i s klienty z Moravy. Praha zdaleka není vždycky nejbližší ani nejlevnější varianta, jen je o ní nejvíc slyšet."
           },
-          checklist: [
-            "Porovnat <strong>Prahu, Vídeň i Krakov</strong>, podle toho, kde bydlíš, může být kterékoli z nich blíž než Praha",
-            "Nevynechat <strong>Mnichov</strong>, i když leží v Německu: kvůli Lufthanse tam bývají dálkové lety, co z Prahy vůbec nepoletí",
-            "Zkusit trasy přes <strong>Varšavu, Frankfurt a Amsterdam</strong>, každá má jinou cenu i jinou délku přestupu",
-            "Připočítat <strong>cestu na letiště</strong>, u časného odletu i nocleh před ním"
-          ],
-          pochvala: "✨ Hotovo. Většina lidí tohle porovnání vůbec nezkusí, a přitom by mohli ušetřit.",
+          trasyPicker: true,
           why: {
-            title: "Proč je to důležité",
+            title: "Proč se to takhle počítá",
             body: [
-              "Frankfurt a Amsterdam jsou velké přestupní uzly s hromadou spojů do USA. Bývá tam největší výběr a nejkratší čekání.",
-              "Varšava umí být výrazně levnější. Zaplatíš to ale delším přestupem.",
-              "Vídeň i Krakov bývají autem rychleji dostupné než Praha, podle toho, ve které části republiky bydlíš. Počítej cenu letenky, ale počítej i cestu na letiště.",
-              "Mnichov bych do porovnání přidávala pokaždé, i když neleží v Česku. Je to druhý největší uzel Lufthansy, takže tam najdeš přímé dálkové lety, co z Prahy ani Krakova <strong>nikdy nepoletí</strong>. A dostaneš se tam snadno: po dálnici 3,5 až 4 hodiny skoro odkudkoliv z Čech, nebo přímo na terminál vlakem či FlixBusem.",
-              "Letenky tam bývají levnější, protože si tamní aerolinky konkurují víc než ty na Ruzyni. I po připočtení cesty a parkování to <strong>často vyjde o tisíce míň</strong>."
+              "Aerolinky na velkém uzlu jako Frankfurt, Amsterdam nebo Mnichov si konkurují mnohem víc než na Ruzyni, takže tam bývají dálkové lety levnější, i po připočtení cesty tam.",
+              "Kratší přestup neznamená automaticky lepší cestu. Levnější spoj s delším čekáním umí vyjít líp, pokud máš tu dobu kam zabít, a hůř, pokud potřebuješ být doma co nejdřív.",
+              "<strong>Univerzální odpověď neexistuje.</strong> Existuje jen ta, která sedí zrovna tvému regionu a tomu, co je ti bližší, pohodlí nebo úspora."
             ]
           }
         },
@@ -6285,6 +6327,148 @@
     show(setup && STAY_BY_DEST[setup.destinace] ? setup.destinace : "florida");
   }
 
+  /* ── Výběr trasy do USA: region, pak styl cesty, appka ukáže jednu kartu ──
+     Statická data, appka jen filtruje a přepíná, co je vidět. Konkrétní
+     čísla a spoje jsou orientační, Gábi je před publikováním ověřuje sama,
+     stejně jako u ostatního obsahu appky (viz CLAUDE.md, sekce Fakta). */
+  var TRASY_REGIONY = [
+    { id: "cechy", label: "Čechy a západ" },
+    { id: "morava", label: "Morava a Slezsko" }
+  ];
+
+  var TRASY_STYLY = {
+    komfort:     { label: "Komfort a přímý přestup",       ico: "planeUp" },
+    rozpocet:    { label: "Rozpočet a nocleh na cestě",     ico: "coins" },
+    dobrodruzny: { label: "Dobrodružný stopover",           ico: "backpack" }
+  };
+
+  var TRASY_DATA = {
+    cechy: [
+      {
+        styl: "rozpocet",
+        nazev: "Mnichovský noční expres",
+        trasa: ["Praha", "noční bus nebo vlak", "Mnichov", "USA"],
+        casovaOsa: [
+          { cas: "22:00", popis: "odjezd z Prahy" },
+          { cas: "05:30", popis: "příjezd do Mnichova" },
+          { cas: "09:00", popis: "odlet do USA" }
+        ],
+        vyhoda: "Noc strávíš v pohybu, takže odpadá platba za hotel den před odletem. Letenky z Mnichova bývají u dálkových letů levnější než z Prahy, protože si tam aerolinky konkurují víc.",
+        uskali: { typ: "trap", text: "Noční spoj může nabrat zpoždění, hlavně v zimě. Nech si mezi příjezdem do Mnichova a odletem <strong>aspoň 2 hodiny rezervy</strong>, ne jen tolik, kolik ukazuje jízdní řád." },
+        odhad: "Cesta trvá o pár hodin déle, zato ušetříš na hotelu i na letence, řádově tisíce korun."
+      },
+      {
+        styl: "komfort",
+        nazev: "Pražský standard",
+        trasa: ["Praha", "přestup v Evropě", "USA"],
+        vyhoda: "Nejjednodušší varianta ze všech. Vyrážíš z domova, žádný noční přejezd, žádné hledání spoje do jiného města.",
+        uskali: { typ: "note", text: "Bývá dražší než varianty přes Mnichov nebo Ostravu, protože si letenky z Ruzyně nekonkurují tolik jako na větším uzlu." },
+        odhad: "Nejméně starostí ze všech tras, o něco vyšší cena letenky."
+      }
+    ],
+    morava: [
+      {
+        styl: "komfort",
+        nazev: "Pohodlný Polák",
+        trasa: ["Ostrava", "Varšava", "Miami"],
+        vyhoda: "Jeden přestup a kufr odbavíš v Ostravě rovnou do USA. Po cestě ho neřešíš, dokud nestojíš u pásu v Americe.",
+        uskali: { typ: "note", text: "V hlavní sezóně bývá dražší než kombinace s vlastním přestupem přes Katovice nebo Londýn." },
+        odhad: "Nejméně přesedání ze všech tří moravských variant."
+      },
+      {
+        styl: "rozpocet",
+        nazev: "Katovické předletí",
+        trasa: ["vlak do Katovic", "noc u letiště", "Frankfurt", "USA"],
+        vyhoda: "Levné ubytování přímo u letiště, takže ráno nastupuješ bez stresu, jestli náhodou nenaberete zpoždění po cestě.",
+        uskali: { typ: "note", text: "Počítej s <strong>jedním dnem dovolené navíc</strong> na přejezd a přespání, tahle varianta se nedá zvládnout za jeden den." },
+        odhad: "Nižší cena letenky i ubytování, zaplatíš to jedním dnem navíc."
+      },
+      {
+        styl: "dobrodruzny",
+        nazev: "Londýnský stopover",
+        trasa: ["Ostrava", "Londýn Stansted", "přesun přes město", "Londýn Gatwick", "USA"],
+        vyhoda: "Poznáš kousek Londýna a poletíš extrémně levnou kombinací nízkonákladovek, což se z Ostravy jinak skoro nevyplácí.",
+        uskali: { typ: "trap", text: "Stansted a Gatwick jsou dvě různá letiště na opačných stranách Londýna. Na přesun mezi nimi si nech <strong>aspoň 5 hodin</strong>, kufr si na Stanstedu vyzvedneš a na Gatwicku znovu odbavíš, stejně jako při přestupu v USA." },
+        odhad: "Nejlevnější varianta z Moravy, zaplatíš to nejsložitější logistikou."
+      }
+    ]
+  };
+
+  function initTrasyPicker() {
+    var regionBtns = document.getElementById("trasy-region-btns");
+    var stylKrok = document.getElementById("trasy-styl-krok");
+    var stylBtns = document.getElementById("trasy-styl-btns");
+    var karta = document.getElementById("trasy-karta");
+    if (!regionBtns || !stylKrok || !stylBtns || !karta) return;
+
+    var aktivniRegion = null;
+
+    function vykresliKartu(s) {
+      if (!s) { karta.innerHTML = '<div class="trasy-karta-prazdna">Vyber styl cesty výš, appka ti ukáže konkrétní trasu.</div>'; return; }
+      var st = TRASY_STYLY[s.styl];
+      var trasaHtml = s.trasa.map(function (krok, i) {
+        return (i > 0 ? '<span class="tk-sipka">→</span>' : '') + '<span class="tk-krok">' + krok + '</span>';
+      }).join('');
+      var osaHtml = s.casovaOsa ? (
+        '<div class="trasy-karta-osa">' +
+          s.casovaOsa.map(function (b, i) {
+            return (i > 0 ? '<span class="to-sipka">→</span>' : '') +
+              '<div class="to-bod"><div class="to-cas">' + b.cas + '</div><div class="to-popis">' + b.popis + '</div></div>';
+          }).join('') +
+        '</div>'
+      ) : '';
+      var uskaliHtml = s.uskali
+        ? (s.uskali.typ === "trap"
+            ? '<div class="trasy-karta-varovani">' + ico("warning") + '<span>' + s.uskali.text + '</span></div>'
+            : '<div class="trasy-karta-poznamka">' + s.uskali.text + '</div>')
+        : '';
+      karta.innerHTML =
+        '<div class="trasy-karta-in">' +
+          '<div class="trasy-karta-eyebrow">' + st.label + '</div>' +
+          '<h3 class="trasy-karta-nazev">' + s.nazev + '</h3>' +
+          '<div class="trasy-karta-trasa">' + trasaHtml + '</div>' +
+          osaHtml +
+          '<div class="trasy-karta-sekce"><div class="tks-label">Proč to zvolit</div><p>' + s.vyhoda + '</p></div>' +
+          uskaliHtml +
+          '<div class="trasy-karta-odhad">' + s.odhad + '</div>' +
+        '</div>';
+    }
+
+    function vyberStyl(styl) {
+      stylBtns.querySelectorAll(".trasy-btn").forEach(function (b) {
+        b.classList.toggle("active", b.dataset.styl === styl);
+      });
+      var scenar = (TRASY_DATA[aktivniRegion] || []).filter(function (s) { return s.styl === styl; })[0];
+      vykresliKartu(scenar);
+    }
+
+    function vyberRegion(id) {
+      aktivniRegion = id;
+      regionBtns.querySelectorAll(".trasy-btn").forEach(function (b) {
+        b.classList.toggle("active", b.dataset.region === id);
+      });
+      var scenare = TRASY_DATA[id] || [];
+      stylBtns.innerHTML = scenare.map(function (s) {
+        var st = TRASY_STYLY[s.styl];
+        return '<button type="button" class="trasy-btn" data-styl="' + s.styl + '">' + ico(st.ico) + st.label + '</button>';
+      }).join('');
+      stylBtns.querySelectorAll(".trasy-btn").forEach(function (b) {
+        b.addEventListener("click", function () { vyberStyl(b.dataset.styl); });
+      });
+      stylKrok.hidden = false;
+      vykresliKartu(null);
+    }
+
+    regionBtns.innerHTML = TRASY_REGIONY.map(function (r) {
+      return '<button type="button" class="trasy-btn" data-region="' + r.id + '">' + r.label + '</button>';
+    }).join('');
+    regionBtns.querySelectorAll(".trasy-btn").forEach(function (b) {
+      b.addEventListener("click", function () { vyberRegion(b.dataset.region); });
+    });
+
+    vyberRegion("cechy");
+  }
+
   /* Když krok nemá vlastní pochvalu, sáhne se sem. Střídá se podle pořadí,
      ať člověk nečte pětkrát za sebou tu samou větu. */
   var POCHVALY = [
@@ -6956,6 +7140,20 @@
                 '</div>';
       }
 
+      if (step.trasyPicker) {
+        html += '<div class="trasy-picker">' +
+                  '<div class="trasy-krok">' +
+                    '<div class="trasy-krok-label">Odkud vyrážíš</div>' +
+                    '<div class="trasy-btns" id="trasy-region-btns"></div>' +
+                  '</div>' +
+                  '<div class="trasy-krok" id="trasy-styl-krok" hidden>' +
+                    '<div class="trasy-krok-label">Na čem ti nejvíc záleží</div>' +
+                    '<div class="trasy-btns" id="trasy-styl-btns"></div>' +
+                  '</div>' +
+                  '<div class="trasy-karta" id="trasy-karta"></div>' +
+                '</div>';
+      }
+
       if (step.gallery) {
         html += '<div class="step-gallery">' + step.gallery.map(function (p) {
           return '<figure class="photo-figure"><img src="' + p.src + '" alt="' + p.alt + '" loading="lazy">' +
@@ -7249,6 +7447,7 @@
     initTerminCheck();
     initMonthPicker();
     initStayPicker();
+    initTrasyPicker();
     initChecklists();
     initPassportCheck();
     initBookingCheck();
