@@ -1,0 +1,88 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400">
+  <!-- Gábi za volantem, sluneční brýle, sebejistý výraz, v ruce mezinárodní
+       řidičský průkaz. Stejná postava jako gabi-happy-plaz.svg (hlava r=76
+       na (200,178), stejná kšiltovka), jen jiné paže, rekvizita a scéna.
+       Pozadí průhledné, scéna oříznutá do kolečka. -->
+
+  <clipPath id="rdKolo"><circle cx="200" cy="200" r="185"/></clipPath>
+
+  <g clip-path="url(#rdKolo)">
+    <!-- obloha a silnice -->
+    <rect x="0" y="0" width="400" height="400" fill="#E6F8FA"/>
+    <circle cx="330" cy="76" r="22" fill="#FFD23F"/>
+    <rect x="0" y="300" width="400" height="100" fill="#7C8B99"/>
+    <path d="M0 300 Q200 288 400 300 L400 312 Q200 300 0 312 Z" fill="#6B7A87"/>
+    <g stroke="#F4FBFC" stroke-width="7" stroke-linecap="round">
+      <line x1="40" y1="336" x2="80" y2="336"/>
+      <line x1="160" y1="336" x2="200" y2="336"/>
+      <line x1="280" y1="336" x2="320" y2="336"/>
+    </g>
+
+    <!-- tělo, vykresleno před volantem a rukama, ať jsou ruce vepředu -->
+    <path d="M118 385 L118 302 Q118 254 166 252 L234 252 Q282 254 282 302 L282 385 Z" fill="#1AC0CE"/>
+    <path d="M176 254 L200 292 L224 254 Z" fill="#F4FBFC"/>
+
+    <!-- volant -->
+    <circle cx="200" cy="300" r="60" fill="none" stroke="#14233A" stroke-width="13"/>
+    <circle cx="200" cy="300" r="13" fill="#14233A"/>
+
+    <!-- paže na volantu, "10 a 2" -->
+    <g fill="none" stroke-linecap="round">
+      <path d="M148 274 Q140 278 158 264" stroke="#E9C6AB" stroke-width="26"/>
+      <path d="M252 274 Q260 278 242 264" stroke="#E9C6AB" stroke-width="26"/>
+      <path d="M148 274 Q140 278 158 264" stroke="#FFE0CC" stroke-width="20"/>
+      <path d="M252 274 Q260 278 242 264" stroke="#FFE0CC" stroke-width="20"/>
+    </g>
+    <circle cx="158" cy="262" r="15" fill="#FFE0CC" stroke="#E9C6AB" stroke-width="3"/>
+
+    <!-- pravá ruka drží kartu řidičáku nad volantem -->
+    <circle cx="242" cy="262" r="15" fill="#FFE0CC" stroke="#E9C6AB" stroke-width="3"/>
+    <g transform="translate(258 236) rotate(14)">
+      <rect x="-26" y="-17" width="52" height="34" rx="4" fill="#FFD23F" stroke="#14233A" stroke-width="3"/>
+      <circle cx="-13" cy="0" r="7" fill="#FFFFFF" stroke="#14233A" stroke-width="2"/>
+      <line x1="0" y1="-6" x2="18" y2="-6" stroke="#14233A" stroke-width="2.4"/>
+      <line x1="0" y1="1" x2="18" y2="1" stroke="#14233A" stroke-width="2.4"/>
+      <line x1="0" y1="8" x2="14" y2="8" stroke="#14233A" stroke-width="2.4"/>
+    </g>
+
+    <!-- vlasy -->
+    <path d="M200 88 Q286 88 288 186 Q290 248 272 276 Q256 254 262 206 Q262 138 200 134
+             Q138 138 138 206 Q144 254 128 276 Q110 248 112 186 Q114 88 200 88 Z" fill="#2A3550"/>
+
+    <!-- hlava -->
+    <circle cx="200" cy="178" r="76" fill="#FFE0CC"/>
+
+    <!-- kšiltovka -->
+    <clipPath id="rdKstil"><path d="M116 130 Q116 58 200 58 Q284 58 284 130 Z"/></clipPath>
+    <g clip-path="url(#rdKstil)">
+      <rect x="104" y="58" width="192" height="22" fill="#F4FBFC"/>
+      <rect x="104" y="80" width="192" height="13" fill="#FF6FA5"/>
+      <rect x="104" y="93" width="192" height="6"  fill="#FFD23F"/>
+      <rect x="104" y="99" width="192" height="13" fill="#F4FBFC"/>
+      <rect x="104" y="112" width="192" height="18" fill="#1AC0CE"/>
+    </g>
+    <path d="M116 130 Q116 58 200 58 Q284 58 284 130" fill="none" stroke="#14233A" stroke-width="4" stroke-linejoin="round"/>
+    <circle cx="200" cy="62" r="6" fill="#14233A"/>
+    <path d="M108 128 Q200 172 292 128 Z" fill="#0E8C97" stroke="#14233A" stroke-width="3" stroke-linejoin="round"/>
+
+    <!-- obočí sebejisté -->
+    <path d="M150 160 Q168 152 186 160" stroke="#14233A" stroke-width="5" fill="none" stroke-linecap="round"/>
+    <path d="M250 160 Q232 152 214 160" stroke="#14233A" stroke-width="5" fill="none" stroke-linecap="round"/>
+
+    <!-- sluneční brýle -->
+    <line x1="142" y1="182" x2="126" y2="178" stroke="#14233A" stroke-width="6" stroke-linecap="round"/>
+    <line x1="258" y1="182" x2="274" y2="178" stroke="#14233A" stroke-width="6" stroke-linecap="round"/>
+    <rect x="141" y="174" width="56" height="38" rx="17" fill="#14233A"/>
+    <rect x="203" y="174" width="56" height="38" rx="17" fill="#14233A"/>
+    <line x1="197" y1="184" x2="203" y2="184" stroke="#14233A" stroke-width="7"/>
+    <path d="M152 180 L165 180 L150 204 L143 196 Z" fill="#FFFFFF" opacity="0.32"/>
+    <path d="M214 180 L227 180 L212 204 L205 196 Z" fill="#FFFFFF" opacity="0.32"/>
+
+    <!-- pusa, sebejistý úsměv -->
+    <path d="M172 222 Q200 234 228 222" stroke="#14233A" stroke-width="5" fill="none" stroke-linecap="round"/>
+
+    <!-- tváře -->
+    <ellipse cx="140" cy="216" rx="10" ry="6" fill="#FF6FA5" opacity="0.4"/>
+    <ellipse cx="260" cy="216" rx="10" ry="6" fill="#FF6FA5" opacity="0.4"/>
+  </g>
+</svg>

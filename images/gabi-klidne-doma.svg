@@ -1,0 +1,90 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400">
+  <!-- Gábi klidně sedí u notebooku s hrnkem v ruce, na displeji ikona
+       letenky a domečku (zpáteční letenka + adresa). Stejná postava jako
+       gabi-happy-plaz.svg (hlava r=76 na (200,178), stejná kšiltovka), jen
+       jiné paže, rekvizity a klidný výraz. Pozadí průhledné, scéna
+       oříznutá do kolečka. -->
+
+  <clipPath id="kdKolo"><circle cx="200" cy="200" r="185"/></clipPath>
+
+  <g clip-path="url(#kdKolo)">
+    <rect x="0" y="0" width="400" height="400" fill="#E6F8FA"/>
+    <circle cx="330" cy="80" r="22" fill="#FFD23F"/>
+    <rect x="0" y="336" width="400" height="64" fill="#CBD6DE"/>
+
+    <!-- levá paže dolů k okraji notebooku, mimo displej -->
+    <g fill="none" stroke-linecap="round">
+      <path d="M148 274 Q118 306 126 348" stroke="#E9C6AB" stroke-width="26"/>
+      <path d="M148 274 Q118 306 126 348" stroke="#FFE0CC" stroke-width="20"/>
+    </g>
+    <!-- pravá paže drží hrnek u těla -->
+    <g fill="none" stroke-linecap="round">
+      <path d="M252 274 Q276 296 258 322" stroke="#E9C6AB" stroke-width="26"/>
+      <path d="M252 274 Q276 296 258 322" stroke="#FFE0CC" stroke-width="20"/>
+    </g>
+
+    <!-- tělo -->
+    <path d="M118 385 L118 302 Q118 254 166 252 L234 252 Q282 254 282 302 L282 385 Z" fill="#1AC0CE"/>
+    <path d="M176 254 L200 292 L224 254 Z" fill="#F4FBFC"/>
+
+    <!-- notebook -->
+    <g transform="translate(180 338)">
+      <path d="M-70 22 L-58 -28 Q-56 -34 -50 -34 L50 -34 Q56 -34 58 -28 L70 22 Z" fill="#14233A"/>
+      <rect x="-52" y="-28" width="104" height="44" rx="3" fill="#F4FBFC"/>
+      <!-- ikona letenky -->
+      <g transform="translate(-24 -6)">
+        <path d="M-10 0 L10 0 M0 -8 L6 0 L0 8" stroke="#1AC0CE" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+      </g>
+      <!-- ikona domečku -->
+      <g transform="translate(22 -6)">
+        <path d="M-9 6 L-9 -3 L0 -10 L9 -3 L9 6 Z" fill="none" stroke="#FF6FA5" stroke-width="3" stroke-linejoin="round"/>
+      </g>
+      <path d="M-76 24 L76 24 L86 38 Q88 44 80 44 L-80 44 Q-88 44 -86 38 Z" fill="#CBD6DE"/>
+    </g>
+    <circle cx="126" cy="350" r="15" fill="#FFE0CC" stroke="#E9C6AB" stroke-width="3"/>
+
+    <!-- hrnek -->
+    <g transform="translate(262 320)">
+      <path d="M-14 -10 L14 -10 L12 14 Q12 20 6 20 L-6 20 Q-12 20 -12 14 Z" fill="#FF6FA5"/>
+      <path d="M14 -4 Q26 -4 26 6 Q26 14 14 12" fill="none" stroke="#FF6FA5" stroke-width="4"/>
+      <path d="M-6 -16 Q-2 -22 -6 -28" fill="none" stroke="#B9C6CE" stroke-width="2.5" stroke-linecap="round"/>
+      <path d="M4 -16 Q8 -22 4 -28" fill="none" stroke="#B9C6CE" stroke-width="2.5" stroke-linecap="round"/>
+    </g>
+    <circle cx="258" cy="322" r="15" fill="#FFE0CC" stroke="#E9C6AB" stroke-width="3"/>
+
+    <!-- vlasy -->
+    <path d="M200 88 Q286 88 288 186 Q290 248 272 276 Q256 254 262 206 Q262 138 200 134
+             Q138 138 138 206 Q144 254 128 276 Q110 248 112 186 Q114 88 200 88 Z" fill="#2A3550"/>
+
+    <!-- hlava -->
+    <circle cx="200" cy="178" r="76" fill="#FFE0CC"/>
+
+    <!-- kšiltovka -->
+    <clipPath id="kdKstil"><path d="M116 130 Q116 58 200 58 Q284 58 284 130 Z"/></clipPath>
+    <g clip-path="url(#kdKstil)">
+      <rect x="104" y="58" width="192" height="22" fill="#F4FBFC"/>
+      <rect x="104" y="80" width="192" height="13" fill="#FF6FA5"/>
+      <rect x="104" y="93" width="192" height="6"  fill="#FFD23F"/>
+      <rect x="104" y="99" width="192" height="13" fill="#F4FBFC"/>
+      <rect x="104" y="112" width="192" height="18" fill="#1AC0CE"/>
+    </g>
+    <path d="M116 130 Q116 58 200 58 Q284 58 284 130" fill="none" stroke="#14233A" stroke-width="4" stroke-linejoin="round"/>
+    <circle cx="200" cy="62" r="6" fill="#14233A"/>
+    <path d="M108 128 Q200 172 292 128 Z" fill="#0E8C97" stroke="#14233A" stroke-width="3" stroke-linejoin="round"/>
+
+    <!-- obočí klidné -->
+    <path d="M150 160 Q168 154 186 160" stroke="#14233A" stroke-width="5" fill="none" stroke-linecap="round"/>
+    <path d="M250 160 Q232 154 214 160" stroke="#14233A" stroke-width="5" fill="none" stroke-linecap="round"/>
+
+    <!-- oči zavřené, spokojený klid -->
+    <path d="M150 190 Q168 196 188 190" stroke="#14233A" stroke-width="5" fill="none" stroke-linecap="round"/>
+    <path d="M212 190 Q232 196 250 190" stroke="#14233A" stroke-width="5" fill="none" stroke-linecap="round"/>
+
+    <!-- pusa, spokojený úsměv -->
+    <path d="M176 226 Q200 238 224 226" stroke="#14233A" stroke-width="5" fill="none" stroke-linecap="round"/>
+
+    <!-- tváře -->
+    <ellipse cx="146" cy="212" rx="10" ry="6" fill="#FF6FA5" opacity="0.4"/>
+    <ellipse cx="254" cy="212" rx="10" ry="6" fill="#FF6FA5" opacity="0.4"/>
+  </g>
+</svg>
