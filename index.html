@@ -3748,27 +3748,29 @@
         },
         {
           icon: ico("moon"),
-          title: "Noční, nebo denní let?",
+          title: "Přílet do USA: odpoledne, nebo večer?",
           lead: [
-            "Na tohle se skoro nikdo neptá. Přitom to rozhoduje, v jakém stavu dorazíš k imigrační kontrole.",
-            "Noční let z Evropy přistává v Americe dopoledne. Vyspaný v letadle nikdo není, hlavu máš vatovou, a před tebou je fronta a úředník s otázkami.",
-            "Denní let přistává večer. Dorazíš unavený/á, zato při smyslech, a jdeš rovnou spát v místním čase."
+            "Noční let z Evropy do Ameriky ve skutečnosti neexistuje, i když to tak spousta lidí říká.",
+            "Kvůli časovému posunu a nočnímu zákazu hluku na evropských letištích se z Prahy i okolních letišť do USA létá dopoledne nebo odpoledne. Doletíš vždycky za světla, jen je otázka, jestli přiletíš brzy odpoledne, nebo až večer.",
+            "Cesta zpátky je jiná. Ta se skoro vždycky létá <strong>přes noc</strong>: odlet z Ameriky večer, přílet do Evropy druhý den ráno."
           ],
           companion: {
             src: "images/gabi-nocni-let.svg",
-            text: "Naposledy jsem letěla nočním letem a první den v Miami strávila spíš v polospánku než na pláži. Vyber si podle sebe, ne podle toho, co je zrovna levnější."
+            text: "Naposledy jsem do Miami přiletěla až pozdě večer a první den strávila spíš v polospánku než na pláži. Podle času příletu si naplánuj i ten první den, ne podle toho, co je zrovna levnější."
           },
+          priletVolba: true,
           checklist: [
-            "U nočního letu počítat s tím, že <strong>první den v USA je odepsaný</strong>",
-            "Odpovědi pro imigrační kontrolu mít <strong>promyšlené předem</strong>, ne je vymýšlet s vatovou hlavou",
-            "Přehodit si hodinky na <strong>místní čas</strong> hned v letadle"
+            "Zjistit <strong>místní čas příletu</strong> do cíle, ne kdy letadlo vzlétne z Evropy",
+            "Podle času příletu naplánovat první den, nic důležitého na pozdní večer",
+            "Na <strong>zpáteční let přes noc</strong> počítat s tím, že druhý den doma bude taky odepsaný"
           ],
           pochvala: "✨ Máš to. První den v Americe ti teď nesebere zbytek dovolené.",
           why: {
             title: "Proč je to důležité",
             body: [
-              "Let na západ se snáší líp než zpátky. Den se ti prodlouží a tělo to bere snáz, než když ho někdo o hodiny připraví.",
-              "Právě proto se první den v USA neplánuje nic důležitého. Ani dlouhá jízda autem, ani vyzvedávání něčeho, co má otevřeno jen do čtyř."
+              "Aerolinky časují lety na západ na dopoledne a odpoledne schválně. Evropská letiště mají v noci zákaz hluku, a let musí stihnout doletět a napojit se na noční let zpátky ještě ten samý den.",
+              "Let na západ navíc snáší tělo líp než zpátky. Den se ti prodlouží, a to bere snáz, než když ho o hodiny připraví zpáteční let přes noc.",
+              "Právě proto se první den po pozdním příletu neplánuje nic důležitého. Ani dlouhá jízda autem, ani vyzvedávání něčeho, co má otevřeno jen do čtyř."
             ]
           }
         },
@@ -7183,6 +7185,41 @@
     });
   }
 
+  /* Volba podle času příletu (krok „Přílet do USA"). Appka nezná skutečný
+     čas příletu (to by šlo jen z reálných letových dat, tedy živého
+     volání ven, což appka nedělá), nechá si ho proto říct uživatelem a
+     jen ukáže odpovídající radu. Statická dvojice, appka nic nedopočítává. */
+  var PRILET_VOLBY = [
+    { id: "odpoledne", label: "Do 16:00",
+      text: "Vyzvedni auto, přejeď na ubytování a stihneš ještě lehkou večeři a procházku. Nechoď spát před 21:00 místního času, ať jet lag přemůžeš rychleji." },
+    { id: "vecer", label: "Po 19:00",
+      text: "První den je odepsaný. Vyzvedni auto, zajeď jen do nejbližšího hotelu nebo motelu a jdi rovnou spát. Řeš jen bezpečný a rychlý check-in, nic víc." }
+  ];
+
+  function initPriletVolba() {
+    var btnsEl = document.getElementById("prilet-btns");
+    var resultEl = document.getElementById("prilet-result");
+    if (!btnsEl || !resultEl) return;
+
+    btnsEl.innerHTML = PRILET_VOLBY.map(function (o) {
+      return '<button type="button" class="mp-month" data-id="' + o.id + '">' + o.label + '</button>';
+    }).join('');
+
+    function show(id) {
+      var o = PRILET_VOLBY.filter(function (x) { return x.id === id; })[0];
+      if (!o) return;
+      btnsEl.querySelectorAll(".mp-month").forEach(function (b) {
+        b.classList.toggle("active", b.dataset.id === id);
+      });
+      resultEl.innerHTML = '<p>' + o.text + '</p>';
+      resultEl.classList.add("show");
+    }
+
+    btnsEl.querySelectorAll(".mp-month").forEach(function (b) {
+      b.addEventListener("click", function () { show(b.dataset.id); });
+    });
+  }
+
   function initToggleQuestions() {
     var boxes = document.querySelectorAll(".toggle-q");
     if (!boxes.length) return;
@@ -7610,6 +7647,14 @@
         }).join('');
       }
 
+      if (step.priletVolba) {
+        html += '<div class="month-picker">' +
+                  '<div class="mp-label">Kdy místním časem přiletíš do cíle?</div>' +
+                  '<div class="mp-months" id="prilet-btns" style="grid-template-columns: repeat(2, 1fr);"></div>' +
+                  '<div class="mp-result" id="prilet-result"></div>' +
+                '</div>';
+      }
+
       if (step.addressField) {
         html += '<div class="address-field">' +
                   '<input type="text" id="address-field-input" placeholder="Např. Hilton Miami Downtown, 1601 Biscayne Blvd">' +
@@ -7955,6 +8000,7 @@
     initBookingCheck();
     initEstaCheck();
     initToggleQuestions();
+    initPriletVolba();
     initAddressField();
     renderDashboard(mod);
 

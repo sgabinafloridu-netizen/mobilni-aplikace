@@ -66,7 +66,7 @@ Vše je v poli `MODULES` v `index.html`. Modul má:
   prep, hook[], praise{}, dashboard: bool, panicokdyz{}, steps[] }
 ```
 
-Krok (`step`) má volitelně: `icon`, `kicker`, `title`, `media{}`, `mapa`, `kviz`, `hintProTyp{}`, `ilustrace{}`, `lead[]`, `companion{}`, `checklist[]`, `checklistGroups[]`, `passportCheck`, `bookingCheck`, `chipExample`, `estaCheck`, `toggleQuestions[]`, `addressField`, `monthPicker`, `stayPicker`, `trasyPicker`, `gallery`, `quote`, `link{}`, `tip{}`, `pochvala`, `why{}`, `trap{}`, `note{}`.
+Krok (`step`) má volitelně: `icon`, `kicker`, `title`, `media{}`, `mapa`, `kviz`, `hintProTyp{}`, `ilustrace{}`, `lead[]`, `companion{}`, `checklist[]`, `checklistGroups[]`, `passportCheck`, `bookingCheck`, `chipExample`, `estaCheck`, `toggleQuestions[]`, `priletVolba`, `addressField`, `monthPicker`, `stayPicker`, `trasyPicker`, `gallery`, `quote`, `link{}`, `tip{}`, `pochvala`, `why{}`, `trap{}`, `note{}`.
 
 **Prvky, které počítají z toho, co uživatel zadal v úvodu** (tohle je jádro UX principu, ne ozdoba):
 - `passportCheck` porovná platnost pasů s datem návratu
@@ -76,6 +76,7 @@ Krok (`step`) má volitelně: `icon`, `kicker`, `title`, `media{}`, `mapa`, `kvi
 - `hintProTyp` ukáže osobní poznámku psanou pro ten typ, který vyšel z kvízu
 - `stayPicker` předvybere destinaci, kterou uživatel zadal, ostatní jdou přepnout
 - `trasyPicker` (krok 3.2, Letenky) je dvoukrokový: region, pak styl cesty, appka pak ukáže jednu kartu s konkrétní trasou z `TRASY_DATA`. Čísla a spoje v kartách jsou orientační, ověřit webem před publikováním, stejně jako ostatní cestovní fakta
+- `priletVolba` (krok 3.5, Letenky) je jedna otázka na dvě možnosti (přílet do 16:00 / po 19:00), appka ukáže radu z `PRILET_VOLBY`. ⚠️ Fakticky ověřeno 25. 8. 2026: dálkové lety z Evropy do USA nelítají v noci (časový posun + noční zákaz hluku na evropských letištích), westbound se létá dopoledne/odpoledne. Noční let (red-eye) je typický pro **zpáteční** cestu USA → Evropa. Appka na to i v textu kroku upozorňuje, „noční let do USA" je mýtus, který se v obsahu appky nesmí znovu objevit
 - `mapa` předvybere zadanou destinaci a rovnou k ní ukáže bublinu
 
 ### Schéma vzdáleností (`mapa`)
@@ -102,7 +103,7 @@ bolí nejvíc.
 ```
 (lead nebo bloky) → media → mapa → kviz → hintProTyp → ilustrace → companion → historka
 → checklist → checklistGroups → passportCheck → bookingCheck → chipExample → estaCheck
-→ toggleQuestions → addressField → monthPicker → stayPicker → trasyPicker → gallery
+→ toggleQuestions → priletVolba → addressField → monthPicker → stayPicker → trasyPicker → gallery
 → quote → link → tip → why → trap → note
 ```
 
