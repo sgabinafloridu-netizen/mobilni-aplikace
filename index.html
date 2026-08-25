@@ -1886,6 +1886,7 @@
     background: var(--sunken); text-align: center; font-size: 14px; color: var(--text-faint); line-height: 1.6;
   }
   .itinerar-dny { display: flex; flex-direction: column; gap: var(--s6); margin-top: var(--s6); }
+  .itinerar-dny[hidden] { display: none; }
   .itinerar-den { background: var(--sunken); border-radius: var(--r-lg); padding: var(--s5); }
   .itinerar-den-head { display: flex; align-items: center; gap: var(--s3); }
   .itinerar-den-cislo {
@@ -1905,33 +1906,109 @@
     display: grid; place-items: center; line-height: 1;
   }
   .itinerar-den-smazat:hover { background: var(--ruzova); color: #fff; }
-  .itinerar-zastavky { display: flex; flex-direction: column; gap: 8px; margin-top: var(--s4); }
-  .itinerar-zastavka { display: grid; grid-template-columns: 1fr 34px 26px; gap: 8px; align-items: center; }
-  .itinerar-zastavka-input {
-    width: 100%; padding: 9px 10px; border-radius: var(--r-sm);
-    border: 1.5px solid var(--line-strong); background: var(--surface);
-    font-family: inherit; font-size: 13.5px; font-weight: 600; color: var(--text); outline: none;
+  .itinerar-den-summary { margin-left: auto; font-size: 11.5px; font-weight: 700; color: var(--text-faint); white-space: nowrap; }
+  .itinerar-den-varovani {
+    margin-top: var(--s4); padding: 10px 14px; border-radius: var(--r-md); display: flex; align-items: center; gap: 7px;
+    background: var(--gold-light); color: #6b5319; font-size: 12.5px; font-weight: 700;
   }
-  .itinerar-zastavka-input:focus { border-color: var(--tyrkys); }
-  .itinerar-pin {
-    width: 34px; height: 34px; border-radius: var(--r-sm); display: grid; place-items: center;
-    background: var(--tyrkys-light); color: var(--tyrkys-dark); transition: background .15s, color .15s;
+  .itinerar-den-varovani[hidden] { display: none; }
+  .itinerar-den-varovani .ico { width: 15px; height: 15px; flex: 0 0 auto; }
+
+  /* časová osa: jedna svislá čára v .itinerar-zastavky, tečka na každé zastávce */
+  .itinerar-zastavky { position: relative; padding-left: 22px; margin-top: var(--s4); }
+  .itinerar-zastavky::before {
+    content: ""; position: absolute; left: 9px; top: 8px; bottom: 8px; width: 2px; background: var(--line-strong);
   }
-  .itinerar-pin .ico { width: 16px; height: 16px; }
-  .itinerar-pin:hover { background: var(--tyrkys); color: #fff; }
-  .itinerar-pin-off { background: var(--sunken); color: var(--text-faint); cursor: default; pointer-events: none; }
+  .itinerar-zastavka { position: relative; padding-bottom: var(--s4); }
+  .itinerar-zastavka:last-child { padding-bottom: 0; }
+  .itinerar-zastavka::before {
+    content: ""; position: absolute; left: -22px; top: 9px; width: 11px; height: 11px; border-radius: 50%;
+    background: var(--tyrkys); border: 2px solid var(--sunken);
+  }
+  .itinerar-zastavka.bez-kategorie::before { background: var(--line-strong); }
+
+  .itz-prejezd {
+    display: flex; flex-wrap: wrap; align-items: center; gap: 6px; margin: 0 0 8px;
+    font-size: 12px; color: var(--text-faint);
+  }
+  .itz-prejezd .ico { width: 14px; height: 14px; }
+  .itz-prejezd input[type="number"] {
+    width: 48px; padding: 5px 6px; border-radius: var(--r-sm); border: 1.5px solid var(--line-strong);
+    background: var(--surface); font-family: inherit; font-size: 12px; text-align: center; outline: none;
+  }
+  .itz-prejezd input[type="text"] {
+    flex: 1 1 120px; min-width: 90px; padding: 5px 8px; border-radius: var(--r-sm);
+    border: 1.5px solid var(--line-strong); background: var(--surface); font-family: inherit; font-size: 12px; outline: none;
+  }
+  .itz-prejezd input:focus { border-color: var(--tyrkys); }
+
+  .itz-radek { display: flex; gap: 8px; align-items: flex-start; }
+  .itz-cas input[type="time"] {
+    width: 76px; padding: 8px 4px; border-radius: var(--r-sm); border: 1.5px solid var(--line-strong);
+    background: var(--surface); font-family: inherit; font-size: 12.5px; font-weight: 700; color: var(--text); outline: none;
+  }
+  .itz-cas input:focus { border-color: var(--tyrkys); }
+  .itz-obsah { flex: 1 1 auto; min-width: 0; }
+  .itz-hlavni { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+  .itz-kategorie {
+    flex: 0 0 auto; max-width: 90px; padding: 8px 4px; border-radius: var(--r-sm); border: 1.5px solid var(--line-strong);
+    background: var(--surface); font-family: inherit; font-size: 12px; color: var(--text-muted); outline: none;
+  }
+  .itz-kategorie:focus { border-color: var(--tyrkys); }
+  .itz-nazev {
+    flex: 1 1 140px; min-width: 0; padding: 9px 10px; border-radius: var(--r-sm);
+    border: 1.5px solid var(--line-strong); background: var(--surface); font-family: inherit;
+    font-size: 13.5px; font-weight: 600; color: var(--text); outline: none;
+  }
+  .itz-nazev:focus { border-color: var(--tyrkys); }
+  .itz-akce { display: flex; align-items: center; gap: 4px; flex: 0 0 auto; }
+  .itz-mapa {
+    display: inline-flex; align-items: center; gap: 4px; padding: 8px 10px; border-radius: var(--r-sm);
+    background: var(--tyrkys-light); color: var(--tyrkys-dark); font-size: 12px; font-weight: 700; white-space: nowrap;
+  }
+  .itz-mapa .ico { width: 14px; height: 14px; }
+  .itz-mapa.itz-mapa-off { background: var(--sunken); color: var(--text-faint); pointer-events: none; }
+  .itz-posun { display: flex; flex-direction: column; gap: 2px; }
+  .itz-posun button {
+    width: 22px; height: 18px; border: none; border-radius: 4px; background: var(--surface);
+    color: var(--text-faint); cursor: pointer; display: grid; place-items: center; font-size: 9px; line-height: 1;
+  }
+  .itz-posun button:hover { background: var(--tyrkys-light); color: var(--tyrkys-dark); }
+  .itz-posun button:disabled { opacity: .3; cursor: default; }
   .itinerar-zastavka-smazat {
-    width: 26px; height: 26px; border-radius: 50%; border: none; cursor: pointer;
+    width: 26px; height: 26px; border-radius: 50%; border: none; cursor: pointer; flex: 0 0 auto;
     background: var(--ruzova-light); color: var(--ruzova-deep); font-size: 13px; font-weight: 800;
     display: grid; place-items: center; line-height: 1;
   }
   .itinerar-zastavka-smazat:hover { background: var(--ruzova); color: #fff; }
+
+  .itz-detail { margin-top: 6px; }
+  .itz-detail summary {
+    list-style: none; cursor: pointer; font-size: 11.5px; font-weight: 700; color: var(--text-faint);
+    display: inline-flex; align-items: center;
+  }
+  .itz-detail summary::-webkit-details-marker { display: none; }
+  .itz-detail summary::before { content: "+ "; }
+  .itz-detail[open] summary::before { content: "− "; }
+  .itz-detail textarea {
+    margin-top: 6px; width: 100%; min-height: 52px; padding: 8px 10px; border-radius: var(--r-sm);
+    border: 1.5px solid var(--line-strong); background: var(--surface); font-family: inherit;
+    font-size: 12.5px; color: var(--text); outline: none; resize: vertical;
+  }
+  .itz-detail textarea:focus { border-color: var(--tyrkys); }
+
   .itinerar-zastavka-pridat {
     margin-top: var(--s3); padding: 8px 14px; border-radius: var(--r-pill);
     border: 1.5px dashed var(--line-strong); background: none; cursor: pointer;
     font-family: inherit; font-size: 12.5px; font-weight: 700; color: var(--tyrkys-dark);
   }
   .itinerar-zastavka-pridat:hover { border-color: var(--tyrkys); background: var(--surface); }
+  @media (max-width: 480px) {
+    .itz-hlavni { flex-wrap: wrap; }
+    .itz-nazev { flex-basis: 100%; order: 1; }
+    .itz-kategorie { order: 2; }
+    .itz-akce { order: 3; margin-left: auto; }
+  }
 
   /* ══ VÝBĚR TRASY DO USA (letenky, krok „odkud vyrazit") ══
      Dva kroky voleb (region, pak styl cesty) a pod nimi karta s konkrétní
@@ -5742,6 +5819,25 @@
   function saveItinerar(d) { uloz(STORAGE_ITINERAR, JSON.stringify(d)); }
   function mapaOdkaz(nazev) { return "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(nazev); }
 
+  var ITIN_KATEGORIE = {
+    letiste:    { label: "Letiště",    ico: "planeUp" },
+    ubytovani:  { label: "Ubytování",  ico: "bed" },
+    jidlo:      { label: "Jídlo",      ico: "food" },
+    priroda:    { label: "Příroda",    ico: "compassArrow" },
+    atrakce:    { label: "Atrakce",    ico: "star" },
+    jine:       { label: "Jiné",       ico: "pin" }
+  };
+  var ITIN_VAROVANI_HODIN = 4;   // od kolika hodin přejezdu za den appka upozorní
+
+  function formatHodiny(h) {
+    var celkMin = Math.round(h * 60);
+    if (celkMin <= 0) return "";
+    var hod = Math.floor(celkMin / 60), min = celkMin % 60;
+    if (hod && min) return hod + " h " + min + " min";
+    if (hod) return hod + " h";
+    return min + " min";
+  }
+
   function initItinerar() {
     var box = document.getElementById("itinerar-dny");
     var prazdno = document.getElementById("itinerar-prazdno");
@@ -5750,42 +5846,93 @@
 
     var dny = loadItinerar();
 
+    function novaZastavka() {
+      return { nazev: "", kategorie: "", cas: "", poznamka: "", prejezdHodiny: null, prejezdPopis: "" };
+    }
+
     function novyDen() {
       var setup = loadSetup();
       var oblast = setup && MAPA_OBLASTI[setup.destinace];
+      var prvni = novaZastavka();
+      var jePrvniDen = dny.length === 0 && oblast;
+      if (jePrvniDen) prvni.kategorie = "letiste";
       return {
-        nazev: (dny.length === 0 && oblast) ? "Přílet, " + oblast.nazev : "",
-        zastavky: [{ nazev: "" }]
+        nazev: jePrvniDen ? "Přílet, " + oblast.nazev : "",
+        zastavky: [prvni]
       };
     }
 
-    function zastavkaHtml(z, di, zi) {
+    // souhrn dne se počítá jen z hodin přejezdu, appka žádnou trasu sama
+    // nedopočítává (to by znamenalo živé volání na mapy za běhu). První
+    // zastávka pole na přejezd nemá (nemá se od čeho odjíždět), proto se
+    // nepočítá, i kdyby jí ze starého pořadí zůstala hodnota po přesunu.
+    function soucetHodin(den) {
+      return den.zastavky.reduce(function (s, z, zi) { return s + (zi > 0 ? (Number(z.prejezdHodiny) || 0) : 0); }, 0);
+    }
+
+    function zastavkaHtml(z, di, zi, den) {
       var hodnota = (z.nazev || "").replace(/"/g, "&quot;");
       var ma = !!(z.nazev && z.nazev.trim());
+      var kat = ITIN_KATEGORIE[z.kategorie];
+      var katOptions = '<option value="">Typ</option>' + Object.keys(ITIN_KATEGORIE).map(function (k) {
+        return '<option value="' + k + '"' + (z.kategorie === k ? ' selected' : '') + '>' + ITIN_KATEGORIE[k].label + '</option>';
+      }).join('');
+      var prejezdHtml = zi === 0 ? '' : (
+        '<div class="itz-prejezd">' + ico("car") +
+          '<input type="number" min="0" step="0.5" data-den="' + di + '" data-zast="' + zi +
+            '" data-pole="prejezdHodiny" placeholder="h" value="' + (z.prejezdHodiny != null ? z.prejezdHodiny : "") + '">' +
+          '<span>h přejezd</span>' +
+          '<input type="text" data-den="' + di + '" data-zast="' + zi + '" data-pole="prejezdPopis" placeholder="např. 165 mil po Overseas Hwy" value="' +
+            (z.prejezdPopis || "").replace(/"/g, "&quot;") + '">' +
+        '</div>'
+      );
       return (
-        '<div class="itinerar-zastavka">' +
-          '<input type="text" class="itinerar-zastavka-input" data-den="' + di + '" data-zast="' + zi +
-            '" placeholder="Kam jedeš nebo co navštívíš…" value="' + hodnota + '">' +
-          '<a class="itinerar-pin' + (ma ? '' : ' itinerar-pin-off') + '" href="' + (ma ? mapaOdkaz(z.nazev) : '#') +
-            '" target="_blank" rel="noopener" aria-label="Otevřít v Mapách">' + ico("pin") + '</a>' +
-          '<button type="button" class="itinerar-zastavka-smazat" data-den="' + di + '" data-zast="' + zi +
-            '" aria-label="Smazat zastávku">✕</button>' +
+        '<div class="itinerar-zastavka' + (kat ? '' : ' bez-kategorie') + '">' +
+          prejezdHtml +
+          '<div class="itz-radek">' +
+            '<div class="itz-cas"><input type="time" data-den="' + di + '" data-zast="' + zi + '" data-pole="cas" value="' + (z.cas || "") + '"></div>' +
+            '<div class="itz-obsah">' +
+              '<div class="itz-hlavni">' +
+                '<select class="itz-kategorie" data-den="' + di + '" data-zast="' + zi + '">' + katOptions + '</select>' +
+                '<input type="text" class="itz-nazev" data-den="' + di + '" data-zast="' + zi +
+                  '" placeholder="Kam jedeš nebo co navštívíš…" value="' + hodnota + '">' +
+                '<div class="itz-akce">' +
+                  '<div class="itz-posun">' +
+                    '<button type="button" class="itz-nahoru" data-den="' + di + '" data-zast="' + zi + '" aria-label="Posunout výš"' + (zi === 0 ? ' disabled' : '') + '>▲</button>' +
+                    '<button type="button" class="itz-dolu" data-den="' + di + '" data-zast="' + zi + '" aria-label="Posunout níž"' + (zi === den.zastavky.length - 1 ? ' disabled' : '') + '>▼</button>' +
+                  '</div>' +
+                  '<a class="itz-mapa' + (ma ? '' : ' itz-mapa-off') + '" href="' + (ma ? mapaOdkaz(z.nazev) : '#') +
+                    '" target="_blank" rel="noopener">' + ico("pin") + '<span>Mapa</span></a>' +
+                  '<button type="button" class="itinerar-zastavka-smazat" data-den="' + di + '" data-zast="' + zi + '" aria-label="Smazat zastávku">✕</button>' +
+                '</div>' +
+              '</div>' +
+              '<details class="itz-detail">' +
+                '<summary>Poznámka nebo vstupenky</summary>' +
+                '<textarea data-den="' + di + '" data-zast="' + zi + '" data-pole="poznamka" placeholder="Např. kód rezervace, kde vyzvednout klíče…"></textarea>' +
+              '</details>' +
+            '</div>' +
+          '</div>' +
         '</div>'
       );
     }
 
     function denHtml(den, di) {
       var nazev = (den.nazev || "").replace(/"/g, "&quot;");
+      var soucet = soucetHodin(den);
       return (
-        '<div class="itinerar-den">' +
+        '<div class="itinerar-den" data-den="' + di + '">' +
           '<div class="itinerar-den-head">' +
             '<span class="itinerar-den-cislo">Den ' + (di + 1) + '</span>' +
             '<input type="text" class="itinerar-den-nazev" data-den="' + di +
               '" placeholder="Např. přílet a autopůjčovna" value="' + nazev + '">' +
+            '<span class="itinerar-den-summary">' + (soucet > 0 ? "Celkem " + formatHodiny(soucet) + " na cestě" : "") + '</span>' +
             '<button type="button" class="itinerar-den-smazat" data-den="' + di + '" aria-label="Smazat den ' + (di + 1) + '">✕</button>' +
           '</div>' +
+          '<div class="itinerar-den-varovani"' + (soucet > ITIN_VAROVANI_HODIN ? '' : ' hidden') + '>' +
+            ico("warning") + '<span>Pozor, tenhle den tě čeká přes ' + ITIN_VAROVANI_HODIN + ' hodiny v autě mezi zastávkami.</span>' +
+          '</div>' +
           '<div class="itinerar-zastavky">' +
-            den.zastavky.map(function (z, zi) { return zastavkaHtml(z, di, zi); }).join('') +
+            den.zastavky.map(function (z, zi) { return zastavkaHtml(z, di, zi, den); }).join('') +
           '</div>' +
           '<button type="button" class="itinerar-zastavka-pridat" data-den="' + di + '">+ Přidat zastávku</button>' +
         '</div>'
@@ -5796,25 +5943,64 @@
       prazdno.hidden = dny.length > 0;
       box.hidden = dny.length === 0;
       box.innerHTML = dny.map(denHtml).join('');
+      // poznámka se plní přes .value, ne přímo do HTML, ať se nemusí řešit
+      // escapování víceřádkového textu uvnitř <textarea>
+      box.querySelectorAll('textarea[data-pole="poznamka"]').forEach(function (ta) {
+        var di = Number(ta.dataset.den), zi = Number(ta.dataset.zast);
+        ta.value = dny[di].zastavky[zi].poznamka || "";
+      });
     }
 
-    // vstupy se poslouchají delegovaně na kontejneru, appka tak nepřekresluje
-    // celý seznam při každém úhozu a uživatel neztrácí kurzor v poli
+    // po změně hodin přejezdu appka přepočte jen souhrn a varování dne,
+    // nepřekresluje celý den, ať uživatel neztrácí kurzor v poli
+    function prepocitejDen(di) {
+      var denEl = box.querySelector('.itinerar-den[data-den="' + di + '"]');
+      if (!denEl) return;
+      var soucet = soucetHodin(dny[di]);
+      var summaryEl = denEl.querySelector(".itinerar-den-summary");
+      var warnEl = denEl.querySelector(".itinerar-den-varovani");
+      if (summaryEl) summaryEl.textContent = soucet > 0 ? "Celkem " + formatHodiny(soucet) + " na cestě" : "";
+      if (warnEl) warnEl.hidden = !(soucet > ITIN_VAROVANI_HODIN);
+    }
+
     box.addEventListener("input", function (e) {
       var t = e.target;
       var di = Number(t.dataset.den);
+      if (!dny[di]) return;
       if (t.classList.contains("itinerar-den-nazev")) {
         dny[di].nazev = t.value;
         saveItinerar(dny);
-      } else if (t.classList.contains("itinerar-zastavka-input")) {
-        var zi = Number(t.dataset.zast);
-        dny[di].zastavky[zi].nazev = t.value;
+        return;
+      }
+      var zi = Number(t.dataset.zast);
+      var z = dny[di].zastavky[zi];
+      if (!z) return;
+      if (t.classList.contains("itz-nazev")) {
+        z.nazev = t.value;
         saveItinerar(dny);
         var hodnota = t.value.trim();
-        var pin = t.parentElement.querySelector(".itinerar-pin");
-        if (hodnota) { pin.href = mapaOdkaz(hodnota); pin.classList.remove("itinerar-pin-off"); }
-        else { pin.href = "#"; pin.classList.add("itinerar-pin-off"); }
+        var mapa = t.closest(".itz-hlavni").querySelector(".itz-mapa");
+        if (hodnota) { mapa.href = mapaOdkaz(hodnota); mapa.classList.remove("itz-mapa-off"); }
+        else { mapa.href = "#"; mapa.classList.add("itz-mapa-off"); }
+        return;
       }
+      var pole = t.dataset.pole;
+      if (pole === "cas") { z.cas = t.value; saveItinerar(dny); }
+      else if (pole === "poznamka") { z.poznamka = t.value; saveItinerar(dny); }
+      else if (pole === "prejezdPopis") { z.prejezdPopis = t.value; saveItinerar(dny); }
+      else if (pole === "prejezdHodiny") {
+        z.prejezdHodiny = t.value === "" ? null : Number(t.value);
+        saveItinerar(dny);
+        prepocitejDen(di);
+      }
+    });
+
+    box.addEventListener("change", function (e) {
+      if (!e.target.classList.contains("itz-kategorie")) return;
+      var di = Number(e.target.dataset.den), zi = Number(e.target.dataset.zast);
+      dny[di].zastavky[zi].kategorie = e.target.value;
+      saveItinerar(dny);
+      vykresli();
     });
 
     box.addEventListener("click", function (e) {
@@ -5827,7 +6013,7 @@
       }
       var pridatZast = e.target.closest(".itinerar-zastavka-pridat");
       if (pridatZast) {
-        dny[Number(pridatZast.dataset.den)].zastavky.push({ nazev: "" });
+        dny[Number(pridatZast.dataset.den)].zastavky.push(novaZastavka());
         saveItinerar(dny);
         vykresli();
         return;
@@ -5837,6 +6023,24 @@
         var di = Number(smazZast.dataset.den);
         var zast = dny[di].zastavky;
         if (zast.length > 1) { zast.splice(Number(smazZast.dataset.zast), 1); saveItinerar(dny); vykresli(); }
+        return;
+      }
+      var nahoru = e.target.closest(".itz-nahoru");
+      if (nahoru && !nahoru.disabled) {
+        var diN = Number(nahoru.dataset.den), ziN = Number(nahoru.dataset.zast);
+        var poleN = dny[diN].zastavky;
+        poleN.splice(ziN - 1, 0, poleN.splice(ziN, 1)[0]);
+        saveItinerar(dny);
+        vykresli();
+        return;
+      }
+      var dolu = e.target.closest(".itz-dolu");
+      if (dolu && !dolu.disabled) {
+        var diD = Number(dolu.dataset.den), ziD = Number(dolu.dataset.zast);
+        var poleD = dny[diD].zastavky;
+        poleD.splice(ziD + 1, 0, poleD.splice(ziD, 1)[0]);
+        saveItinerar(dny);
+        vykresli();
       }
     });
 

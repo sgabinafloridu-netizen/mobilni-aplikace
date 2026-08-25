@@ -133,7 +133,9 @@ Obrázek nesmí opakovat to, co hned pod ním appka ukáže doopravdy. Kreslený
 nezOdletisSetup      termín, datum návratu, destinace
 nezOdletisProgress   hotové moduly
 nezOdletisTrezor     Trezor (adresa, esta, letenky, rezervace)
-nezOdletisItinerar   itinerář po dnech [{ nazev, zastavky: [{ nazev }] }], odkaz do map se dopočítá
+nezOdletisItinerar   itinerář po dnech [{ nazev, zastavky: [{ nazev, kategorie, cas, poznamka,
+                     prejezdHodiny, prejezdPopis }] }], odkaz do map se dopočítá z nazev,
+                     souhrn hodin a varování nad 4 h se dopočítá z prejezdHodiny zadaných uživatelem
 nezOdletisChecklist  odškrtnuté položky, klíč: modulId-kKrok-index
 nezOdletisCestujici  cestující [{name, expiry, esta}]
 nezOdletisOdpovedi   odpovědi na ano/ne otázky, klíč = id otázky
