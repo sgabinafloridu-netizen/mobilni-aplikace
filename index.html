@@ -942,6 +942,40 @@
     width: 28px; height: 28px; border-radius: 50%; background: var(--accent); color: #fff;
     display: grid; place-items: center; font-size: 13px; font-weight: 800;
   }
+  /* ── Paní Cokdyž: velké tlačítko na konci lekce, rozbalí předvolené
+     „co když" otázky pro dané téma. Tmavá paleta stejná jako u pasti
+     (.disc-trap), appka jí drží noční identitu i tady. ── */
+  .panicokdyz-blok { margin-top: var(--s7); }
+  .panicokdyz-btn {
+    width: 100%; display: flex; align-items: center; gap: var(--s4); padding: var(--s5);
+    border-radius: var(--r-lg); border: none; cursor: pointer; text-align: left;
+    background: linear-gradient(160deg, #4A1830 0%, #7E2A44 100%);
+    box-shadow: 0 10px 28px rgba(74,24,48,.28);
+  }
+  .panicokdyz-btn-foto { flex: 0 0 auto; width: 56px; height: 56px; border-radius: 50%; object-fit: cover; background: rgba(255,255,255,.14); }
+  .panicokdyz-btn-text { flex: 1 1 auto; min-width: 0; }
+  .panicokdyz-btn-label { display: block; font-size: 18px; font-weight: 800; color: #fff; letter-spacing: .01em; }
+  .panicokdyz-btn-sub { display: block; margin-top: 2px; font-size: 12.5px; color: #FFD3E4; line-height: 1.4; }
+  .panicokdyz-btn-chev { flex: 0 0 auto; color: #FFD3E4; font-size: 15px; transition: transform .25s; }
+  .panicokdyz-btn.open .panicokdyz-btn-chev { transform: rotate(180deg); }
+
+  .panicokdyz-seznam { margin-top: var(--s4); display: flex; flex-direction: column; gap: 8px; }
+  .panicokdyz-seznam[hidden] { display: none; }
+  .pc-item { border-radius: var(--r-md); background: var(--sunken); overflow: hidden; }
+  .pc-item summary {
+    list-style: none; cursor: pointer; padding: 13px var(--s4); font-size: 14px; font-weight: 700; color: var(--text);
+    display: flex; align-items: center; gap: 10px;
+  }
+  .pc-item summary:hover { background: rgba(0,0,0,.02); }
+  .pc-item summary::-webkit-details-marker { display: none; }
+  .pc-item summary::before {
+    content: "?"; flex: 0 0 auto; width: 20px; height: 20px; border-radius: 50%;
+    background: var(--tyrkys-light); color: var(--tyrkys-dark); font-size: 12px; font-weight: 800;
+    display: grid; place-items: center;
+  }
+  .pc-odpoved { padding: 0 var(--s4) var(--s4) 46px; font-size: 14px; line-height: 1.7; color: var(--text-muted); animation: discIn .25s ease both; }
+  .pc-odpoved p + p { margin-top: 8px; }
+
   .lesson-icon {
     flex: 0 0 auto; width: 56px; height: 56px; border-radius: 18px;
     background: var(--accent-soft); display: grid; place-items: center; font-size: 28px;
@@ -2564,6 +2598,18 @@
               <ol class="tahak-list" id="tahak-list"></ol>
             </div>
 
+            <div class="panicokdyz-blok" id="module-panicokdyz" style="display:none;">
+              <button type="button" class="panicokdyz-btn" id="panicokdyz-toggle">
+                <img class="panicokdyz-btn-foto" src="images/pani-cokdyz.png" alt="">
+                <span class="panicokdyz-btn-text">
+                  <span class="panicokdyz-btn-label">Paní Cokdyž?</span>
+                  <span class="panicokdyz-btn-sub" id="panicokdyz-sub">Co tě na tomhle tématu ještě straší v 00:47, appka to už slyšela</span>
+                </span>
+                <span class="panicokdyz-btn-chev" aria-hidden="true">▾</span>
+              </button>
+              <div class="panicokdyz-seznam" id="panicokdyz-seznam" hidden></div>
+            </div>
+
             <div class="lesson-foot">
             <button class="btn-done" id="btn-module-done">
               <span>Mám hotovo</span><span aria-hidden="true">✓</span>
@@ -3138,6 +3184,29 @@
         "ESTA vyřiď <strong>jako první</strong>, dřív než cokoliv koupíš. Jedině oficiálně na esta.cbp.dhs.gov, za 40,27 dolarů.",
         "Zpáteční letenka a adresa první noci jsou dvě věci, na který se ptají na hranici, měj je připravené."
       ],
+      panicokdyz: {
+        podtitulek: "Co tě na ESTA ještě straší v 00:47, appka to už slyšela",
+        otazky: [
+          { otazka: "Co když mi neschválí ESTA?",
+            odpoved: "Přesný důvod ti CBP nesdělí, úřad ho ze zákona neuvádí. Když šlo jen o překlep, třeba špatně opsané číslo pasu, dá se to napravit novou žádostí s opravenými údaji a ta často projde. Pokud tě ale <strong>opravdu zamítnou</strong>, cesta dál vede přes klasické vízum B1/B2 na ambasádě, ne přes další pokus o ESTA." },
+          { otazka: "Co když jsem vyplnila ESTA špatně?",
+            odpoved: "Dokud nezaplatíš, klidně si všechno v žádosti oprav. Po odeslání jde dopsat už jen e-mail a adresa první noci v USA. Cokoliv jiného, jméno, číslo pasu, odpovědi na bezpečnostní otázky, se opravuje <strong>novou žádostí</strong>. Appka na to hned upozorní, systém pozná, že pro tenhle pas žádost už existuje, a zeptá se, jestli tu starou chceš přepsat. Klidně to potvrď." },
+          { otazka: "Co když mi ESTA ještě nepřišla?",
+            odpoved: "U většiny lidí přijde do pár minut. Počítej ale s tím, že to <strong>oficiálně může trvat až 72 hodin</strong>. Dokud svítí stav „Authorization Pending“, nikam nelítej, ještě to není rozhodnuté. Stav si kdykoliv zdarma zkontroluješ na esta.cbp.dhs.gov, přes „Check Existing Application“. Když se nic nezmění ani po 72 hodinách, zavolej rovnou na CBP Info Center." },
+          { otazka: "Co když mi ESTA schválili, ale změnil se mi pas?",
+            odpoved: "ESTA je navázaná na <strong>konkrétní číslo pasu</strong>, ne na tebe jako osobu. Nový pas ji automaticky zneplatní, i kdyby ti v e-mailu pořád svítila jako schválená. Musíš požádat o novou, i s novým poplatkem." },
+          { otazka: "Co když mi ESTA platí, ale mám nový pas?",
+            odpoved: "Stejná past jako s propadlou ESTA, jen v jiném pořadí: datum platnosti nic neznamená, když se mezitím změnilo číslo pasu. <strong>Vyřiď si novou ESTA k novému pasu</strong>, klidně hned, formulář zabere pár minut a odpověď u většiny lidí přijde rychle." },
+          { otazka: "Co když jsem ESTA kdysi měla a nevím, jestli ještě platí?",
+            odpoved: "Nemusíš hádat. Na esta.cbp.dhs.gov klikni na „Check Existing Application“ a pak „Check Individual Status“, zadej číslo pasu a datum narození. Rovnou uvidíš, jestli je stav „Authorization Approved“ a do kdy platí. Kontrola je <strong>zdarma</strong>, platíš jen za samotnou žádost." },
+          { otazka: "Co když mi ESTA zamítnou?",
+            odpoved: "Tahle situace má jediné řešení: <strong>klasické vízum B1/B2</strong> na ambasádě. Další ESTA žádost problém nevyřeší, systém si zamítnutí pamatuje a odpoví stejně i příště." },
+          { otazka: "Co když mi ESTA zamítnou těsně před odletem?",
+            odpoved: "Nejdřív klid, i tohle jde řešit, jen ne za víkend. Běžné vyřízení víza trvá týdny. Mimořádný termín na ambasádě se dá sehnat rychle, obvykle do 2 až 5 pracovních dnů, ale <strong>jen u opravdu vážných důvodů</strong>: pohřeb, vážně nemocný blízký, akutní zdravotní péče. Dovolená mezi ně nepatří. Realisticky to znamená, že se cesta o pár týdnů posune, ne že ji zachráníš přes noc." },
+          { otazka: "Co když jsem do USA cestovala s jiným pasem?",
+            odpoved: "To samo o sobě problém není. Tvoje cestovní historie se váže <strong>k tobě, ne k číslu pasu</strong>, a starý pobyt bez problémů appce ani úřadu nevadí. Když si nejsi jistá přesnými daty té staré cesty, měj po ruce starý pas nebo aspoň jeho razítka, kdyby se na to u kontroly ptali." }
+        ]
+      },
       steps: [
         {
           icon: ico("book"),
@@ -7906,7 +7975,36 @@
       tahak.style.display = "none";
     }
 
+    renderPaniCokdyz(mod);
+
     goTo("s-module");
+  }
+
+  // Paní Cokdyž: velké tlačítko na konci lekce, rozbalí předvolené otázky
+  // pro dané téma. Modul bez pole panicokdyz tlačítko vůbec neukáže.
+  function renderPaniCokdyz(mod) {
+    var blok = document.getElementById("module-panicokdyz");
+    var seznam = document.getElementById("panicokdyz-seznam");
+    var toggle = document.getElementById("panicokdyz-toggle");
+    if (!blok || !seznam || !toggle) return;
+    var otazky = mod.panicokdyz && mod.panicokdyz.otazky;
+    if (!otazky || !otazky.length) { blok.style.display = "none"; return; }
+
+    blok.style.display = "block";
+    seznam.hidden = true;
+    toggle.classList.remove("open");
+    var subEl = document.getElementById("panicokdyz-sub");
+    if (subEl && mod.panicokdyz.podtitulek) subEl.textContent = mod.panicokdyz.podtitulek;
+
+    seznam.innerHTML = otazky.map(function (o) {
+      return '<details class="pc-item"><summary>' + o.otazka + '</summary>' +
+             '<div class="pc-odpoved"><p>' + o.odpoved + '</p></div></details>';
+    }).join('');
+
+    toggle.onclick = function () {
+      seznam.hidden = !seznam.hidden;
+      toggle.classList.toggle("open", !seznam.hidden);
+    };
   }
 
   // Sesbírá checklist a checklistGroups položky ze všech kroků modulu,

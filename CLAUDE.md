@@ -63,7 +63,7 @@ Každý krok v modulu má tři vrstvy a v tomhle pořadí se i vykresluje:
 Vše je v poli `MODULES` v `index.html`. Modul má:
 ```
 { id, name, shortName, emoji, time, lessons, accent, accentSoft, desc,
-  prep, hook[], praise{}, dashboard: bool, steps[] }
+  prep, hook[], praise{}, dashboard: bool, panicokdyz{}, steps[] }
 ```
 
 Krok (`step`) má volitelně: `icon`, `kicker`, `title`, `media{}`, `mapa`, `kviz`, `hintProTyp{}`, `ilustrace{}`, `lead[]`, `companion{}`, `checklist[]`, `checklistGroups[]`, `passportCheck`, `bookingCheck`, `chipExample`, `estaCheck`, `toggleQuestions[]`, `addressField`, `monthPicker`, `stayPicker`, `trasyPicker`, `gallery`, `quote`, `link{}`, `tip{}`, `pochvala`, `why{}`, `trap{}`, `note{}`.
@@ -86,6 +86,15 @@ Není to obrys pevniny a nikdy jím být nemá. Je to **schéma**: tři body roz
 - viewBox je držený úzký (460 jednotek) schválně: appka se čte na mobilu, kde graf dostane jen asi 260 pixelů. V širokém viewBoxu vyjdou popisky na osm pixelů a nedají se přečíst. Ze stejného důvodu má `.mapa svg` strop `max-width: 400px`, aby na desktopu popisky naopak nepřerostly běžný text.
 
 Modul s `dashboard: true` si nese vlastní nadpis v `dashboardTitle`.
+
+### Paní Cokdyž: velké tlačítko na konci lekce
+`panicokdyz: { podtitulek, otazky: [{ otazka, odpoved }] }` na modulu (ne na kroku).
+Vykresluje se v `renderPaniCokdyz()`, mezi tahákem a tlačítkem „Mám hotovo". Modul bez
+tohohle pole tlačítko vůbec neukáže, takže se dá doplňovat modul po modulu, ne najednou.
+Otázky jsou typu „Co když…", odpovědi krátké a konkrétní, ne uklidňování bez obsahu.
+⚠️ Cestovní a imigrační fakta v odpovědích **vždy ověřit webem** (viz sekce Fakta), tohle
+je přesně to místo, kde čtenář hledá odpověď na skutečnou paniku, špatná informace tady
+bolí nejvíc.
 
 ### ⚠️ Pořadí vykreslení je pevné
 `renderStepsHtml()` vykresluje prvky ve **fixním pořadí**, ne v pořadí, v jakém jsou zapsané v datech:
