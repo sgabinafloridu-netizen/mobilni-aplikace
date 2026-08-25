@@ -1871,6 +1871,68 @@
   .trezor-saved { font-size: 12px; font-weight: 700; color: var(--tyrkys-dark); margin-top: var(--s1); height: 16px; opacity: 0; transition: opacity .2s; }
   .trezor-saved.show { opacity: 1; }
 
+  /* ══ ITINERÁŘ ══ — plán dne po dni. Appka jen skládá zastávky, odkaz do
+     Google Map je obyčejný <a href>, otevře se v prohlížeči jen když na něj
+     uživatel klikne a má signál. Appka sama žádnou mapu nevykresluje ani
+     nikam nevolá za běhu, zůstává 100 % offline. */
+  .itinerar-pridat-hlavni {
+    margin-top: var(--s7); padding: 12px 22px; border-radius: var(--r-pill);
+    border: 1.5px dashed var(--line-strong); background: none; cursor: pointer;
+    font-family: inherit; font-size: 14px; font-weight: 700; color: var(--tyrkys-dark);
+  }
+  .itinerar-pridat-hlavni:hover { border-color: var(--tyrkys); background: var(--tyrkys-light); }
+  .itinerar-prazdno {
+    margin-top: var(--s6); padding: var(--s6); border-radius: var(--r-lg);
+    background: var(--sunken); text-align: center; font-size: 14px; color: var(--text-faint); line-height: 1.6;
+  }
+  .itinerar-dny { display: flex; flex-direction: column; gap: var(--s6); margin-top: var(--s6); }
+  .itinerar-den { background: var(--sunken); border-radius: var(--r-lg); padding: var(--s5); }
+  .itinerar-den-head { display: flex; align-items: center; gap: var(--s3); }
+  .itinerar-den-cislo {
+    flex: 0 0 auto; font-size: 12px; font-weight: 800; letter-spacing: .04em;
+    color: var(--tyrkys-dark); background: var(--tyrkys-light); border-radius: var(--r-pill);
+    padding: 5px 12px;
+  }
+  .itinerar-den-nazev {
+    flex: 1 1 auto; min-width: 0; padding: 9px 12px; border-radius: var(--r-md);
+    border: 1.5px solid var(--line-strong); background: var(--surface);
+    font-family: inherit; font-size: 15px; font-weight: 700; color: var(--text); outline: none;
+  }
+  .itinerar-den-nazev:focus { border-color: var(--tyrkys); }
+  .itinerar-den-smazat {
+    flex: 0 0 auto; width: 28px; height: 28px; border-radius: 50%; border: none; cursor: pointer;
+    background: var(--ruzova-light); color: var(--ruzova-deep); font-size: 14px; font-weight: 800;
+    display: grid; place-items: center; line-height: 1;
+  }
+  .itinerar-den-smazat:hover { background: var(--ruzova); color: #fff; }
+  .itinerar-zastavky { display: flex; flex-direction: column; gap: 8px; margin-top: var(--s4); }
+  .itinerar-zastavka { display: grid; grid-template-columns: 1fr 34px 26px; gap: 8px; align-items: center; }
+  .itinerar-zastavka-input {
+    width: 100%; padding: 9px 10px; border-radius: var(--r-sm);
+    border: 1.5px solid var(--line-strong); background: var(--surface);
+    font-family: inherit; font-size: 13.5px; font-weight: 600; color: var(--text); outline: none;
+  }
+  .itinerar-zastavka-input:focus { border-color: var(--tyrkys); }
+  .itinerar-pin {
+    width: 34px; height: 34px; border-radius: var(--r-sm); display: grid; place-items: center;
+    background: var(--tyrkys-light); color: var(--tyrkys-dark); transition: background .15s, color .15s;
+  }
+  .itinerar-pin .ico { width: 16px; height: 16px; }
+  .itinerar-pin:hover { background: var(--tyrkys); color: #fff; }
+  .itinerar-pin-off { background: var(--sunken); color: var(--text-faint); cursor: default; pointer-events: none; }
+  .itinerar-zastavka-smazat {
+    width: 26px; height: 26px; border-radius: 50%; border: none; cursor: pointer;
+    background: var(--ruzova-light); color: var(--ruzova-deep); font-size: 13px; font-weight: 800;
+    display: grid; place-items: center; line-height: 1;
+  }
+  .itinerar-zastavka-smazat:hover { background: var(--ruzova); color: #fff; }
+  .itinerar-zastavka-pridat {
+    margin-top: var(--s3); padding: 8px 14px; border-radius: var(--r-pill);
+    border: 1.5px dashed var(--line-strong); background: none; cursor: pointer;
+    font-family: inherit; font-size: 12.5px; font-weight: 700; color: var(--tyrkys-dark);
+  }
+  .itinerar-zastavka-pridat:hover { border-color: var(--tyrkys); background: var(--surface); }
+
   /* ══ AŽ PŘISTANEŠ (náhled druhého průvodce) ══ */
   .pristanes-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: var(--s5); margin-top: var(--s7); }
   .pristanes-item {
@@ -2414,7 +2476,22 @@
           </div>
         </div>
 
-        <!-- 6) MŮJ ROZPOČET -->
+        <!-- 6) ITINERÁŘ -->
+        <div class="screen" id="s-itinerar">
+          <div class="page-head">
+            <span class="eyebrow eyebrow-warm">Funguje i offline</span>
+            <h1>Itinerář</h1>
+            <p class="sub">Naplánuj cestu den po dni. Ke každé zastávce appka rovnou nabídne odkaz do Google Map, otevře se, jakmile budeš mít signál.</p>
+          </div>
+
+          <div class="itinerar-prazdno" id="itinerar-prazdno" hidden>
+            Zatím žádný den. Přidej první a hned k němu appka nabídne mapu.
+          </div>
+          <div class="itinerar-dny" id="itinerar-dny" hidden></div>
+          <button type="button" class="itinerar-pridat-hlavni" id="itinerar-pridat-den">+ Přidat den</button>
+        </div>
+
+        <!-- 7) MŮJ ROZPOČET -->
         <div class="screen" id="s-rozpocet">
           <div class="page-head">
             <span class="eyebrow">Počítá se samo</span>
@@ -2424,7 +2501,7 @@
           <div class="rozpocet-kalk" id="rozpocet-kalk"></div>
         </div>
 
-        <!-- 7) PŘEVODNÍK -->
+        <!-- 8) PŘEVODNÍK -->
         <div class="screen" id="s-prevodnik">
           <div class="page-head">
             <span class="eyebrow">Počítá se samo</span>
@@ -2434,7 +2511,7 @@
           <div class="prevodnik-wrap" id="prevodnik-kalk"></div>
         </div>
 
-        <!-- 8) AŽ PŘISTANEŠ (náhled druhého průvodce) -->
+        <!-- 9) AŽ PŘISTANEŠ (náhled druhého průvodce) -->
         <div class="screen" id="s-pristanes">
           <div class="page-head">
             <span class="eyebrow eyebrow-warm" id="pristanes-kdy">Bude koncem roku 2026</span>
@@ -3273,7 +3350,8 @@
               "Frankfurt a Amsterdam jsou velké přestupní uzly s hromadou spojů do USA. Bývá tam největší výběr a nejkratší čekání.",
               "Varšava umí být výrazně levnější. Zaplatíš to ale delším přestupem.",
               "Vídeň i Krakov bývají autem rychleji dostupné než Praha, podle toho, ve které části republiky bydlíš. Počítej cenu letenky, ale počítej i cestu na letiště.",
-              "Mnichov bych do porovnání přidávala pokaždé. Je to druhý největší uzel Lufthansy, takže tam najdeš přímé dálkové lety, co z Prahy ani Krakova <strong>nikdy nepoletí</strong>. Dostaneš se tam autem po dálnici za 3,5 až 4 hodiny skoro odkudkoliv z Čech, a přímo na terminál jezdí i vlak nebo FlixBus. Letenky tam bývají levnější, protože si tamní aerolinky navzájem konkurují víc než ty na Ruzyni, a i po připočtení cesty a parkování to často vyjde o tisíce míň."
+              "Mnichov bych do porovnání přidávala pokaždé, i když neleží v Česku. Je to druhý největší uzel Lufthansy, takže tam najdeš přímé dálkové lety, co z Prahy ani Krakova <strong>nikdy nepoletí</strong>. A dostaneš se tam snadno: po dálnici 3,5 až 4 hodiny skoro odkudkoliv z Čech, nebo přímo na terminál vlakem či FlixBusem.",
+              "Letenky tam bývají levnější, protože si tamní aerolinky konkurují víc než ty na Ruzyni. I po připočtení cesty a parkování to <strong>často vyjde o tisíce míň</strong>."
             ]
           }
         },
@@ -4847,7 +4925,7 @@
     screens.forEach(function (s) { s.classList.toggle("active", s.id === screenId); });
 
     var inShell = (screenId === "s-uvod" || screenId === "s-home" ||
-                   screenId === "s-module" || screenId === "s-trezor" || screenId === "s-rozpocet" ||
+                   screenId === "s-module" || screenId === "s-trezor" || screenId === "s-itinerar" || screenId === "s-rozpocet" ||
                    screenId === "s-prevodnik" || screenId === "s-pristanes");
     onboarding.hidden = inShell;
     onboarding.style.display = inShell ? "none" : "grid";
@@ -4858,14 +4936,15 @@
     if (screenId === "s-uvod") topbarTitle.textContent = "Úvod";
     else if (screenId === "s-home") topbarTitle.textContent = "Přehled";
     else if (screenId === "s-trezor") topbarTitle.textContent = "Trezor";
+    else if (screenId === "s-itinerar") topbarTitle.textContent = "Itinerář";
     else if (screenId === "s-rozpocet") topbarTitle.textContent = "Můj rozpočet";
     else if (screenId === "s-prevodnik") topbarTitle.textContent = "Převodník";
     else if (screenId === "s-pristanes") topbarTitle.textContent = "Až přistaneš";
 
-    // osa s moduly patří jen k modulovému postupu, na Trezoru, v rozpočtu
-    // a v náhledu druhého průvodce nic neznázorňuje, tak tam jen mate
+    // osa s moduly patří jen k modulovému postupu, na Trezoru, v itineráři,
+    // v rozpočtu a v náhledu druhého průvodce nic neznázorňuje, tak tam jen mate
     var railEl = document.getElementById("rail");
-    if (railEl) railEl.hidden = (screenId === "s-trezor" || screenId === "s-rozpocet" ||
+    if (railEl) railEl.hidden = (screenId === "s-trezor" || screenId === "s-itinerar" || screenId === "s-rozpocet" ||
                                   screenId === "s-prevodnik" || screenId === "s-pristanes");
 
     closeMenu();
@@ -5024,6 +5103,11 @@
       ico: ico("lock", "ico-side"), title: "Trezor", meta: "ESTA, letenky, rezervace",
       active: currentScreen === "s-trezor",
       onClick: function () { goTo("s-trezor"); }
+    });
+    item({
+      ico: ico("map", "ico-side"), title: "Itinerář", meta: "Plán den po dni",
+      active: currentScreen === "s-itinerar",
+      onClick: function () { goTo("s-itinerar"); }
     });
     item({
       ico: ico("coins", "ico-side"), title: "Můj rozpočet", meta: "Kolik to celé bude stát",
@@ -5599,6 +5683,128 @@
 
     vykresli();
     return { cisti: cisti, nahradit: function (novy) { seznam.length = 0; novy.forEach(function (x) { seznam.push(x); }); vykresli(); } };
+  }
+
+  /* ── Itinerář: plán dne po dni ────────────────────────────────────────
+     Appka jen skládá zastávky do localStorage. Odkaz do map je obyčejný
+     <a href="https://www.google.com/maps/...">, appka sama žádnou mapu
+     nevykresluje ani nikam nevolá za běhu, zůstává 100 % offline. Číslo
+     dne se nikdy neukládá, dopočítá se vždy z pozice v poli. */
+  var STORAGE_ITINERAR = "nezOdletisItinerar";
+  function loadItinerar() {
+    try {
+      var d = JSON.parse(nacti(STORAGE_ITINERAR) || "[]");
+      return Array.isArray(d) ? d : [];
+    } catch (e) { return []; }
+  }
+  function saveItinerar(d) { uloz(STORAGE_ITINERAR, JSON.stringify(d)); }
+  function mapaOdkaz(nazev) { return "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(nazev); }
+
+  function initItinerar() {
+    var box = document.getElementById("itinerar-dny");
+    var prazdno = document.getElementById("itinerar-prazdno");
+    var btnPridatDen = document.getElementById("itinerar-pridat-den");
+    if (!box || !prazdno || !btnPridatDen) return;
+
+    var dny = loadItinerar();
+
+    function novyDen() {
+      var setup = loadSetup();
+      var oblast = setup && MAPA_OBLASTI[setup.destinace];
+      return {
+        nazev: (dny.length === 0 && oblast) ? "Přílet, " + oblast.nazev : "",
+        zastavky: [{ nazev: "" }]
+      };
+    }
+
+    function zastavkaHtml(z, di, zi) {
+      var hodnota = (z.nazev || "").replace(/"/g, "&quot;");
+      var ma = !!(z.nazev && z.nazev.trim());
+      return (
+        '<div class="itinerar-zastavka">' +
+          '<input type="text" class="itinerar-zastavka-input" data-den="' + di + '" data-zast="' + zi +
+            '" placeholder="Kam jedeš nebo co navštívíš…" value="' + hodnota + '">' +
+          '<a class="itinerar-pin' + (ma ? '' : ' itinerar-pin-off') + '" href="' + (ma ? mapaOdkaz(z.nazev) : '#') +
+            '" target="_blank" rel="noopener" aria-label="Otevřít v Mapách">' + ico("pin") + '</a>' +
+          '<button type="button" class="itinerar-zastavka-smazat" data-den="' + di + '" data-zast="' + zi +
+            '" aria-label="Smazat zastávku">✕</button>' +
+        '</div>'
+      );
+    }
+
+    function denHtml(den, di) {
+      var nazev = (den.nazev || "").replace(/"/g, "&quot;");
+      return (
+        '<div class="itinerar-den">' +
+          '<div class="itinerar-den-head">' +
+            '<span class="itinerar-den-cislo">Den ' + (di + 1) + '</span>' +
+            '<input type="text" class="itinerar-den-nazev" data-den="' + di +
+              '" placeholder="Např. přílet a autopůjčovna" value="' + nazev + '">' +
+            '<button type="button" class="itinerar-den-smazat" data-den="' + di + '" aria-label="Smazat den ' + (di + 1) + '">✕</button>' +
+          '</div>' +
+          '<div class="itinerar-zastavky">' +
+            den.zastavky.map(function (z, zi) { return zastavkaHtml(z, di, zi); }).join('') +
+          '</div>' +
+          '<button type="button" class="itinerar-zastavka-pridat" data-den="' + di + '">+ Přidat zastávku</button>' +
+        '</div>'
+      );
+    }
+
+    function vykresli() {
+      prazdno.hidden = dny.length > 0;
+      box.hidden = dny.length === 0;
+      box.innerHTML = dny.map(denHtml).join('');
+    }
+
+    // vstupy se poslouchají delegovaně na kontejneru, appka tak nepřekresluje
+    // celý seznam při každém úhozu a uživatel neztrácí kurzor v poli
+    box.addEventListener("input", function (e) {
+      var t = e.target;
+      var di = Number(t.dataset.den);
+      if (t.classList.contains("itinerar-den-nazev")) {
+        dny[di].nazev = t.value;
+        saveItinerar(dny);
+      } else if (t.classList.contains("itinerar-zastavka-input")) {
+        var zi = Number(t.dataset.zast);
+        dny[di].zastavky[zi].nazev = t.value;
+        saveItinerar(dny);
+        var hodnota = t.value.trim();
+        var pin = t.parentElement.querySelector(".itinerar-pin");
+        if (hodnota) { pin.href = mapaOdkaz(hodnota); pin.classList.remove("itinerar-pin-off"); }
+        else { pin.href = "#"; pin.classList.add("itinerar-pin-off"); }
+      }
+    });
+
+    box.addEventListener("click", function (e) {
+      var smazDen = e.target.closest(".itinerar-den-smazat");
+      if (smazDen) {
+        dny.splice(Number(smazDen.dataset.den), 1);
+        saveItinerar(dny);
+        vykresli();
+        return;
+      }
+      var pridatZast = e.target.closest(".itinerar-zastavka-pridat");
+      if (pridatZast) {
+        dny[Number(pridatZast.dataset.den)].zastavky.push({ nazev: "" });
+        saveItinerar(dny);
+        vykresli();
+        return;
+      }
+      var smazZast = e.target.closest(".itinerar-zastavka-smazat");
+      if (smazZast) {
+        var di = Number(smazZast.dataset.den);
+        var zast = dny[di].zastavky;
+        if (zast.length > 1) { zast.splice(Number(smazZast.dataset.zast), 1); saveItinerar(dny); vykresli(); }
+      }
+    });
+
+    btnPridatDen.addEventListener("click", function () {
+      dny.push(novyDen());
+      saveItinerar(dny);
+      vykresli();
+    });
+
+    vykresli();
   }
 
   function initRozpocet() {
@@ -7265,6 +7471,7 @@
   }
   renderPristanes();
 
+  initItinerar();
   initRozpocet();
   initPrevodnik();
 
