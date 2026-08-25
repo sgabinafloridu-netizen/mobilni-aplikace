@@ -135,7 +135,11 @@ nezOdletisProgress   hotové moduly
 nezOdletisTrezor     Trezor (adresa, esta, letenky, rezervace)
 nezOdletisItinerar   itinerář po dnech [{ nazev, zastavky: [{ nazev, kategorie, cas, poznamka,
                      prejezdHodiny, prejezdPopis }] }], odkaz do map se dopočítá z nazev,
-                     souhrn hodin a varování nad 4 h se dopočítá z prejezdHodiny zadaných uživatelem
+                     souhrn hodin a varování nad 4 h se dopočítá z prejezdHodiny zadaných uživatelem.
+                     Zastávky se řadí podle cas při change (ne při každém úhozu), ruční tažení
+                     (pointer events na .itz-drag) pořadí přebije, dokud se čas znovu nezmění.
+                     Sdílení a tisk (printItinerar/itinerarText) posílají jednorázový textový
+                     snímek přes navigator.share nebo schránku, appka nemá server na živý odkaz.
 nezOdletisChecklist  odškrtnuté položky, klíč: modulId-kKrok-index
 nezOdletisCestujici  cestující [{name, expiry, esta}]
 nezOdletisOdpovedi   odpovědi na ano/ne otázky, klíč = id otázky
