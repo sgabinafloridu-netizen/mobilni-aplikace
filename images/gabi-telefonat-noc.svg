@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400">
+  <!-- Gábi telefonuje, druhá ruka drží poznámkový blok, klidný soustředěný
+       výraz (bez smíchu, modul je vážný). Stejná postava jako
+       gabi-happy-plaz.svg (hlava r=76 na (200,178), stejná kšiltovka), jen
+       jiné paže, rekvizita a klidnější výraz. Pozadí průhledné, scéna
+       oříznutá do kolečka. -->
+
+  <clipPath id="tnKolo"><circle cx="200" cy="200" r="185"/></clipPath>
+
+  <g clip-path="url(#tnKolo)">
+    <rect x="0" y="0" width="400" height="400" fill="#E6F8FA"/>
+    <circle cx="326" cy="72" r="16" fill="#FFD23F"/>
+    <circle cx="336" cy="64" r="13" fill="#E6F8FA"/>
+
+    <!-- pravá paže drží telefon u ucha -->
+    <g fill="none" stroke-linecap="round">
+      <path d="M252 274 Q276 240 254 202" stroke="#E9C6AB" stroke-width="26"/>
+      <path d="M252 274 Q276 240 254 202" stroke="#FFE0CC" stroke-width="20"/>
+    </g>
+    <!-- levá paže drží poznámkový blok -->
+    <g fill="none" stroke-linecap="round">
+      <path d="M148 274 Q128 300 154 322" stroke="#E9C6AB" stroke-width="26"/>
+      <path d="M148 274 Q128 300 154 322" stroke="#FFE0CC" stroke-width="20"/>
+    </g>
+
+    <!-- tělo -->
+    <path d="M118 385 L118 302 Q118 254 166 252 L234 252 Q282 254 282 302 L282 385 Z" fill="#1AC0CE"/>
+    <path d="M176 254 L200 292 L224 254 Z" fill="#F4FBFC"/>
+
+    <!-- poznámkový blok -->
+    <g transform="translate(154 322) rotate(-4)">
+      <rect x="-30" y="-36" width="60" height="72" fill="#F4FBFC" stroke="#14233A" stroke-width="3"/>
+      <line x1="-18" y1="-20" x2="18" y2="-20" stroke="#B9C6CE" stroke-width="3" stroke-linecap="round"/>
+      <line x1="-18" y1="-8" x2="18" y2="-8" stroke="#B9C6CE" stroke-width="3" stroke-linecap="round"/>
+      <line x1="-18" y1="4" x2="18" y2="4" stroke="#B9C6CE" stroke-width="3" stroke-linecap="round"/>
+      <line x1="-18" y1="16" x2="4" y2="16" stroke="#1AC0CE" stroke-width="3" stroke-linecap="round"/>
+    </g>
+    <circle cx="154" cy="322" r="15" fill="#FFE0CC" stroke="#E9C6AB" stroke-width="3"/>
+
+    <!-- vlasy -->
+    <path d="M200 88 Q286 88 288 186 Q290 248 272 276 Q256 254 262 206 Q262 138 200 134
+             Q138 138 138 206 Q144 254 128 276 Q110 248 112 186 Q114 88 200 88 Z" fill="#2A3550"/>
+
+    <!-- hlava -->
+    <circle cx="200" cy="178" r="76" fill="#FFE0CC"/>
+
+    <!-- kšiltovka -->
+    <clipPath id="tnKstil"><path d="M116 130 Q116 58 200 58 Q284 58 284 130 Z"/></clipPath>
+    <g clip-path="url(#tnKstil)">
+      <rect x="104" y="58" width="192" height="22" fill="#F4FBFC"/>
+      <rect x="104" y="80" width="192" height="13" fill="#FF6FA5"/>
+      <rect x="104" y="93" width="192" height="6"  fill="#FFD23F"/>
+      <rect x="104" y="99" width="192" height="13" fill="#F4FBFC"/>
+      <rect x="104" y="112" width="192" height="18" fill="#1AC0CE"/>
+    </g>
+    <path d="M116 130 Q116 58 200 58 Q284 58 284 130" fill="none" stroke="#14233A" stroke-width="4" stroke-linejoin="round"/>
+    <circle cx="200" cy="62" r="6" fill="#14233A"/>
+    <path d="M108 128 Q200 172 292 128 Z" fill="#0E8C97" stroke="#14233A" stroke-width="3" stroke-linejoin="round"/>
+
+    <!-- obočí, klidné, soustředěné -->
+    <path d="M150 160 Q168 154 186 160" stroke="#14233A" stroke-width="5" fill="none" stroke-linecap="round"/>
+    <path d="M250 160 Q232 154 214 160" stroke="#14233A" stroke-width="5" fill="none" stroke-linecap="round"/>
+
+    <!-- oči, bez brýlí, klidný pohled -->
+    <path d="M152 190 Q168 195 186 191" stroke="#14233A" stroke-width="5" fill="none" stroke-linecap="round"/>
+    <path d="M214 191 Q232 195 248 190" stroke="#14233A" stroke-width="5" fill="none" stroke-linecap="round"/>
+
+    <!-- pusa, klidná, neutrální -->
+    <line x1="182" y1="228" x2="218" y2="228" stroke="#14233A" stroke-width="5" stroke-linecap="round"/>
+
+    <!-- tváře -->
+    <ellipse cx="146" cy="212" rx="10" ry="6" fill="#FF6FA5" opacity="0.35"/>
+    <ellipse cx="254" cy="212" rx="10" ry="6" fill="#FF6FA5" opacity="0.35"/>
+
+    <!-- telefon u ucha, kreslen navrch -->
+    <g transform="translate(258 196) rotate(18)">
+      <path d="M-8 -20 Q4 -20 8 -8 L8 8 Q8 20 -4 20 Q-14 20 -14 8 L-14 -8 Q-14 -20 -8 -20 Z" fill="#14233A"/>
+      <rect x="-10" y="-14" width="12" height="28" rx="3" fill="#F4FBFC"/>
+    </g>
+  </g>
+</svg>

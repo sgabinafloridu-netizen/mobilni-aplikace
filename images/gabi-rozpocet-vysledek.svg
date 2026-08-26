@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400">
+  <!-- Gábi ukazuje na displej s velkým vypočítaným číslem, spokojený
+       hrdý výraz. Stejná postava jako gabi-happy-plaz.svg (hlava r=76 na
+       (200,178), stejná kšiltovka), jen jiné paže, rekvizita a scéna.
+       Pozadí průhledné, scéna oříznutá do kolečka. -->
+
+  <clipPath id="rvKolo"><circle cx="200" cy="200" r="185"/></clipPath>
+
+  <g clip-path="url(#rvKolo)">
+    <rect x="0" y="0" width="400" height="400" fill="#E6F8FA"/>
+    <circle cx="330" cy="80" r="22" fill="#FFD23F"/>
+
+    <!-- levá paže drží telefon -->
+    <g fill="none" stroke-linecap="round">
+      <path d="M148 274 Q128 302 156 324" stroke="#E9C6AB" stroke-width="26"/>
+      <path d="M148 274 Q128 302 156 324" stroke="#FFE0CC" stroke-width="20"/>
+    </g>
+    <!-- pravá paže ukazuje na displej -->
+    <g fill="none" stroke-linecap="round">
+      <path d="M252 274 Q272 292 244 306" stroke="#E9C6AB" stroke-width="26"/>
+      <path d="M252 274 Q272 292 244 306" stroke="#FFE0CC" stroke-width="20"/>
+    </g>
+
+    <!-- tělo -->
+    <path d="M118 385 L118 302 Q118 254 166 252 L234 252 Q282 254 282 302 L282 385 Z" fill="#1AC0CE"/>
+    <path d="M176 254 L200 292 L224 254 Z" fill="#F4FBFC"/>
+
+    <!-- telefon s velkým číslem -->
+    <g transform="translate(190 322)">
+      <rect x="-48" y="-38" width="96" height="72" rx="8" fill="#14233A"/>
+      <rect x="-40" y="-30" width="80" height="56" rx="3" fill="#F4FBFC"/>
+      <text x="0" y="4" text-anchor="middle" font-family="Arial, sans-serif" font-weight="bold" font-size="24" fill="#FF6FA5">$</text>
+      <line x1="-26" y1="16" x2="26" y2="16" stroke="#B9C6CE" stroke-width="3" stroke-linecap="round"/>
+    </g>
+    <circle cx="156" cy="324" r="15" fill="#FFE0CC" stroke="#E9C6AB" stroke-width="3"/>
+    <circle cx="244" cy="306" r="15" fill="#FFE0CC" stroke="#E9C6AB" stroke-width="3"/>
+
+    <!-- vlasy -->
+    <path d="M200 88 Q286 88 288 186 Q290 248 272 276 Q256 254 262 206 Q262 138 200 134
+             Q138 138 138 206 Q144 254 128 276 Q110 248 112 186 Q114 88 200 88 Z" fill="#2A3550"/>
+
+    <!-- hlava -->
+    <circle cx="200" cy="178" r="76" fill="#FFE0CC"/>
+
+    <!-- kšiltovka -->
+    <clipPath id="rvKstil"><path d="M116 130 Q116 58 200 58 Q284 58 284 130 Z"/></clipPath>
+    <g clip-path="url(#rvKstil)">
+      <rect x="104" y="58" width="192" height="22" fill="#F4FBFC"/>
+      <rect x="104" y="80" width="192" height="13" fill="#FF6FA5"/>
+      <rect x="104" y="93" width="192" height="6"  fill="#FFD23F"/>
+      <rect x="104" y="99" width="192" height="13" fill="#F4FBFC"/>
+      <rect x="104" y="112" width="192" height="18" fill="#1AC0CE"/>
+    </g>
+    <path d="M116 130 Q116 58 200 58 Q284 58 284 130" fill="none" stroke="#14233A" stroke-width="4" stroke-linejoin="round"/>
+    <circle cx="200" cy="62" r="6" fill="#14233A"/>
+    <path d="M108 128 Q200 172 292 128 Z" fill="#0E8C97" stroke="#14233A" stroke-width="3" stroke-linejoin="round"/>
+
+    <!-- obočí, spokojené, hrdé -->
+    <path d="M150 158 Q168 150 186 158" stroke="#14233A" stroke-width="5" fill="none" stroke-linecap="round"/>
+    <path d="M250 158 Q232 150 214 158" stroke="#14233A" stroke-width="5" fill="none" stroke-linecap="round"/>
+
+    <!-- oči, bez brýlí -->
+    <path d="M152 190 Q168 196 186 190" stroke="#14233A" stroke-width="5" fill="none" stroke-linecap="round"/>
+    <path d="M214 190 Q232 196 248 190" stroke="#14233A" stroke-width="5" fill="none" stroke-linecap="round"/>
+
+    <!-- pusa, spokojený úsměv -->
+    <path d="M174 224 Q200 238 226 224" stroke="#14233A" stroke-width="5" fill="none" stroke-linecap="round"/>
+
+    <!-- tváře -->
+    <ellipse cx="146" cy="212" rx="10" ry="6" fill="#FF6FA5" opacity="0.4"/>
+    <ellipse cx="254" cy="212" rx="10" ry="6" fill="#FF6FA5" opacity="0.4"/>
+  </g>
+</svg>

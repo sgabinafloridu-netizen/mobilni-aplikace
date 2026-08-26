@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400">
+  <!-- Gábi drží sáček (kvasnice) s přeškrtnutým kolečkem nad ním, mírně
+       provinilý/pobavený výraz. Stejná postava jako gabi-happy-plaz.svg
+       (hlava r=76 na (200,178), stejná kšiltovka), jen jiné paže,
+       rekvizita a scéna. Pozadí průhledné, scéna oříznutá do kolečka. -->
+
+  <clipPath id="zkKolo"><circle cx="200" cy="200" r="185"/></clipPath>
+
+  <g clip-path="url(#zkKolo)">
+    <rect x="0" y="0" width="400" height="400" fill="#E6F8FA"/>
+    <circle cx="330" cy="80" r="22" fill="#FFD23F"/>
+
+    <!-- levá paže drží sáček -->
+    <g fill="none" stroke-linecap="round">
+      <path d="M148 274 Q128 300 154 322" stroke="#E9C6AB" stroke-width="26"/>
+      <path d="M148 274 Q128 300 154 322" stroke="#FFE0CC" stroke-width="20"/>
+    </g>
+    <!-- pravá paže dole -->
+    <g fill="none" stroke-linecap="round">
+      <path d="M252 274 Q268 300 254 324" stroke="#E9C6AB" stroke-width="26"/>
+      <path d="M252 274 Q268 300 254 324" stroke="#FFE0CC" stroke-width="20"/>
+    </g>
+
+    <!-- tělo -->
+    <path d="M118 385 L118 302 Q118 254 166 252 L234 252 Q282 254 282 302 L282 385 Z" fill="#1AC0CE"/>
+    <path d="M176 254 L200 292 L224 254 Z" fill="#F4FBFC"/>
+
+    <!-- vlasy -->
+    <path d="M200 88 Q286 88 288 186 Q290 248 272 276 Q256 254 262 206 Q262 138 200 134
+             Q138 138 138 206 Q144 254 128 276 Q110 248 112 186 Q114 88 200 88 Z" fill="#2A3550"/>
+
+    <!-- hlava -->
+    <circle cx="200" cy="178" r="76" fill="#FFE0CC"/>
+
+    <!-- kšiltovka -->
+    <clipPath id="zkKstil"><path d="M116 130 Q116 58 200 58 Q284 58 284 130 Z"/></clipPath>
+    <g clip-path="url(#zkKstil)">
+      <rect x="104" y="58" width="192" height="22" fill="#F4FBFC"/>
+      <rect x="104" y="80" width="192" height="13" fill="#FF6FA5"/>
+      <rect x="104" y="93" width="192" height="6"  fill="#FFD23F"/>
+      <rect x="104" y="99" width="192" height="13" fill="#F4FBFC"/>
+      <rect x="104" y="112" width="192" height="18" fill="#1AC0CE"/>
+    </g>
+    <path d="M116 130 Q116 58 200 58 Q284 58 284 130" fill="none" stroke="#14233A" stroke-width="4" stroke-linejoin="round"/>
+    <circle cx="200" cy="62" r="6" fill="#14233A"/>
+    <path d="M108 128 Q200 172 292 128 Z" fill="#0E8C97" stroke="#14233A" stroke-width="3" stroke-linejoin="round"/>
+
+    <!-- obočí, mírně provinilé -->
+    <path d="M150 158 Q168 152 186 160" stroke="#14233A" stroke-width="5" fill="none" stroke-linecap="round"/>
+    <path d="M250 158 Q232 152 214 160" stroke="#14233A" stroke-width="5" fill="none" stroke-linecap="round"/>
+
+    <!-- oči, bez brýlí -->
+    <path d="M152 190 Q168 196 186 190" stroke="#14233A" stroke-width="5" fill="none" stroke-linecap="round"/>
+    <path d="M214 190 Q232 196 248 190" stroke="#14233A" stroke-width="5" fill="none" stroke-linecap="round"/>
+
+    <!-- pusa, mírný pobavený úsměv -->
+    <path d="M178 226 Q200 232 222 226" stroke="#14233A" stroke-width="5" fill="none" stroke-linecap="round"/>
+
+    <!-- tváře -->
+    <ellipse cx="146" cy="212" rx="10" ry="6" fill="#FF6FA5" opacity="0.4"/>
+    <ellipse cx="254" cy="212" rx="10" ry="6" fill="#FF6FA5" opacity="0.4"/>
+
+    <!-- sáček s kvasnicemi, kreslen navrch -->
+    <g transform="translate(154 322)">
+      <path d="M-20 -24 L20 -24 L24 26 Q24 32 18 32 L-18 32 Q-24 32 -24 26 Z" fill="#F4FBFC" stroke="#14233A" stroke-width="3"/>
+      <rect x="-14" y="-16" width="28" height="16" rx="2" fill="#E9C6AB"/>
+      <line x1="-14" y1="6" x2="14" y2="6" stroke="#B9C6CE" stroke-width="2.4"/>
+      <line x1="-14" y1="14" x2="14" y2="14" stroke="#B9C6CE" stroke-width="2.4"/>
+    </g>
+    <!-- zákazová značka -->
+    <g transform="translate(154 322)">
+      <circle cx="0" cy="0" r="34" fill="#FFFFFF" fill-opacity="0.15" stroke="#C4275A" stroke-width="5"/>
+      <line x1="-22" y1="-22" x2="22" y2="22" stroke="#C4275A" stroke-width="5" stroke-linecap="round"/>
+    </g>
+  </g>
+</svg>
