@@ -7439,6 +7439,7 @@
 
     var r = computeReadiness(mod);
     var pct = r.total ? Math.round(r.done / r.total * 100) : 0;
+    var modCislo = MODULES.findIndex(function (m) { return m.id === mod.id; }) + 1;
 
     var left = r.total - r.done;
     var mascotSrc = left <= 0 ? "images/pani-cokdyz-kufr-smile.svg" : "images/pani-cokdyz-kufr.svg";
@@ -7452,7 +7453,7 @@
       ? '<div class="rc-list">' + r.outstanding.slice(0, 6).map(function (o) {
           return '<button type="button" class="rc-list-item' + (o.blocking ? ' blocking' : '') + '" data-step="' + o.stepIndex + '">' +
                    '<span class="dot"></span>' +
-                   '<span class="rc-item-text"><span class="rc-krok-tag">Krok ' + (o.stepIndex + 1) + '</span><span class="rc-label">' + o.label + '</span></span>' +
+                   '<span class="rc-item-text"><span class="rc-krok-tag">Krok ' + modCislo + '.' + (o.stepIndex + 1) + '</span><span class="rc-label">' + o.label + '</span></span>' +
                  '</button>';
         }).join('') + '</div>'
       : '<p class="rc-all-done">Všechno hotovo. Doklady máš v pořádku.</p>';
