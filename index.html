@@ -1008,8 +1008,22 @@
     background: var(--accent-soft); border-radius: var(--r-lg);
     padding: var(--s6); margin-bottom: var(--s8);
   }
+  .lesson-hook p {
+    text-align: justify; text-align-last: left;
+    hyphens: auto; -webkit-hyphens: auto;
+  }
   .lesson-hook p + p { margin-top: var(--s4); }
   .lesson-hook strong { color: var(--text); }
+  /* první odstavec = otevírací věta hooku, dostane víc váhy, ať se karta
+     nečte jako jedna šedá plocha textu */
+  .lesson-hook p:first-of-type {
+    font-size: 19px; font-weight: 700; color: var(--text); text-align: left;
+  }
+  /* poslední odstavec = otázka na čtenáře (uzávěrka hooku), barevně
+     odlišená, ať se nečte jako další z řady odstavců */
+  .lesson-hook p:last-of-type {
+    color: var(--accent); font-weight: 600; text-align: left;
+  }
   /* volitelná fotka, kterou text v úvodu modulu obtéká, stejný princip
      jako u step.ilustrace, jen pro modulový hook místo kroku */
   .lesson-hook::after { content: ""; display: block; clear: both; }
@@ -1064,11 +1078,11 @@
     display: block; font-size: clamp(19px, 2.4vw, 23px); font-weight: 800;
     line-height: 1.25; letter-spacing: -.02em; text-wrap: balance;
   }
-  /* teplý celoškolní pruh, jako u prodejky (Vrstva 1: příběh), edge to edge v rámci karty kroku */
+  /* Vypravěcí text kroku: obyčejný text na bílé kartě, žádný barevný pruh.
+     Barva je vzácná měna, patří jen companionu, tipu a pasti, ne úvodnímu
+     odstavci každého kroku. Když je barevná i samotná próza, nic nevystoupí. */
   .step-lead {
     font-size: 16.5px; line-height: 1.8; color: var(--text-muted);
-    margin: 0 calc(var(--s6) * -1) var(--s2); padding: var(--s5) var(--s6);
-    background: linear-gradient(135deg, var(--sand) 0%, var(--ruzova-light) 100%);
   }
   .step-lead.measure { max-width: none; }
   .step-lead p { max-width: 68ch; }
@@ -1744,7 +1758,7 @@
 
   /* ── souhrnný dashboard připravenosti na začátku modulu ── */
   .readiness-card {
-    margin-bottom: var(--s7); padding: var(--s6); border-radius: var(--r-xl);
+    margin-top: var(--s7); margin-bottom: var(--s7); padding: var(--s6); border-radius: var(--r-xl);
     background: linear-gradient(135deg, var(--accent-soft, #E4F0F2), var(--surface));
     border: 1px solid var(--line);
   }
@@ -2625,13 +2639,16 @@
 
             <div class="lesson-hook measure" id="module-hook" style="display:none;"></div>
 
-            <div class="readiness-card" id="module-dashboard" style="display:none;"></div>
-
             <div class="module-steps" id="module-steps">
               <div class="placeholder-note">
                 Obsah tohohle modulu se ještě připravuje.<br>Tady budou kroky, vysvětlení a pasti, na které si dát pozor.
               </div>
             </div>
+
+            <!-- Rekapitulace, ne rozcestník: co ještě zaškrtnout, se ukazuje
+                 až za odkrokovaným obsahem, ne hned po hooku, ať čtenář
+                 nevidí čísla kroků (3.3, 3.4...), které ještě nečetl. -->
+            <div class="readiness-card" id="module-dashboard" style="display:none;"></div>
 
             <div class="module-tahak" id="module-tahak" style="display:none;">
               <div class="tahak-eyebrow"><svg class="ico" style="width:13px;height:13px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s7-6.1 7-11.5A7 7 0 0 0 5 9.5C5 14.9 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.3"/></svg>Tahák na závěr</div>
@@ -3689,17 +3706,6 @@
             titulek: "Jak kupuju letenky já",
             popis: "Proč se na cenu letenky nedá odpovědět ze screenshotu, co dělám při každém hledání jinak, a co si můžu dovolit já, ale ty radši ne."
           },
-          gallery: [
-            { src: "images/flights/flights-kalendar.jpg",
-              alt: "Google Flights, zobrazení celého měsíce s barevnou mřížkou cen",
-              caption: "Flexibilní kalendář: přepni na celý měsíc a ceny se seřadí vedle sebe" },
-            { src: "images/flights/flights-hlidani-ceny.jpg",
-              alt: "Google Flights, přepínač sledování ceny u vybraného spojení",
-              caption: "Hlídání ceny: jeden přepínač a Google se ozve sám" },
-            { src: "images/flights/flights-vic-letist.jpg",
-              alt: "Google Flights, pole s několika letišti zadanými najednou",
-              caption: "Víc letišť najednou: Tampa, Orlando a Fort Lauderdale v jednom hledání" }
-          ],
           trap: {
             title: "Pozor na tohle",
             body: [
@@ -8383,6 +8389,16 @@
   initItinerar();
   initRozpocet();
   initPrevodnik();
+
+  /* Bezpečnostní síť pro chybějící obrázek: appka nikdy neukáže rozbitou
+     ikonku s přetékajícím alt textem, kartu s ní radši potichu schová.
+     "error" nebubluje, proto capture: true na document. */
+  document.addEventListener("error", function (e) {
+    var img = e.target;
+    if (!img || img.tagName !== "IMG") return;
+    var figure = img.closest("figure, .step-gallery");
+    (figure || img).style.display = "none";
+  }, true);
 
   /* ── start ── */
   if (loadSetup()) { renderHome(); goTo("s-uvod"); }
