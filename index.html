@@ -1703,6 +1703,36 @@
   }
   .toggle-q-warning.show { display: block; }
 
+  /* ── dvě karty vedle sebe, srovnání tarifů (např. Basic vs. Standard) ── */
+  .tarify-srovnani { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s4); margin-top: var(--s5); }
+  @media (max-width: 560px) { .tarify-srovnani { grid-template-columns: 1fr; } }
+  .tarify-karta { border-radius: var(--r-lg); padding: var(--s5); border: 1.5px solid var(--line); background: var(--surface); }
+  .tarify-karta.zvyraznena {
+    border: 2px solid var(--tyrkys); background: linear-gradient(180deg, var(--tyrkys-light) 0%, var(--surface) 55%);
+    box-shadow: 0 12px 28px rgba(20,35,58,.09);
+  }
+  .tarify-nazev { font-size: 16px; font-weight: 700; color: var(--text); }
+  .tarify-badge {
+    display: inline-block; font-size: 10.5px; font-weight: 700; text-transform: uppercase; letter-spacing: .03em;
+    color: #fff; background: var(--tyrkys); border-radius: var(--r-pill); padding: 3px 10px; margin-left: var(--s2); vertical-align: middle;
+  }
+  .tarify-polozky { list-style: none; margin: var(--s4) 0 0; padding: 0; display: flex; flex-direction: column; gap: var(--s3); }
+  .tarify-polozka { display: flex; align-items: flex-start; gap: 10px; font-size: 14.5px; line-height: 1.5; color: var(--text); }
+  .tarify-polozka .ico { width: 19px; height: 19px; flex: 0 0 19px; margin-top: 1px; color: var(--tyrkys); }
+  .tarify-polozka.ne { color: var(--text-muted); }
+  .tarify-dash { flex: 0 0 19px; text-align: center; font-weight: 700; color: var(--text-faint); }
+  .tarify-zaver { margin-top: var(--s4); font-size: 14.5px; line-height: 1.6; color: var(--text-muted); }
+
+  /* ── svítící rámeček s vypočteným nákupním oknem (bookingCheck) ── */
+  .pc-okno {
+    display: flex; align-items: flex-start; gap: 12px; margin-top: var(--s4); padding: var(--s4);
+    border-radius: var(--r-md); border: 1.5px solid var(--tyrkys);
+    background: linear-gradient(135deg, var(--tyrkys-light), var(--surface));
+    box-shadow: 0 0 0 4px rgba(26,192,206,.1), 0 10px 24px rgba(26,192,206,.16);
+  }
+  .pc-okno .ico { width: 22px; height: 22px; flex: 0 0 22px; margin-top: 1px; color: var(--tyrkys-dark); }
+  .pc-okno p { margin: 0; font-size: 14.5px; line-height: 1.55; color: var(--text); }
+
   /* ── textové pole, co se ukládá rovnou do Trezoru ── */
   .address-field { margin-top: var(--s5); }
   .address-field input {
@@ -3681,6 +3711,11 @@
               url: "https://www.google.com/travel/flights"
             },
             {
+              title: "ITA Matrix",
+              sub: "Pokročilé filtry na spojení, aerolinky i letiště, co Google Flights nemá. Letenku tu nekoupíš, jen si na ní najdeš přesnou trasu a cenu, se kterou pak jdeš na web aerolinky.",
+              url: "https://matrix.itasoftware.com/search"
+            },
+            {
               title: "Sledovat na YouTube",
               sub: "Video se právě chystá i přímo do appky, tohle mezitím funguje, když máš signál.",
               url: "https://youtu.be/nZqux39fLXA"
@@ -3794,6 +3829,29 @@
             src: "images/gabi-basic-economy.svg",
             text: "Basic Economy mě jednou dostala až u brány, kde mi chtěli nechat kufřík doma. Radši si to over dopředu, než abys tohle řešil/a se zavazadlem v ruce."
           },
+          srovnani: {
+            karty: [
+              {
+                nazev: "Basic Economy",
+                polozky: [
+                  { text: "Jen <strong>osobní věc pod sedadlo</strong>, žádný kufr v ceně", ok: false },
+                  { text: "Sedadlo <strong>přidělí systém</strong>, výběr si nekoupíš dopředu", ok: false },
+                  { text: "Změna termínu <strong>jen za poplatek</strong>, u řady aerolinek nejde vůbec", ok: false }
+                ]
+              },
+              {
+                nazev: "Standard",
+                zvyraznit: true,
+                odznak: "Víc jistoty",
+                polozky: [
+                  { text: "<strong>Odbavené zavazadlo v ceně</strong>, obvykle do 23 kg", ok: true },
+                  { text: "<strong>Výběr sedadla zdarma</strong>, sedíš, kde chceš", ok: true },
+                  { text: "Možnost <strong>stornokreditu</strong>, když se plán změní", ok: true }
+                ]
+              }
+            ],
+            zaver: "Rozdíl v ceně mezi tarify bývá menší, než co by stálo doplatit si kufr a sedadlo zvlášť. Basic Economy se vyplatí jen s jistým termínem a jedním příručním zavazadlem."
+          },
           checklist: [
             "Ověřit počet <strong>odbavených zavazadel v ceně</strong>, zvlášť pro cestu tam a zvlášť zpátky",
             "Ověřit, co smíš vzít <strong>do kabiny</strong>, u Basic Economy se to liší aerolinka od aerolinky",
@@ -3822,6 +3880,14 @@
             src: "images/gabi-kontrola-udaju.svg",
             text: "Tuhle část dělám pokaždé, i po těch letech. <strong>Dvě minuty čtení proti tisícům za opravu.</strong>"
           },
+          toggleQuestions: [
+            {
+              id: "kde-kupujes-letenku",
+              question: "Kupuješ letenku přímo na webu aerolinky, jako Delta nebo Lufthansa, nebo přes přeprodejce, jako Kiwi nebo Gotogate?",
+              labels: { yes: "Přeprodejce", no: "Web aerolinky" },
+              yesWarning: "Pak počítej s tím, že <strong>změnu i storno řešíš přes přeprodejce, ne přímo přes aerolinku</strong>. Aerolinka ti bez čísla rezervace u přeprodejce často nic neřekne, a cizí call centrum bývá pomalejší i dražší než přímé jednání. Vrácení peněz umí trvat týdny místo dnů."
+            }
+          ],
           checklist: [
             "Jméno a příjmení <strong>přesně jako v pase</strong>, včetně všech křestních jmen",
             "Zkontrolovat <strong>datum narození</strong>, překlep v roce systém neodpustí",
@@ -7091,9 +7157,25 @@
              "Last minute do Ameriky nefunguje jako do Egypta, čekání tady nic nezachrání.";
     }
 
+    var oknoHtml = "";
+    if (dnu >= 0) {
+      var oknoOd = new Date(setup.datum + "T00:00:00"); oknoOd.setDate(oknoOd.getDate() - brzy);
+      var oknoDo = new Date(setup.datum + "T00:00:00"); oknoDo.setDate(oknoDo.getDate() - pozde);
+      var fmt = function (d) { return d.getDate() + ". " + CZ_MONTHS[d.getMonth()]; };
+      var oknoZaver = cls === "ok" ? "Pokud kupuješ teď, ceny bývají nejvýhodnější."
+                     : cls === "wait" ? "Zatím je brzy, tohle okno teprve začíná."
+                     : "Tohle okno už je za tebou, kup co nejdřív, cena teď jen poroste.";
+      oknoHtml = '<div class="pc-okno">' +
+                   '<span aria-hidden="true">' + ico("calendar") + '</span>' +
+                   '<p>Tvoje ideální okno pro nákup letenky je od <strong>' + fmt(oknoOd) + '</strong> do ' +
+                     '<strong>' + fmt(oknoDo) + '</strong>. ' + oknoZaver + '</p>' +
+                 '</div>';
+    }
+
     box.innerHTML =
       '<p class="pc-verdict-line ' + cls + '"><strong>' + nadpis + '</strong></p>' +
       '<p>' + text + '</p>' +
+      oknoHtml +
       '<p style="font-size:13.5px;color:var(--text-faint);margin-top:var(--s3);">' +
         'Orientační odhad podle data odletu. Žádná appka ti neřekne přesný den, kdy bude nejlevněji.' +
       '</p>';
@@ -7581,6 +7663,30 @@
                 '</div>';
       }
 
+      if (step.srovnani) {
+        var srov = step.srovnani;
+        html += '<div class="tarify-srovnani">' +
+                  srov.karty.map(function (k) {
+                    return '<div class="tarify-karta' + (k.zvyraznit ? ' zvyraznena' : '') + '">' +
+                             '<div class="tarify-nazev">' + k.nazev +
+                               (k.odznak ? '<span class="tarify-badge">' + k.odznak + '</span>' : '') +
+                             '</div>' +
+                             '<ul class="tarify-polozky">' +
+                               k.polozky.map(function (p) {
+                                 return '<li class="tarify-polozka' + (p.ok ? '' : ' ne') + '">' +
+                                          (p.ok
+                                            ? ico("check")
+                                            : '<span class="tarify-dash" aria-hidden="true">–</span>') +
+                                          '<span>' + p.text + '</span>' +
+                                        '</li>';
+                               }).join('') +
+                             '</ul>' +
+                           '</div>';
+                  }).join('') +
+                '</div>' +
+                (srov.zaver ? '<p class="tarify-zaver">' + srov.zaver + '</p>' : '');
+      }
+
       if (step.checklist) {
         html += '<p class="checklist-hint">✓ Jakmile máš hotovo, rovnou si to tady odškrtni.</p>';
         html += '<div class="checklist-group">' +
@@ -7644,11 +7750,13 @@
 
       if (step.toggleQuestions) {
         html += step.toggleQuestions.map(function (q, qi) {
+          var labelAno = (q.labels && q.labels.yes) || "Ano";
+          var labelNe = (q.labels && q.labels.no) || "Ne";
           return '<div class="toggle-q" data-qid="' + q.id + '">' +
                    '<p class="toggle-q-label">' + q.question + '</p>' +
                    '<div class="toggle-q-btns">' +
-                     '<button type="button" data-val="yes">Ano</button>' +
-                     '<button type="button" data-val="no">Ne</button>' +
+                     '<button type="button" data-val="yes">' + labelAno + '</button>' +
+                     '<button type="button" data-val="no">' + labelNe + '</button>' +
                    '</div>' +
                    '<div class="toggle-q-warning">' + q.yesWarning + '</div>' +
                  '</div>';
