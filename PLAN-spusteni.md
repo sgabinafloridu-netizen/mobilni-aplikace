@@ -62,13 +62,21 @@ a doladění, ne na dohánění zpoždění.
       oprava
 - [ ] Nasadit, ověřit videa/podcasty naostro na mobilu i offline
 
-## Týden 3 · 1.–7. 9. — Zapnout peníze
+## Týden 3 · 1.–5. 9. — Zapnout peníze
 
-- [ ] Potvrdit ceny (690 Kč základ, 1 490 Kč celý) a systém kódů — zůstat u jednoho sdíleného
-      kódu na balíček jako teď, unikátní kódy na appku bez backendu jsou zbytečná složitost
-- [ ] Zapnout zámky, do `BALICKY` doplnit skutečné `odkaz`, do `KODY` skutečné kódy
-- [ ] Založit prodejní stránku jako kopii kostry „Přes imigrační v klidu" (stejné CTA,
-      SimpleShop produkt, ThePay 2.0 — nemusí se znovu schvalovat, je na účtu už schválené)
+⚠️ **Cenový model změněn 29. 8. 2026.** Appka jde do launche jako **jeden balíček** (celá
+appka, všech 7 modulů), ne dva (základ/rozšíření). Cenový rozdíl 990 Kč (tiché spuštění
+7.–11. 9.) vs. 1 490 Kč (veřejné spuštění 15.–27. 9.) řeší SimpleShop mimo appku (dva
+produkty se stejným odemykacím kódem, nebo slevový kupón pro tichou fázi) — appka sama o
+dvou cenách neví. Termín dokončení posunut na **5. 9.** (Gábin vlastní cíl, dvoudenní
+rezerva před tichým spuštěním 7. 9.). Kontext a zdůvodnění v
+`Marketingové podklady/plan-obsahu-25-8-az-30-9-2026.md`, sekce „Cenový model appky".
+
+- [ ] Sjednotit `BALICKY` a `KODY` na jeden balíček (např. `cely`, všech 7 modulů), doplnit
+      skutečný `odkaz` a skutečný kód
+- [ ] Zapnout zámky
+- [ ] Tiché spuštění (7.–11. 9.) jede na přímý platební odkaz poslaný osobně e-mailem/DM,
+      ne přes hotovou prodejní stránku — ta se dodělává souběžně, viz týden 4
 
 ## Týden 4 · 8.–14. 9. — Prodejní stránka a checkout
 

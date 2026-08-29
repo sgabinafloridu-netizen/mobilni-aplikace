@@ -1,0 +1,98 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400">
+  <!-- Gábi jako reportérka s výrazným mikrofonem. Vědomě odlišná verze postavy:
+       stejná hlava, čepice a brýle jako gabi-happy-plaz.svg, ale růžové tričko
+       místo tyrkysového a velký kulatý reportérský mikrofon s barevnou
+       manžetou, ať je na první pohled jasně poznat, co drží v ruce, i v malém
+       kolečku appky. -->
+
+  <clipPath id="mikroKolo"><circle cx="200" cy="200" r="185"/></clipPath>
+
+  <g clip-path="url(#mikroKolo)">
+    <!-- pozadí, teplé, stejná rodina jako gabi-pise -->
+    <rect x="0" y="0" width="400" height="400" fill="#FFF3E4"/>
+    <circle cx="316" cy="90" r="26" fill="#FFD23F" opacity="0.85"/>
+
+    <!-- levá ruka dole u těla -->
+    <g fill="none" stroke-linecap="round">
+      <path d="M150 274 Q126 300 130 326" stroke="#E9C6AB" stroke-width="26"/>
+      <path d="M150 274 Q126 300 130 326" stroke="#FFD9E6" stroke-width="20"/>
+    </g>
+    <circle cx="130" cy="330" r="17" fill="#FFE0CC" stroke="#E9C6AB" stroke-width="3"/>
+
+    <!-- pravá ruka dolů k tělu, drží mikrofon nad růžovým tričkem, ne u čepice -->
+    <g fill="none" stroke-linecap="round">
+      <path d="M250 274 Q272 296 240 310" stroke="#E9C6AB" stroke-width="26"/>
+      <path d="M250 274 Q272 296 240 310" stroke="#FFD9E6" stroke-width="20"/>
+    </g>
+    <circle cx="238" cy="314" r="16" fill="#FFE0CC" stroke="#E9C6AB" stroke-width="3"/>
+
+    <!-- tělo: tričko, růžové, ne tyrkysové -->
+    <path d="M118 385 L118 302 Q118 254 166 252 L234 252 Q282 254 282 302 L282 385 Z" fill="#FF6FA5"/>
+    <path d="M176 254 L200 292 L224 254 Z" fill="#FFF3E4"/>
+
+    <text x="200" y="372" text-anchor="middle" font-family="Arial, sans-serif" font-weight="bold"
+          font-size="13" letter-spacing="-0.2" fill="#FFFFFF">www.sgabinafloridu.cz</text>
+
+    <!-- vlasy -->
+    <path d="M200 88 Q286 88 288 186 Q290 248 272 276 Q256 254 262 206 Q262 138 200 134
+             Q138 138 138 206 Q144 254 128 276 Q110 248 112 186 Q114 88 200 88 Z" fill="#2A3550"/>
+
+    <!-- hlava -->
+    <circle cx="200" cy="178" r="76" fill="#FFE0CC"/>
+
+    <!-- kšiltovka, stejná jako happy-plaz -->
+    <clipPath id="mikroKstil"><path d="M116 130 Q116 58 200 58 Q284 58 284 130 Z"/></clipPath>
+    <g clip-path="url(#mikroKstil)">
+      <rect x="104" y="58" width="192" height="22" fill="#F4FBFC"/>
+      <rect x="104" y="80" width="192" height="13" fill="#FF6FA5"/>
+      <rect x="104" y="93" width="192" height="6"  fill="#FFD23F"/>
+      <rect x="104" y="99" width="192" height="13" fill="#F4FBFC"/>
+      <rect x="104" y="112" width="192" height="18" fill="#1AC0CE"/>
+    </g>
+    <path d="M116 130 Q116 58 200 58 Q284 58 284 130" fill="none" stroke="#14233A" stroke-width="4" stroke-linejoin="round"/>
+    <circle cx="200" cy="62" r="6" fill="#14233A"/>
+    <path d="M108 128 Q200 172 292 128 Z" fill="#0E8C97" stroke="#14233A" stroke-width="3" stroke-linejoin="round"/>
+
+    <!-- obočí nahoru, soustředěný zájem -->
+    <path d="M150 162 Q168 150 186 160" stroke="#14233A" stroke-width="5" fill="none" stroke-linecap="round"/>
+    <path d="M250 162 Q232 150 214 160" stroke="#14233A" stroke-width="5" fill="none" stroke-linecap="round"/>
+
+    <!-- sluneční brýle, stejné jako happy-plaz -->
+    <line x1="142" y1="182" x2="126" y2="178" stroke="#14233A" stroke-width="6" stroke-linecap="round"/>
+    <line x1="258" y1="182" x2="274" y2="178" stroke="#14233A" stroke-width="6" stroke-linecap="round"/>
+    <rect x="141" y="174" width="56" height="38" rx="17" fill="#14233A"/>
+    <rect x="203" y="174" width="56" height="38" rx="17" fill="#14233A"/>
+    <line x1="197" y1="184" x2="203" y2="184" stroke="#14233A" stroke-width="7"/>
+    <path d="M152 180 L165 180 L150 204 L143 196 Z" fill="#FFFFFF" opacity="0.32"/>
+    <path d="M214 180 L227 180 L212 204 L205 196 Z" fill="#FFFFFF" opacity="0.32"/>
+
+    <!-- pusa, klidný soustředěný úsměv, mikrofon je teď v ruce, ne u úst -->
+    <path d="M176 222 Q200 236 224 222" stroke="#14233A" stroke-width="6" fill="none" stroke-linecap="round"/>
+
+    <!-- tváře -->
+    <ellipse cx="140" cy="222" rx="11" ry="7" fill="#FF6FA5" opacity="0.4"/>
+    <ellipse cx="260" cy="222" rx="11" ry="7" fill="#FF6FA5" opacity="0.4"/>
+
+    <!-- velký výrazný mikrofon v ruce, dole na růžovém tričku, kde je
+         kontrastní a nesplývá s modrou čepicí. Kreslený jako poslední navrchu. -->
+    <g transform="rotate(10 238 290)">
+      <!-- držadlo, krátké, od hlavice k ruce -->
+      <rect x="229" y="296" width="16" height="26" rx="8" fill="#14233A"/>
+      <!-- kulatá hlavice, tmavá s mřížkou -->
+      <circle cx="238" cy="278" r="26" fill="#14233A"/>
+      <g stroke="#5A6B85" stroke-width="2.2" opacity="0.9">
+        <line x1="216" y1="271" x2="260" y2="271"/>
+        <line x1="214" y1="279" x2="262" y2="279"/>
+        <line x1="217" y1="287" x2="259" y2="287"/>
+      </g>
+      <!-- bílá manžeta, kontrastní na tmavé hlavici i na růžovém tričku -->
+      <path d="M212 278 a26 26 0 0 1 52 0 Z" fill="#FFFFFF"/>
+      <!-- lesk -->
+      <ellipse cx="225" cy="265" rx="6" ry="9" fill="#FFFFFF" opacity="0.4"/>
+    </g>
+  </g>
+
+  <!-- hvězdičky -->
+  <text x="52" y="120" font-family="Arial, sans-serif" font-size="16" fill="#1AC0CE">&#10022;</text>
+  <text x="348" y="150" font-family="Arial, sans-serif" font-size="14" fill="#1AC0CE">&#10022;</text>
+</svg>

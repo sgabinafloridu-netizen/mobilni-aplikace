@@ -17,7 +17,7 @@
 <meta name="apple-mobile-web-app-title" content="Než odletíš">
 <link rel="apple-touch-icon" href="icons/icon-192.png">
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Righteous&display=swap" rel="stylesheet">
 <style>
   /* ══════════════════════════════════════════════
      TOKENY  (barvy a písma podle design manuálu)
@@ -75,8 +75,8 @@
   }
   :focus-visible { outline: 3px solid rgba(26,192,206,.5); outline-offset: 2px; border-radius: 6px; }
 
-  h1 { font-size: clamp(28px, 4.6vw, 40px); font-weight: 800; line-height: 1.14; letter-spacing: -.025em; text-wrap: balance; }
-  h2 { font-size: clamp(23px, 3.4vw, 31px); font-weight: 800; line-height: 1.2;  letter-spacing: -.02em;  text-wrap: balance; }
+  h1 { font-family: 'Righteous', 'Poppins', sans-serif; font-size: clamp(28px, 4.6vw, 40px); font-weight: 400; line-height: 1.14; letter-spacing: -.01em; text-wrap: balance; }
+  h2 { font-family: 'Righteous', 'Poppins', sans-serif; font-size: clamp(21px, 3.2vw, 28px); font-weight: 400; line-height: 1.25;  letter-spacing: -.01em;  text-wrap: balance; }
   p  { line-height: 1.75; text-align: justify; text-justify: inter-word; }
   .sub { font-size: 16px; color: var(--text-muted); line-height: 1.78; }
   .sub strong { color: var(--tyrkys-dark); font-weight: 700; }
@@ -1664,29 +1664,23 @@
 
   /* ── Historka: osobní příhoda, foto + bublina s citací. Tmavá jako
      sůl-karta na prodejce, protože jde vždycky o reálné jméno a reálný
-     důsledek, ne o obecnou radu. ── */
+     důsledek, ne o obecnou radu. Fotka plave uvnitř bubliny v levém horním
+     rohu, text kolem ní obtéká, funguje to samo i na úzké obrazovce, žádná
+     zvláštní mobilní výjimka není potřeba. ── */
   .historka {
-    margin-top: var(--s5); display: flex; align-items: center; gap: var(--s5);
-    padding: var(--s5); border-radius: var(--r-lg);
+    margin-top: var(--s5); padding: var(--s5); border-radius: var(--r-lg);
     background: linear-gradient(160deg, #14233A 0%, #0E5A66 100%);
   }
-  .historka img {
-    flex: 0 0 auto; width: 52px; height: 52px; border-radius: 50%; object-fit: cover;
-    box-shadow: 0 0 0 3px var(--gold, #C9A24B);
-  }
-  /* skutečná bublina, ne jen barevná karta: plocha o odstín světlejší než
-     pozadí karty, se špičkou vedenou k ústům na fotce. */
   .historka-text {
-    position: relative; flex: 1 1 auto;
     background: rgba(255,255,255,.09);
     border: 1px solid rgba(255,255,255,.14);
     border-radius: 18px; padding: 14px 18px;
   }
-  .historka-text::before {
-    content: ""; position: absolute; left: -8px; top: 50%; transform: translateY(-50%);
-    width: 15px; height: 15px; background: rgba(255,255,255,.09);
-    border-left: 1px solid rgba(255,255,255,.14); border-bottom: 1px solid rgba(255,255,255,.14);
-    clip-path: polygon(100% 0, 0 100%, 100% 100%);
+  .historka-text::after { content: ""; display: block; clear: both; }
+  .historka-text img {
+    float: left; margin: 0 14px 8px 0;
+    width: 52px; height: 52px; border-radius: 50%; object-fit: cover;
+    box-shadow: 0 0 0 3px var(--gold, #C9A24B);
   }
   .historka-text p {
     margin: 0 0 var(--s3); font-size: 15px; line-height: 1.7; color: rgba(255,255,255,.9); font-style: italic;
@@ -2323,11 +2317,12 @@
         <p class="sub">
           Ahoj, tady Gábi. Než jsem před 30 lety poprvé letěla sama do Ameriky, seděla jsem
           večer nad otevřeným kufrem a upřímně nevěděla, jestli se víc těším, nebo víc bojím.
-          Co jsem tenkrát potřebovala, nebyl další článek k přečtení. Potřebovala jsem někoho,
-          kdo mi řekne: <strong>tohle teď, tohle potom, tohle si připrav, tohle klidně nech být</strong>.
-          Přesně proto jsem připravila tohoto průvodce.
+          Tehdy ještě nebyl internet, ale kdyby byl, stejně bych nepotřebovala číst nudné
+          webovky ani třicetistránkový blog. Hodil by se mi jeden člověk, co by vedle mě seděl
+          a řekl: <strong>tohle vyřiď teď, tohle počká, a na tohle rovnou zapomeň</strong>.
+          A přesně tenhle hlas jsem zabalila do svého průvodce.
         </p>
-        <p class="sub">Napiš mi, kdy a kam letíš, a já tě <strong>provedu krok za krokem</strong>, co tě čeká a v jakém pořadí.</p>
+        <p class="sub">Napiš mi do políčka níže odhadovaný datum a cíl své cesty (fakt jen odhadem) a já ti ukážu <strong>krok za krokem</strong>, co tě čeká, ať máš v hlavě klid.</p>
       </div>
       <div class="onb-cta">
         <button class="btn btn-p btn-block btn-xl" id="btn-start">Začít →</button>
@@ -2797,7 +2792,39 @@
           <div class="prevodnik-wrap" id="prevodnik-kalk"></div>
         </div>
 
-        <!-- 9) AŽ PŘISTANEŠ (náhled druhého průvodce) -->
+        <!-- 9) NA ČTENÍ DO LETADLA -->
+        <div class="screen" id="s-cteni">
+          <div class="page-head">
+            <span class="eyebrow eyebrow-warm">Bonus, ne úkol</span>
+            <h1>Na čtení do letadla</h1>
+            <p class="sub">Tohle appka po tobě nic nechce zaškrtnout. Je to na chvíli, kdy máš v letadle nebo na pláži čas navíc, dvě historky ze života, ne příprava na cestu.</p>
+          </div>
+
+          <div class="step-lead measure">
+            <p>Jak vzniklo naše česko-americké manželství</p>
+          </div>
+          <div class="historka">
+            <div class="historka-text" id="cteni-pribeh-text">
+              <img src="images/gabi-pise.svg" alt="Gábi píše svůj příběh" style="width: 76px; height: 76px;">
+              <p>Sem patří Gábin vlastní příběh, jak vznikl vztah s Jirkou, napsaný jejím hlasem a jejími slovy. Zatím tu čeká, až mi ho pošleš, ať ho nevymýšlím za tebe.</p>
+            </div>
+          </div>
+
+          <div class="step-video" style="margin-top: var(--s6)">
+            <div class="step-video-head"><span aria-hidden="true"><svg class="ico" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4.5 15.5V12a7.5 7.5 0 0 1 15 0v3.5"/><rect x="3.5" y="14.5" width="4" height="6" rx="1.6"/><rect x="16.5" y="14.5" width="4" height="6" rx="1.6"/></svg></span>Mini rozhovor s Jirkou</div>
+            <div class="step-audio missing" data-media>
+              <img src="images/gabi-mikrofon.svg" alt="Gábi s mikrofonem, reportérka">
+              <div class="step-audio-body">
+                <div class="step-audio-title">Sporty v USA: co si o nich myslí Američan po 27 letech</div>
+                <div class="step-audio-delka">Gábi jako reportérka, Jirka jako host</div>
+                <audio controls preload="metadata" src="audio/rozhovor-jirka-sporty.mp3"></audio>
+                <div class="step-audio-ceka">Tenhle rozhovor se právě chystá, přidám ho sem brzy.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 10) AŽ PŘISTANEŠ (náhled druhého průvodce) -->
         <div class="screen" id="s-pristanes">
           <div class="page-head">
             <span class="eyebrow eyebrow-warm" id="pristanes-kdy">Bude koncem roku 2026</span>
@@ -3650,17 +3677,22 @@
           icon: ico("map"),
           title: "Odkud vlastně vyrazit, aby to dávalo smysl",
           lead: [
-            "Zadáš do vyhledávače Praha, protože to dělá skoro každý. Vyjedou letenky, časy, přestupy. Vypadá to vyřešeně.",
-            "Jenže Praha není nejbližší ani nejlevnější.",
-            "Jenom je o ní nejvíc slyšet.",
-            "Přímá linka do USA z Česka neexistuje, takže se stejně bude přestupovat, ať vyrazíš odkudkoliv. Otázka není jestli, ale odkud se to vyplatí nejvíc.",
+            "Letenky do Prahy, nebo z Prahy? V tomhle se s manželem nikdy neshodneme. Jsme totiž z Rožnova pod Radhoštěm.",
+            "On má svůj rituál. Miluje plzeňské pivo a tvrdí, že dát si jedno na rozloučenou, nebo hned po příletu z Ameriky, jedině v Praze, k té cestě prostě patří.",
+            "A tak létá z Prahy.",
+            "Jenže když pak pozoruju ty jeho galeje. Nejdřív ho někdo musí hodit autem do Hranic na Moravě. Pak jede vlakem. Pak se drkotá s obrovským kufrem přes celou Prahu na letiště a ještě tam musí někde přenocovat, aby ranní odlet vůbec stihl.",
+            "Zpátky to samé v bledě modrém. Rozlámaný po desetihodinovém letu a před sebou cesta přes půl republiky.",
+            "Upřímně? Pro člověka z Moravy je to čistý nesmysl.",
+            "Praha pro nás zdaleka <strong>není nejbližší a už vůbec ne nejvýhodnější</strong>. Jenže když lidé sednou k vyhledávači letenek, stejně tam jako první napíšou PRG.",
+            "Ne proto, že je to nejlepší cesta. Ale protože je o té Praze <strong>nejvíc slyšet</strong>.",
+            "Přímá linka do USA z Česka neexistuje, takže se stejně bude přestupovat, ať vyrazíš odkudkoliv. Otázka není jestli, ale <strong>odkud se to vyplatí nejvíc</strong>.",
             "Kdo bydlí blíž Ostravě, stráví jen cestou na Ruzyni <strong>skoro čtyři hodiny</strong>. Kdo je od Plzně, může mít blíž jinam, než by čekal.",
-            "Vyber si napřed region, kde bydlíš, a pak, na čem ti víc záleží: na pohodlí, na penězích, nebo na tom, aby cesta sama byla zážitek.",
+            "Vyber si napřed region, kde bydlíš, a pak <strong>na čem ti víc záleží</strong>: na pohodlí, na penězích, nebo na tom, aby cesta sama byla zážitek.",
             "Odkud vlastně vyrážíš ty?"
           ],
           companion: {
             src: "images/gabi-trasa.svg",
-            text: "Tyhle trasy jsem srovnávala i s klienty z Moravy. Praha zdaleka není vždycky nejbližší ani nejlevnější varianta, jen je o ní nejvíc slyšet."
+            text: "Tyhle trasy porovnávám pořád, pro manžela, pro sebe a hlavně pro svoje klienty. Vyber svůj region a podívej se, jak vychází cesta právě tobě."
           },
           trasyPicker: true,
           why: {
@@ -3674,11 +3706,10 @@
         },
         {
           icon: ico("search"),
-          title: "Tři funkce, které dělají celý rozdíl",
+          title: "Tři tlačítka v Google Flights, která ušetří tisíce",
           lead: [
             "Hledat letenky umí každý.",
-            "Rozdíl mezi drahou a levnou letenkou dělají tři funkce Google Flights, které většina lidí nikdy neotevře.",
-            "A pak je tu ještě jedna věc, která není funkce, ale způsob uvažování: <strong>nehledej letenku, hledej celou cestu</strong>."
+            "Ušetřit na nich tisíce vyžaduje jen dvě věci: <strong>znát tři skrytá tlačítka</strong> v Google Flights a přestat hledat letenku místo celé trasy."
           ],
           why: {
             title: "Proč nehledám letenku, ale celou cestu",
@@ -3689,14 +3720,14 @@
           },
           companion: {
             src: "images/gabi-letenky.svg",
-            text: "Tyhle tři funkce používám při každém hledání letenek, i po těch letech. Není to trik, je to zvyk, který se vyplatí naučit se jednou a používat pořád."
+            text: "Tyhle tři tlačítka mačkám při každém hledání letenek, i po těch letech. Není to trik, je to zvyk, který se vyplatí naučit se jednou a používat pořád."
           },
           checklist: [
             "<strong>Flexibilní kalendář</strong>: uvidíš celý měsíc najednou, a že úterý místo pátku umí být o 4 000 Kč levnější",
             "<strong>Hlídání ceny</strong>: zapneš ho a Google ti sám napíše, když cena klesne",
             "<strong>Víc letišť najednou</strong>: pro Floridu zadej Tampu, Orlando i Fort Lauderdale, rozdíl bývá i 8 000 Kč"
           ],
-          pochvala: "✨ A je to. Tyhle tři funkce dělají rozdíl v tisících, a většina lidí je nikdy neotevře.",
+          pochvala: "✨ A je to. Tyhle tři tlačítka dělají rozdíl v tisících, a většina lidí je nikdy nezmáčkne.",
           media: {
             kicker: "Jak kupuju letenky já",
             src: "video/letenky-jak-kupuju.mp4",
@@ -3766,12 +3797,14 @@
           historka: {
             foto: "images/gabi-hlavicka.jpg",
             text: [
-              "O přestupech v Americe bych mohla napsat celou brožuru. Ale to nejdůležitější se vejde na půl stránky.",
-              "Přestup v USA totiž není jako v Amsterdamu nebo Frankfurtu. Nikdy nevíš, jak dlouhá bude fronta na imigračním, u zavazadel nebo na novém odbavení, i když letíš dál třeba do Denveru nebo Chicaga.",
-              "Já si trasu promýšlím dopředu, a přesto se mi víckrát stalo, že mi navazující let ujel a spala jsem na letišti v Chicagu nebo Washingtonu. <strong>Proto mám jedno pevné pravidlo: pod 3 hodiny na přestup nejdu.</strong> Nestojí mi to za to. A vybírám letiště, která znám.",
-              "Když už to nevychází a vypadá to, že to nestihneš, začni jednat ještě v letadle. Půl hodiny před přistáním sbal všechno z přihrádky nad sebou a požádej letušku, jestli tě může pustit ven jako první.",
-              "A pak platí jediné pravidlo. <strong>Žádné záchody, žádná zmrzlina, žádné kafe, žádná voda.</strong> Utíkej.",
-              "Co dělat, když to fakt ujede, to podrobně popisuju v druhém díle průvodce, Až přistaneš."
+              "Za covidu jsem uvízla v Americe a po měsících odloučení potřebovala dostat svého tehdy čtrnáctiletého syna za mnou na Floridu. Kluk měl stejně všechno online, tak se to i hodilo.",
+              "Za normálních okolností na to existuje služba pro nezletilé. Dítě dostane náramek, personál ho vezme za ruku a provede přes všechny přestupy. Jenže za covidu tenhle servis ve Frankfurtu zrušili, protože nebyl personál.",
+              "Volala jsem do Polska, ověřovala to ze všech stran, udělala maximum. Možnost doprovodu jednoduše neexistovala. Zbývala jediná šance, jak syna vidět: nechat ho letět samotného.",
+              "Tu trasu jsem dobře znala, takže jsem věděla, že ve Frankfurtu na přestupu potká na pasovém maximálně tak kontrolní brány a první živou duši uvidí až na imigračním v Americe.",
+              "Babička ho hodila autem do Katovic. Synek v ruce držel pas, letenku, ten důležitý papír, že nemá covid, zelenou kartu a moji jedinou instrukci: <strong>„Nic nevysvětluj. Jen vytáhni pas s letenkou a všude jen přikládej, přikládej, přikládej, a raději s nikým moc nemluv.“</strong>",
+              "Prošel Katovice, obří Frankfurt i imigrační kontrolu v USA. Ne díky pevným nervům, ten má jinak v každé situaci fakt na salámu. Prošel, protože měl v ruce jasný návod a přesně věděl, co ho na každém kroku čeká.",
+              "Skoro každý, kdo letí poprvé, si myslí, že se na letišti může stát cokoliv. Není to tak, <strong>je to jen chybějící systém.</strong> Když to zvládl čtrnáctiletý kluk uprostřed covidových zmatků, s přehledným plánem v kapse nezamrzneš taky.",
+              "A nakonec jedno pravidlo, přes které nejede vlak. Platí u každého přestupu stejně: <strong>pod 3 hodiny nechoď.</strong> A když už to nevychází, nespoléhej, že to nějak dopadne, jednej ještě v letadle. Půl hodiny před přistáním sbal věci z přihrádky a požádej letušku, jestli tě může pustit ven jako první. A dej zbytku výpravy jasné pokyny: <strong>žádné záchody, kafe ani voda.</strong> Valíme."
             ]
           },
           toggleQuestions: [
@@ -3782,7 +3815,7 @@
             }
           ],
           checklist: [
-            "Zkontrolovat čas mezi přílety a odlety, u přestupu v USA <strong>aspoň 2 až 3 hodiny</strong>",
+            "Zkontrolovat čas mezi přílety a odlety, u přestupu v Evropě stačí 2 hodiny, u přestupu v USA <strong>nejméně 3 hodiny</strong>",
             "Ověřit, že mám ESTA, <strong>platí i pro pouhý tranzit</strong> přes americké letiště",
             "Zjistit, jestli mám celou cestu <strong>na jedné rezervaci</strong>, nebo jako dvě samostatné letenky"
           ],
@@ -3790,10 +3823,14 @@
           trap: {
             title: "Pozor na tohle",
             body: [
-              "Dvě samostatně koupené letenky vypadají levněji. Riziko ale nesou celé na tobě.",
-              "Když první let nabere zpoždění a druhý ti uletí, <strong>aerolinka té druhé letenky ti nic nedluží</strong>. O tvém prvním letu nikdy nevěděla. Novou letenku si koupíš znovu a za cenu na poslední chvíli.",
+              "Dvě samostatné letenky vypadají levněji.",
+              "Jenže veškeré riziko neseš ty. Aerolinka toho druhého letu o tom prvním vůbec neví. Když ti spoj uletí, kupuješ novou letenku za cenu na poslední chvíli.",
               "Na jedné rezervaci je to <strong>starost aerolinky</strong>. Přebookuje tě na další spoj a při delším zdržení řeší i hotel.",
-              "Sama jsem si kdysi koupila přestup s hodinou a půl v Atlantě. Naletěla jsem na to úplně stejně jako všichni ostatní."
+              "Já sice takhle lítám, abych ušetřila rodinný rozpočet, a manžel si klepe na čelo.",
+              "Miluju ten adrenalin, když letím z Melbourne na Floridě s Deltou do Atlanty, pak do Frankfurtu, a očima popoháním letadýlko na mapě v zobrazení letu na obrazovce v letadle, aby zrychlilo, když vím, že mi zbývá asi hodina na přestup.",
+              "Pak naberu tempo v běhu jako finalista běhu Rodným krajem Emila Zátopka a valím na druhý terminál, abych stihla polský LOT z Frankfurtu do Varšavy a z Varšavy do Ostravy.",
+              "Samozřejmě to nedělám kvůli tomu, abych manželovi z letadla vyfotila stadion Baníku, ale abych měla ten komfort, že mě někdo vyzvedne v Mošnově.",
+              "Ty ale tenhle adrenalin nepotřebuješ. Ty jedeš na dovolenou, <strong>kup si tedy celou letenku od jedné aerolinky</strong>."
             ]
           }
         },
@@ -5288,7 +5325,7 @@
 
     var inShell = (screenId === "s-uvod" || screenId === "s-home" ||
                    screenId === "s-module" || screenId === "s-trezor" || screenId === "s-itinerar" || screenId === "s-rozpocet" ||
-                   screenId === "s-prevodnik" || screenId === "s-pristanes");
+                   screenId === "s-prevodnik" || screenId === "s-pristanes" || screenId === "s-cteni");
     onboarding.hidden = inShell;
     onboarding.style.display = inShell ? "none" : "grid";
     shell.hidden = !inShell;
@@ -5302,12 +5339,13 @@
     else if (screenId === "s-rozpocet") topbarTitle.textContent = "Můj rozpočet";
     else if (screenId === "s-prevodnik") topbarTitle.textContent = "Převodník";
     else if (screenId === "s-pristanes") topbarTitle.textContent = "Až přistaneš";
+    else if (screenId === "s-cteni") topbarTitle.textContent = "Na čtení do letadla";
 
     // osa s moduly patří jen k modulovému postupu, na Trezoru, v itineráři,
     // v rozpočtu a v náhledu druhého průvodce nic neznázorňuje, tak tam jen mate
     var railEl = document.getElementById("rail");
     if (railEl) railEl.hidden = (screenId === "s-trezor" || screenId === "s-itinerar" || screenId === "s-rozpocet" ||
-                                  screenId === "s-prevodnik" || screenId === "s-pristanes");
+                                  screenId === "s-prevodnik" || screenId === "s-pristanes" || screenId === "s-cteni");
 
     closeMenu();
     renderSidebar();
@@ -5480,6 +5518,17 @@
       ico: ico("refresh", "ico-side"), title: "Převodník", meta: "Měna, jednotky, spropitné",
       active: currentScreen === "s-prevodnik",
       onClick: function () { goTo("s-prevodnik"); }
+    });
+
+    var lbl3 = document.createElement("div");
+    lbl3.className = "side-group-label";
+    lbl3.textContent = "Na chvíli volna";
+    nav.appendChild(lbl3);
+
+    item({
+      ico: ico("book", "ico-side"), title: "Na čtení do letadla", meta: "Historky, ne úkoly",
+      active: currentScreen === "s-cteni",
+      onClick: function () { goTo("s-cteni"); }
     });
   }
 
@@ -6911,7 +6960,7 @@
           ? '<figure class="step-ilustrace stay-ilustrace"><img src="' + d.ilustrace.src + '" alt="" loading="lazy"><figcaption>' + d.ilustrace.popis + '</figcaption></figure>'
           : '') +
         (d.historka
-          ? '<div class="historka"><img src="' + d.historka.foto + '" alt="Gábi"><div class="historka-text">' +
+          ? '<div class="historka"><div class="historka-text"><img src="' + d.historka.foto + '" alt="Gábi">' +
               d.historka.text.map(function (p) { return '<p>' + p + '</p>'; }).join('') +
             '</div></div>'
           : '');
@@ -7679,8 +7728,7 @@
       if (step.historka) {
         var histParas = Array.isArray(step.historka.text) ? step.historka.text : [step.historka.text];
         html += '<div class="historka">' +
-                  '<img src="' + step.historka.foto + '" alt="Gábi">' +
-                  '<div class="historka-text">' + paras(histParas) + '</div>' +
+                  '<div class="historka-text"><img src="' + step.historka.foto + '" alt="Gábi">' + paras(histParas) + '</div>' +
                 '</div>';
       }
 
@@ -8387,6 +8435,7 @@
   initItinerar();
   initRozpocet();
   initPrevodnik();
+  initStepVideos();
 
   /* Bezpečnostní síť pro chybějící obrázek: appka nikdy neukáže rozbitou
      ikonku s přetékajícím alt textem, kartu s ní radši potichu schová.
