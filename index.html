@@ -2974,8 +2974,9 @@
       hookFotoAlt: "Gábi na floridské pláži při západu slunce",
 
       ikona: "images/ikony/highlight-prezij-ameriku.svg",
-      dashboard: true,
-      dashboardTitle: "Jak jsi daleko",
+      /* dashboard: žádná z 5 lekcí nemá checklist, toggleQuestions ani jinou
+         sledovanou položku, takže by widget vždycky ukázal 0 % a "hotovo"
+         zároveň. Appka ho tu proto nezobrazuje, dashboard mají až moduly 2 až 7. */
       name: "Kdy a kam: rozhodnutí, které udělá nebo zkazí celou cestu",
       shortName: "Kdy a kam",
       emoji: "📍",
@@ -3270,6 +3271,7 @@
       shortName: "Doklady",
       dashboard: true,
       dashboardTitle: "Připravenost na doklady",
+      dashboardDone: "Všechno hotovo. Doklady máš v pořádku.",
       emoji: "📄",
       time: "20 min",
       accent: "#0E5A66", accentSoft: "#E4F0F2",
@@ -3655,6 +3657,7 @@
       shortName: "Letenky",
       dashboard: true,
       dashboardTitle: "Připravenost na letenku",
+      dashboardDone: "Všechno hotovo. Letenka je vyřešená.",
       emoji: "✈️",
       time: "25 min",
       accent: "#C4275A", accentSoft: "#FFEFF4",
@@ -4072,6 +4075,7 @@
       shortName: "Ubytování",
       dashboard: true,
       dashboardTitle: "Připravenost na ubytování",
+      dashboardDone: "Všechno hotovo. Ubytování máš podchycené.",
       emoji: "🏨",
       time: "15 min",
       accent: "#FF6FA5", accentSoft: "#FFF1F6",
@@ -4332,6 +4336,7 @@
       shortName: "Finance",
       dashboard: true,
       dashboardTitle: "Připravenost na peníze",
+      dashboardDone: "Všechno hotovo. Finance máš zajištěné.",
       emoji: "💳",
       time: "20 min",
       accent: "#C08A00", accentSoft: "#FFF6DC",
@@ -4571,6 +4576,7 @@
       shortName: "Checklisty",
       dashboard: true,
       dashboardTitle: "Sbaleno",
+      dashboardDone: "Všechno hotovo. Kufr je sbalený.",
       emoji: "✅",
       time: "15 min",
       accent: "#0E8A96", accentSoft: "#E2F4F6",
@@ -4805,6 +4811,7 @@
       shortName: "Krizové situace",
       dashboard: true,
       dashboardTitle: "Plán B připravený",
+      dashboardDone: "Všechno hotovo. Víš, co dělat, kdyby se něco pokazilo.",
       emoji: "🆘",
       time: "15 min",
       accent: "#E85892", accentSoft: "#FFEAF2",
@@ -7696,7 +7703,7 @@
                    '<span class="rc-item-text"><span class="rc-krok-tag">Krok ' + modCislo + '.' + (o.stepIndex + 1) + '</span><span class="rc-label">' + o.label + '</span></span>' +
                  '</button>';
         }).join('') + '</div>'
-      : '<p class="rc-all-done">Všechno hotovo. Doklady máš v pořádku.</p>';
+      : '<p class="rc-all-done">' + (mod.dashboardDone || "Všechno hotovo.") + '</p>';
 
     box.innerHTML =
       '<div class="rc-top">' +
