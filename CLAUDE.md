@@ -170,13 +170,13 @@ Průvodce „Než odletíš" má **7 modulů** a jsou rozdělené do dvou placen
 |---|---|---|---|---|
 | 1 | `destinace` | Kdy a kam | `zaklad` | ✅ hotový, 5 kroků |
 | 2 | `doklady` | Doklady a formálnosti | `zaklad` | ✅ hotový, 6 kroků, dashboard |
-| 3 | `letenky` | Letenky | `zaklad` | ✅ hotový, 5 kroků, dashboard |
+| 3 | `letenky` | Letenky | `zaklad` | ✅ hotový, 7 kroků, dashboard |
 | 4 | `ubytovani` | Ubytování | `zaklad` | ✅ hotový, 5 kroků, dashboard |
 | 5 | `finance` | Finance a placení | `rozsireni` | ✅ hotový, 6 kroků, dashboard |
-| 6 | `checklisty` | Checklisty | `rozsireni` | ✅ hotový, 5 kroků, dashboard |
+| 6 | `checklisty` | Checklisty | `rozsireni` | ✅ hotový, 6 kroků, dashboard |
 | 7 | `krize` | Krizové situace před odletem | `rozsireni` | ✅ hotový, 5 kroků, dashboard |
 
-**Průvodce „Než odletíš" je obsahově hotový.** 7 modulů, 39 kroků, zhruba 7 650 slov.
+**Průvodce „Než odletíš" je obsahově hotový.** 7 modulů, 40 kroků, zhruba 7 650 slov.
 Obě cenové úrovně se dají prodat, protože ani jedna se neotevře prázdná.
 
 ⚠️ **Modul 7 se píše jinak než ostatní.** Bez vtipů a bez paní Cokdyž, protože ho člověk
@@ -200,7 +200,7 @@ Appka i tenhle dokument mluví o kroku ve tvaru **modul.krok** (2.3 = modul 2, k
 | 3 | Letenky | 3.1 Kdy je správná chvíle koupit · 3.2 Praha, nebo Mošnov · 3.3 Tři funkce, co dělají rozdíl · 3.4 Proč je americký přestup jiný · 3.5 Noční, nebo denní let · 3.6 Basic Economy · 3.7 Než klikneš na zaplatit |
 | 4 | Ubytování | 4.1 Kde spát podle destinace · 4.2 Kde se ze 120 stane 165 · 4.3 Blokace peněz hotelem · 4.4 Co se dohání až na místě · 4.5 Dvě věci i bez signálu |
 | 5 | Finance | 5.1 Proč nestačí jedna karta · 5.2 Kolik hotovosti · 5.3 Kolik ukousne banka · 5.4 Terminál a koruny · 5.5 Co udělat s bankou · 5.6 Kolik to celé stojí |
-| 6 | Checklisty | 6.1 Co musí být v příručním · 6.2 Co vytisknout · 6.3 Tři věci, co se zapomínají · 6.4 Co se do Ameriky nesmí · 6.5 Poslední večer |
+| 6 | Checklisty | 6.1 Co musí být v příručním · 6.2 Co vytisknout · 6.3 Tři věci, co se zapomínají · 6.4 Co se do Ameriky nesmí · 6.5 Internet v Americe, eSIM · 6.6 Poslední večer |
 | 7 | Krizové situace | 7.1 Zrušený let · 7.2 Onemocníš před odletem · 7.3 Ztracený pas · 7.4 Zamítnutá ESTA · 7.5 Co mít po ruce |
 
 ---
