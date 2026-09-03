@@ -4,6 +4,7 @@ Kurzová PWA appka pro Čechy, kteří letí poprvé sami do USA. Provede je př
 
 **Autorka:** Gábi (s.gábi.na.Floridu), žije na Floridě, provází klienty na místě.
 **Repozitář:** `github.com/sgabinafloridu-netizen/mobilni-aplikace` (soukromý)
+**Nasazeno:** https://usa-bez-cestovky-cast1.netlify.app (Netlify, build se spouští pushem do `main`)
 
 ---
 
@@ -218,7 +219,7 @@ Adresa první noci se plní i z modulu 2 (prvek `addressField`), obojí míří 
 ## 7. Offline režim
 
 - `manifest.json` — PWA manifest, standalone, portrait, theme `#1AC0CE`
-- `sw.js` — service worker, cache `nez-odletis-v39`, strategie cache-first s fallbackem na `index.html`
+- `sw.js` — service worker, cache `nez-odletis-vNNN` (číslo se povyšuje při nasazení, viz níže), strategie cache-first s fallbackem na `index.html`
 
 ⚠️ **Když přibude nový soubor** (obrázek, ikona), musí se přidat do `CACHE_FILES` v `sw.js` a povýšit `CACHE_NAME`, jinak se offline nenačte.
 
