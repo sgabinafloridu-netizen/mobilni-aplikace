@@ -227,6 +227,19 @@ Adresa první noci se plní i z modulu 2 (prvek `addressField`), obojí míří 
 
 ---
 
+## 7b. Nasazení a bezpečnost
+
+`netlify.toml` drží dvě věci, na které se snadno zapomene:
+
+- **Bezpečnostní hlavičky** pro celý web: CSP, `X-Frame-Options`, `nosniff`, `Referrer-Policy`, `Permissions-Policy`. CSP dovoluje jen vlastní doménu, takže **jakýkoli nový externí zdroj (font, skript, obrázek z cizí domény) se tiše zablokuje**. To je záměr: appka nesmí volat ven.
+- **Interní podklady se nesmí vydávat na web.** `CLAUDE.md`, plány, audity a kostry v repu být mají, na internetu ne. Netlify neumí zástupný znak uprostřed cesty, takže se každý soubor vypisuje zvlášť. **Když přibude další interní `.md` nebo PDF, patří do `netlify.toml`.**
+
+⚠️ **Text, který píše uživatel, se nikdy nesmí skládat do HTML bez `escHtml()`.** Jména cestujících, názvy zastávek, poznámky. Appka nemá server, ale skript propašovaný přes takové pole vidí celý `localStorage`, tedy i Trezor s ESTA a rezervacemi. Objeveno 3. 9. 2026 u jména cestujícího na dvou místech.
+
+Písma leží v `fonts/` a **nikdy se netahají z Google Fonts**: kvůli offline režimu i kvůli tomu, aby appka nehlásila Googlu IP každého čtenáře.
+
+---
+
 ## 8. Jak psát texty
 
 Gábi je autorka a texty musí znít jejím hlasem. **Role při psaní: špičkový copywriter a UX writer se specializací na cestování po USA** — platí i pro krátké popisky tlačítek a checklistů, nejen pro dlouhé texty.
