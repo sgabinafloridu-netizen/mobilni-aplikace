@@ -2883,7 +2883,10 @@
                  cena: "590 Kč", odkaz: "" }
   };
   var VYCHOZI_BALICKY = ["zaklad"];         // co má kupující odemčené rovnou
-  var KODY = { "CELY": "rozsireni" };       // kód → balíček
+  /* Odemykací kód. Nesmí to být slovo, které jde uhodnout: leží v kódu
+     stránky, takže hádání je jediná cesta, kterou má smysl zavírat.
+     Bez znaků, co se pletou při opisování z mailu (I, O, nula, jednička). */
+  var KODY = { "FLKAVZW2E9": "rozsireni" };   // kód → balíček
 
   /* ── ikony appky: liniové SVG místo systémových emoji ──
      Stejná gramatika jako ruční SVG v kartě "Moje cesta", jen sesbíraná na
@@ -5465,7 +5468,7 @@
 
   /* Vrátí id balíčku, pokud kód sedí, jinak null. Nezáleží na velikosti písmen. */
   function balicekProKod(kod) {
-    var klic = String(kod || "").trim().toUpperCase();
+    var klic = String(kod || "").toUpperCase().replace(/[\s-]/g, "");
     return Object.prototype.hasOwnProperty.call(KODY, klic) ? KODY[klic] : null;
   }
 
