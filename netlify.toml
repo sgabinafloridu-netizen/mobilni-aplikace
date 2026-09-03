@@ -1,0 +1,30 @@
+# Nastavení nasazení. Dvě věci: bezpečnostní hlavičky pro celý web
+# a schování interních podkladů, které patří do repa, ale ne na internet.
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    # Appka se nesmí dát vložit do cizí stránky jako rám (clickjacking).
+    X-Frame-Options = "SAMEORIGIN"
+    # Prohlížeč nesmí hádat typ souboru podle obsahu.
+    X-Content-Type-Options = "nosniff"
+    # Při odchodu na cizí web se posílá jen doména, ne celá adresa.
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    # Appka nepotřebuje polohu, kameru, mikrofon ani platby.
+    Permissions-Policy = "geolocation=(), camera=(), microphone=(), payment=(), interest-cohort=()"
+    # Vše se smí načítat jen z vlastní domény. Appka je jeden soubor
+    # s vloženým JS a CSS, proto tu musí být 'unsafe-inline'.
+    Content-Security-Policy = "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; media-src 'self'; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'self'"
+
+# Interní podklady: v repu ano, na webu ne.
+[[redirects]]
+  from = "/*.md"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
+  from = "/kostra-nez-odletis.pdf"
+  to = "/404.html"
+  status = 404
+  force = true

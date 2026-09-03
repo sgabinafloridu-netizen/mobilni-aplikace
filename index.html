@@ -17,7 +17,7 @@
 <meta name="apple-mobile-web-app-title" content="Než odletíš">
 <link rel="apple-touch-icon" href="icons/icon-192.png">
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Righteous&display=swap" rel="stylesheet">
+<link href="fonts/fonts.css" rel="stylesheet">
 <style>
   /* ══════════════════════════════════════════════
      TOKENY  (barvy a písma podle design manuálu)
@@ -6306,7 +6306,14 @@
     return min + " min";
   }
 
-  function escHtml(s) { return String(s || "").replace(/&/g, "&amp;").replace(/</g, "&lt;"); }
+  /* Ošetření textu, který píše uživatel (jména, názvy zastávek, poznámky), než se
+     složí do HTML. Musí escapovat i uvozovky a apostrof, ne jen & a <, protože
+     stejná funkce chrání i hodnoty uvnitř atributů. */
+  function escHtml(s) {
+    return String(s || "")
+      .replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;").replace(/'/g, "&#39;");
+  }
 
   // Text i tisková verze čtou stejná data, appka nic nedopočítává navíc,
   // jen je jinak poskládá. Prázdné zastávky (bez jména i bez času) vynechá.
@@ -7347,7 +7354,7 @@
   }
 
   function pcVerdict(name, expiry, navrat) {
-    var who = name ? name + ": pas" : "Pas";
+    var who = name ? escHtml(name) + ": pas" : "Pas";
     if (!expiry) return { cls: "wait", text: "Doplň datum konce platnosti pasu." };
     if (expiry < navrat) {
       return { cls: "bad", text: who + " vyprší " + czDate(expiry) + ", ale návrat je až " + czDate(navrat) + ": potřebuje nový pas." };
@@ -7502,7 +7509,7 @@
     box.innerHTML = travelers.map(function (t, i) {
       return '<label class="esta-row" data-i="' + i + '">' +
                '<input type="checkbox">' +
-               '<span>' + t.name + ' má platnou ESTA</span>' +
+               '<span>' + escHtml(t.name) + ' má platnou ESTA</span>' +
              '</label>';
     }).join('');
 
