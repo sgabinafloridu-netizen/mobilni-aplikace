@@ -9,6 +9,7 @@ Appka přehrává nahrávky **z týhle složky**, ne z internetu. Proto fungují
 | Krok | Soubor | Kde se objeví | Stav |
 |---|---|---|---|
 | 1.3 | `pani-cokdyz-v-noci.mp3` | Kdy a kam, krok 3 „Hurikánová sezóna: kde, kdy a jak moc to řešit" | ⬜ čeká na nahrání |
+| 3.4 | `proc-pod-tri-hodiny-nejdu.mp3` | Letenky, krok 4 „Proč je americký přestup jiný než evropský", krátká nahrávka nad podcastem | ✅ nahráno 3. 9. 2026, 2:25 |
 | 3.4 | `prestup-krok-za-krokem.mp3` | Letenky, krok 4 „Proč je americký přestup jiný než evropský" | ⬜ čeká na nahrání |
 | 6.1 | `co-musi-byt-v-prirucnim.mp3` | Checklisty, krok 1 „Co musí být v příručním, ať se stane cokoliv" | ⬜ čeká na nahrání |
 | 7.5 | `kdyz-se-neco-pokazi.mp3` | Krizové situace, krok 5 „Co mít po ruce, aby se to řešilo snadno" | ⬜ čeká na nahrání |
