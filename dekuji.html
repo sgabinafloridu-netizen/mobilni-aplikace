@@ -74,6 +74,8 @@
     font-size: 15.5px; font-weight: 700; color: var(--tyrkys-dark);
   }
   .mail-box .hlavicka svg { flex: none; }
+  /* na mobilu se jinak láme na „e-“ a „mailu“ */
+  .mail-box .hlavicka .nedelit { white-space: nowrap; }
   .mail-box p { font-size: 14.5px; line-height: 1.65; color: #16505A; }
 
   .nadpis-kroku {
@@ -151,7 +153,7 @@
         <rect x="2.5" y="5" width="19" height="14" rx="2.5"/>
         <path d="M3 6.5 L12 13 L21 6.5"/>
       </svg>
-      Odemykací kód máš v e-mailu
+      Odemykací kód máš v <span class="nedelit">e-mailu</span>
     </div>
     <p>Poslala jsem ti ho spolu s potvrzením objednávky. Pokud do pár minut nic nedorazí, mrkni do složky s hromadnou poštou nebo do spamu.</p>
   </div>
