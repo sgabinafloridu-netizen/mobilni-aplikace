@@ -17,6 +17,8 @@
     --tyrkys-dark: #0B7C87;
     --ruzova: #FF6FA5;
     --zluta: #FFD23F;
+    --zlata: #D9B876;
+    --vino: #A6395E;
     --inkoust: #14233A;
     --papir: #F5FAFC;
     --tyrkys-light: #E6F8FA;
@@ -38,17 +40,18 @@
 
   .btn {
     display: inline-block; background: linear-gradient(135deg, #FF6FA5 0%, #FF9E6B 100%);
-    color: #fff; font-family: 'Poppins', sans-serif; font-size: 18px; font-weight: 700;
+    color: #fff; font-family: 'Poppins', sans-serif; font-size: 16px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: .03em;
     padding: 19px 46px; border-radius: 50px; text-decoration: none; border: none; cursor: pointer;
     box-shadow: 0 6px 24px rgba(255,111,165,.42); transition: transform .15s, box-shadow .15s;
   }
   .btn:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(255,111,165,.5); }
   .btn-outline { background: transparent; border: 2px solid var(--tyrkys); color: var(--tyrkys); box-shadow: none; padding: 17px 32px; }
   .btn-outline:hover { background: rgba(26,192,206,.08); box-shadow: none; }
-  .cena-final .btn-outline { color: #fff; border-color: rgba(255,255,255,.4); }
-  .cena-final .btn-outline:hover { background: rgba(255,255,255,.06); }
+  .cena-final .btn-outline { color: var(--tyrkys); border-color: var(--tyrkys); }
+  .cena-final .btn-outline:hover { background: rgba(26,192,206,.1); }
   .btn-wrap { text-align: center; margin: 30px 0; }
-  .btn-note { display: block; margin-top: 12px; font-size: 13px; opacity: .65; }
+  .btn-note { display: block; margin-top: 12px; font-size: 13px; opacity: .85; text-shadow: 0 1px 3px rgba(0,0,0,.35); }
 
   /* ─── HERO ─── */
   .hero {
@@ -60,6 +63,7 @@
   .hero-pain { font-family: 'Righteous', 'Poppins', sans-serif; font-size: clamp(20px, 4vw, 28px); font-weight: 400; line-height: 1.3; margin: 0 auto 20px; max-width: 560px; }
   .hero h1 { font-family: 'Righteous', 'Poppins', sans-serif; font-size: clamp(26px, 5vw, 42px); font-weight: 400; line-height: 1.35; max-width: 720px; margin: 0 auto 18px; }
   .hero h1 .barva { color: var(--tyrkys); }
+  .hero h1 .zlata { color: var(--zlata); }
   .hero-sub { font-size: 18px; line-height: 1.7; max-width: 560px; margin: 0 auto 8px; opacity: .88; }
   .hero-fakta { list-style: none; max-width: 440px; margin: 26px auto 0; text-align: left; }
   .hero-fakta li { display: flex; align-items: center; gap: 14px; font-size: 14.5px; line-height: 1.4; padding: 9px 0; opacity: .95; }
@@ -100,25 +104,31 @@
   .reseni-list li .fajfka { flex: none; width: 28px; height: 28px; border-radius: 50%; background: var(--tyrkys); color: #fff; font-weight: 700; display: flex; align-items: center; justify-content: center; font-size: 14px; }
 
   /* ─── MODULY (white) ─── */
-  .moduly-sekce { background: #fff; }
-  .moduly { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; max-width: 900px; margin: 0 auto; }
-  .modul-item { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 8px; padding: 20px 14px; background: #fff; border: 1px solid var(--tyrkys-light); border-radius: 16px; box-shadow: 0 6px 18px rgba(20,35,58,.07); }
+  .moduly-sekce { background: var(--vino); }
+  .moduly-sekce h2 { color: #fff; }
+  .naslapana-vec b { color: #fff; }
+  .bonus-moduly .modul-item { background: #FFFBF3; border-color: var(--zlata); }
+  .bonus-moduly .modul-item .kolecko { border-color: var(--zlata); }
+  .bonus-moduly .modul-item .kolecko.scena { background: rgba(217,184,118,.2); }
+  .moduly-sekce > .inner > p.p3 { color: #fff; }
+  .moduly { display: flex; flex-wrap: wrap; justify-content: center; gap: 16px; max-width: 900px; margin: 0 auto; }
+  .modul-item { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 8px; padding: 20px 14px; background: #fff; border: 1px solid var(--tyrkys-light); border-radius: 16px; box-shadow: 0 6px 18px rgba(20,35,58,.07); box-sizing: border-box; flex: 0 1 calc(25% - 12px); }
   .modul-item .kolecko { width: 56px; height: 56px; border-radius: 50%; overflow: hidden; flex: none; border: 2.5px solid var(--tyrkys); background: #fff; box-shadow: 0 4px 10px rgba(26,192,206,.25); }
   .modul-item .kolecko img { width: 100%; height: 100%; object-fit: cover; display: block; }
   .modul-item .kolecko.scena { background: var(--tyrkys-light); }
   .modul-item .kolecko.scena img { object-fit: contain; padding: 9px; }
   .modul-item .kolecko.emoji { display: flex; align-items: center; justify-content: center; font-size: 24px; background: var(--tyrkys-light); }
-  .modul-item .cislo { font-size: 10.5px; font-weight: 700; color: var(--ruzova); text-transform: uppercase; letter-spacing: .5px; }
+  .modul-item .cislo { font-size: 10.5px; font-weight: 700; color: var(--zlata); text-transform: uppercase; letter-spacing: .5px; }
   .modul-item h3 { font-size: 14px; font-weight: 700; }
   .modul-item p { font-size: 12px; line-height: 1.45; color: #4C6373; }
-  @media (max-width: 760px) { .moduly { grid-template-columns: repeat(2, 1fr); gap: 12px; } .modul-item p { font-size: 13px; line-height: 1.5; } .modul-item h3 { font-size: 15px; } }
-  @media (max-width: 460px) { .moduly { grid-template-columns: 1fr; } .modul-item { flex-direction: row; text-align: left; padding: 16px; } .modul-item .kolecko { width: 48px; height: 48px; } }
+  @media (max-width: 760px) { .moduly { gap: 12px; } .modul-item { flex-basis: calc(50% - 6px); } .modul-item p { font-size: 13px; line-height: 1.5; } .modul-item h3 { font-size: 15px; } }
+  @media (max-width: 460px) { .modul-item { flex-basis: 100%; flex-direction: row; text-align: left; padding: 16px; } .modul-item .kolecko { width: 48px; height: 48px; } }
 
   /* ─── REFERENCE (sand) ─── */
   .reference { background: var(--sand); }
   .ref-karty { display: flex; flex-wrap: wrap; gap: 18px; justify-content: center; max-width: 880px; margin: 0 auto; }
   .ref-karta { background: #fff; border-radius: 16px; padding: 24px 22px; flex: 1 1 260px; max-width: 300px; font-size: 14px; line-height: 1.6; color: #4C6373; box-shadow: 0 8px 20px rgba(20,35,58,.06); }
-  .ref-karta .hvezdy { color: var(--zluta); font-size: 15px; margin-bottom: 10px; letter-spacing: 2px; }
+  .ref-karta .hvezdy { color: var(--zlata); font-size: 15px; margin-bottom: 10px; letter-spacing: 2px; }
   .ref-karta .autor { display: flex; align-items: center; gap: 10px; margin-top: 14px; }
   .ref-karta .avatar { width: 36px; height: 36px; border-radius: 50%; flex: none; background: linear-gradient(135deg, var(--tyrkys), var(--ruzova)); color: #fff; font-weight: 700; font-size: 14px; display: flex; align-items: center; justify-content: center; }
   .ref-karta .jmeno { font-size: 12.5px; font-weight: 700; color: var(--inkoust); }
@@ -136,7 +146,7 @@
   .cena-karta .btn { width: 100%; text-align: center; padding: 15px 20px; font-size: 15.5px; }
   .rodina-note { max-width: 500px; margin: 30px auto 0; background: var(--tyrkys-light); border-radius: 14px; padding: 16px 20px; font-size: 14px; line-height: 1.6; color: #0e5a66; }
   .naslapane { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; max-width: 700px; margin: 16px auto 0; }
-  .naslapana-vec { background: #fff; border: 1.5px solid var(--tyrkys-light); border-radius: 50px; padding: 10px 18px; font-size: 13.5px; color: var(--inkoust); box-shadow: 0 4px 12px rgba(20,35,58,.05); }
+  .naslapana-vec { font-size: 16px; color: rgba(255,255,255,.7); }
 
   /* ─── CENA FINAL (dark, těsně před závěrem) ─── */
   .cena-final { background: #14233A; text-align: center; }
@@ -152,19 +162,25 @@
   .cena-final-karta p { font-size: 13.5px; line-height: 1.55; color: rgba(255,255,255,.75); margin: 14px 0 22px; min-height: 58px; }
   .cena-final-karta .btn { width: 100%; text-align: center; padding: 14px 20px; font-size: 15px; }
   .cena-final-karta.hlavni { border-color: var(--ruzova); background: rgba(255,111,165,.08); }
-  .cena-final-karta .stitek { position: absolute; top: -14px; left: 50%; transform: translateX(-50%); background: var(--ruzova); color: #fff; font-size: 11px; font-weight: 700; letter-spacing: .6px; padding: 6px 16px; border-radius: 50px; white-space: nowrap; }
-  .bundle-nabidka { max-width: 560px; margin: 30px auto 0; background: rgba(255,255,255,.05); border: 1px dashed rgba(255,255,255,.25); border-radius: 16px; padding: 20px 22px; text-align: left; }
+  .cena-final-karta .stitek { position: absolute; top: -14px; left: 50%; transform: translateX(-50%); background: var(--zlata); color: var(--inkoust); font-size: 11px; font-weight: 700; letter-spacing: .6px; padding: 6px 16px; border-radius: 50px; white-space: nowrap; }
+  .bundle-nabidka { max-width: 480px; margin: 18px auto 0; text-align: center; }
+  .bundle-nabidka.pripravuje-se b { color: var(--zlata); }
   .bundle-text { font-size: 13.5px; line-height: 1.6; color: rgba(255,255,255,.8); margin-bottom: 12px; }
   .bundle-text b { color: #fff; }
   .bundle-link { display: inline-block; font-size: 13.5px; font-weight: 700; color: var(--tyrkys); text-decoration: none; }
   .bundle-link:hover { text-decoration: underline; }
   .cena-final-poznamka { margin: 28px auto 0; font-size: 13px; color: rgba(255,255,255,.6); }
-  .cena-final-garance { max-width: 480px; margin: 16px auto 0; background: rgba(26,192,206,.12); border: 1.5px solid var(--tyrkys); border-radius: 14px; padding: 14px 20px; font-size: 14px; line-height: 1.55; color: #fff; }
+  .cena-final-garance { max-width: 420px; margin: 22px auto 0; background: rgba(26,192,206,.12); border: 1.5px solid var(--tyrkys); border-radius: 18px; padding: 22px 24px; text-align: center; color: #fff; }
+  .cena-final-garance svg { margin: 0 auto 10px; display: block; }
+  .cena-final-garance .garance-titul { font-family: 'Righteous', 'Poppins', sans-serif; font-size: 19px; color: var(--tyrkys); margin-bottom: 6px; }
+  .cena-final-garance p { font-size: 13.5px; line-height: 1.55; color: rgba(255,255,255,.85); margin: 0; }
 
   /* ─── FAQ (white) ─── */
   .faq { background: #fff; }
   .faq-polozka { max-width: 640px; margin: 0 auto 16px; padding: 20px 24px; background: var(--papir); border-radius: 16px; }
-  .faq-polozka h3 { font-size: 15.5px; font-weight: 700; margin-bottom: 8px; }
+  .faq-polozka h3 { display: flex; align-items: flex-start; gap: 12px; font-size: 15.5px; font-weight: 700; margin-bottom: 8px; }
+  .faq-polozka h3 svg { flex: none; margin-top: 1px; }
+  .faq-polozka p { margin-left: 36px; }
   .faq-polozka p { font-size: 14.5px; line-height: 1.65; color: #4C6373; }
 
   /* ─── KDO JE GÁBI (warm) ─── */
@@ -180,7 +196,7 @@
   .zaver h2 { color: #fff; }
   .zaver p.p3 { color: rgba(255,255,255,.82); }
 
-  footer { background: #0d1b2a; color: rgba(255,255,255,.4); text-align: center; padding: 30px 20px; font-size: 12px; line-height: 1.8; }
+  footer { background: #0d1b2a; border-top: 1px solid rgba(255,255,255,.1); color: rgba(255,255,255,.4); text-align: center; padding: 30px 20px; font-size: 12px; line-height: 1.8; }
   footer a { color: rgba(255,255,255,.5); }
 
   /* ─── STICKY CTA ─── */
@@ -195,11 +211,11 @@
 <section class="hero">
   <span class="eyebrow">✈️ Pro každého, kdo chce do USA poprvé a bez cestovky</span>
   <p class="hero-pain">Třicet otevřených záložek. A pořád nevíš, kde začít.</p>
-  <h1>S touhle appkou dáš Ameriku jako výlet do Brna. I když je tvůj strop zatím Chorvatsko.</h1>
-  <p class="hero-sub">Žádný chaos. Zadáš datum odletu a appka tě povede přesně tam, kde teď jsi, krok za krokem, jen to, co řešit právě teď.</p>
+  <h1>S touhle appkou dáš <span class="zlata">Ameriku</span> jako výlet do <span class="zlata">Brna</span>. I když je tvůj strop zatím <span class="zlata">Chorvatsko</span>.</h1>
+  <p class="hero-sub">Zadáš datum odletu a appka ví, kde teď jsi. Co vyřídit dnes, co příští týden, co až na letišti. Žádný seznam, který tě zahltí. Jen jeden krok, který má smysl právě teď.</p>
 
   <ul class="hero-fakta">
-    <li><span class="ico cislo">7</span> Appka ukáže vždycky jen to, co řešit právě teď</li>
+    <li><span class="ico cislo">7</span> modulů, appka ukáže vždycky jen to, co řešit právě teď</li>
     <li><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path transform="rotate(55 12 12)" d="M12 1.5 L13.6 9 L22 13.5 L13.9 13.2 L13.1 18.5 L16 21 L12 20 L8 21 L10.9 18.5 L10.1 13.2 L2 13.5 L10.4 9 Z" fill="#1AC0CE"/></svg></span> Appka se řídí tvým datem odletu, ne pevným rozvrhem</li>
     <li><span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2" y="5.5" width="20" height="14" rx="2.5" fill="#1AC0CE"/><rect x="2" y="9" width="20" height="3" fill="#14233A"/><rect x="5" y="15.5" width="6" height="2" rx="1" fill="#FFFFFF"/></svg></span> Od 990 Kč, přístup hned po zaplacení</li>
   </ul>
@@ -207,7 +223,7 @@
   <!-- 5: CTA 1 -->
   <div class="btn-wrap" style="margin-top:34px;">
     <a href="index.html" class="btn">Chci průvodce a klid v hlavě →</a>
-    <span class="btn-note" style="color:rgba(255,255,255,.6);">Běží v prohlížeči. Nikam se neinstaluje. Funguje i offline.</span>
+    <span class="btn-note" style="color:#FFFFFF;">Běží v prohlížeči. Nikam se neinstaluje. Funguje i offline.</span>
   </div>
 </section>
 
@@ -219,21 +235,19 @@
     <div class="pribeh-wrap">
       <img src="images/gabi-hlavicka.jpg" alt="Gábi">
       <div class="pribeh-text">
-        <p class="p3">Svíral se mi žaludek. Neznámá dálka, cizí jazyk, cizí systém. Ale tehdy bylo paradoxně jedno plus navíc: prostě jsem musela věřit, že to dopadne dobře, protože jiná možnost nebyla.</p>
+        <p class="p3">Svíral se mi žaludek. Tisíce kilometrů od domova a ani jeden člověk, kterého znám. Ale tehdy bylo paradoxně jedno plus navíc: prostě jsem musela věřit, že to dopadne dobře, protože jiná možnost nebyla.</p>
         <p class="p3">Uběhlo třicet let. A víš, co se změnilo?</p>
         <p class="p3"><b>Nic.</b></p>
         <p class="p3"><i>(Tedy kromě toho, že dneska u toho zmatkování máme vysokorychlostní internet. A třicet záložek místo jedné.)</i></p>
         <p class="p3">Přesně tenhle stav teď žije moje kamarádka Hanka. Chystá se do Ameriky poprvé na vlastní pěst. Sedí po nocích u počítače. Fóra, blogy. A čím víc toho přečte, tím míň má jasno. Protože každý píše něco trochu jiného a nikdo jí neřekne, co platí pro ni a její termín.</p>
         <p class="p3"><b>Tenhle zmatek znám z obou stran. A přesně proto jsem tu appku udělala.</b></p>
-        <p class="p3">Chci, aby se Hanka, a všichni ostatní, co poprvé vyrážejí na vlastní pěst, místo večerního stresování fakt těšili.</p>
+        <p class="p3">Chci, aby ses ty, co poprvé vyrážíš na vlastní pěst, netrápila večerním stresováním, ale se fakt těšila.</p>
       </div>
     </div>
 
-    <!-- 4: VIDEO (přesunuto z hero, tady už má návštěvník důvěru, ne pochybnost) -->
-    <div class="video-placeholder" style="margin-top:36px;">
+    <div style="margin-top:36px;text-align:center;">
       <img src="images/gabi-happy-plaz.svg" alt="" style="width:56px;height:56px;margin:0 auto 12px;display:block;">
-      <h3>Video ode mě je na cestě</h3>
-      <p>Mezitím čti dál, appka nezahálí.</p>
+      <p style="font-family:'Caveat',cursive;font-size:23px;color:var(--ruzova);">Pojď se mnou na ty věci, co ti dělají největší starost.</p>
     </div>
   </div>
 </section>
@@ -244,10 +258,13 @@
     <h2>Znám to. Fakt znám</h2>
     <div class="h2-underline"></div>
     <p class="p3 center"><span class="pop-t">Věci se dějí.</span> I těm, co mají všechno srovnané.</p>
-    <p class="p3 center">Bojíš se, že ti u kontroly někdo promluví rychleji, než stihneš v hlavě přeložit? Stává se to i lidem, co anglicky umí líp, než si myslíš.</p>
-    <p class="p3 center">A kolik si vzít peněz, ať to stačí a nic nepřeplatíš? To taky nemusí být hádanka.</p>
+    <p class="p3 center">Bojíš se, že u kontroly někdo promluví rychleji, než si to stihneš v hlavě přeložit? Stává se to i lidem, kteří mají angličtinu v malíku.</p>
+    <p class="p3 center">A kolik si vzít peněz, ať to stačí a nebo ať to zas není moc a doma to pak nemusíš měnit zpátky? To taky nemusí být hádanka.</p>
+    <div style="float:right;width:120px;height:120px;border-radius:50%;overflow:hidden;margin:6px 0 16px 22px;box-shadow:0 8px 20px rgba(0,0,0,.25);">
+      <img src="images/pani-cokdyz-kufr-smile.svg" alt="Paní Cokdyž s příručním kufříkem, v klidu" style="width:100%;height:100%;object-fit:cover;">
+    </div>
     <p class="p3 center">Co třeba dělat, když máš <span class="pop-r">dvě hodiny na přestup</span> a na imigračním je fronta jak za socíků na toaletní papír. A ty víš, že se v Americe nesmí předbíhat.</p>
-    <p class="p3 center">Tohle se nedozvíš z žádného blogu. A cestovka ti to taky neřekne, protože ona prodává sny, ne realitu.</p>
+    <p class="p3 center">Tohle se nedozvíš z žádného blogu. A cestovka ti to taky neřekne, protože ona prodává sny, ne realitu. Ona tě dostane na letiště. Co se děje potom, to je tvůj problém.</p>
     <p class="p3 center">Do Česka můžeš dovézt kde co, ale do USA je to jinak. Své by o tom mohl vyprávět kamarád Michal, který vezl z <span class="pop-t">Kolumbie do Denveru</span> šunkovou kýtu. <span class="pop-r">Pokuta byla astronomická.</span> A o kýtu přišel taky.</p>
     <p class="p3 center">Co dalšího se nesmí vozit, a co naopak smí, i když by tě to nenapadlo, to máš v průvodci celé pohromadě.</p>
   </div>
@@ -260,10 +277,10 @@
     <div class="h2-underline"></div>
     <ul class="reseni-list">
       <li><span class="fajfka">✓</span> Stojíš na letišti a víš přesně, co máš v ruce a proč. Žádné zoufalé hledání dokladu ve frontě.</li>
-      <li><span class="fajfka">✓</span> Víš přesně, kdy co zařídit, za sebe i za každého, kdo letí s tebou.</li>
-      <li><span class="fajfka">✓</span> Víš, kdy koupit letenku a proč se přestup v Americe chová jinak než v Evropě.</li>
+      <li><span class="fajfka">✓</span> Nezjistíš na poslední chvíli, že dceři za týden vyprší pas. Víš to měsíce dopředu.</li>
+      <li><span class="fajfka">✓</span> Nekoupíš letenku ze strachu o čtrnáct dní dřív, a na přestupu v Americe neběháš mezi terminály, protože nevíš, že se prochází bezpečnostní kontrolou znovu.</li>
       <li><span class="fajfka">✓</span> Na imigrační kontrole nestojíš s prázdnou hlavou. Víš, co tě čeká.</li>
-      <li><span class="fajfka">✓</span> Když se něco pokazí, sáhneš po appce, ne po panice.</li>
+      <li><span class="fajfka">✓</span> Když ti zruší let, neotvíráš třicet dalších záložek. Otevřeš appku a najdeš postup.</li>
     </ul>
   </div>
 </section>
@@ -276,31 +293,31 @@
     <div class="moduly">
       <div class="modul-item"><div class="kolecko scena"><img src="images/sceny/scena-kdy-a-kam.svg" alt=""></div><div class="telo"><div class="cislo">Modul 1</div><h3>Kdy a kam</h3><p>Zjistíš, která destinace sedí tobě... ne cestovce, ne Instagramu. A ve kterém období tam jet, aby tě Amerika nepřekvapila víc, než obvykle překvapí.</p></div></div>
       <div class="modul-item"><div class="kolecko scena"><img src="images/sceny/scena-razitko.svg" alt=""></div><div class="telo"><div class="cislo">Modul 2</div><h3>Doklady a formálnosti</h3><p>Appka zkontroluje platnost pasu za tebe i za každého, kdo letí s tebou. ESTA vyřídíš na správném místě, ne na podvodném webu, který vypadá skoro stejně.</p></div></div>
-      <div class="modul-item"><div class="kolecko scena"><img src="images/sceny/scena-prestup.svg" alt=""></div><div class="telo"><div class="cislo">Modul 3</div><h3>Letenky</h3><p>Víš přesně, kdy nakupovat, kde hledat a proč je délka přestupu důležitější než cena letenky. Zkrácený přestup v Americe se chová jinak než v Evropě, a to se ti může pořádně prodražit.</p></div></div>
+      <div class="modul-item"><div class="kolecko scena"><img src="images/sceny/scena-prestup.svg" alt=""></div><div class="telo"><div class="cislo">Modul 3</div><h3>Letenky</h3><p>Víš přesně, kdy letenku koupit a proč se přestup v Americe chová úplně jinak než v Evropě. Zkrácený přestup, co by v Evropě prošel bez problému, tě tady může stát zmeškaný let.</p></div></div>
       <div class="modul-item"><div class="kolecko scena"><img src="images/sceny/scena-karta-blokace.svg" alt=""></div><div class="telo"><div class="cislo">Modul 4</div><h3>Ubytování</h3><p>Žádné překvapení na recepci. Víš dopředu o resort fee, blokaci na kartě i o tom, proč čtyři hvězdičky v Americe neznamenají to samé co doma.</p></div></div>
       <div class="modul-item"><div class="kolecko scena"><img src="images/sceny/scena-penezenka.svg" alt=""></div><div class="telo"><div class="cislo">Modul 5</div><h3>Finance a placení</h3><p>Přesně víš, kolik hotovosti vzít, jak funguje spropitné a kolik si ukousne banka ještě předtím, než z účtu zmizí první tisícovka.</p></div></div>
       <div class="modul-item"><div class="kolecko scena"><img src="images/sceny/scena-vaha-kufr.svg" alt=""></div><div class="telo"><div class="cislo">Modul 6</div><h3>Checklisty</h3><p>Co sbalit, co vytisknout, co do Ameriky nesmí. Nic nezapomeneš, protože appka tě hlídá podle tvého data odletu.</p></div></div>
-      <div class="modul-item"><div class="kolecko scena"><img src="images/sceny/florida-bourka.svg" alt=""></div><div class="telo"><div class="cislo">Modul 7</div><h3>Krizové situace</h3><p>Zrušený let, ztracený pas, zamítnutá ESTA. Pro každou situaci klidný postup místo paniky. Protože věci se dějí, i těm, co mají všechno srovnané.</p></div></div>
+      <div class="modul-item"><div class="kolecko scena"><img src="images/sceny/florida-bourka.svg" alt=""></div><div class="telo"><div class="cislo">Modul 7</div><h3>Krizové situace</h3><p>Zrušený let, ztracený pas, zamítnutá ESTA. Pro každý z těch průšvihů máš klidný postup a ne chaos v hlavě, protože věci se dějí i těm, co mají jinak všechno OK.</p></div></div>
     </div>
 
-    <p class="p3 center" style="margin-top:30px;font-weight:700;">A k tomu navíc dostaneš 4 věci, které v žádném jiném průvodci nenajdeš.</p>
-    <div class="moduly" style="margin-top:16px;">
-      <div class="modul-item"><div class="kolecko emoji">🔒</div><div class="telo"><h3>Trezor</h3><p>Offline schránka na ESTU, letenky a rezervace. Funguje i bez signálu, i na letišti, kde data nestačí.</p></div></div>
-      <div class="modul-item"><div class="kolecko emoji">🗺️</div><div class="telo"><h3>Itinerář</h3><p>Přehledný plán cesty, který si upravíš podle svého data odletu a destinace.</p></div></div>
-      <div class="modul-item"><div class="kolecko emoji">🧮</div><div class="telo"><h3>Můj rozpočet</h3><p>Přesně vidíš, kolik celý výlet stojí. Bez překvapení na konci.</p></div></div>
-      <div class="modul-item"><div class="kolecko emoji">🔁</div><div class="telo"><h3>Převodník</h3><p>Měny a jednotky, Fahrenheit, galony, míle, dolary. Všechno na jednom místě, bez googlu, a rovnou i kalkulačka spropitného.</p></div></div>
+    <p class="p3 center" style="margin-top:30px;font-family:'Righteous','Poppins',sans-serif;font-weight:400;"><span style="color:rgba(255,255,255,.75);">A k tomu navíc dostaneš 4 věci,</span> <span style="color:var(--zlata);">které v žádném jiném průvodci nenajdeš.</span></p>
+    <div class="moduly bonus-moduly" style="margin-top:16px;">
+      <div class="modul-item"><div class="kolecko scena"><img src="images/ikony/mini-zamek.svg" alt=""></div><div class="telo"><h3>Trezor</h3><p>Offline schránka na ESTU, letenky a rezervace. Funguje i bez signálu, na letišti i tam, kde marně hledáš wifi.</p></div></div>
+      <div class="modul-item"><div class="kolecko scena"><img src="images/ikony/mini-mapa-trasa.svg" alt=""></div><div class="telo"><h3>Itinerář</h3><p>Skvělá vychytávka pro ty, co si chtějí připravit přehledný plán cesty, klidně i hodinu po hodině.</p></div></div>
+      <div class="modul-item"><div class="kolecko scena"><img src="images/ikony/mini-kalkulacka.svg" alt=""></div><div class="telo"><h3>Můj rozpočet</h3><p>Přesně vidíš, kolik tě celá dovolená stojí. Bez překvapení na konci.</p></div></div>
+      <div class="modul-item"><div class="kolecko scena"><img src="images/ikony/mini-prevod.svg" alt=""></div><div class="telo"><h3>Převodník</h3><p>Kalkulačka spropitného po ruce, ale taky měny a jednotky, Fahrenheit, galony, míle, dolary. Všechno na jednom místě.</p></div></div>
     </div>
 
     <div style="text-align:center;margin-top:20px;">
-      <span class="naslapana-vec">🎥 <b>Videa</b> u vybraných kroků appky</span>
+      <span class="naslapana-vec"><svg viewBox="0 0 24 24" width="15" height="15" style="vertical-align:-2px" aria-hidden="true"><rect x="2" y="5" width="14" height="14" rx="3" fill="#1AC0CE"/><path d="M18 9.5 L22 7 V17 L18 14.5 Z" fill="#1AC0CE"/><path d="M7.5 9.5 L12.5 12 L7.5 14.5 Z" fill="#FFFFFF"/></svg> <b>Videa a podcasty</b> u vybraných modulů appky</span>
     </div>
   </div>
 </section>
 
 <!-- CTA 2 -->
-<section style="background:#fff;padding-top:0;">
+<section style="background:#fff;padding-top:0;overflow:hidden;">
   <div class="btn-wrap">
-    <a href="index.html" class="btn">Pojď na to spolu se mnou →</a>
+    <a href="index.html" class="btn">Chci appku, ne dalších 30 záložek →</a>
   </div>
 </section>
 
@@ -359,12 +376,16 @@
     <!-- Náhled druhého průvodce "Až přistaneš". Zatím se neprodává (kostra
          v usa-bez-cestovky-cast2/KOSTRA.md), takže žádné tlačítko koupit,
          jen slib. Stejný vzor jako appka: appka/CLAUDE.md, sekce 10. -->
-    <div class="bundle-nabidka">
-      <div class="bundle-text"><b>Než odletíš pokračuje i po přistání.</b> Druhý průvodce <b>Až přistaneš</b> (doprava, nakupování, stravování a další) se teď připravuje. V appce ho uvidíš jako náhled hned vedle sedmi hotových modulů.</div>
+    <div class="bundle-nabidka pripravuje-se">
+      <div class="bundle-text"><b>Než odletíš pokračuje i po přistání.</b> Průvodce 2. díl, <b>Až přistaneš</b> (doprava, nakupování, stravování a další) se teď připravuje. V appce ho uvidíš jako náhled hned vedle sedmi hotových modulů.</div>
     </div>
 
     <p class="cena-final-poznamka">Ceny jsou s DPH. Přístup dostaneš okamžitě po zaplacení.</p>
-    <div class="cena-final-garance">✓ 30denní záruka spokojenosti. Když ti průvodce nepomůže, vrátím ti peníze. Bez otázek. <b>Gabi.</b></div>
+    <div class="cena-final-garance">
+      <svg viewBox="0 0 24 24" width="34" height="34" fill="none" stroke="#1AC0CE" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2 L20 5.5 V11 C20 16 16.5 20 12 22 C7.5 20 4 16 4 11 V5.5 Z"/><path d="M8.5 12 L11 14.5 L15.5 9.5"/></svg>
+      <div class="garance-titul">30denní záruka</div>
+      <p>Když ti průvodce nepomůže, vrátím ti peníze. Bez otázek. <b style="color:#fff;">Gabi.</b></p>
+    </div>
     <div class="btn-wrap" style="margin-top:22px;margin-bottom:0;">
       <a href="index.html" class="btn btn-outline">Vyzkoušet bez rizika, 30 dní záruka →</a>
     </div>
@@ -377,24 +398,28 @@
     <h2>Co se lidi ptají nejčastěji</h2>
     <div class="h2-underline"></div>
     <div class="faq-polozka">
-      <h3>Funguje appka i pro celou rodinu, ne jen pro mě?</h3>
+      <h3><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#1AC0CE" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.9 22 C10.9 17 11.1 13.6 12 11"/><path d="M12 11 C8.6 8.6 5.2 8.6 2.6 11"/><path d="M12 11 C9.6 5.6 6.2 3.6 3.2 4.2"/><path d="M12 11 C14.4 5.6 17.8 3.6 20.8 4.2"/><path d="M12 11 C15.4 8.6 18.8 8.6 21.4 11"/></svg>Funguje appka i pro celou rodinu, ne jen pro mě?</h3>
       <p>Ano. Appka hlídá doklady a termíny pro každého, kdo jede s tebou, ne jen pro tebe samotnou. Cena je za appku, ne za jednoho člověka.</p>
     </div>
     <div class="faq-polozka">
-      <h3>Co když nejsem technický typ?</h3>
+      <h3><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#1AC0CE" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.9 22 C10.9 17 11.1 13.6 12 11"/><path d="M12 11 C8.6 8.6 5.2 8.6 2.6 11"/><path d="M12 11 C9.6 5.6 6.2 3.6 3.2 4.2"/><path d="M12 11 C14.4 5.6 17.8 3.6 20.8 4.2"/><path d="M12 11 C15.4 8.6 18.8 8.6 21.4 11"/></svg>Co když nejsem technický typ?</h3>
       <p>Appka běží přímo v prohlížeči. Nic se neinstaluje, nic se nestahuje. Otevřeš odkaz a appka je tam, stejně jako webová stránka.</p>
     </div>
     <div class="faq-polozka">
-      <h3>Co když se mi změní termín odletu?</h3>
+      <h3><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#1AC0CE" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.9 22 C10.9 17 11.1 13.6 12 11"/><path d="M12 11 C8.6 8.6 5.2 8.6 2.6 11"/><path d="M12 11 C9.6 5.6 6.2 3.6 3.2 4.2"/><path d="M12 11 C14.4 5.6 17.8 3.6 20.8 4.2"/><path d="M12 11 C15.4 8.6 18.8 8.6 21.4 11"/></svg>Co když se mi změní termín odletu?</h3>
       <p>Datum si kdykoliv upravíš a appka přepočítá celý plán znovu.</p>
     </div>
     <div class="faq-polozka">
-      <h3>Funguje appka bez signálu?</h3>
+      <h3><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#1AC0CE" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.9 22 C10.9 17 11.1 13.6 12 11"/><path d="M12 11 C8.6 8.6 5.2 8.6 2.6 11"/><path d="M12 11 C9.6 5.6 6.2 3.6 3.2 4.2"/><path d="M12 11 C14.4 5.6 17.8 3.6 20.8 4.2"/><path d="M12 11 C15.4 8.6 18.8 8.6 21.4 11"/></svg>Funguje appka bez signálu?</h3>
       <p>Ano, appka i Trezor fungují offline. Signál potřebuješ jen při úplně prvním otevření.</p>
     </div>
     <div class="faq-polozka">
-      <h3>Jaký je rozdíl mezi Základem a Celým průvodcem?</h3>
+      <h3><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#1AC0CE" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.9 22 C10.9 17 11.1 13.6 12 11"/><path d="M12 11 C8.6 8.6 5.2 8.6 2.6 11"/><path d="M12 11 C9.6 5.6 6.2 3.6 3.2 4.2"/><path d="M12 11 C14.4 5.6 17.8 3.6 20.8 4.2"/><path d="M12 11 C15.4 8.6 18.8 8.6 21.4 11"/></svg>Jaký je rozdíl mezi Základem a Celým průvodcem?</h3>
       <p>Pro soft launch prodávám jen Celý průvodce za zvýhodněnou cenu. Varianta jen s moduly 1 až 4 bude dostupná od veřejného launche 15. září.</p>
+    </div>
+    <div class="faq-polozka">
+      <h3><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#1AC0CE" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10.9 22 C10.9 17 11.1 13.6 12 11"/><path d="M12 11 C8.6 8.6 5.2 8.6 2.6 11"/><path d="M12 11 C9.6 5.6 6.2 3.6 3.2 4.2"/><path d="M12 11 C14.4 5.6 17.8 3.6 20.8 4.2"/><path d="M12 11 C15.4 8.6 18.8 8.6 21.4 11"/></svg>Platím jednou, nebo je to předplatné?</h3>
+      <p>Platíš jednou. Appka je tvoje natrvalo, žádné měsíční poplatky.</p>
     </div>
   </div>
 </section>
@@ -402,10 +427,10 @@
 <!-- 16: ZÁVĚREČNÉ CTA -->
 <section class="zaver">
   <div class="inner">
-    <h2>Konec chaosu na obrazovce i v hlavě.</h2>
-    <p class="p3 center">Třicet záložek otevřených. A moje kámoška Hanka pořád neví, kde začít.</p>
-    <p class="p3 center"><b>Ty už víš.</b></p>
-    <p class="p3 center">Jedna appka. Někdo, kdo tím prošel. A klid, který přijde ne z přípravy doma, ale z toho, co máš u sebe na letišti.</p>
+    <h2>Zavři 30 otevřených záložek.</h2>
+    <p class="p3 center"><b style="color:var(--zlata);">Už je nebudeš potřebovat.</b></p>
+    <p class="p3 center">Ten neustálý strach, že na něco zapomeneš, ESTA, správné formuláře, co říct na imigračním, tohle všechno řeší jedna aplikace. Krok za krokem, offline, od někoho, kdo tuhle cestu absolvoval přes čtyřicetkrát.</p>
+    <p class="p3 center">Do Ameriky odletíš s klidnou hlavou. A to záložky v prohlížeči nezavřou.</p>
     <div class="btn-wrap">
       <a href="index.html" class="btn">Chci appku místo záložek →</a>
     </div>
@@ -419,7 +444,7 @@
 
 <!-- STICKY CTA (mobil) -->
 <div class="sticky-cta" id="stickyCta">
-  <a href="index.html">Chci appku vyzkoušet →</a>
+  <a href="index.html">Chci appku a klid na letišti →</a>
 </div>
 <script>
   window.addEventListener('scroll', function () {
