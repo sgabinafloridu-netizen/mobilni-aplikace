@@ -63,7 +63,7 @@
     <li><b>Cena 990 Kč včetně DPH</b><span>Prodejka slibuje 990 Kč pro prvních 10 lidí a pak 1 490 Kč. Nejjednodušší je založit produkt rovnou na 1 490 Kč a na tichou fázi vydat slevový kupón na 500 Kč. Nemusíš pak nic přepínat, jen kupón vypneš.</span></li>
     <li><b>Napoj ThePay</b><span>Máš ji schválenou a otestovanou od 18. 7. u druhého produktu. Tady se jen vybere u tohohle produktu.</span></li>
     <li><b>Nastav e-mail po zaplacení</b><span>Text máš připravený níž. Musí v něm být odemykací kód, jinak se kupující do appky nedostane.</span></li>
-    <li><b>Nastav stránku po zaplacení</b><span>Přesměruj na <code>https://usa-bez-cestovky-cast1.netlify.app/dekuji.html</code>. Tu stránku ti postavím, až budu mít odkaz na formulář.</span></li>
+    <li><b>Nastav stránku po zaplacení</b><span>Přesměruj na <code>https://usa-bez-cestovky-cast1.netlify.app/dekuji.html</code>. Ta stránka je hotová a nasazená, můžeš ji rovnou vložit.</span></li>
     <li><b>Zkopíruj adresu objednávkového formuláře</b><span>Vypadá jako <code>https://form.simpleshop.cz/XXXXX/buy/</code> a je to jediná věc, kterou od tebe potřebuju.</span></li>
     <li><b>Udělej testovací nákup</b><span>Až budu hotový s kódem. Projdeme celou cestu: platba, e-mail s kódem, odemčení appky.</span></li>
   </ol>
@@ -149,7 +149,7 @@ A tady je tvůj odemykací kód:
 
 FLKAVZW2E9
 
-Jak na to: otevři odkaz, appka se tě zeptá na kód, vlož ho a je odemčeno. Stačí jednou, appka si to pamatuje.
+Jak na to: otevři odkaz a projdi krátkým nastavením, appka se zeptá na datum odletu. Pak otevři kterýkoli modul a objeví se políčko na kód. Vlož ho a je odemčeno. Stačí jednou, appka si to pamatuje.
 
 Dva tipy, ať z toho máš víc:
 
@@ -163,13 +163,19 @@ Gábi<button class="copybtn" onclick="kopiruj('mail')">Kopírovat</button></div>
     <p class="pozn">Text je psaný bezrodě, aby seděl i mužům. Kdybys ho upravovala, drž se toho.</p>
   </div>
 
-  <h2>Část 4: jedno rozhodnutí, které potřebuju od tebe</h2>
-  <p class="h2-pod">Týká se stránky <code>dekuji.html</code>, na kterou SimpleShop pošle kupujícího po zaplacení.</p>
+  <h2>Část 4: rozhodnutí, která už padla</h2>
+  <p class="h2-pod">Ať se k tomu nemusíme vracet.</p>
 
   <div class="karta">
-    <h3>Má se kód ukazovat i na děkovací stránce?</h3>
-    <p style="font-size:14.5px;">V tvém plánu spuštění stojí, že po platbě ukáže kód. Má to ale jeden háček: <b>ta stránka je veřejná a její adresa se dá uhodnout.</b> Kdokoliv napíše do prohlížeče <code>/dekuji.html</code> a má kód, aniž by zaplatil.</p>
-    <p class="pozn" style="margin-top:14px;"><b>Co doporučuju:</b> kód nechat jen v e-mailu a na děkovací stránce napsat „kód ti dorazil do e-mailu“. Kupující o nic nepřijde, e-mail dostane během chvilky. Když ti přijde, že je to pro kupujícího otrava, udělám to podle tebe a kód tam dám. Řekni mi, co chceš.</p>
+    <h3>Kód na děkovací stránce: NE</h3>
+    <p style="font-size:14.5px;">Rozhodnuto 4. 9. 2026. Stránka <code>dekuji.html</code> kód neukazuje. Její adresa se dá uhodnout a kdokoli by ji napsal do prohlížeče, měl by kód bez zaplacení. Kupující ho dostane v e-mailu ze SimpleShopu, což je stejně to místo, kam si pro něj sáhne i za půl roku na jiném telefonu.</p>
+    <p class="pozn" style="margin-top:14px;">Děkovací stránka je hotová a nasazená. Říká „kód máš v e-mailu“, vysvětlí, jak appku odemknout, a má tlačítko do appky.</p>
+  </div>
+
+  <div class="karta">
+    <h3>Jak se appka odemyká, doopravdy</h3>
+    <p style="font-size:14.5px;">Ať to víš přesně, protože to není úplně samo sebou: <b>appka se na kód sama nezeptá.</b> Políčko na kód se objeví teprve ve chvíli, kdy člověk otevře zamčený modul. Do té doby projde úvodem a nastavením data odletu.</p>
+    <p class="pozn" style="margin-top:14px;">Text v e-mailu i na děkovací stránce už tenhle postup popisuje správně. Až budu zapínat zámek, můžu přidat políčko na kód rovnou na úvodní obrazovku, aby to kupující našel hned. Řekni, jestli to chceš.</p>
   </div>
 
 </div>

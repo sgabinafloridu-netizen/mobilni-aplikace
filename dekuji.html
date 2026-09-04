@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Děkuju | Než odletíš</title>
+<meta name="description" content="Potvrzení nákupu průvodce Než odletíš. Odemykací kód najdeš v e-mailu.">
+<meta name="robots" content="noindex, nofollow">
+<link href="fonts/fonts.css" rel="stylesheet">
+<style>
+  /* Stránka po zaplacení, sem posílá SimpleShop.
+     POZOR: odemykací kód se sem záměrně nepíše. Adresa se dá uhodnout, takže
+     kdo by ji napsal do prohlížeče, měl by kód bez zaplacení. Kód chodí jen
+     v e-mailu ze SimpleShopu. Rozhodnuto s Gábi 4. 9. 2026.
+     Tón: spisovná čeština jako zbytek appky. Hovorová výjimka platí jen pro
+     prodejka.html, ne sem. */
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --tyrkys: #1AC0CE;
+    --tyrkys-dark: #0B7C87;
+    --ruzova: #FF6FA5;
+    --zluta: #FFD23F;
+    --inkoust: #14233A;
+    --papir: #F5FAFC;
+    --tyrkys-light: #E6F8FA;
+    --sand: #FFF6E9;
+  }
+  body {
+    font-family: 'Poppins', sans-serif; color: var(--inkoust);
+    background: var(--sand);
+    background-image:
+      radial-gradient(circle at 12% 8%, rgba(26,192,206,.16) 0%, transparent 42%),
+      radial-gradient(circle at 88% 92%, rgba(255,111,165,.14) 0%, transparent 45%);
+    min-height: 100vh; display: flex; align-items: center; justify-content: center;
+    padding: 40px 20px;
+  }
+
+  .karta {
+    position: relative; overflow: hidden;
+    background: #fff; border-radius: 26px; max-width: 580px; width: 100%;
+    padding: 46px 44px 38px; text-align: center;
+    box-shadow: 0 24px 60px rgba(20,35,58,.15);
+  }
+  /* proužek v barvách značky, ať karta nezačíná naprázdno */
+  .karta::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 6px;
+    background: linear-gradient(90deg, var(--tyrkys) 0%, var(--zluta) 50%, var(--ruzova) 100%);
+  }
+
+  /* Gábi s palcem a k tomu potvrzovací odznak */
+  .gabi { position: relative; width: 156px; margin: 6px auto 22px; }
+  .gabi img { width: 100%; height: auto; display: block; }
+  .gabi .odznak {
+    position: absolute; right: 0; bottom: 6px;
+    width: 46px; height: 46px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--tyrkys) 0%, var(--tyrkys-dark) 100%);
+    border: 4px solid #fff;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 6px 16px rgba(11,124,135,.35);
+  }
+
+  h1 {
+    font-family: 'Righteous', 'Poppins', sans-serif; font-weight: 400;
+    font-size: clamp(26px, 5vw, 34px); line-height: 1.25; margin-bottom: 10px;
+  }
+  .lead { font-size: 16.5px; line-height: 1.7; color: #4C6373; margin-bottom: 30px; }
+
+  .mail-box {
+    background: var(--tyrkys-light); border-radius: 18px; padding: 22px 24px;
+    text-align: left; margin-bottom: 28px;
+  }
+  .mail-box .hlavicka {
+    display: flex; align-items: center; gap: 11px; margin-bottom: 9px;
+    font-size: 15.5px; font-weight: 700; color: var(--tyrkys-dark);
+  }
+  .mail-box .hlavicka svg { flex: none; }
+  .mail-box p { font-size: 14.5px; line-height: 1.65; color: #16505A; }
+
+  .nadpis-kroku {
+    font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase;
+    color: #7A8FA0; text-align: left; margin-bottom: 14px;
+  }
+  .kroky { list-style: none; counter-reset: k; text-align: left; margin-bottom: 30px; }
+  .kroky li {
+    counter-increment: k; position: relative; padding: 0 0 18px 44px;
+    font-size: 15px; line-height: 1.62;
+  }
+  .kroky li:last-child { padding-bottom: 0; }
+  .kroky li::before {
+    content: counter(k); position: absolute; left: 0; top: -1px;
+    width: 29px; height: 29px; border-radius: 50%;
+    background: var(--tyrkys); color: #fff;
+    font-size: 13.5px; font-weight: 700;
+    display: flex; align-items: center; justify-content: center;
+  }
+  /* linka spojující kolečka, ať to čte jako postup, ne jako tři nesouvisející věty */
+  .kroky li:not(:last-child)::after {
+    content: ''; position: absolute; left: 14px; top: 32px; bottom: 8px;
+    width: 2px; background: var(--tyrkys-light);
+  }
+
+  .btn {
+    display: inline-block; width: 100%;
+    background: linear-gradient(135deg, #FF6FA5 0%, #FF9E6B 100%);
+    color: #fff; font-family: 'Poppins', sans-serif; font-size: 16px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: .03em;
+    padding: 18px 34px; border-radius: 50px; text-decoration: none;
+    box-shadow: 0 6px 24px rgba(255,111,165,.42);
+    transition: transform .15s, box-shadow .15s;
+  }
+  .btn:hover { transform: translateY(-2px); box-shadow: 0 10px 30px rgba(255,111,165,.5); }
+
+  .pomoc {
+    margin-top: 26px; padding-top: 22px; border-top: 1px solid #E9F2F5;
+    font-size: 13.5px; line-height: 1.65; color: #4C6373; text-align: left;
+  }
+  .pomoc .tip { display: flex; gap: 10px; align-items: flex-start; }
+  .pomoc .tip svg { flex: none; margin-top: 2px; }
+  .pomoc a { color: var(--tyrkys-dark); font-weight: 700; }
+  .podpis {
+    font-family: 'Caveat', cursive; font-size: 26px; color: var(--ruzova);
+    margin-top: 16px; text-align: center;
+  }
+
+  @media (max-width: 520px) {
+    .karta { padding: 38px 24px 32px; border-radius: 22px; }
+    .gabi { width: 132px; }
+    .pomoc { text-align: left; }
+  }
+</style>
+</head>
+<body>
+
+<div class="karta">
+
+  <div class="gabi">
+    <img src="images/gabi-palec-nahoru.svg" alt="Gábi na pláži zvedá palec nahoru" width="156" height="156">
+    <span class="odznak" aria-hidden="true">
+      <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#fff" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M5 12.5 L10 17.5 L19 6.5"/>
+      </svg>
+    </span>
+  </div>
+
+  <h1>Máš to. Děkuju ti za důvěru</h1>
+  <p class="lead">Průvodce je od téhle chvíle tvůj. Zbývá poslední drobnost: odemknout appku.</p>
+
+  <div class="mail-box">
+    <div class="hlavicka">
+      <svg viewBox="0 0 24 24" width="21" height="21" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <rect x="2.5" y="5" width="19" height="14" rx="2.5"/>
+        <path d="M3 6.5 L12 13 L21 6.5"/>
+      </svg>
+      Odemykací kód máš v e-mailu
+    </div>
+    <p>Poslala jsem ti ho spolu s potvrzením objednávky. Pokud do pár minut nic nedorazí, mrkni do složky s hromadnou poštou nebo do spamu.</p>
+  </div>
+
+  <p class="nadpis-kroku">Jak appku odemknout</p>
+  <ol class="kroky">
+    <li>Otevři appku tlačítkem níže a projdi krátkým nastavením. Appka se zeptá na <strong>datum odletu</strong>, aby věděla, kde v přípravě právě jsi.</li>
+    <li>Otevři kterýkoli modul. Objeví se políčko <strong>Máš odemykací kód?</strong> Vlož do něj kód z e-mailu.</li>
+    <li>Hotovo. Stačí jednou, appka si odemčení pamatuje.</li>
+  </ol>
+
+  <a href="index.html" class="btn">Otevřít appku &rarr;</a>
+
+  <div class="pomoc">
+    <div class="tip">
+      <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="#0B7C87" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <path d="M9 18h6"/><path d="M10 21.5h4"/>
+        <path d="M12 2.5a6.5 6.5 0 0 0-3.8 11.8c.5.4.8 1 .8 1.7h6c0-.7.3-1.3.8-1.7A6.5 6.5 0 0 0 12 2.5z"/>
+      </svg>
+      <p><strong>Ulož si ten e-mail.</strong> Kdyby sis appku někdy otevřel na jiném telefonu nebo počítači, kód budeš potřebovat znovu.</p>
+    </div>
+    <p style="margin-top:14px;">Kdyby cokoli nefungovalo, napiš mi na <a href="mailto:gabi@sgabinafloridu.cz">gabi@sgabinafloridu.cz</a> a vyřešíme to.</p>
+    <p class="podpis">Gábi</p>
+  </div>
+
+</div>
+
+</body>
+</html>
