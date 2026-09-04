@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SimpleShop: co nastavit a co zkopírovat</title>
+<link href="fonts/fonts.css" rel="stylesheet">
+<style>
+  /* Interní pomůcka, ne veřejná stránka. Schovaná v netlify.toml.
+     Písma z fonts/, ne z Google Fonts: CSP na téhle doméně cizí zdroje blokuje. */
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --tyrkys: #1AC0CE; --tyrkys-dark: #0B7C87; --ruzova: #FF6FA5;
+    --inkoust: #14233A; --papir: #F5FAFC; --sand: #FFF6E9;
+  }
+  body { font-family: 'Poppins', sans-serif; color: var(--inkoust); background: var(--papir); line-height: 1.6; }
+  .wrap { max-width: 780px; margin: 0 auto; padding: 40px 24px 80px; }
+
+  h1 { font-family: 'Righteous','Poppins',sans-serif; font-weight: 400; font-size: 30px; line-height: 1.25; margin-bottom: 8px; }
+  .podnadpis { font-size: 14.5px; color: #4C6373; margin-bottom: 12px; }
+  .varovani { background: var(--ruzova); color: #fff; padding: 13px 18px; border-radius: 10px; font-size: 13.5px; margin-bottom: 34px; }
+
+  h2 { font-family: 'Righteous','Poppins',sans-serif; font-weight: 400; font-size: 22px; margin: 40px 0 6px; }
+  .h2-pod { font-size: 13.5px; color: #4C6373; margin-bottom: 18px; max-width: 62ch; }
+
+  .karta { background: #fff; border-radius: 14px; padding: 24px 26px; margin-bottom: 18px; box-shadow: 0 2px 10px rgba(20,35,58,.06); }
+  .karta h3 { font-size: 12px; font-weight: 700; color: var(--tyrkys-dark); text-transform: uppercase; letter-spacing: 1px; margin-bottom: 14px; }
+  .karta > p.pozn { font-size: 13px; color: #4C6373; margin-top: 12px; }
+
+  .copybox { position: relative; background: var(--papir); border: 1.5px solid var(--tyrkys); border-radius: 10px; padding: 20px 22px 20px; font-size: 14px; line-height: 1.75; white-space: pre-wrap; }
+  .copybtn { position: absolute; top: 10px; right: 10px; background: var(--tyrkys); color: #fff; border: none; border-radius: 6px; padding: 7px 15px; font-size: 12px; font-weight: 700; cursor: pointer; font-family: 'Poppins', sans-serif; }
+  .copybtn:hover { background: var(--tyrkys-dark); }
+
+  ol.kroky { list-style: none; counter-reset: k; }
+  ol.kroky li { counter-increment: k; position: relative; padding: 0 0 20px 46px; font-size: 15px; }
+  ol.kroky li::before {
+    content: counter(k); position: absolute; left: 0; top: -2px;
+    width: 30px; height: 30px; border-radius: 50%; background: var(--tyrkys); color: #fff;
+    font-size: 14px; font-weight: 700; display: flex; align-items: center; justify-content: center;
+  }
+  ol.kroky li b { display: block; margin-bottom: 2px; }
+  ol.kroky li span { font-size: 13.5px; color: #4C6373; display: block; }
+
+  .doplnit { background: var(--sand); border-left: 4px solid #E0A63A; border-radius: 0 10px 10px 0; padding: 16px 20px; font-size: 13.5px; margin: 16px 0; }
+  .doplnit b { color: #8A6314; }
+
+  code { font-family: ui-monospace, 'Cascadia Mono', Consolas, monospace; background: #E6F8FA; padding: 2px 6px; border-radius: 4px; font-size: 13px; }
+  .kod-velky { font-family: ui-monospace, 'Cascadia Mono', Consolas, monospace; font-size: 22px; font-weight: 700; letter-spacing: 3px; color: var(--tyrkys-dark); background: #E6F8FA; padding: 12px 20px; border-radius: 10px; display: inline-block; }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <h1>SimpleShop: co nastavit a co zkopírovat</h1>
+  <p class="podnadpis">Produkt „Než odletíš“ (celý průvodce). Stejný postup, jaký už běží u „Přes imigrační v klidu“.</p>
+  <p class="varovani">Než tohle doděláš, prodejka rozdává appku zadarmo. Všech 6 tlačítek vede rovnou do appky a zámek je vypnutý. Neposílej na prodejku nikoho, dokud nebude platba napojená.</p>
+
+  <h2>Část 1: co naklikat v SimpleShopu</h2>
+  <p class="h2-pod">Nemůžu ti do účtu, tohle je na tobě. Až budeš mít odkaz na formulář, pošli mi ho a zbytek dodělám v kódu za pár minut.</p>
+
+  <ol class="kroky">
+    <li><b>Založ nový produkt</b><span>Název, popis a obsah máš připravené níž, stačí kopírovat.</span></li>
+    <li><b>Cena 990 Kč včetně DPH</b><span>Prodejka slibuje 990 Kč pro prvních 10 lidí a pak 1 490 Kč. Nejjednodušší je založit produkt rovnou na 1 490 Kč a na tichou fázi vydat slevový kupón na 500 Kč. Nemusíš pak nic přepínat, jen kupón vypneš.</span></li>
+    <li><b>Napoj ThePay</b><span>Máš ji schválenou a otestovanou od 18. 7. u druhého produktu. Tady se jen vybere u tohohle produktu.</span></li>
+    <li><b>Nastav e-mail po zaplacení</b><span>Text máš připravený níž. Musí v něm být odemykací kód, jinak se kupující do appky nedostane.</span></li>
+    <li><b>Nastav stránku po zaplacení</b><span>Přesměruj na <code>https://usa-bez-cestovky-cast1.netlify.app/dekuji.html</code>. Tu stránku ti postavím, až budu mít odkaz na formulář.</span></li>
+    <li><b>Zkopíruj adresu objednávkového formuláře</b><span>Vypadá jako <code>https://form.simpleshop.cz/XXXXX/buy/</code> a je to jediná věc, kterou od tebe potřebuju.</span></li>
+    <li><b>Udělej testovací nákup</b><span>Až budu hotový s kódem. Projdeme celou cestu: platba, e-mail s kódem, odemčení appky.</span></li>
+  </ol>
+
+  <div class="doplnit">
+    <b>Odemykací kód, který už v appce je:</b><br>
+    <span class="kod-velky">FLKAVZW2E9</span><br>
+    Ten patří do e-mailu po zaplacení. Nemá v sobě znaky, co se pletou při opisování (I, O, nula, jednička). Je stejný pro všechny kupující, protože appka nemá server a jednorázové kódy by neměl kdo ověřovat.
+  </div>
+
+  <h2>Část 2: texty ke zkopírování</h2>
+  <p class="h2-pod">Klikni na tlačítko u každé sekce a vlož do SimpleShopu.</p>
+
+  <div class="karta">
+    <h3>Název produktu</h3>
+    <div class="copybox" id="nazev">Než odletíš: celý průvodce první cestou do USA<button class="copybtn" onclick="kopiruj('nazev')">Kopírovat</button></div>
+  </div>
+
+  <div class="karta">
+    <h3>Krátký popis</h3>
+    <div class="copybox" id="kratky">Appka, která se řídí tvým datem odletu a ukáže vždycky jen to, co řešit právě teď. Od prvního rozhodnutí až po krizový plán.<button class="copybtn" onclick="kopiruj('kratky')">Kopírovat</button></div>
+  </div>
+
+  <div class="karta">
+    <h3>Hlavní popis produktu</h3>
+    <div class="copybox" id="hlavni">Třicet otevřených záložek. A pořád nevíš, kde začít.
+
+Každý blog píše něco trochu jiného a nikdo ti neřekne, co platí pro tebe a tvůj termín. Cestovka ti to taky neřekne, ta tě dostane na letiště a co se děje potom, to je tvůj problém.
+
+Tahle appka funguje jinak. Zadáš datum odletu a ona ví, kde teď jsi. Co vyřídit dnes, co příští týden, co až na letišti. Žádný seznam, který tě zahltí. Jen jeden krok, který má smysl právě teď.
+
+Co je uvnitř:
+
+Modul 1, Kdy a kam. Která destinace sedí tobě a ve kterém období tam jet.
+
+Modul 2, Doklady a formálnosti. Appka hlídá platnost pasu za tebe i za každého, kdo letí s tebou. ESTA na správném místě, ne na podvodném webu, který vypadá skoro stejně.
+
+Modul 3, Letenky. Kdy nakupovat a proč se přestup v Americe chová jinak než v Evropě.
+
+Modul 4, Ubytování. Resort fee, blokace na kartě a proč čtyři hvězdičky v Americe neznamenají to samé co doma.
+
+Modul 5, Finance a placení. Kolik hotovosti vzít, jak funguje spropitné a kolik si ukousne banka.
+
+Modul 6, Checklisty. Co sbalit, co vytisknout, co do Ameriky nesmí.
+
+Modul 7, Krizové situace. Zrušený let, ztracený pas, zamítnutá ESTA. Pro každý průšvih klidný postup.
+
+A k tomu čtyři věci navíc: Trezor jako offline schránka na ESTU a rezervace, Itinerář, kalkulačka Můj rozpočet a Převodník měn, jednotek a spropitného.
+
+Appka běží v prohlížeči. Nic se neinstaluje a funguje i offline, takže ji máš i na letišti, kde data nestačí.
+
+Platíš jednou, appka je tvoje natrvalo.
+
+30denní záruka. Když ti průvodce nepomůže, vrátím ti peníze. Bez otázek.<button class="copybtn" onclick="kopiruj('hlavni')">Kopírovat</button></div>
+  </div>
+
+  <div class="karta">
+    <h3>Obsah balíčku (seznam položek)</h3>
+    <div class="copybox" id="obsah">7 modulů: Kdy a kam, Doklady, Letenky, Ubytování, Finance, Checklisty, Krizové situace
+Trezor: offline schránka na ESTU, letenky a rezervace
+Itinerář: plán cesty podle tvého data odletu
+Můj rozpočet: kalkulačka celé dovolené
+Převodník: měny, jednotky a spropitné
+Videa a podcasty u vybraných modulů<button class="copybtn" onclick="kopiruj('obsah')">Kopírovat</button></div>
+  </div>
+
+  <h2>Část 3: e-mail po zaplacení</h2>
+  <p class="h2-pod">Tohle je nejdůležitější text z celé stránky. Bez kódu se kupující do appky nedostane.</p>
+
+  <div class="karta">
+    <h3>Předmět</h3>
+    <div class="copybox" id="predmet">Tvůj průvodce je připravený, tady je kód<button class="copybtn" onclick="kopiruj('predmet')">Kopírovat</button></div>
+  </div>
+
+  <div class="karta">
+    <h3>Text e-mailu</h3>
+    <div class="copybox" id="mail">Děkuju ti za důvěru.
+
+Tady je odkaz do appky:
+https://usa-bez-cestovky-cast1.netlify.app
+
+A tady je tvůj odemykací kód:
+
+FLKAVZW2E9
+
+Jak na to: otevři odkaz, appka se tě zeptá na kód, vlož ho a je odemčeno. Stačí jednou, appka si to pamatuje.
+
+Dva tipy, ať z toho máš víc:
+
+Ulož si tenhle e-mail. Kdyby sis appku někdy otevřel na jiném telefonu nebo počítači, kód budeš potřebovat znovu.
+
+Přidej si appku na plochu telefonu. V prohlížeči je na to volba „Přidat na plochu“. Pak se chová jako normální appka a funguje i bez signálu, což oceníš na letišti.
+
+Kdyby cokoliv nefungovalo, napiš mi na gabi@sgabinafloridu.cz a vyřešíme to.
+
+Gábi<button class="copybtn" onclick="kopiruj('mail')">Kopírovat</button></div>
+    <p class="pozn">Text je psaný bezrodě, aby seděl i mužům. Kdybys ho upravovala, drž se toho.</p>
+  </div>
+
+  <h2>Část 4: jedno rozhodnutí, které potřebuju od tebe</h2>
+  <p class="h2-pod">Týká se stránky <code>dekuji.html</code>, na kterou SimpleShop pošle kupujícího po zaplacení.</p>
+
+  <div class="karta">
+    <h3>Má se kód ukazovat i na děkovací stránce?</h3>
+    <p style="font-size:14.5px;">V tvém plánu spuštění stojí, že po platbě ukáže kód. Má to ale jeden háček: <b>ta stránka je veřejná a její adresa se dá uhodnout.</b> Kdokoliv napíše do prohlížeče <code>/dekuji.html</code> a má kód, aniž by zaplatil.</p>
+    <p class="pozn" style="margin-top:14px;"><b>Co doporučuju:</b> kód nechat jen v e-mailu a na děkovací stránce napsat „kód ti dorazil do e-mailu“. Kupující o nic nepřijde, e-mail dostane během chvilky. Když ti přijde, že je to pro kupujícího otrava, udělám to podle tebe a kód tam dám. Řekni mi, co chceš.</p>
+  </div>
+
+</div>
+
+<script>
+function kopiruj(id) {
+  var el = document.getElementById(id);
+  var btn = el.querySelector('.copybtn');
+  var text = el.innerText.replace('Kopírovat', '').replace('Zkopírováno', '').trim();
+  navigator.clipboard.writeText(text).then(function () {
+    btn.textContent = 'Zkopírováno';
+    btn.style.background = '#14233A';
+    setTimeout(function () { btn.textContent = 'Kopírovat'; btn.style.background = '#1AC0CE'; }, 2000);
+  });
+}
+</script>
+
+</body>
+</html>

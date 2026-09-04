@@ -39,6 +39,12 @@
   force = true
 
 [[redirects]]
+  from = "/simpleshop-text.html"
+  to = "/404.html"
+  status = 404
+  force = true
+
+[[redirects]]
   from = "/kviz-prodejka-navrh.md"
   to = "/404.html"
   status = 404
