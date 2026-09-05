@@ -830,10 +830,12 @@
   .toc-close, .toc-fab, .toc-scrim { display: none; }
   @media (max-width: 860px) {
     .toc-fab {
-      display: grid; place-items: center; position: fixed; right: var(--s6); bottom: var(--s6); z-index: 45;
-      width: 52px; height: 52px; border-radius: 50%; border: none; cursor: pointer;
-      background: var(--tyrkys); color: #fff; font-size: 20px; box-shadow: var(--sh-3);
+      display: flex; align-items: center; gap: 8px; position: fixed; right: var(--s6); bottom: var(--s6); z-index: 45;
+      height: 52px; padding: 0 20px 0 18px; border-radius: 100px; border: none; cursor: pointer;
+      background: var(--tyrkys); color: #fff; font-size: 14.5px; font-weight: 700; white-space: nowrap;
+      box-shadow: var(--sh-3);
     }
+    .toc-fab-icon { font-size: 18px; line-height: 1; }
     .toc-scrim {
       display: block; position: fixed; inset: 0; z-index: 46; background: rgba(20,35,58,.4);
       opacity: 0; pointer-events: none; transition: opacity .2s;
@@ -2612,7 +2614,7 @@
               </div>
             </div>
           </aside>
-          <button type="button" class="toc-fab" id="toc-fab" aria-label="V téhle lekci">☰</button>
+          <button type="button" class="toc-fab" id="toc-fab" aria-label="V téhle lekci"><span class="toc-fab-icon">☰</span>V téhle lekci</button>
           <div class="toc-scrim" id="toc-scrim"></div>
 
           <div class="lesson-main">
