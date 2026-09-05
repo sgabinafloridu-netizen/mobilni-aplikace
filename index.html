@@ -700,6 +700,18 @@
     padding: 4px 11px; font-size: 10px; font-weight: 800; letter-spacing: .1em; text-transform: uppercase;
   }
   .mg-badge::before { content: '●'; font-size: 7px; }
+  /* zbylé moduly na úvodní obrazovce: sbalené za jeden řádek, ať 40 lekcí
+     nepůsobí jako nápor hned na první pohled. Appka nic neschovává natrvalo,
+     jen to dá najevo v pravou chvíli, na klik se rozbalí stejné karty. */
+  .mg-waiting-toggle {
+    grid-column: 1 / -1; display: flex; align-items: center; justify-content: center; gap: 8px;
+    background: var(--sunken); border: 1px dashed var(--line-strong); border-radius: var(--r-lg);
+    padding: var(--s4) var(--s5); font-family: inherit; font-size: 13.5px; font-weight: 700;
+    color: var(--text-muted); cursor: pointer; text-align: center; width: 100%;
+  }
+  .mg-waiting-toggle:hover { background: var(--surface); border-color: var(--tyrkys); color: var(--tyrkys-dark); }
+  .mg-waiting-wrap { grid-column: 1 / -1; display: grid; grid-template-columns: inherit; gap: inherit; }
+  .mg-waiting-wrap[hidden] { display: none; }
   /* aktuální modul: barevný rámeček, ne jen odznak */
   .mg-card.current { border-color: var(--tyrkys); box-shadow: 0 0 0 3px rgba(26,192,206,.14); }
   .mg-card.done .mg-label { color: var(--text-faint); }
@@ -5002,6 +5014,11 @@
   function modMeta(mod) {
     return lekci(lessonCount(mod)) + " · " + mod.time;
   }
+  function modulSlovo(n) {
+    if (n === 1) return "modul";
+    if (n >= 2 && n <= 4) return "moduly";
+    return "modulů";
+  }
 
   var DEST_LABELS = { florida: "Florida", newyork: "New York", parky: "Národní parky" };
   var DEST_ICON = {
@@ -6063,10 +6080,7 @@
     var grid = document.getElementById("module-grid");
     grid.innerHTML = "";
 
-    MODULES.forEach(function (mod, i) {
-      var done = !!progress[mod.id];
-      var locked = !isUnlocked(mod);
-      var isNext = (mod.id === nextId) && !done && !locked;
+    function buildModuleCard(mod, i, done, locked, isNext) {
       var card = document.createElement("button");
       card.type = "button";
       card.className = "mg-card" + (done && !locked ? " done" : "") +
@@ -6082,8 +6096,44 @@
         '<span class="mg-desc">' + (mod.desc || "") + '</span>' +
         '<span class="mg-meta">' + modMeta(mod) + '</span>';
       card.addEventListener("click", function () { openModule(mod.id); });
-      grid.appendChild(card);
+      return card;
+    }
+
+    // Modul, co je právě na řadě (nebo hotový), appka ukáže rovnou. Zbytek,
+    // co ještě nepřišel na řadu, schová za jeden řádek, ať hned na úvodní
+    // obrazovce nepůsobí 40 lekcí jako nápor. Rozbalí se na klik, appka
+    // nic netají, jen to neukazuje všechno najednou.
+    var waitingCards = [];
+    MODULES.forEach(function (mod, i) {
+      var done = !!progress[mod.id];
+      var locked = !isUnlocked(mod);
+      var isNext = (mod.id === nextId) && !done && !locked;
+      var card = buildModuleCard(mod, i, done, locked, isNext);
+      if (!done && !isNext) waitingCards.push(card);
+      else grid.appendChild(card);
     });
+
+    if (waitingCards.length) {
+      var wrap = document.createElement("div");
+      wrap.className = "mg-waiting-wrap";
+      wrap.hidden = true;
+      waitingCards.forEach(function (c) { wrap.appendChild(c); });
+
+      var labelClosed = "Ještě " + waitingCards.length + " " + modulSlovo(waitingCards.length) +
+                         " čeká. Žádný spěch. ›";
+      var labelOpen = "Skrýt zbylé moduly ‹";
+      var toggle = document.createElement("button");
+      toggle.type = "button";
+      toggle.className = "mg-waiting-toggle";
+      toggle.textContent = labelClosed;
+      toggle.addEventListener("click", function () {
+        wrap.hidden = !wrap.hidden;
+        toggle.textContent = wrap.hidden ? labelClosed : labelOpen;
+      });
+
+      grid.appendChild(toggle);
+      grid.appendChild(wrap);
+    }
   }
 
   document.getElementById("btn-continue").addEventListener("click", function () {
