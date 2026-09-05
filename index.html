@@ -4698,6 +4698,7 @@
         {
           icon: ico("plug"),
           title: "Tři věci, na které se zapomíná nejčastěji",
+          weatherVariant: true,
           lead: [
             "Oblečení si sbalíš sám/sama a líp než já. Tyhle tři věci se ale zapomínají tak spolehlivě, že si zaslouží vlastní krok."
           ],
@@ -5879,6 +5880,39 @@
       return "Léto v parcích znamená vedro i davy lidí. V modulu 1 se dozvíš, jak si rezervovat vstupy včas a kdy do kaňonu radši nechodit.";
     }
     return null;
+  }
+
+  // Krok "Tři věci, na které se zapomíná" (step.weatherVariant) má jinou
+  // druhou položku checklistu i poslední řádek poznámky, když jede uživatel
+  // do zimního New Yorku, sluneční krém tam totiž nedává smysl.
+  function zimniNewYork(setup) {
+    if (!setup || setup.destinace !== "newyork" || !setup.datum) return false;
+    var month = new Date(setup.datum + "T00:00:00").getMonth() + 1;
+    return month === 12 || month === 1 || month === 2;
+  }
+
+  function weatherChecklistItems(step, setup) {
+    if (!step.checklist) return null;
+    if (step.weatherVariant && zimniNewYork(setup)) {
+      return step.checklist.map(function (item, ci) {
+        return ci === 1
+          ? "<strong>Rukavice a čepice</strong>, mezi mrazivým větrem venku a nemilosrdnou klimatizací uvnitř budov přepínáš vrstvy pořád dokola"
+          : item;
+      });
+    }
+    return step.checklist;
+  }
+
+  function weatherNoteBody(step, setup) {
+    if (!step.note) return null;
+    if (step.weatherVariant && zimniNewYork(setup)) {
+      return step.note.body.map(function (line, li) {
+        return li === 2
+          ? "Zimní New York funguje líp na víc tenčích vrstev než na jeden tlustý kabát, uvnitř budov je vytopeno stejně silně, jako venku mrzne."
+          : line;
+      });
+    }
+    return step.note.body;
   }
 
   /* Cesta: jedna propojená svislá osa místo dřívější dvojice
@@ -7676,7 +7710,7 @@
 
     mod.steps.forEach(function (step, i) {
       if (step.checklist) {
-        step.checklist.forEach(function (item, ci) {
+        weatherChecklistItems(step, setup).forEach(function (item, ci) {
           total++;
           var key = mod.id + "-k" + i + "-" + ci;
           if (checklistState[key]) done++; else outstanding.push({ label: item, stepIndex: i });
@@ -7791,6 +7825,7 @@
     // sloupcem „V téhle lekci“. Ignoruje se tím uložené step.kicker,
     // který v datech stejně vždy jen opakoval pořadí kroku.
     var modCislo = MODULES.findIndex(function (m) { return m.id === moduleId; }) + 1;
+    var setup = loadSetup();
     return steps.map(function (step, i) {
       var html = '<article class="step-card" id="krok-' + (i + 1) + '">';
 
@@ -7996,7 +8031,7 @@
       if (step.checklist) {
         html += '<p class="checklist-hint">✓ Jakmile máš hotovo, rovnou si to tady odškrtni.</p>';
         html += '<div class="checklist-group">' +
-                  '<div class="step-checklist">' + step.checklist.map(function (item, ci) {
+                  '<div class="step-checklist">' + weatherChecklistItems(step, setup).map(function (item, ci) {
                     var key = moduleId + '-k' + i + '-' + ci;
                     return '<label class="check-item" data-key="' + key + '">' +
                              '<input type="checkbox">' +
@@ -8178,7 +8213,7 @@
         html += '<details class="disc disc-note">' +
                   '<summary><span class="d-ico"><img src="images/ikony/mini-poznamka.svg" alt=""></span>' + step.note.title +
                   '<span class="d-chev" aria-hidden="true">▾</span></summary>' +
-                  '<div class="d-body">' + paras(step.note.body) + '</div>' +
+                  '<div class="d-body">' + paras(weatherNoteBody(step, setup)) + '</div>' +
                 '</details>';
       }
 
@@ -8504,10 +8539,11 @@
   // ať je z čeho postavit tiskovou verzi. Krok bez checklistu se přeskočí.
   function moduleChecklistGroups(mod) {
     var out = [];
+    var setup = loadSetup();
     (mod.steps || []).forEach(function (step, i) {
       var rows = [];
       if (step.checklist) {
-        step.checklist.forEach(function (t) { rows.push({ text: t }); });
+        weatherChecklistItems(step, setup).forEach(function (t) { rows.push({ text: t }); });
       }
       if (step.checklistGroups) {
         step.checklistGroups.forEach(function (g) {
