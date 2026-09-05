@@ -5884,20 +5884,34 @@
 
   // Krok "Tři věci, na které se zapomíná" (step.weatherVariant) má jinou
   // druhou položku checklistu i poslední řádek poznámky, když jede uživatel
-  // do zimního New Yorku, sluneční krém tam totiž nedává smysl.
-  function zimniNewYork(setup) {
-    if (!setup || setup.destinace !== "newyork" || !setup.datum) return false;
+  // v zimě do New Yorku nebo do národních parků, sluneční krém tam totiž
+  // nedává smysl.
+  function zimniVariant(setup) {
+    if (!setup || !setup.datum) return null;
     var month = new Date(setup.datum + "T00:00:00").getMonth() + 1;
-    return month === 12 || month === 1 || month === 2;
+    var zima = month === 12 || month === 1 || month === 2;
+    if (!zima) return null;
+    if (setup.destinace === "newyork") return "newyork";
+    if (setup.destinace === "parky") return "parky";
+    return null;
   }
+
+  var ZIMNI_CHECKLIST_ITEM = {
+    newyork: "<strong>Rukavice a čepice</strong>, mezi mrazivým větrem venku a nemilosrdnou klimatizací uvnitř budov přepínáš vrstvy pořád dokola",
+    parky: "<strong>Rukavice, čepice a teplá bunda</strong>, ráno u vyhlídek v kaňonech bývá pořádný mráz, i když přes den vysvitne slunce"
+  };
+
+  var ZIMNI_NOTE_LINE = {
+    newyork: "Zimní New York funguje líp na víc tenčích vrstev než na jeden tlustý kabát, uvnitř budov je vytopeno stejně silně, jako venku mrzne.",
+    parky: "Zimní parky umí přes den vyhřát slunce, ale brzy ráno a večer u vyhlídek teplota prudce klesá, vrstvy si tam sundáš a zase navlečeš víckrát za den."
+  };
 
   function weatherChecklistItems(step, setup) {
     if (!step.checklist) return null;
-    if (step.weatherVariant && zimniNewYork(setup)) {
+    var variant = step.weatherVariant && zimniVariant(setup);
+    if (variant) {
       return step.checklist.map(function (item, ci) {
-        return ci === 1
-          ? "<strong>Rukavice a čepice</strong>, mezi mrazivým větrem venku a nemilosrdnou klimatizací uvnitř budov přepínáš vrstvy pořád dokola"
-          : item;
+        return ci === 1 ? ZIMNI_CHECKLIST_ITEM[variant] : item;
       });
     }
     return step.checklist;
@@ -5905,11 +5919,10 @@
 
   function weatherNoteBody(step, setup) {
     if (!step.note) return null;
-    if (step.weatherVariant && zimniNewYork(setup)) {
+    var variant = step.weatherVariant && zimniVariant(setup);
+    if (variant) {
       return step.note.body.map(function (line, li) {
-        return li === 2
-          ? "Zimní New York funguje líp na víc tenčích vrstev než na jeden tlustý kabát, uvnitř budov je vytopeno stejně silně, jako venku mrzne."
-          : line;
+        return li === 2 ? ZIMNI_NOTE_LINE[variant] : line;
       });
     }
     return step.note.body;
