@@ -8,8 +8,10 @@
     X-Frame-Options = "SAMEORIGIN"
     # Prohlížeč nesmí hádat typ souboru podle obsahu.
     X-Content-Type-Options = "nosniff"
-    # Při odchodu na cizí web se posílá jen doména, ne celá adresa.
-    Referrer-Policy = "strict-origin-when-cross-origin"
+    # Při odchodu na cizí web se neposílá vůbec nic. Adresa appky je
+    # neuhodnutelná schválně (chodí kupujícím ze SimpleShopu), takže se
+    # nesmí dostat ani do logů webů, na které appka odkazuje.
+    Referrer-Policy = "no-referrer"
     # Appka nepotřebuje polohu, kameru, mikrofon ani platby.
     Permissions-Policy = "geolocation=(), camera=(), microphone=(), payment=(), interest-cohort=()"
     # Vše se smí načítat jen z vlastní domény. Appka je jeden soubor
