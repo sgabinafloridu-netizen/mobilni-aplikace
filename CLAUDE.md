@@ -4,7 +4,9 @@ Kurzová PWA appka pro Čechy, kteří letí poprvé sami do USA. Provede je př
 
 **Autorka:** Gábi (s.gábi.na.Floridu), žije na Floridě, provází klienty na místě.
 **Repozitář:** `github.com/sgabinafloridu-netizen/mobilni-aplikace` (soukromý)
-**Nasazeno:** https://usa-bez-cestovky-cast1.netlify.app (Netlify, build se spouští pushem do `main`)
+**Nasazeno:**
+- **Appka:** https://usa-cast1-k7m3x9q2.netlify.app (Netlify, build se spouští pushem do `main`). Adresa je záměrně neuhodnutelná, tohle je odkaz pro kupující.
+- **Prodejka:** https://usa-bez-cestovky-cast1.netlify.app (samostatný web, `prodejka.html` nasazená jako `index.html`). ⚠️ Na tuhle adresu appku nenasazovat, přepsala by prodejku.
 
 ---
 
