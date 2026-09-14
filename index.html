@@ -3104,6 +3104,12 @@
      jako hotový text. Plné znění zadání je v usa-bez-cestovky-cast2/KOSTRA.md. */
   var PRISTANES_MODULY = [
     { id: "p-imigracni", emoji: ico("doc"), name: "Imigrační kontrola podrobněji", shortName: "Imigrační kontrola", desc: "Co přesně čeká za dveřmi, jak vypadá fronta a co u toho říct.", dashboard: true,
+      hook: [
+        "Možná už tohle znáš z prvního dílu. Neboj, tady to bude podrobněji.",
+        "Projdeme si celou cestu od chvíle, kdy se v kabině rozsvítí, až po pás se zavazadly. Včetně <strong>vět, které u kontroly řekneš nahlas</strong>, i s výslovností.",
+        "(Ano, i tu o kreditce. Ta je z nich nejdůležitější a plete se skoro každému.)",
+        "Kolik z těch 10 otázek zvládneš zodpovědět hned teď, bez přemýšlení?"
+      ],
       steps: [
         {
           icon: ico("doc"),
@@ -3659,6 +3665,7 @@
     return {
       id: m.id, balicek: "pristanes",
       name: m.name, shortName: m.shortName || m.name,
+      hook: m.hook,
       emoji: m.emoji, ikona: m.ikona,
       desc: m.desc,
       dashboard: !!m.dashboard,
