@@ -18,7 +18,17 @@ Appka přehrává nahrávky **z týhle složky**, ne z internetu. Proto fungují
 
 | Krok | Soubor | Kde se objeví | Stav |
 |---|---|---|---|
-| 1.1 | `co-me-ceka-za-temi-dvermi.mp3` | Až přistaneš → Imigrační kontrola, krok 1 „Poslední hodina v letadle" | ⬜ čeká na nahrání |
+| 1.1 | `co-me-ceka-za-temi-dvermi.mp3` | Až přistaneš → Imigrační kontrola, krok 1 „Papír, který tě zachrání" | ⬜ čeká na nahrání |
+| 2.4 | `dva-ridicaky-v-pujcovne.mp3` | Až přistaneš → Půjčovna aut, krok 4 „Pojištění: co je v ceně a co ti nabídnou u přepážky" | ⬜ čeká na nahrání |
+
+**O čem 2.4 je:** proč se do USA vozí dva řidičáky (český a mezinárodní, ten je jenom překlad)
+a jak celé převzetí auta u přepážky reálně probíhá. Zadáno Gábi 14. 9. 2026. Nahradilo to
+`[SEM DOPLNIT]`, které tam čekalo na její zkušenost od přepážky, protože vyprávěné to unese
+víc než odstavec textu.
+
+⚠️ Sama látka o dvou řidičácích patří obsahem do kroku **2.3 Co musíš mít v ruce**. Nahrávka
+sedí u 2.4, protože pokrývá i pojištění a celé dění u přepážky. Kdyby se ukázalo, že díl mluví
+hlavně o dokladech, přesune se `media` o krok výš.
 
 Je to **zvuk z produktu Přes imigrační v klidu** (11 min video za 297 Kč), vyexportovaný do mp3.
 Rozhodnuto 13. 9. 2026: video se do appky nedává, mělo by kolem 150 MB a zabilo by stahování,

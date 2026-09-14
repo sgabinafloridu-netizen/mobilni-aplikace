@@ -59,6 +59,15 @@ Každý krok v modulu má tři vrstvy a v tomhle pořadí se i vykresluje:
 - `trap` — „Pozor na tohle" (červená, ⚠️): **jen pro věci, kde přehlédnutí znamená reálný problém** (zmeškaný let, zamítnutý vstup, účet v tisících dolarů). Červená se nesmí opotřebovat.
 - `note` — „Ještě jedna věc" (zlatá, 📝): užitečné, ale nekritické
 
+**`quote{}`** umí volitelné pole **`foto`**: kresba mluvčího, která se postaví vedle citátu
+(`.step-quote.s-fotkou`, 84 px, na mobilu 62 px). Typicky paní Cokdyž. Bez `foto` se citát
+vykreslí jako dřív, jen s barevnou linkou.
+
+Všechny tři disclosure bloky umí volitelné pole **`zaver`**: jedna věta na odnesení, která se vykreslí pod
+`body` v rámečku a tučně (`.d-zaver`). Rámeček si bere barvu bloku, ve kterém stojí, takže
+se v mint, červeném i zlatém obarví sám. **Nejvýš jedna na blok**, jinak přestane fungovat
+jako uzávěrka. Obsluha je v `zaverHtml()`.
+
 ---
 
 ## 4. Struktura kódu
@@ -70,7 +79,7 @@ Vše je v poli `MODULES` v `index.html`. Modul má:
   prep, hook[], praise{}, dashboard: bool, panicokdyz{}, steps[] }
 ```
 
-Krok (`step`) má volitelně: `icon`, `kicker`, `title`, `media{}`, `mapa`, `kviz`, `hintProTyp{}`, `ilustrace{}`, `lead[]`, `companion{}`, `historka{}`, `srovnani{}`, `checklist[]`, `checklistGroups[]`, `passportCheck`, `bookingCheck`, `chipExample`, `estaCheck`, `toggleQuestions[]`, `priletVolba`, `addressField`, `monthPicker`, `stayPicker`, `trasyPicker`, `gallery`, `quote`, `link{}`, `tip{}`, `pochvala`, `why{}`, `trap{}`, `note{}`.
+Krok (`step`) má volitelně: `icon`, `kicker`, `title`, `hadanka{}`, `media{}`, `mapa`, `kviz`, `hintProTyp{}`, `ilustrace{}`, `lead[]`, `companion{}`, `historka{}`, `srovnani{}`, `checklist[]`, `checklistGroups[]`, `passportCheck`, `bookingCheck`, `chipExample`, `estaCheck`, `toggleQuestions[]`, `priletVolba`, `addressField`, `monthPicker`, `stayPicker`, `trasyPicker`, `gallery`, `quote`, `link{}`, `tip{}`, `pochvala`, `why{}`, `trap{}`, `note{}`.
 
 **Prvky, které počítají z toho, co uživatel zadal v úvodu** (tohle je jádro UX principu, ne ozdoba):
 - `passportCheck` porovná platnost pasů s datem návratu
@@ -115,6 +124,30 @@ bolí nejvíc.
 ```
 
 Když má něco vyjít jinde, musí se změnit `renderStepsHtml()`, ne pořadí klíčů v datech.
+
+**Výjimka: `hadanka`.** Vykresluje se **před vším ostatním** a zbytek kroku drží zavřený
+(`.po-hadance`), dokud na ni někdo neodpoví. Je to schválně: smysl hádanky je, aby si čtenář
+tipl dřív, než uvidí odpověď v textu pod ní. Tvar:
+
+```
+hadanka: {
+  otazka: "Kolik hodin podle tebe trvá cesta z Orlanda do Miami?",
+  moznosti: [
+    { text: "Hodinu a půl, je to kousek", reakce: ["…", "…"] },
+    { text: "Skoro 4 hodiny", spravne: true, reakce: ["…"] }
+  ]
+}
+```
+
+Možnosti se samy očíslují a) b) c). ⚠️ **Špatná volba nikdy neprozradí správnou.** Jen se
+sama vyškrtne a zešedne (`disabled`), ukáže svoji `reakce` a text zůstane zamčený. Teprve
+správná volba se obarví tyrkysově a odemkne zbytek kroku. Ukládá se **jen správná odpověď**,
+do `nezOdletisOdpovedi` pod klíčem `hadanka-<modulId>-<krok>`, takže po znovuotevření appky
+je krok rovnou otevřený a nikdo neluští podruhé to, co už vyřešil.
+
+**Reakce u špatné možnosti napovídá směr** („Víc.“, „Ještě kousek nahoru.“), ne odpověď.
+Aby se nedalo zaseknout, musí být možností nejvýš tolik, kolik jich jde postupně vyloučit,
+tedy typicky 3. Obsluha je v `initHadanky()`.
 
 **Výjimka: `ilustrace`.** Když krok má `lead`, obrázek se nevykreslí za odstavci, ale **dovnitř** nich, a text ho obtéká. Strany se střídají podle pořadí kroku, dá se přebít polem `strana: "vlevo"` nebo `"vpravo"`. Bez `lead` (krok nemá co obtékat) spadne zpět na variantu na střed. Pod 700 px šířky se obtékání ruší, jinak by na řádek zbylo pár slov.
 
@@ -202,10 +235,12 @@ modul podle id napříč oběma průvodci, ptá se `najdiModul(id)`; číslo mod
 pole, ve kterém modul žije, `poleModulu(mod)`, a jméno průvodce `pruvodceNazev(mod)`. Časová osa se
 u modulu druhého průvodce sama schová, měří jen „Než odletíš".
 
-Kroky jsou zatím kostra: nadpis a v `lead` Gábino zadání označené `[SEM DOPLNIT: …]`, aby se
-nemohlo omylem dostat ven jako hotový text. Plné zadání ze 13. 9. 2026 je v
-`usa-bez-cestovky-cast2/KOSTRA.md`. Prázdný modul appka zvládne, ukáže placeholder a schová
-řádek „Zabere ti".
+**Stav obsahu k 14. 9. 2026:** modul 1 (Imigrační kontrola) a modul 2 (Půjčovna aut) jsou
+napsané celé, oba včetně hooku, ilustrací a historky nebo místa na podcast. Moduly 3 až 7 mají
+hotové texty a plní se dál. Tam, kde chybí Gábina vlastní zkušenost, zůstává v `lead`
+`[SEM DOPLNIT: …]`, aby se nemohlo omylem dostat ven jako hotový text. Plné zadání ze
+13. 9. 2026 je v `usa-bez-cestovky-cast2/KOSTRA.md`. Prázdný modul appka zvládne, ukáže
+placeholder a schová řádek „Zabere ti".
 
 ⚠️ **Moduly se klíčují podle `id`, ne podle pořadí.** Proto jde modul přidat, rozdělit nebo přesunout bez ztráty dat. Nikdy nepřejmenovávat existující `id`.
 

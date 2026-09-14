@@ -1536,6 +1536,41 @@
      Obrázek nemá text přerušit, ale patřit do něj. Proto se vkládá dovnitř
      odstavců a text ho obtéká zleva nebo zprava. Záložní varianta na střed
      zůstává pro kroky, které nemají žádný text k obtékání.               */
+  /* ── hádanka: otázka s možnostmi, po odpovědi se odemkne zbytek kroku ──
+     Drží se vzhledu ostatních voleb v appce (.mp-month), jen přidává
+     písmeno a) b) c) a barevnou zpětnou vazbu. Odpověď se ukládá, takže
+     se při dalším otevření appky neptá znovu.                            */
+  .hadanka {
+    margin: var(--s5) 0 var(--s6);
+    padding: var(--s5);
+    border: 2px solid var(--tyrkys-light);
+    border-radius: 18px;
+    background: var(--page);
+  }
+  .hadanka-otazka { font-weight: 700; font-size: 16px; margin-bottom: var(--s4); }
+  .hadanka-moznosti { display: grid; gap: 10px; }
+  .hadanka-moznost {
+    display: flex; align-items: flex-start; gap: 10px; width: 100%;
+    text-align: left; cursor: pointer;
+    padding: 13px 15px; font: inherit; font-size: 15px; font-weight: 600;
+    color: var(--text); background: #fff;
+    border: 2px solid var(--tyrkys-light); border-radius: 14px;
+  }
+  .hadanka-moznost:hover { border-color: var(--tyrkys); }
+  .hadanka-moznost:disabled { cursor: default; opacity: .7; }
+  .hadanka-moznost:disabled .hadanka-text { text-decoration: line-through; }
+  .hadanka-pismeno { font-weight: 800; color: var(--tyrkys); flex: 0 0 auto; }
+  .hadanka-moznost.spravne { border-color: var(--tyrkys); background: var(--tyrkys-light); }
+  .hadanka-moznost.spravne .hadanka-pismeno { color: var(--tyrkys); }
+  .hadanka-moznost.spatne { border-color: var(--ruzova); background: #FFF1F6; }
+  .hadanka-moznost.spatne .hadanka-pismeno { color: var(--ruzova); }
+  .hadanka-reakce { display: none; margin-top: var(--s4); font-size: 15px; line-height: 1.6; }
+  .hadanka-reakce.show { display: block; }
+  .hadanka-reakce p { margin: 0 0 var(--s3); }
+  .hadanka-reakce p:last-child { margin-bottom: 0; }
+  .po-hadance { display: none; }
+  .po-hadance.odhaleno { display: block; }
+
   .step-ilustrace { margin-top: var(--s6); text-align: center; }
   .step-ilustrace img {
     width: 148px; height: 148px; display: block; margin: 0 auto;
@@ -1600,6 +1635,14 @@
     font-size: clamp(18px, 2.2vw, 21px); line-height: 1.5; color: var(--text);
   }
   .step-quote .who { display: block; margin-top: var(--s2); font-style: italic; font-weight: 700; font-size: 14px; color: #C4275A; }
+  /* volitelná kresba mluvčího vedle citátu, typicky paní Cokdyž */
+  .step-quote.s-fotkou { display: flex; align-items: center; gap: var(--s4); }
+  .step-quote .quote-foto { flex: 0 0 auto; width: 84px; height: 84px; }
+  .step-quote .quote-obsah { min-width: 0; }
+  @media (max-width: 520px) {
+    .step-quote.s-fotkou { gap: var(--s3); }
+    .step-quote .quote-foto { width: 62px; height: 62px; }
+  }
 
   /* odkaz na skutečný rezervační systém, ne jen text o tom, že rezervace existují */
   .step-link {
@@ -1615,6 +1658,20 @@
   .step-link-arrow { flex: 0 0 auto; font-size: 18px; color: var(--accent, var(--tyrkys-dark)); }
 
   /* ── výrazný samostatný tip (peněženkové rady apod.), vždy viditelný, ne za rozkliknutím ── */
+  /* ── závěr bloku: jedna věta na odnesení, v rámečku a tučně ──
+     Volitelné pole `zaver` u why/trap/note. Je to uzávěrka, ne další
+     odstavec, proto rámeček a tučné písmo. Nejvýš jedna na blok.     */
+  .d-zaver {
+    margin-top: var(--s4);
+    padding: 13px 15px;
+    border: 2px solid currentColor;
+    border-radius: 14px;
+    font-weight: 700;
+    line-height: 1.6;
+  }
+  .d-zaver p { margin: 0 0 var(--s2); }
+  .d-zaver p:last-child { margin-bottom: 0; }
+
   .step-tip {
     margin-top: var(--s5); border-radius: var(--r-lg); padding: var(--s5);
     background: var(--gold-light); border: 1.5px solid var(--gold);
@@ -3094,14 +3151,16 @@
       'stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + d + '</svg>';
   }
 
-  /* Náhled druhého průvodce "Až přistaneš" (usa-bez-cestovky-cast2/KOSTRA.md).
-     Není to modul appky, jen ochutnávka: appka sama žádný obsah těchhle
-     7 položek nemá, jen jméno a jednu větu. Proto se neúčastní MODULES,
-     progress, checklistů ani isUnlocked. Dokud je PRISTANES_ODKAZ prázdný,
-     appka nenabízí žádnou akci, jen slib. Stejný vzor jako BALICKY.odkaz. */
-  /* Kroky jsou zatím jen kostra: nadpis a v leadu Gábino vlastní zadání
-     ze 13. 9. 2026, označené [SEM DOPLNIT], ať se nemůže omylem dostat ven
-     jako hotový text. Plné znění zadání je v usa-bez-cestovky-cast2/KOSTRA.md. */
+  /* Druhý průvodce "Až přistaneš" (usa-bez-cestovky-cast2/KOSTRA.md).
+     Na zamčené obrazovce se z tohohle seznamu berou jen jména a popisky,
+     ať se dlaždice nikdy nerozejdou s obsahem. Do MODULES, progress,
+     checklistů ani isUnlocked se nepočítá. Dokud je PRISTANES_ODKAZ prázdný,
+     appka nenabízí žádnou akci, jen slib. Stejný vzor jako BALICKY.odkaz.
+
+     Stav obsahu: modul 1 je napsaný celý (9 kroků, historka, místo na podcast),
+     moduly 2 až 7 mají hotové texty a plní se dál. Kde chybí Gábina vlastní
+     zkušenost, je v leadu `[SEM DOPLNIT]`, ať se nemůže omylem dostat ven
+     jako hotový text. Odemyká se autorským kódem, viz KODY výš. */
   var PRISTANES_MODULY = [
     { id: "p-imigracni", emoji: ico("doc"), name: "Imigrační kontrola podrobněji", shortName: "Imigrační kontrola", desc: "Co přesně čeká za dveřmi, jak vypadá fronta a co u toho říct.", dashboard: true,
       hook: [
@@ -3114,6 +3173,7 @@
         {
           icon: ico("doc"),
           title: "Papír, který tě zachrání",
+          ilustrace: { src: "images/gabi-tisk-listu.svg", popis: "jedna A4, na které je všechno, na co se zeptají", strana: "vpravo" },
           media: {
             kicker: "K poslechu",
             src: "audio/co-me-ceka-za-temi-dvermi.mp3",
@@ -3195,6 +3255,7 @@
         {
           icon: ico("people"),
           title: "Správná fronta",
+          ilustrace: { src: "images/gabi-cekani-hala.svg", popis: "špatná fronta stojí čas i nervy, a obojí je tady vzácné", strana: "vlevo" },
           lead: [
             "Tady se láme chleba. Špatná fronta tě bude stát čas, nervy a možná i nepříjemný rozhovor s úředníkem, který tě pošle zpátky na začátek.",
             "Koukni nahoru na cedule. Ty patříš do fronty <strong>Visitors, ESTA nebo Visa Waiver Program</strong>.",
@@ -3206,6 +3267,7 @@
         {
           icon: ico("phone"),
           title: "Rozhovor: co se ptají a co odpovědět",
+          ilustrace: { src: "images/sceny/urednik-kafe.svg", popis: "úředník, který to chce mít za sebou a dát si další kafe", strana: "vpravo" },
           lead: [
             "Ještě ve frontě si vytáhni pas, tu A4 s adresou a zpáteční letenku. Nic víc nepotřebuješ. Telefon schovej.",
             "Pak platí zlaté pravidlo, které ti ušetří většinu nervů: <strong>odpovídej co nejstručněji</strong>. Úředník nechce příběh, chce se ujistit, že jedeš jako turista a víš, kde budeš bydlet.",
@@ -3271,6 +3333,7 @@
         {
           icon: ico("laptop"),
           title: "Telefon: co s ním udělat ještě doma",
+          ilustrace: { src: "images/gabi-klidne-doma.svg", popis: "tohle je deset minut doma u stolu, ne řešení ve frontě", strana: "vlevo" },
           lead: [
             "Úředníci mají zákonné právo požádat o přístup do telefonu bez soudního příkazu. Nestává se to často, ale děje se to.",
             "A nejhorší moment, kdy to zjistíš, je až ve frontě. Udělej proto tyhle 3 věci ještě doma.",
@@ -3321,6 +3384,7 @@
         {
           icon: ico("suitcase"),
           title: "Po imigrační: co dál",
+          ilustrace: { src: "images/gabi-happy-plaz.svg", popis: "za těmi dveřmi už je jenom dovolená", strana: "vpravo" },
           lead: [
             "Hotovo. Nejhorší máš za sebou a zbytek už je jen chození po šipkách.",
             "Jdeš pro zavazadla na <strong>baggage claim</strong>, hledej číslo svého letu na tabulích.",
@@ -3331,16 +3395,138 @@
           pochvala: "Máš to nastudované celé. Paní Cokdyž si může jít po svých."
         }
       ] },
-    { id: "p-pujcovna", emoji: ico("ticket"), name: "Jak půjčit auto bez stresu", shortName: "Půjčovna aut", desc: "Vyzvednutí vozu, co podepisuješ a co zkontrolovat, než odjedeš.", dashboard: true,
+    { id: "p-pujcovna", emoji: ico("ticket"), name: "Jak půjčit auto bez stresu", shortName: "Půjčovna aut", desc: "Proč auto potřebuješ, kde ho rezervovat a co zkontrolovat, než odjedeš.", dashboard: true,
+      hookFoto: "images/gabi-ridicak.svg",
+      hook: [
+        "„Auto si půjčovat nebudeme, nějak to zvládneme.“ Kdepák, takhle by to nešlo.",
+        "Asi tušíš, že Amerika není Itálie nebo Chorvatsko, kde vystoupíš z vlaku a máš pláž za rohem. Města jsou tu stavěná pro auta, ne pro lidi, a co je v Evropě deset minut pěšky, je tady <strong>čtyři kilometry po silnici bez chodníku</strong>.",
+        "Než začneš vybírat, jedno číslo na rozehřátí."
+      ],
       steps: [
+        {
+          icon: ico("map"),
+          title: "Proč to bez auta nepůjde",
+          hadanka: {
+            otazka: "Kolik hodin podle tebe trvá cesta z Orlanda do Miami?",
+            moznosti: [
+              { text: "Hodinu a půl, je to kousek",
+                reakce: [
+                  "Víc. Podstatně víc, a přesně tenhle odhad stojí lidi celý den dovolené.",
+                  "Zkus to ještě jednou."
+                ] },
+              { text: "Dvě a půl hodiny",
+                reakce: [
+                  "Pořád míň, než to ve skutečnosti je. Ještě kousek nahoru."
+                ] },
+              { text: "Skoro 4 hodiny", spravne: true,
+                reakce: [
+                  "Přesně tak. <strong>380 km jedním směrem</strong>, takže výlet z Orlanda do Miami a zpátky ti sní celý den.",
+                  "Když tohle víš předem, ušetříš si tu nejčastější chybu v plánování americké cesty."
+                ] }
+            ]
+          },
+          ilustrace: { src: "images/gabi-trasa.svg", popis: "na mapě kousek, v autě půl dne", strana: "vpravo" },
+          lead: [
+            "Orlando a Miami vypadají na mapě jako dvě města na jednom poloostrově. Je mezi nimi <strong>380 km</strong>, tedy skoro 4 hodiny jízdy jedním směrem.",
+            "Autobusem je to přes několik přestupů a půl dne. Taxíkem částka, za kterou se dá mít auto na celý týden.",
+            "Tohle je celá logika amerického cestování. Vzdálenosti vypadají menší, než jsou, a veřejná doprava mezi nimi skoro neexistuje.",
+            "<strong>New York je výjimka.</strong> Metro tam jezdí tak hustě, že auto nepotřebuješ, a popravdě ho tam ani mít nechceš. Jenže New York není Amerika, New York je New York.",
+            "Na Floridě metro není. Autobusy jezdí, ale po trasách, které navrhoval někdo, kdo turistu nikdy neviděl. Na Cocoa Beach, do Everglades ani na Kennedy Space Center se jimi nedostaneš.",
+            "V Denveru je to stejná písnička. Centrum má tramvaj, ale Rocky Mountain National Park, kvůli kterému tam většina lidí letí, je <strong>hodinu a půl autem</strong> a bus tam nejede.",
+            "Auto v Americe není luxus. Je to podmínka toho, že cestu vůbec uvidíš, a ne jen prožiješ mezi hotelem a nejbližším McDonald's."
+          ],
+          why: {
+            title: "Proč je to důležité",
+            body: [
+              "Jediné místo, kde se tahle rada obrací, je <strong>Manhattan</strong>. Má nejnáročnější podmínky pro řidiče v celých USA a parkování v kryté garáži tam stojí <strong>50 až 90 dolarů za 24 hodin</strong>.",
+              "K tomu zácpy a metro, které jezdí nepřetržitě a hustě. Autem se po Manhattanu jede často pomaleji, než se jde pěšky.",
+              "Parkování na ulici má navíc přísné časové zóny a dny, kdy se ulice čistí. Kdo je přehlédne, najde za stěračem pokutu.",
+              "Beze zbytku naopak platí všude mimo velká města. Na Floridě, na západním pobřeží i mezi národními parky je meziměstská doprava řídká a drahá, takže bez auta se prakticky nehneš."
+            ],
+            zaver: "Takže: letíš jen do New Yorku, auto si nepůjčuj. Letíš kamkoliv jinam, počítej s ním od začátku, včetně rozpočtu."
+          }
+        },
+        {
+          icon: ico("ticket"),
+          title: "Rezervuj už doma",
+          ilustrace: { src: "images/gabi-banka-appka.svg", popis: "deset minut na gauči, nebo hodina ve frontě?", strana: "vlevo" },
+          bloky: [
+            { text: [
+              "Představ si týpka, co stojí ve frontě před přepážkou v půjčovně aut v Orlandu a nemá rezervaci.",
+              "Po dvaceti minutách čekání mu řeknou, že všechna levnější auta jsou pryč. Zbývá jen velké SUV, které nechtěl, ale které si musí vzít za cenu, kterou nečekal.",
+              "Ta sazba má i svoje jméno. <strong>Walk-up rate</strong>. Je to cena pro toho, kdo přijde bez rezervace, a na amerických letištích bývá o třetinu až polovinu vyšší než ta samá rezervace udělaná doma."
+            ] },
+            { stat: "30 až 50 %", popis: "o tolik je dražší sazba u přepážky proti rezervaci z domova" },
+            { text: [
+              "To že vyprodali levnou třídu navíc není smůla, ale spíš pravidlo. V Orlandu a v Los Angeles se to stane na beton.",
+              "Na menších letištích, třeba u nás v Melbourne, ještě nějaká menší auta většinou jsou.",
+              "Rezervuj proto <strong>několik týdnů před odletem</strong>. Vidíš přesnou částku i auto, které se ti líbí, tak si ho radši posichruj.",
+              "Drž se velkých značek: Hertz, Enterprise, Avis, Budget, Alamo, National. Mají v USA největší flotily, zákaznickou linku a v případě problému víš, komu volat.",
+              "A teď věc, kterou moc lidí nezná. Když máš <strong>věrnostní program</strong> u vybrané půjčovny, můžeš přeskočit frontu. Díky Hertz Gold nebo Alamo Bypass jdeš po příletu rovnou k autu na parkovišti a u přepážky se vůbec nezdržíš.",
+              "Registrace přitom doma zabere pět minut. Ale panečku, taková fronta u přepážky v Miami zabere klidně hodinu. (Lepší návratnost pěti minut v přípravě na cestu fakt nenajdeš.)"
+            ] },
+            { oddelovac: true, ikona: "✦" },
+            { text: [
+              "A pak je tu jedna věc, která Čechy překvapí nejvíc, protože se o ní nikde nemluví.",
+              "Když rezervuješ <strong>přes evropskou verzi webu</strong>, bývají v ceně rovnou dvě pojištění: CDW nebo LDW proti poškození a krádeži, a rozšířená odpovědnost SLI.",
+              "Když si to samé auto půjčíš až na místě v USA, v ceně u přepážky obvykle nejsou. Doplatíš za ně <strong>20 až 40 dolarů za každý den</strong>."
+            ] },
+            { stat: "280 až 560 $", popis: "tolik to dělá navíc na dvoutýdenní cestě" },
+            { text: [
+              "Za nic jiného než za místo, odkud rezervace odešla.",
+              "Důvod je přitom prostý. Američané mají vlastní povinné ručení nebo krytí z domácí kreditky, takže základní americká cena pojištění neobsahuje. Evropské verze webů to vědí a přibalují ho rovnou.",
+              "A budeš to potřebovat umět doložit. Lidi u přepážek mají z připojištění provizi, takže ti ho zkusí prodat, i když ho v rezervaci dávno máš.",
+              "Takže vždycky si v rezervaci najdi, co přesně je v ceně, a ten výpis si ulož, klidně jen do telefonu. Hledej v něm anglicky <strong>CDW Included</strong> a <strong>SLI Included</strong>.",
+              "U přepážky se pak nehádáš, jen ukazuješ."
+            ] }
+          ],
+          checklist: [
+            "Rezervovat <strong>několik týdnů dopředu</strong>, ne až na letišti",
+            "Objednat <strong>přímo u půjčovny</strong> nebo přes velký srovnávač",
+            "Založit si <strong>věrnostní program</strong> půjčovny a přeskočit frontu",
+            "Uložit si <strong>voucher s CDW Included a SLI Included</strong> do telefonu",
+            "Ověřit, jestli je sazba <strong>zrušitelná, nebo předplacená</strong>",
+            "Uložit si <strong>číslo rezervace</strong> do Trezoru v téhle appce"
+          ],
+          why: {
+            title: "Proč je to důležité",
+            body: [
+              "U rezervace si vybíráš mezi dvěma sazbami a rozdíl je větší, než vypadá.",
+              "<strong>Pay at Location</strong>, tedy platba až při převzetí, nemá stornopoplatek. Můžeš rezervovat i několik měsíců dopředu, a když cena před odletem klesne, zrušíš to zdarma a rezervuješ znovu levněji.",
+              "<strong>Pay Now</strong>, tedy předplacená sazba, bývá o 5 až 10 procent levnější. Za zrušení nebo změnu si ale půjčovna účtuje <strong>50 až 100 dolarů</strong>, a těsně před vyzvednutím klidně celou částku."
+            ],
+            zaver: "Deset procent úspory proti volnosti měnit plán. U první cesty do Ameriky vyhrává volnost."
+          },
+          trap: {
+            title: "Pozor na tohle",
+            body: [
+              "Zavedené srovnávače jako Rentalcars, Auto Europe, Expedia nebo Skyscanner a weby samotných půjčoven jsou bezpečná volba. Malí neznámí zprostředkovatelé ne.",
+              "Umí schovat <strong>povinné místní poplatky</strong>, které se objeví až na místě. A prodat pojištění, které ti pak půjčovna u přepážky neuzná, takže ho platíš dvakrát.",
+              "Rozdíl v ceně bývá pár dolarů. Ale když se něco pokazí, může být rozdíl v tom, co za své peníze dostaneš, obrovský."
+            ]
+          },
+          note: {
+            title: "Ještě jedna věc",
+            body: [
+              "Auto se dá vyzvednout i mimo letiště, ve městě. Bývá to o poznání levnější, protože k letištním sazbám se připočítávají letištní poplatky.",
+              "Vyplatí se to ale jen tehdy, když k té pobočce jezdí třeba shuttle bus nebo tě tam někdo hodí. Když zaplatíš 80 dolarů za Uber nebo taxi, tak to moc efektivní nebude."
+            ]
+          }
+        },
         {
           icon: ico("card"),
           title: "Co musíš mít v ruce",
+          ilustrace: { src: "images/gabi-dve-karty.svg", popis: "kreditní, ne debetní, a na jméno toho, kdo řídí", strana: "vlevo" },
           lead: [
-            "Do půjčovny se jde s trojicí dokladů a jeden z nich se v Česku vyřizuje předem. Bez něj tě sice většinou pustí, ale je to tvoje riziko, ne jejich.",
+            "Do půjčovny potřebuješ tři doklady a jeden z nich si musíš vyřídit ještě doma.",
+            "Možná ti auto půjčí i bez něj. Ale možná taky ne, takže si ho raději vyřiď.",
             "Ministerstvo zahraničí u USA uvádí <strong>mezinárodní řidičský průkaz podle Ženevské úmluvy z roku 1949</strong>. To je důležitá věta, protože v Evropě se běžněji vydává ten podle Vídeňské úmluvy z roku 1968 a ten v USA neplatí.",
             "Vyřídíš ho <strong>na počkání na obecním úřadě obce s rozšířenou působností</strong>. Stojí <strong>200 Kč</strong>, chce to fotku 3,5 krát 4,5 cm, občanku a řidičák. Platí 1 rok.",
-            "Druhá věc je <strong>kreditní karta na jméno řidiče</strong>. Debetní kartu většina půjčoven na blokaci kauce nebere, i když na ní peníze jsou."
+            "A hlavně: mezinárodní průkaz je <strong>jenom překlad</strong>, ne samostatný doklad. Sám o sobě neplatí nic.",
+            "Český řidičák proto musí jet s ním. A oba je potřebuješ mít u sebe jak při přebírání auta v půjčovně, tak pak za volantem.",
+            "Druhá věc je <strong>kreditní karta na jméno řidiče</strong>. Debetní kartu většina půjčoven na blokaci kauce nebere, i když na ní peníze jsou.",
+            "Půjčovna na ní zablokuje kauci, obvykle <strong>200 až 500 dolarů</strong> podle třídy auta. Po vrácení vozu se uvolní, ale po celou dobu pronájmu s těmi penězi nepočítej.",
+            "A třetí věc je věk. Pod 25 let auto dostaneš, ale s příplatkem za mladého řidiče, který se pohybuje <strong>kolem 25 až 35 dolarů denně</strong>. Za dva týdny je to víc než samotný pronájem malého vozu."
           ],
           checklist: [
             "Vyřídit <strong>mezinárodní řidičský průkaz</strong> podle Ženevské úmluvy 1949",
@@ -3351,8 +3537,8 @@
           why: {
             title: "Proč je to důležité",
             body: [
-              "Mezinárodní řidičský průkaz není samostatný doklad. Je to <strong>překlad toho českého</strong> a bez něj neplatí, takže s sebou musí jet oba.",
-              "Půjčovny ho nekontrolují pokaždé. Policie při silniční kontrole a hlavně pojišťovna při nehodě už ano, a tam se to prodraží."
+              "Půjčovny ho nekontrolují pokaždé, a z toho vzniká dojem, že není potřeba.",
+              "Policie při silniční kontrole a hlavně <strong>pojišťovna při nehodě</strong> už ho ale chtějí. Bez něj může pojišťovna plnění zkrátit nebo odmítnout, a škodu na autě pak platíš z vlastního."
             ]
           },
           link: {
@@ -3363,20 +3549,51 @@
         },
         {
           icon: ico("suitcase"),
-          title: "Pojištění: co je v ceně a co ti nabídnou u pultu",
+          title: "Pojištění: co je v ceně a co ti nabídnou u přepážky",
+          ilustrace: { src: "images/gabi-pojisteni.svg", popis: "rozhodnuto doma, ne po dvanácti hodinách letu", strana: "vpravo" },
           lead: [
             "Cena, kterou vidíš na internetu, skoro nikdy není cena, kterou nakonec zaplatíš. Rozdíl dělá pojištění, a to se domlouvá až na místě.",
-            "Připrav se na to, že u pultu dostaneš nabídku na několik připojištění za sebou. Není to podvod, je to standardní americký způsob prodeje.",
-            "Rozhodni se <strong>předem, doma</strong>, co chceš. U pultu po dvanácti hodinách letu se rozhoduje špatně a personál to ví.",
-            "Zjisti si taky, jestli něco z toho nekryje tvoje cestovní pojištění nebo kreditní karta. Někdy ano, ale <strong>vždycky si to nech potvrdit písemně</strong>, ne po telefonu.",
-            "[SEM DOPLNIT: co jsi u pultu zažila ty nebo tvoji klienti, na co vás ukecali a jestli se to vyplatilo. Tohle je přesně místo, kde tvoje zkušenost udělá víc než obecná rada.]"
+            "Připrav se na to, že u přepážky dostaneš nabídku na několik připojištění za sebou. Není to podvod, je to standardní americký způsob prodeje.",
+            "Nejdřív ale mrkni do rezervace. Když šla přes evropskou verzi webu, <strong>CDW nebo LDW a rozšířenou odpovědnost tam nejspíš už máš v ceně</strong>, takže u přepážky by to byla druhá platba za to samé.",
+            "Ve zkratkách, které uslyšíš: <strong>CDW nebo LDW</strong> kryjí škodu na půjčeném autě, <strong>liability</strong> je odpovědnost za škodu způsobenou někomu jinému, a k tomu se přidávají pojistky na věci v autě a na úraz.",
+            "<strong>Odpovědnost neškrtej.</strong> Americké zdravotní účty a soudy jsou drahé a u nehody se zraněním jdou částky do desítek tisíc dolarů. Tohle je ta jediná položka, u které se nevyplatí šetřit.",
+            "Rozhodni se <strong>předem, doma</strong>, co chceš. U přepážky po dvanácti hodinách letu se rozhoduje špatně a personál to ví.",
+            "Zjisti si taky, jestli něco z toho nekryje tvoje cestovní pojištění nebo kreditní karta. Prémiové karty Visa a Mastercard tohle krytí běžně mají, když se celý pronájem zaplatí tou kartou, a ušetří klidně <strong>15 až 20 dolarů denně</strong>.",
+            "Jedna podmínka ale platí vždycky: <strong>nech si to potvrdit písemně</strong>, ne po telefonu. Slib operátora na lince ti u přepážky v Miami nepomůže."
           ],
+          media: {
+            kicker: "K poslechu",
+            src: "audio/dva-ridicaky-v-pujcovne.mp3",
+            titulek: "Dva řidičáky a jak to chodí v půjčovně",
+            obrazek: "images/gabi-mikrofon.svg",
+            popis: "Pusť si to cestou na letiště nebo ve frontě na shuttle k půjčovně."
+          },
+          quote: {
+            foto: "images/pani-cokdyz.svg",
+            text: "„A co když to pojištění nevezmu a zrovna tohle auto pak nabourám?“",
+            who: "Paní Cokdyž, večer před odletem"
+          },
           trap: {
             title: "Pozor na tohle",
             body: [
               "Cena z porovnávače bývá bez pojištění, bez druhého řidiče a bez poplatků letiště. Skutečná částka může být <strong>i dvojnásobek</strong>.",
               "Druhý řidič se musí <strong>nahlásit a zapsat do smlouvy</strong>. Když za volantem sedí někdo, kdo ve smlouvě není, pojištění při nehodě neplatí.",
-              "Nepodepisuj smlouvu, dokud nevidíš celkovou částku včetně všeho. Až podpis, pak už se nediskutuje."
+              "Nepodepisuj smlouvu, dokud nevíš, kolik tě půjčení auta opravdu bude stát. Po podpisu už se cena většinou řeší mnohem hůř."
+            ]
+          }
+        },
+        {
+          icon: ico("suitcase"),
+          title: "Než se vůbec dostaneš k autu",
+          lead: [
+            "Půjčovny na velkých amerických letištích nestojí u terminálu. Mají vlastní budovu, takzvané <strong>rental car center</strong>, a jezdí se k ní autobusem nebo vláčkem.",
+            "Na letištích jako Orlando, Miami nebo Denver počítej po vyzvednutí kufrů s <strong>10 až 20 minutami navíc</strong>. Na cedulích hledej Rental Car Center nebo Car Rental Shuttle."
+          ],
+          note: {
+            title: "Ještě jedna věc",
+            body: [
+              "Do shuttle busu se nastupuje s celými zavazadly a bývá plný. Když jedete ve dvou a máte čtyři kufry, počítejte s tím, že první bus možná necháte odjet.",
+              "Na některých letištích jezdí shuttle zvlášť pro každou půjčovnu, jinde jeden pro všechny. Řidič ti poradí, stačí říct jméno půjčovny."
             ]
           }
         },
@@ -3399,7 +3616,36 @@
             title: "Ještě jedna věc",
             body: [
               "Skoro každá půjčovna nabízí, že palivo koupíš předem. Vyplatí se to jen tehdy, když auto vrátíš opravdu prázdné, což se skoro nikdy nepovede.",
-              "Levnější bývá natankovat si sám cestou na letiště a schovat si účtenku."
+              "Levnější bývá natankovat cestou na letiště a schovat si účtenku."
+            ]
+          }
+        },
+        {
+          icon: ico("laptop"),
+          title: "Turo: kdy ano a kdy radši ne",
+          bloky: [
+            { text: [
+              "Turo je něco jako Airbnb pro auta. Půjčuješ si vůz přímo od majitele přes aplikaci, platíš kartou a na předání se domluvíte spolu.",
+              "Ceny bývají nižší a výběr pestřejší. Místo šedého sedanu můžeš mít kabriolet nebo pick-up, a majitel často přihodí tipy na okolí, protože je místní.",
+              "Nevýhoda je předvídatelnost. Když se auto porouchá, nevoláš na zákaznickou linku, ale konkrétnímu člověku, a jak to dopadne, záleží na něm.",
+              "Pojištění řeší Turo vlastní platformou a je součástí ceny. Podmínky si ale přečti dopředu, ne až u předání."
+            ] },
+            { historka: {
+              foto: "images/gabi-hlavicka.jpg",
+              text: [
+                "Jirka si půjčil Ford Mustang, protože chtěl po Floridě jezdit v kabrioletu.",
+                "[SEM DOPLNIT: kdy to bylo, jestli přes Turo nebo klasickou půjčovnu, kolik to stálo za den a jak to dopadlo. Bez toho je z toho zmínka, ne historka.]"
+              ]
+            } },
+            { text: [
+              "<strong>Na první cestu do Ameriky bych do toho nešla.</strong> Turo dává smysl, až když víš, jak to tam chodí, a drobná improvizace tě nerozhodí."
+            ] }
+          ],
+          trap: {
+            title: "Pozor na tohle",
+            body: [
+              "Předání bývá jinde než na letišti, někdy u majitele doma. Zjisti si <strong>adresu a způsob předání</strong> dřív, než zaplatíš, ne až po přistání.",
+              "Ne každý majitel povolí cestu do jiného státu nebo neomezené kilometry. U roadtripu si tohle ověř jako první věc."
             ]
           }
         }
@@ -3472,7 +3718,7 @@
             "Před nastartováním musí být páka v P a noha na brzdě. Když auto nechce nastartovat, bývá to tímhle, ne poruchou.",
             "Americké vzdálenosti jsou jiná liga. <strong>Přejezd 400 mil je běžný denní úsek</strong>, což je asi 640 km, a na rovné silnici s tempomatem to ubíhá rychleji, než čekáš.",
             "Únavu ale podceňují i zkušení. Plánuj zastávku každé 2 hodiny a nechtěj po sobě přejezd hned v den příletu, kdy tělo počítá s jiným časem.",
-            "[SEM DOPLNIT: tvoje nebo Jirkovo pravidlo na dlouhé přejezdy, něco konkrétního z vašich cest po Utahu a Coloradu.]"
+            "[SEM DOPLNIT: tvoje nebo Jirkovo pravidlo na dlouhé přejezdy. Něco konkrétního, co se vám reálně stalo, a odkud to bylo.]"
           ]
         }
       ] },
@@ -3687,7 +3933,7 @@
     return {
       id: m.id, balicek: "pristanes",
       name: m.name, shortName: m.shortName || m.name,
-      hook: m.hook,
+      hook: m.hook, hookFoto: m.hookFoto, hookFotoAlt: m.hookFotoAlt,
       emoji: m.emoji, ikona: m.ikona,
       desc: m.desc,
       dashboard: !!m.dashboard,
@@ -3796,7 +4042,7 @@
               "Největší chyba při plánování dovolené v USA je přesvědčení, že <strong>víc zastávek znamená lepší dovolenou</strong>. Je to pochopitelné: když už člověk pracně naplánuje cestu přes Atlantik, chce toho vidět co nejvíc. Ale v USA platí tohle pravidlo víc než kdekoliv jinde: <strong>méně je více</strong>.",
               "6 parků v desetidenním výletu nejsou zážitky. Je to <strong>jeden vyčerpaný člověk, který už ani neví, co je na fotce ze včerejška</strong>.",
               "Grand Canyon není zastávka na cestě. Je to místo, kde stojíš na okraji a <strong>mozek odmítá uvěřit tomu, co vidí</strong>. Grand Canyon potřebuje aspoň 1 den, ideálně 2: první na to, vzpamatovat se z výhledu, druhý na to, prožít ho naplno.",
-              "Totéž platí pro Floridu. Daleko víc si ji užiješ, když si vybereš: buď západ se Sarasotou a okolím, nebo jih s Key Westem, nebo Canaveral National Seashore u Cocoa Beach na východě. Obojí najednou za týden? <strong>Strávíš půlku dovolené v autě a druhou půlku litováním, že jsi nikde nezůstal/a déle.</strong>",
+              "Totéž platí pro Floridu. Daleko víc si ji užiješ, když si vybereš: buď západ se Sarasotou a okolím, nebo jih s Key Westem, nebo Canaveral National Seashore u Cocoa Beach na východě. Obojí najednou za týden? <strong>Strávíš půlku dovolené v autě a druhou půlku litováním, že nikde nezbyl čas zůstat déle.</strong>",
               "Plánuj podle počasí, ale hlavně podle sebe. Nesnášíš vedro? Tak žádná Florida v červenci. Bez ranní kávy z pořádného hrnku se neobejdeš? Tak žádný týden v kempu uprostřed Utahu.",
               "<strong>Méně míst, více zážitků.</strong> Tenhle princip ti hned na začátku ušetří nejvíc zklamání."
             ]
@@ -4219,7 +4465,7 @@
           ],
           companion: {
             src: "images/gabi-vyjimka.svg",
-            text: "Tuhle otázku proletí devět z deseti lidí za pár vteřin a mají po starosti. Kdyby ses ale ocitl/a v té desáté, chci, abys to věděl/a dřív, než utratíš korunu za cokoliv nevratného."
+            text: "Tuhle otázku proletí devět z deseti lidí za pár vteřin a mají po starosti. Kdyby na tebe ale vyšla ta desátá, chci, ať to víš dřív, než utratíš korunu za cokoliv nevratného."
           },
           checklist: [
             "Zkontrolovat, že plánovaný pobyt nepřesáhne <strong>90 dní</strong>",
@@ -4573,7 +4819,7 @@
           note: {
             title: "Ještě jedna věc",
             body: [
-              "<strong>Flexibilní kalendář</strong> najdeš tak, že v Google Flights klikneš na datum a přepneš na Mřížku dat nebo Cenový graf, místo abys zadával/a pevný termín. Odlety v úterý nebo ve středu bývají skoro vždycky levnější než v pátek nebo v neděli.",
+              "<strong>Flexibilní kalendář</strong> najdeš tak, že v Google Flights klikneš na datum a přepneš na Mřížku dat nebo Cenový graf, místo zadávání pevného termínu. Odlety v úterý nebo ve středu bývají skoro vždycky levnější než v pátek nebo v neděli.",
               "<strong>Hlídání ceny</strong> zapneš přepínačem Sledovat ceny u vybraného spojení. Google pak sám pošle e-mail při výrazném výkyvu, takže nemusíš ceny kontrolovat ručně každý den.",
               "<strong>Víc letišť najednou</strong> mi jednou ušetřilo 8 000 Kč, protože jsem místo Orlanda zkusila i Miami, a tam bývají třeba z Vídně parádní akce. Zadáš to tak, že do pole odletu nebo příletu napíšeš víc kódů oddělených čárkou, třeba TPA, MCO, FLL, MIA pro Floridu nebo PRG, VIE, MUC pro odletová letiště. Google pak sám najde nejvýhodnější kombinaci."
             ]
@@ -4681,9 +4927,9 @@
               "Jenže ty jsi na dovolené a těšíš se, až vyrazíš na cestu. Plýtvat prvními dny v mrákotách je škoda.",
               "Jak z toho ven?",
               "Mám na to jednu zásadní radu: okamžitě se přepni do času na místě a vymaž Česko z hlavy.",
-              "Nepřemýšlej nad tím, že „v Česku bys už stál/a frontu do práce“ nebo že „doma už jedí oběd“. Vůbec ne.",
+              "Nepřemýšlej nad tím, že „v Česku se teď stojí fronta do práce“ nebo že „doma už jedí oběd“. Vůbec ne.",
               "Když přiletíš a kolem tebe běží noční život a chodí se na večeři, běž taky na večeři. Prostě se novému rytmu přizpůsob naplno, od první minuty.",
-              "A aby sis to ještě víc usnadnil/a, vybírej letenky s příletem odpoledne."
+              "A ať je to ještě snazší: vybírej letenky s příletem odpoledne."
             ]
           },
           priletVolba: true,
@@ -4715,7 +4961,7 @@
           title: "Proč je Basic Economy dražší, než vypadá",
           lead: [
             "Vidíš cenu <strong>12 000 Kč</strong> a říkáš si, jaký je to zázrak. Není.",
-            "Paní Cokdyž tě hladí po rameni a šeptá, že jsi právě ušetřil/a na pár dní v Miami navíc. Ve skutečnosti máš letenku, která tě bude vytáčet od chvíle, kdy balíš kufr, až po nástup do letadla.",
+            "Paní Cokdyž tě hladí po rameni a šeptá, že máš právě ušetřeno na pár dní v Miami navíc. Ve skutečnosti máš letenku, která tě bude vytáčet od chvíle, kdy balíš kufr, až po nástup do letadla.",
             "Basic Economy totiž neprodává levnou letenku. Prodává iluzi nízké ceny, a účtuje si zvlášť za každé normální rozhodnutí: kufr, sedadlo, změnu termínu.",
             "Kufr většinou zůstane doma. V ceně máš jen malý batoh pod sedadlo, a když zjistíš, že se do něj nesbalí ani pár dní, dokoupení odbaveného kufru vyjde <strong>klidně na 3 500 Kč</strong> tam i zpět.",
             "Sedadlo vybírá systém, ne ty. Chceš sedět vedle partnera nebo dětí? Bez příplatku <strong>kolem 1 200 Kč na osobu</strong> vás klidně rozhodí po celém letadle.",
@@ -4724,7 +4970,7 @@
           ilustrace: { src: "images/sceny/scena-vaha-kufr.svg", popis: "23 kg, a rozhoduje se u odbavení" },
           companion: {
             src: "images/gabi-basic-economy.svg",
-            text: "Basic Economy mě jednou dostala až u brány, kde mi chtěli nechat kufřík doma. Radši si to over dopředu, než abys tohle řešil/a se zavazadlem v ruce."
+            text: "Basic Economy mě jednou dostala až u brány, kde mi chtěli nechat kufřík doma. Radši si to over dopředu, než tohle řešit se zavazadlem v ruce."
           },
           srovnani: {
             karty: [
@@ -4931,7 +5177,7 @@
               "Vybereme pokoj, řekneme si „ok, cena na Bookingu sedí“, a na recepci je to najednou o <strong>30 nebo 40 dolarů</strong> víc.",
               "Může za to americký zlozvyk ukazovat ceny bez místních daní a bez resort fee.",
               "Nebo ti na recepci připočítají <strong>25 dolarů</strong> za parkovné, které na webu svítilo jako „dostupné“, ale už ne „v ceně“.",
-              "(A ne, nepomůže ani to, že tam jezdíš roky. Paní Cokdyž stejně zkouší, jestli ses přehlédl/a.)",
+              "(A ne, nepomůže ani to, že tam jezdíš roky. Paní Cokdyž stejně zkouší, jestli ti něco neuteklo.)",
               "Pravidlo pro ubytování: výsledná cena není ta, která svítí ve velkém rámečku na srovnávači. Je to vždycky až ta částka na poslední obrazovce těsně před zaplacením."
             ]
           },
@@ -5048,7 +5294,7 @@
           ],
           companion: {
             src: "images/gabi-baleni-kufru.svg",
-            text: "Tohle jsou přesně ty dvě věci, které chci, abys měl/a vyplněné dřív, než zavřeš kufr. V letadle na to nebudeš mít myšlenky."
+            text: "Tohle jsou přesně ty dvě věci, u kterých chci, ať je máš vyplněné dřív, než zavřeš kufr. V letadle na to nebudeš mít myšlenky."
           },
           checklist: [
             "Uložit <strong>adresu první noci</strong> do Trezoru, ptají se na ni na imigrační kontrole",
@@ -5202,7 +5448,7 @@
               "<strong>3 procenta</strong> tady, <strong>50 korun</strong> tam. Na první pohled drobné, nad kterými v nákupním centru mávneš rukou.",
               "Jenže když jsem to na kalkulačce spočítala za celý měsíc, vyšlo z toho skoro <strong>4 000 korun</strong>.",
               "4 000 korun za to, že jsem platila vlastními penězi. Nákupy v Targetu, benzín, kávu i vstupy do parků.",
-              "(Sucho v ústech, když si uvědomíš, že jsi za tyhle peníze mohl/a mít lístek do Universal Studios, je zdarma k tomu.)",
+              "(Sucho v ústech, když si uvědomíš, že za tyhle peníze mohl být lístek do Universal Studios, je zdarma k tomu.)",
               "Tohle je ta položka rozpočtu, o které nikdo nemluví, protože je neviditelná. Česká banka ti při platbě v Americe přepočítá dolary svým nevýhodným kurzem a ještě si k tomu často přisype poplatek za převod měny.",
               "Dneska už běžnou českou kartou v USA neplatím. Na placení používám Revolut, nebo jinou multiměnovou kartu, kde si dolary vyměním předem za středový kurz bez přirážek.",
               "Pravidlo pro placení: běžná česká karta je skvělá pojistka do zálohy. Ale jako hlavní karta na denní placení v Americe tebe i tvůj rozpočet zbytečně dře z kůže."
@@ -5437,7 +5683,7 @@
           title: "Tři věci, na které se zapomíná nejčastěji",
           weatherVariant: true,
           lead: [
-            "Oblečení si sbalíš sám/sama a líp než já. Tyhle tři věci se ale zapomínají tak spolehlivě, že si zaslouží vlastní krok."
+            "Oblečení si sbalíš líp než já, na to mě nepotřebuješ. Tyhle tři věci se ale zapomínají tak spolehlivě, že si zaslouží vlastní krok."
           ],
           companion: {
             src: "images/gabi-adapter.svg",
@@ -5604,7 +5850,7 @@
           ],
           companion: {
             src: "images/gabi-telefonat-noc.svg",
-            text: "Tohle přesně kontroluju klientům, když se jim to fakt stane, telefonicky, někdy uprostřed noci. Nejsi v tom sám/sama, jen postupuj bod po bodu."
+            text: "Tohle přesně kontroluju klientům, když se jim to fakt stane, telefonicky, někdy uprostřed noci. V tom tě nenechám, jen postupuj bod po bodu."
           },
           checklist: [
             "Nikam neodcházet, dokud <strong>nemám od aerolinky písemně</strong>, co se s letem děje",
@@ -5684,7 +5930,7 @@
           ],
           companion: {
             src: "images/gabi-jina-cesta.svg",
-            text: "Tahle situace je vzácná, ale když nastane, chci, abys věděl/a, že to není konec, jen jiná a delší cesta. Projdeme ji spolu, krok po kroku."
+            text: "Tahle situace je vzácná, ale když nastane, chci, ať víš, že to není konec, jen jiná a delší cesta. Projdeme ji spolu, krok po kroku."
           },
           checklist: [
             "Nepodávat <strong>opakovanou žádost o ESTA</strong>, výsledek bude stejný",
@@ -6109,7 +6355,7 @@
         foto: "images/gabi-hlavicka.jpg",
         text: [
           "Jedna z nejkrásnějších nocí, co jsem v Americe zažila, byla na kempu <strong>Bahia Honda</strong>. Přijedeš na plošinu přímo nad oceánem, s vlastním grilem a židlemi, postavíš stan, a ráno se probudíš rovnou do výhledu na moře.",
-          "Místo se rezervuje i <strong>rok dopředu</strong>, a přesto stojí jen <strong>10 dolarů</strong>. Kdo nestihne, může zkusit štěstí na poslední chvíli, uvolní se to častěji, než by člověk čekal. A je to nesrovnatelně levnější, než bys čekal/a z Česka."
+          "Místo se rezervuje i <strong>rok dopředu</strong>, a přesto stojí jen <strong>10 dolarů</strong>. Kdo nestihne, může zkusit štěstí na poslední chvíli, uvolní se to častěji, než by člověk čekal. A je to nesrovnatelně levnější, než se z Česka čeká."
         ]
       }
     },
@@ -7071,6 +7317,11 @@
                                '</div><div class="blok-stat-popis">' + b.popis + '</div></div>';
       if (b.oddelovac) return '<div class="blok-oddelovac"><span class="blok-oddelovac-ikona" aria-hidden="true">' +
                                (b.ikona || '✦') + '</span></div>';
+      /* historka i uvnitř bloků, ne jen jako samostatný prvek za textem.
+         Někdy patří doprostřed výkladu, ne až na jeho konec.            */
+      if (b.historka)  return '<div class="historka"><div class="historka-text">' +
+                               '<img src="' + (b.historka.foto || 'images/gabi-hlavicka.jpg') + '" alt="Gábi">' +
+                               paras([].concat(b.historka.text)) + '</div></div>';
       if (b.voda)      return '<div class="blok-eyebrow eyebrow">' + ico("drop", "ico-side") + ' Kalkulačka</div>' +
                               '<div class="voda-kalk" id="voda-kalk"></div>';
       return '';
@@ -8497,6 +8748,59 @@
     });
   }
 
+  /* Hádanka: tipni si, pak teprve uvidíš zbytek kroku. Odpověď se ukládá
+     mezi ostatní odpovědi (STORAGE_ANSWERS), takže se při dalším otevření
+     appky obsah rovnou odemkne a nikdo neodpovídá dvakrát.               */
+  function initHadanky() {
+    var boxy = document.querySelectorAll(".hadanka");
+    if (!boxy.length) return;
+    var answers = loadAnswers();
+
+    boxy.forEach(function (box) {
+      var hid = "hadanka-" + box.dataset.hid;
+      var mod = najdiModul(currentModuleId);
+      var krok = parseInt(box.dataset.hid.split("-").pop(), 10);
+      var stepData = (mod && mod.steps && mod.steps[krok - 1]) || null;
+      var data = stepData && stepData.hadanka;
+      if (!data) return;
+
+      var btns = box.querySelectorAll(".hadanka-moznost");
+      var reakce = box.querySelector(".hadanka-reakce");
+      var zbytek = box.nextElementSibling;
+
+      /* Špatná volba nikdy neprozradí správnou. Jen se vyškrtne, napoví směr
+         („víc“, „míň“) a text zůstane zamčený, dokud na to čtenář nepřijde.
+         Uloží se až správná odpověď, takže po znovuotevření appky je krok
+         otevřený a nikdo neluští podruhé to, co už vyřešil.               */
+      function ukaz(k, ulozit) {
+        var m = data.moznosti[k];
+        if (!m) return;
+        var spravna = !!m.spravne;
+
+        btns[k].classList.add(spravna ? "spravne" : "spatne");
+        if (!spravna) btns[k].disabled = true;
+
+        reakce.innerHTML = paras([].concat(m.reakce || []));
+        reakce.classList.add("show");
+
+        if (spravna) {
+          if (zbytek && zbytek.classList.contains("po-hadance")) zbytek.classList.add("odhaleno");
+          if (ulozit) {
+            var a = loadAnswers();
+            a[hid] = k;
+            saveAnswers(a);
+          }
+        }
+      }
+
+      btns.forEach(function (b) {
+        b.addEventListener("click", function () { ukaz(parseInt(b.dataset.k, 10), true); });
+      });
+
+      if (typeof answers[hid] === "number") ukaz(answers[hid], false);
+    });
+  }
+
   function initToggleQuestions() {
     var boxes = document.querySelectorAll(".toggle-q");
     if (!boxes.length) return;
@@ -8667,6 +8971,14 @@
     renderDashboard(mod);
   }
 
+  /* Uzávěrka bloku why/trap/note: jedna věta na odnesení v rámečku.
+     Barvu si bere z bloku, ve kterém stojí (currentColor), takže se
+     v mint, červeném i zlatém bloku obarví sama a nic se neduplikuje. */
+  function zaverHtml(blok) {
+    if (!blok || !blok.zaver) return "";
+    return '<div class="d-zaver">' + paras([].concat(blok.zaver)) + '</div>';
+  }
+
   function renderStepsHtml(steps, moduleId) {
     // Číslo kroku je vždy "modul.krok" (např. 2.3), ať sedí s pravým
     // sloupcem „V téhle lekci“. Ignoruje se tím uložené step.kicker,
@@ -8686,6 +8998,27 @@
                 '</span>' +
                 '<span class="step-hotovo">✓ Hotovo</span>' +
               '</div>';
+
+      /* Hádanka stojí před vším ostatním a zbytek kroku drží zavřený, dokud
+         na ni někdo neodpoví. Je to jediné místo, kde se pořadí vykreslení
+         obchází, a to schválně: smysl hádanky je, aby si čtenář tipnul dřív,
+         než uvidí odpověď v textu. Odpověď se ukládá, takže se při dalším
+         otevření appky neptá znovu a obsah zůstane otevřený.               */
+      if (step.hadanka) {
+        html += '<div class="hadanka" data-hid="' + moduleId + '-' + (i + 1) + '">' +
+                  '<div class="hadanka-otazka">' + step.hadanka.otazka + '</div>' +
+                  '<div class="hadanka-moznosti">' +
+                    step.hadanka.moznosti.map(function (m, k) {
+                      return '<button type="button" class="hadanka-moznost" data-k="' + k + '">' +
+                               '<span class="hadanka-pismeno">' + "abcdef".charAt(k) + ')</span>' +
+                               '<span class="hadanka-text">' + m.text + '</span>' +
+                             '</button>';
+                    }).join('') +
+                  '</div>' +
+                  '<div class="hadanka-reakce"></div>' +
+                '</div>' +
+                '<div class="po-hadance">';
+      }
 
       /* Ilustrace patří dovnitř textu, ne mezi odstavce. Když krok má lead,
          vloží se jako první dítě a odstavce ji obtečou. Strany se střídají
@@ -9013,8 +9346,15 @@
       }
 
       if (step.quote) {
-        html += '<div class="step-quote"><div class="quote-body">' + step.quote.text + '</div>' +
-                '<span class="who">' + step.quote.who + '</span></div>';
+        html += '<div class="step-quote' + (step.quote.foto ? ' s-fotkou' : '') + '">' +
+                  (step.quote.foto
+                    ? '<img class="quote-foto" src="' + step.quote.foto + '" alt="" loading="lazy">'
+                    : '') +
+                  '<div class="quote-obsah">' +
+                    '<div class="quote-body">' + step.quote.text + '</div>' +
+                    '<span class="who">' + step.quote.who + '</span>' +
+                  '</div>' +
+                '</div>';
       }
 
       if (step.link) {
@@ -9046,23 +9386,25 @@
         html += '<details class="disc disc-why">' +
                   '<summary><span class="d-ico"><img src="images/ikony/mini-zarovka.svg" alt=""></span>' + step.why.title +
                   '<span class="d-chev" aria-hidden="true">▾</span></summary>' +
-                  '<div class="d-body">' + paras(step.why.body) + '</div>' +
+                  '<div class="d-body">' + paras(step.why.body) + zaverHtml(step.why) + '</div>' +
                 '</details>';
       }
       if (step.trap) {
         html += '<details class="disc disc-trap">' +
                   '<summary><span class="d-ico">' + ico("warning") + '</span>' + step.trap.title +
                   '<span class="d-chev" aria-hidden="true">▾</span></summary>' +
-                  '<div class="d-body">' + paras(step.trap.body) + '</div>' +
+                  '<div class="d-body">' + paras(step.trap.body) + zaverHtml(step.trap) + '</div>' +
                 '</details>';
       }
       if (step.note) {
         html += '<details class="disc disc-note">' +
                   '<summary><span class="d-ico"><img src="images/ikony/mini-poznamka.svg" alt=""></span>' + step.note.title +
                   '<span class="d-chev" aria-hidden="true">▾</span></summary>' +
-                  '<div class="d-body">' + paras(weatherNoteBody(step, setup)) + '</div>' +
+                  '<div class="d-body">' + paras(weatherNoteBody(step, setup)) + zaverHtml(step.note) + '</div>' +
                 '</details>';
       }
+
+      if (step.hadanka) html += '</div>';   // zavírá .po-hadance
 
       html += '</article>';
       return html;
@@ -9310,6 +9652,7 @@
     initBookingCheck();
     initEstaCheck();
     initToggleQuestions();
+    initHadanky();
     initPriletVolba();
     initAddressField();
     renderDashboard(mod);
