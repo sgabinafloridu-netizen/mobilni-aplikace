@@ -189,6 +189,24 @@ v úvodu, ať čtenáře nepřekvapí změna tónu.
 
 Moduly 1 až 4 = příprava před odletem. Moduly 5 až 7 = to, co se hodí těsně před odletem a v den letu.
 
+### Druhý průvodce „Až přistaneš" žije ve stejném souboru (13. 9. 2026)
+
+Rozhodnutí Gábi: 7 modulů druhého průvodce se plní **uvnitř téhle appky**, ne v samostatném
+souboru (mění to bod 4 v sekci 10). Bydlí ve **vlastním poli `MODULES_PRISTANES`**, které se
+generuje z `PRISTANES_MODULY`, aby dlaždice na obrazovce „Až přistaneš" a moduly v menu četly
+z jednoho seznamu a nikdy se nerozešly.
+
+⚠️ **Nepřidávat je do `MODULES`.** Průběh, časová osa, „Modul 1 z 7", dashboard i doporučení
+dalšího modulu počítají s délkou `MODULES`, takže sedm modulů navíc by je rozhodilo. Kdo potřebuje
+modul podle id napříč oběma průvodci, ptá se `najdiModul(id)`; číslo modulu dává `cisloModulu(mod)`,
+pole, ve kterém modul žije, `poleModulu(mod)`, a jméno průvodce `pruvodceNazev(mod)`. Časová osa se
+u modulu druhého průvodce sama schová, měří jen „Než odletíš".
+
+Kroky jsou zatím kostra: nadpis a v `lead` Gábino zadání označené `[SEM DOPLNIT: …]`, aby se
+nemohlo omylem dostat ven jako hotový text. Plné zadání ze 13. 9. 2026 je v
+`usa-bez-cestovky-cast2/KOSTRA.md`. Prázdný modul appka zvládne, ukáže placeholder a schová
+řádek „Zabere ti".
+
 ⚠️ **Moduly se klíčují podle `id`, ne podle pořadí.** Proto jde modul přidat, rozdělit nebo přesunout bez ztráty dat. Nikdy nepřejmenovávat existující `id`.
 
 ⚠️ **„Doprava na místě" se odsud přesunula do průvodce „Až přistaneš"** (14. 8. 2026), kam patří obsahem. Byla jen kostra, nic se neztratilo. Zakomentovaný záznam i ikona zůstávají v `index.html`, kdyby se měla vrátit.
@@ -206,6 +224,21 @@ Appka i tenhle dokument mluví o kroku ve tvaru **modul.krok** (2.3 = modul 2, k
 | 5 | Finance | 5.1 Proč nestačí jedna karta · 5.2 Kolik hotovosti · 5.3 Kolik ukousne banka · 5.4 Terminál a koruny · 5.5 Co udělat s bankou · 5.6 Kolik to celé stojí |
 | 6 | Checklisty | 6.1 Co musí být v příručním · 6.2 Co vytisknout · 6.3 Tři věci, co se zapomínají · 6.4 Co se do Ameriky nesmí · 6.5 Internet v Americe, eSIM · 6.6 Poslední večer |
 | 7 | Krizové situace | 7.1 Zrušený let · 7.2 Onemocníš před odletem · 7.3 Ztracený pas · 7.4 Zamítnutá ESTA · 7.5 Co mít po ruce |
+
+---
+
+### Obrazovky mimo moduly (13. 9. 2026)
+
+- **Spropitné** (`s-spropitne`, `initSpropitne()`) je **vlastní záložka**, ne sekce v Převodníku.
+  Počítá se u stolu ve chvíli, kdy přijde účet, takže musí být na jedno klepnutí. Převodník
+  (`initPrevodnik()`) drží už jen měnu a jednotky.
+- **Na čtení do letadla** (`s-cteni`) nese Gábin článek „Já bych chtěla na sopku" o seznámení
+  s Jirkou, ve stylu Ingrid Dach. Vlastní styly `.cteni-clanek`, `.cteni-h`, `.cteni-podpis`:
+  historková bublina se na 1 000 slov nehodí, kurzíva a uvozovky kolem celého textu by z článku
+  udělaly citát. Originál textu leží v `Marketingové podklady/pribeh-jirka-marianne-ORIGINAL.md`.
+- **Menu má tři plochy.** Moduly „Než odletíš" stojí volně, druhý průvodce sedí na zlaté ploše
+  `.side-guide2` a nástroje s čtením na tyrkysové `.side-tools`. Do modulů se jde po pořadí, do
+  nástrojů se skáče kdykoli, proto to nemá splývat.
 
 ---
 
@@ -345,11 +378,17 @@ Appka je jeden článek delšího řetězce. Tohle je celý žebřík, ať se v�
 |---|---|---|---|
 | `zaklad` | 1 až 4 (Kdy a kam, Doklady, Letenky, Ubytování) | 690 Kč | rovnou po koupi |
 | `rozsireni` | 5 až 7 (Finance, Checklisty, Krize) | 1 490 Kč za celek | až po zadání kódu |
+| `pristanes` | 7 modulů druhého průvodce | 1 490 Kč | až po zadání kódu (jediný zámek, který dnes drží) |
+
+⚠️ **Co je dnes skutečně zamčené (13. 9. 2026):** `isUnlocked()` pouští celý průvodce
+„Než odletíš" (moduly 1 až 7) bez ptaní, protože appka neumí ověřit platbu a měkký zámek by po
+koupi jen kazil první dojem. Zamčený je **jen balíček `pristanes`**, tedy druhý průvodce, který se
+teprve píše. Gábi má vlastní autorský kód v `KODY`, kterým si ho otevře a plní obsah.
 
 **Kde se co mění** (vše pohromadě nad polem `MODULES`):
 - `BALICKY` — název, rozsah, `cena` (ukazuje se v pozvánce) a `odkaz` na prodejní stránku. Dokud je `odkaz` prázdný, tlačítko na koupi se nezobrazí.
 - `VYCHOZI_BALICKY` — co má kupující odemčené hned
-- `KODY` — dvojice odemykací kód → balíček, porovnává se bez ohledu na velikost písmen a mezery. Teď je tam zástupný `CELY`, před prodejem vyměnit.
+- `KODY` — dvojice odemykací kód → balíček, porovnává se bez ohledu na velikost písmen a mezery. Jsou tam dva ostré kódy: jeden pro `rozsireni`, druhý autorský pro `pristanes` (Gábin, na plnění druhého průvodce). Kód nesmí jít uhodnout a nemá obsahovat znaky, co se pletou při opisování (I, O, nula, jednička).
 
 Stav odemčení: `localStorage`, klíč `nezOdletisOdemceno` (pole id balíčků).
 
@@ -363,7 +402,10 @@ Stav odemčení: `localStorage`, klíč `nezOdletisOdemceno` (pole id balíčků
 
 **3. Zamčený modul se chová jako pozvánka, ne jako zeď.** ✅ Hotovo, funkce `renderUnlockHtml()`. Zamčený modul zůstává všude klikatelný, klik vede na pozvánku: co je uvnitř, pole na kód, případně odkaz na koupi. Zeď neprodává. Prodej přes to, co uživatel právě zjistil, že mu chybí (pravidlo z bible Goliášové).
 
-**4. Část 2 = samostatný soubor ve stejné složce.** Sdílí `localStorage` (stejný origin), takže Trezor a odškrtané položky přetečou z Části 1 automaticky. Klíče proto **nikdy nepřejmenovávat**.
+**4. ~~Část 2 = samostatný soubor ve stejné složce.~~** ⚠️ **Přehodnoceno 13. 9. 2026:** Gábi si
+vybrala plnit „Až přistaneš" uvnitř téhle appky, jako 7 zamčených modulů v `MODULES_PRISTANES`
+(viz sekce 5). Samostatný soubor `usa-bez-cestovky-cast2/` zůstává jen jako `KOSTRA.md` s obsahem.
+Klíče v `localStorage` **nikdy nepřejmenovávat** platí dál.
 
 **5. Stahování checklistů řeš přes tisk.** `window.print()` plus tiskové CSS. Funguje offline, nevyžaduje knihovnu ani server a uživatel si zvolí „Uložit jako PDF". Generování PDF v JS by znamenalo knihovnu, což porušuje pravidlo o jednom souboru.
 

@@ -334,6 +334,35 @@
   .side-chev { flex: 0 0 auto; color: var(--line-strong); font-size: 14px; }
   .side-item.active .side-chev { color: var(--tyrkys); }
 
+  /* ── Spodek menu: nástroje a čtení nejsou lekce. Do modulů se jde po pořadí,
+     sem se skáče kdykoli a klidně několikrát denně, takže dostávají vlastní
+     plochu a tyrkysové popisky skupin. Oko pak hned vidí, kde končí průvodce
+     krok za krokem. Kroužky a hover uvnitř jdou na bílou, protože sunken je
+     už pod nimi, a aktivní položka si přes :not(.active) udrží svůj gradient. ── */
+  .side-tools {
+    margin-top: var(--s5); padding: 2px var(--s2) var(--s3);
+    border-radius: var(--r-lg); background: var(--tyrkys-light);
+    box-shadow: inset 0 0 0 1.5px rgba(26,192,206,.22);
+  }
+  .side-tools .side-group-label { color: var(--tyrkys-dark); padding-top: var(--s3); }
+  .side-tools .side-item:not(.active):hover { background: var(--surface); }
+  .side-tools .side-item:not(.active) .side-ico { background: var(--surface); }
+
+  /* ── Až přistaneš: druhý průvodce, samostatný produkt, který se teprve
+     plní. Zlatá je v appce barva zamčeného a budoucího (viz .part-locked),
+     takže celá skupina stojí na zlaté ploše, ať je na první pohled jasné,
+     že tohle není součást „Než odletíš". ── */
+  .side-guide2 {
+    margin-top: var(--s5); padding: 2px var(--s2) var(--s3);
+    border-radius: var(--r-lg); background: var(--gold-light);
+    box-shadow: inset 0 0 0 1.5px rgba(201,162,75,.35);
+  }
+  .side-guide2 .side-group-label { color: #6b5319; padding-top: var(--s3); }
+  .side-guide2 .side-item:not(.active):hover { background: var(--surface); }
+  .side-guide2 .side-item:not(.active) .side-ico,
+  .side-guide2 .side-item.locked .side-ico { background: var(--surface); }
+  .side-guide2 .side-item .side-meta { color: #7d6535; }
+
   .side-foot { padding: var(--s4) var(--s5) var(--s6); border-top: 1px solid var(--line); }
   .side-foot-btn {
     display: flex; align-items: center; gap: var(--s2); width: 100%;
@@ -1703,6 +1732,31 @@
   .historka-text p:first-child::before { content: "\201E"; }
   .historka-text p:last-child::after { content: "\201C"; }
 
+  /* ── Dlouhé čtení do letadla. Jediné místo v appce, kde se nic nevyplňuje
+     a jen se čte, takže próza dostane víc vzduchu než step-lead uvnitř kroku
+     a tmavší barvu písma: tohle se čte na 15 minut, ne na 15 vteřin.
+     Historková bublina se sem nehodí, kurzíva na bílém v tomhle rozsahu unaví
+     a uvozovky kolem celého článku by z něj udělaly citát. Barvu si sekce
+     nebere žádnou, drží ji jen mezititulky a rytmus. ── */
+  .cteni-clanek { margin-top: var(--s5); }
+  .cteni-uvod { margin-bottom: var(--s6); }
+  .cteni-uvod img { display: block; width: 76px; height: 76px; margin: 0 0 var(--s4); }
+  .cteni-uvod h2 { margin: 0; font-size: clamp(23px, 3.4vw, 29px); line-height: 1.22; color: var(--text); }
+  .cteni-perex {
+    margin: var(--s3) 0 0; max-width: 56ch;
+    font-size: 16px; line-height: 1.6; color: var(--text-muted); font-style: italic;
+  }
+  .cteni-clanek .step-lead { font-size: 17px; line-height: 1.85; color: var(--text); }
+  .cteni-h {
+    margin: var(--s7) 0 var(--s4); max-width: 42ch;
+    font-size: 19px; line-height: 1.35; color: var(--text);
+  }
+  .cteni-clanek .step-lead p:first-of-type { font-size: 18px; }
+  .cteni-podpis {
+    margin-top: var(--s6); padding-top: var(--s5); border-top: 1px solid var(--line);
+    font-size: 15.5px; line-height: 1.7; color: var(--text-muted); font-style: italic;
+  }
+
   /* ── ESTA per cestující, navazuje na seznam z Kroku 1 ── */
   .esta-check { margin-top: var(--s5); display: flex; flex-direction: column; gap: 2px; }
   .esta-row { display: flex; align-items: center; gap: var(--s3); padding: 11px var(--s4); border-radius: var(--r-md); background: var(--sunken); }
@@ -2210,7 +2264,10 @@
   .pristanes-ico.has-img { padding: 9px; }
   .pristanes-ico.has-img img { width: 100%; height: 100%; object-fit: contain; display: block; }
   .pristanes-body { min-width: 0; }
-  .pristanes-name { display: flex; align-items: center; gap: 6px; font-size: 14.5px; font-weight: 800; }
+  /* název je celá věta, ne jedno slovo: zámek drží nahoře u prvního řádku
+     a text se pod ním zalamuje, ať se karta nerozjede do šířky */
+  .pristanes-name { display: flex; align-items: flex-start; gap: 6px; font-size: 14.5px; font-weight: 800; line-height: 1.35; }
+  .pristanes-name .ico { flex: 0 0 auto; margin-top: 1px; }
   .pristanes-desc { font-size: 13px; line-height: 1.55; color: var(--text-faint); margin-top: 3px; }
   .pristanes-note {
     margin-top: var(--s7); font-size: 13.5px; color: var(--text-faint); line-height: 1.6;
@@ -2801,12 +2858,22 @@
           <div class="page-head">
             <span class="eyebrow">Počítá se samo</span>
             <h1>Převodník</h1>
-            <p class="sub">Měna, jednotky a spropitné, spočítané rovnou v appce, i bez signálu a bez dat.</p>
+            <p class="sub">Měna a jednotky, přepočítané rovnou v appce, i bez signálu a bez dat.</p>
           </div>
           <div class="prevodnik-wrap" id="prevodnik-kalk"></div>
         </div>
 
-        <!-- 9) NA ČTENÍ DO LETADLA -->
+        <!-- 9) SPROPITNÉ -->
+        <div class="screen" id="s-spropitne">
+          <div class="page-head">
+            <span class="eyebrow">Počítá se samo</span>
+            <h1>Spropitné</h1>
+            <p class="sub">Zadej účet a appka dopočítá, kolik nechat a kolik to dělá na osobu. Spropitné není povinné, ale v Americe se bere jako samozřejmost, asi jako u nás sezout boty v bytě.</p>
+          </div>
+          <div class="prevodnik-wrap" id="spropitne-kalk"></div>
+        </div>
+
+        <!-- 10) NA ČTENÍ DO LETADLA -->
         <div class="screen" id="s-cteni">
           <div class="page-head">
             <span class="eyebrow eyebrow-warm">Bonus, ne úkol</span>
@@ -2814,13 +2881,71 @@
             <p class="sub">Tohle appka po tobě nic nechce zaškrtnout. Je to na chvíli, kdy máš v letadle nebo na pláži čas navíc, dvě historky ze života, ne příprava na cestu.</p>
           </div>
 
-          <div class="step-lead measure">
-            <p>Jak vzniklo naše česko-americké manželství</p>
-          </div>
-          <div class="historka">
-            <div class="historka-text" id="cteni-pribeh-text">
-              <img src="images/gabi-pise.svg" alt="Gábi píše svůj příběh" style="width: 76px; height: 76px;">
-              <p>Sem patří Gábin vlastní příběh, jak vznikl vztah s Jirkou, napsaný jejím hlasem a jejími slovy. Zatím tu čeká, až mi ho pošleš, ať ho nevymýšlím za tebe.</p>
+          <div class="cteni-clanek" id="cteni-pribeh">
+            <div class="cteni-uvod">
+              <img src="images/gabi-pise.svg" alt="Kreslená Gábi, jak píše svůj příběh">
+              <h2>Já bych chtěla na sopku</h2>
+              <p class="cteni-perex">Jak z jedné věty na srazu z gymplu vzniklo manželství přes oceán.</p>
+            </div>
+
+            <div class="step-lead measure">
+              <p>Bylo to mezi vánočními svátky. Sjeli jsme se ze všech koutů republiky, odskočili si z pokojíků u rodičů do restaurace a jen tak povídali.</p>
+              <p>Naproti mně seděl spolužák, kterého jsem od maturity neviděla.</p>
+              <p>Na gymplu jsem ho vnímala jako živel, co pořád někde běhá, má na hlavě kohouta (prý pankáč) a každou chvíli se něčemu hihňá. Byl to přitom nejlepší sportovec ve škole. Pro mě, co tehdy hrála s kapelou, ale úplně nezajímavý typ.</p>
+              <p>U toho stolu seděl někdo úplně jiný. Žádné bříško, žádné hloupé kecy, perfektní postava, opálený, vlnité vlasy. A zelené oči, kterých jsem si na střední přes jeho tlusté brýle nikdy nevšimla.</p>
+              <p>Jirka.</p>
+
+              <h3 class="cteni-h">Proč jsem roky slýchala „možná příště"</h3>
+              <p>Byla jsem samoživitelka. Novinářka, cestovatelka, máma malého kluka, se kterým jsem projela snad půl světa.</p>
+              <p>Jako spousta lidí kolem mě jsem si opakovala, že ten pravý jednou přijde. Jenže jsem nechtěla dělat kompromisy. Vůbec žádné, a tak jsem čekala.</p>
+              <p>Tehdy mě fascinovala Indonésie. Byla jsem tam dvakrát, ale pokaždé to skončilo u chrámů a šnorchlování. Přála jsem si jít na sopku a nikdy se se mnou nikomu nechtělo, všem stačila pláž, kokos a šnorchl.</p>
+              <p>Tak jsem to u toho stolu řekla nahlas. Přímo. <strong>Já bych chtěla na sopku.</strong></p>
+              <p>Jirka se na mě podíval a bez váhání povídá: „Ty jo, já bych jel. Já bych s tebou na tu sopku šel!"</p>
+              <p>Poprvé po dlouhé době mi někdo neřekl možná příště ani to je blbost. Někdo mi řekl no tak jo.</p>
+
+              <h3 class="cteni-h">Co udělá konkrétní přání</h3>
+              <p>Dlouho mi trvalo, než mi došlo, proč zafungovala zrovna tahle věta, když předtím roky nic.</p>
+              <p>O cestování jsem přece mluvila pořád. Jenže jsem říkala „mám ráda cestování", a s tím nemůže druhý člověk udělat vůbec nic. Není v tom kam, kdy ani co.</p>
+              <p>Sopka je jiná. Sopka je konkrétní. Na sopku se dá říct ano, nebo ne.</p>
+              <p>A tady je ta část, kterou jsem pochopila až mnohem později. <strong>Konkrétní přání nepřinese víc lidí, co se přidají. Přinese ty správné.</strong> Ostatní zůstanou u toho kokosu, a je to úplně v pořádku, protože to konečně víš.</p>
+
+              <h3 class="cteni-h">Dva měsíce ticha a jedna fotka z italských hor</h3>
+              <p>Nezačalo to hned. Jirka odjel domů a první měsíce po srazu se vyvíjely úplně jinak.</p>
+              <p>Já plánovala s tím svým drakem cestu do Mexika. Jirka vyrazil s kamarády do Ekvádoru, kde mu ukradli telefon, a <strong>víc než 2 měsíce se neozval</strong>.</p>
+              <p>Pak přišel březen, doma zima, a já vyrazila na lyže do Itálie s partou, se kterou jsem jezdila roky. Ti do mě po pár panácích začali rýpat: „Ty Gábi, prosím tě, co blbneš? Ty jsi pořád sama. Taková baba přece nemůže být sama."</p>
+              <p>Protože už jsem v sobě pár panáků měla taky, vzala jsem telefon a poslala Jirkovi fotku souostroví Raja Ampat v Indonésii. A k ní jednu jedinou větu: „Co myslíš, je to daleko?"</p>
+              <p>Všimni si, že jsem nečekala, až se ozve on.</p>
+              <p>Esemesky začaly lítat. Pak telefony. Hodina, dvě, tři. Časový posun? Práce? Bylo nám to jedno.</p>
+
+              <h3 class="cteni-h">První rande na Jamajce</h3>
+              <p>Tak jsme spolu začali chodit přes telefon. Indonésie nějak přestala být důležitá a naše první rande bylo na Jamajce.</p>
+              <p>Letěla jsem přes půl světa za spolužákem, se kterým jsem nikdy předtím nerandila. Bylo to fakt super.</p>
+              <p>Ještě ani neuběhl rok od Jamajky. Byl únor a Jirka mě vzal na nejmagičtější místo ve Spojených státech, do amfiteátru Red Rocks v Coloradu. Říkal, že tam jen tak zastavíme.</p>
+              <p>Nezastavili jsme. Poklekl a požádal mě o ruku.</p>
+              <p>Vzali jsme se na Kostarice a o měsíc později ještě jednou v Česku, na Den nezávislosti. Jonášovi bylo <strong>9</strong> a na piano si nacvičil svatební pochod. Zahrál nám ho na svatbě, k nevelké radosti sousedů.</p>
+
+              <h3 class="cteni-h">Doma to tak jednoduché nebylo</h3>
+              <p>Když se do života samoživitelky s devítiletým klukem přimotá někdo třetí, je to výzva. Jonáš byl na mě hodně fixovaný a Jirkovi to dával pořádně sežrat.</p>
+              <p>Třeba večer, z ničeho nic a bez zaklepání, rozrazil dveře do pokoje a vybafl na nás: „Tak co vy dva kolouškové? Doufám, že tu neděláte dalšího kolouška."</p>
+              <p>Hodně jsem přemýšlela, jak ty dva dát dohromady. Nakonec se to vyřešilo za nás, a úplně jinudy, než jsem čekala.</p>
+
+              <h3 class="cteni-h">Dveře za 120 tisíc, nebo Kuba</h3>
+              <p>Stavěli jsme byt a přišla nám faktura za dveře na <strong>120 tisíc korun</strong>. Protočily se nám panenky.</p>
+              <p>„No 120 tisíc za dveře nedáme," řekl Jirka. „Necháme si obyčejné a raději poletíme na Kubu."</p>
+              <p>Byl to jeden z těch dost možná ne tak geniálních nápadů, co se otočí v to nejlepší rozhodnutí. <strong>Na té Kubě se Jonáš do Jirky zamiloval.</strong> Od té doby byl doma zhruba relativní klid.</p>
+              <p>Tedy pokud po něm Jirka zrovna nechce, aby si uklidil pokoj. To je dodnes absolutně nedosažitelné. Jednou mu na dveře napsal ceduli Studio klídek, ale to je jiný příběh.</p>
+              <p>Všimni si, že v tom rozhodování o dveřích vlastně nešlo o peníze. Ta částka byla pořád stejná, jenom najednou měla jméno.</p>
+
+              <h3 class="cteni-h">Proč ti to celé vyprávím</h3>
+              <p>Dneska je Jonášovi <strong>18</strong>, je z něj rebel a legrace je s ním o dost menší. Ale to je zase jiný příběh.</p>
+              <p>My s Jirkou lítáme pořád sem a tam, mezi Amerikou a Českem. Manžel je srdcem Američan, já mám v srdci Valašsko a práci reportérky, která mě baví.</p>
+              <p>A teď to hlavní. Ty teď sedíš v letadle, nebo se na něj chystáš.</p>
+              <p>Někdo ti nejspíš stihl říct, že je to složité. Že se to bez cestovky nedá zvládnout, že takhle daleko se přece nejezdí na vlastní pěst, že to má člověk nechat na jindy.</p>
+              <p>A ty tam přesto sedíš. <strong>Ne kvůli náladě, ale kvůli datu, místu a částce, která se dala spočítat.</strong> Mlhavé přání zůstane náladou, konkrétní přání dostane termín.</p>
+              <p>Na nic jsme nepřišli. A přišli jsme na všechno.</p>
+              <p>Takže až ti někdo bude tvrdit, že vztahy na dálku nevydrží a že princové na bílém koni neexistují, věř mi, že je to jinak. Jen někdy mají zelené oči a žijí v Coloradu.</p>
+
+              <p class="cteni-podpis">A jestli teď přemýšlíš, jestli jsme na tu sopku nebo na Raja Ampat nakonec vyrazili: zatím ne. Zatím nás lákají jiné cíle, ale jednou to klapne. Určitě!</p>
             </div>
           </div>
 
@@ -2838,7 +2963,7 @@
           </div>
         </div>
 
-        <!-- 10) AŽ PŘISTANEŠ (náhled druhého průvodce) -->
+        <!-- 11) AŽ PŘISTANEŠ (náhled druhého průvodce) -->
         <div class="screen" id="s-pristanes">
           <div class="page-head">
             <span class="eyebrow eyebrow-warm" id="pristanes-kdy">Bude koncem roku 2026</span>
@@ -2894,13 +3019,18 @@
     zaklad:    { nazev: "Příprava před odletem", rozsah: "moduly 1 až 4",
                  cena: "890 Kč", odkaz: "" },
     rozsireni: { nazev: "Celý průvodce Než odletíš", rozsah: "moduly 5 až 7 navíc",
-                 cena: "590 Kč", odkaz: "" }
+                 cena: "590 Kč", odkaz: "" },
+    pristanes: { nazev: "Až přistaneš", rozsah: "7 modulů o životě na místě",
+                 cena: "1 490 Kč", odkaz: "" }
   };
   var VYCHOZI_BALICKY = ["zaklad"];         // co má kupující odemčené rovnou
   /* Odemykací kód. Nesmí to být slovo, které jde uhodnout: leží v kódu
      stránky, takže hádání je jediná cesta, kterou má smysl zavírat.
      Bez znaků, co se pletou při opisování z mailu (I, O, nula, jednička). */
-  var KODY = { "FLKAVZW2E9": "rozsireni" };   // kód → balíček
+  var KODY = {
+    "FLKAVZW2E9": "rozsireni",
+    "WEM4WLXMTY": "pristanes"    // autorský: Gábi si tím otevře druhého průvodce, dokud se píše
+  };
 
   /* ── ikony appky: liniové SVG místo systémových emoji ──
      Stejná gramatika jako ruční SVG v kartě "Moje cesta", jen sesbíraná na
@@ -2969,15 +3099,467 @@
      7 položek nemá, jen jméno a jednu větu. Proto se neúčastní MODULES,
      progress, checklistů ani isUnlocked. Dokud je PRISTANES_ODKAZ prázdný,
      appka nenabízí žádnou akci, jen slib. Stejný vzor jako BALICKY.odkaz. */
+  /* Kroky jsou zatím jen kostra: nadpis a v leadu Gábino vlastní zadání
+     ze 13. 9. 2026, označené [SEM DOPLNIT], ať se nemůže omylem dostat ven
+     jako hotový text. Plné znění zadání je v usa-bez-cestovky-cast2/KOSTRA.md. */
   var PRISTANES_MODULY = [
-    { emoji: ico("doc"), name: "Imigrační kontrola", desc: "Co přesně čeká za dveřmi, jak vypadá fronta a co u toho říct." },
-    { emoji: ico("suitcase"), name: "Výdej zavazadel a celnice", desc: "Kdy se kufry vyzvedávají znovu a co nahlásit celníkovi." },
-    { emoji: ico("car"), ikona: "images/ikony/highlight-doprava.svg", name: "Doprava na místě", desc: "Půjčení auta, dálniční poplatky a provoz podle amerických pravidel." },
-    { emoji: ico("cart"), name: "Nakupování a peníze", desc: "Sales tax u pokladny, platby kartou a kde nakoupit levněji." },
-    { emoji: ico("food"), name: "Stravování", desc: "Tipping kultura, čtení menu a kdy se vyplatí happy hour." },
-    { emoji: ico("signal"), name: "Praktické věci na místě", desc: "eSIM, lékárna a co dělat, když se ztratíš." },
-    { emoji: ico("sos"), name: "Krizové situace na místě", desc: "Nehoda, krádež nebo problém s ubytováním: klidný postup na místě." }
+    { id: "p-imigracni", emoji: ico("doc"), name: "Imigrační kontrola podrobněji", shortName: "Imigrační kontrola", desc: "Co přesně čeká za dveřmi, jak vypadá fronta a co u toho říct.", dashboard: true,
+      steps: [
+        {
+          icon: ico("doc"),
+          title: "Poslední hodina v letadle",
+          media: {
+            kicker: "K poslechu",
+            src: "audio/co-me-ceka-za-temi-dvermi.mp3",
+            titulek: "Co mě čeká za těmi dveřmi",
+            delka: "asi 11 minut",
+            obrazek: "images/gabi-mikrofon.svg",
+            popis: "Pusť si to hodinu před přistáním, když už se stejně nedá dělat nic jiného. Zvuk z produktu Přes imigrační v klidu."
+          },
+          lead: [
+            "Kapitán ohlásí klesání a v kabině se rozsvítí. Tohle je ta chvíle, kdy se rozhoduje, jestli půjdeš imigrační kontrolou v klidu, nebo budeš u úředníka lovit adresu hotelu z mailu bez signálu.",
+            "Připrav si všechno teď, dokud sedíš. Po vystoupení už se nikde nezastavíš, dav tě nese rovnou do fronty.",
+            "Posádka někdy rozdává papírovou celní deklaraci, jindy ji vyplníš až u automatu na letišti. <strong>Údaje jsou v obou případech stejné</strong>, takže si je nachystej a je jedno, co ti podají do ruky."
+          ],
+          checklist: [
+            "Pas <strong>v ruce</strong>, ne v kufru v zavazadlovém prostoru",
+            "<strong>Adresu první noci</strong> včetně státu a PSČ, ideálně na papíře nebo ve stažené poznámce",
+            "Datum a číslo <strong>zpátečního letu</strong>",
+            "Vědět, co vezeš z <strong>jídla</strong>, i to zabalené v kufru"
+          ],
+          why: {
+            title: "Proč je to důležité",
+            body: [
+              "Adresa první noci je jediný údaj, na kterém se lidi u kontroly zaseknou nejčastěji. Do formuláře patří celá, tedy ulice, město, stát a PSČ.",
+              "V Trezoru v téhle appce ji máš uloženou <strong>i bez signálu</strong>, takže ji na letišti jen otevřeš.",
+              "Jídlo se nepřiznává proto, aby se zabavilo. Přiznat ho nic nestojí, nepřiznat ho může stát pokutu."
+            ]
+          }
+        },
+        {
+          icon: ico("people"),
+          title: "Fronta, automat a fotka",
+          lead: [
+            "Za dveřmi z letadla se cesta rozdělí. Jedna fronta je pro americké občany a držitele zelené karty, ta druhá pro všechny ostatní. Ty jdeš do té druhé.",
+            "Na většině letišť projdeš nejdřív automatem: přiloží se pas, udělá se fotka a vypadne lístek nebo se rovnou pošleš dál.",
+            "<strong>Obličej se dnes snímá na všech mezinárodních letištích v USA.</strong> Na části z nich k tomu přibydou otisky prstů, řídí se to letištěm a tím, jestli tam letíš poprvé.",
+            "Pak přijdeš k úředníkovi. Sundej si čepici i sluneční brýle a telefon nech v kapse, u okénka se netelefonuje ani nefotí.",
+            "[SEM DOPLNIT: tvoje vlastní vzpomínka na první průchod, jak to na tebe působilo a co tě překvapilo. Tohle je podle kostry emocionálně nejsilnější místo celého druhého průvodce, ale nechci ti ho vymyslet.]"
+          ],
+          note: {
+            title: "Ještě jedna věc",
+            body: [
+              "Fronta bývá nejdelší, když přistane několik dálkových letů najednou. Půl hodiny je běžné, hodina a půl se stává.",
+              "Když máš navazující let, počítej s tím už při kupování letenky. Přestup pod 3 hodiny je v USA na první příletové letiště riskantní."
+            ]
+          }
+        },
+        {
+          icon: ico("phone"),
+          title: "Otázky, které padnou",
+          lead: [
+            "Úředník má pár desítek vteřin a jedinou práci: ověřit, že jedeš na to, co máš napsané v ESTA. Ptá se proto pořád na to samé.",
+            "Odpovídej krátce, konkrétně a bez vysvětlování navíc. Dlouhá odpověď zní jako vymýšlení, i když vymýšlení není.",
+            "Nejčastěji zazní tohle: <strong>Kam jedeš. Na jak dlouho. Kde budeš bydlet. S kým cestuješ. Kdy letíš zpátky.</strong>",
+            "Na otázku „co budeš v USA dělat“ je správná odpověď dovolená, výlet, návštěva. Nikdy ne práce, schůzka s klientem ani pohovor.",
+            "Angličtinu na úrovni „two weeks, Florida, vacation“ zvládneš. Nikdo tu nezkouší gramatiku."
+          ],
+          trap: {
+            title: "Pozor na tohle",
+            body: [
+              "ESTA opravňuje k turistice a k obchodním jednáním, <strong>ne k práci</strong>. Věta o tom, že si při cestě něco přivyděláš nebo že se zastavíš na pohovor, dokáže cestu ukončit rovnou na letišti.",
+              "Stejně tak neříkej, že ještě nevíš, kdy poletíš zpátky. Zpáteční letenka je jedna z věcí, kterou má úředník právo chtít vidět.",
+              "Když se něco zamotá, nediskutuj a neironizuj. Klid a krátké odpovědi jsou tvoje jediná výhoda."
+            ]
+          }
+        },
+        {
+          icon: ico("check"),
+          title: "Co dostaneš a co si ověřit",
+          lead: [
+            "Odbaveno, jdeš pro kufry. Razítko do pasu ale dneska dostat nemusíš, a to není chyba.",
+            "Záznam o vstupu, <strong>I-94</strong>, vede CBP elektronicky. Je v něm datum příletu a hlavně den, do kterého smíš zůstat.",
+            "Bez víza je pobyt <strong>nejvýš 90 dní</strong>, o konkrétním datu ale rozhoduje úředník. Proto se to vyplatí zkontrolovat, ne odhadovat.",
+            "Otevři si i94.cbp.dhs.gov nebo appku CBP Link, najdi si svůj záznam a ulož si ho. Zabere to minutu a máš černé na bílém, do kdy platí tvůj pobyt."
+          ],
+          link: {
+            title: "Oficiální I-94: záznam o tvém vstupu",
+            sub: "Stránka CBP, kde si po příletu najdeš datum vstupu a den, do kterého smíš v USA zůstat.",
+            url: "https://i94.cbp.dhs.gov/"
+          },
+          trap: {
+            title: "Pozor na tohle",
+            body: [
+              "Přetažení povoleného pobytu i o pár dní je vážná věc. Znamená to konec bezvízového styku pro příště a pro další cesty už jen vízum s pohovorem na ambasádě.",
+              "Datum v I-94 nemusí být přesně 90 dní od příletu. Řídí se tím, co zapsal úředník, ne tvou letenkou."
+            ]
+          }
+        }
+      ] },
+    { id: "p-pujcovna", emoji: ico("ticket"), name: "Jak půjčit auto bez stresu", shortName: "Půjčovna aut", desc: "Vyzvednutí vozu, co podepisuješ a co zkontrolovat, než odjedeš.", dashboard: true,
+      steps: [
+        {
+          icon: ico("card"),
+          title: "Co musíš mít v ruce",
+          lead: [
+            "Do půjčovny se jde s trojicí dokladů a jeden z nich se v Česku vyřizuje předem. Bez něj tě sice většinou pustí, ale je to tvoje riziko, ne jejich.",
+            "Ministerstvo zahraničí u USA uvádí <strong>mezinárodní řidičský průkaz podle Ženevské úmluvy z roku 1949</strong>. To je důležitá věta, protože v Evropě se běžněji vydává ten podle Vídeňské úmluvy z roku 1968 a ten v USA neplatí.",
+            "Vyřídíš ho <strong>na počkání na obecním úřadě obce s rozšířenou působností</strong>. Stojí <strong>200 Kč</strong>, chce to fotku 3,5 krát 4,5 cm, občanku a řidičák. Platí 1 rok.",
+            "Druhá věc je <strong>kreditní karta na jméno řidiče</strong>. Debetní kartu většina půjčoven na blokaci kauce nebere, i když na ní peníze jsou."
+          ],
+          checklist: [
+            "Vyřídit <strong>mezinárodní řidičský průkaz</strong> podle Ženevské úmluvy 1949",
+            "Mít <strong>kreditní kartu na jméno řidiče</strong>, ne debetní",
+            "Vzít <strong>český řidičák i pas</strong>, mezinárodní průkaz platí jen s ním",
+            "Ověřit <strong>věk řidiče</strong> u konkrétní půjčovny, mladší 25 let obvykle platí příplatek"
+          ],
+          why: {
+            title: "Proč je to důležité",
+            body: [
+              "Mezinárodní řidičský průkaz není samostatný doklad. Je to <strong>překlad toho českého</strong> a bez něj neplatí, takže s sebou musí jet oba.",
+              "Půjčovny ho nekontrolují pokaždé. Policie při silniční kontrole a hlavně pojišťovna při nehodě už ano, a tam se to prodraží."
+            ]
+          },
+          link: {
+            title: "Vydání mezinárodního řidičského průkazu",
+            sub: "Oficiální popis služby na portálu gov.cz: co doložit, kolik to stojí a kde se to vyřizuje.",
+            url: "https://portal.gov.cz/sluzby-vs/vydani-mezinarodniho-ridicskeho-prukazu-S94"
+          }
+        },
+        {
+          icon: ico("suitcase"),
+          title: "Pojištění: co je v ceně a co ti nabídnou u pultu",
+          lead: [
+            "Cena, kterou vidíš na internetu, skoro nikdy není cena, kterou nakonec zaplatíš. Rozdíl dělá pojištění, a to se domlouvá až na místě.",
+            "Připrav se na to, že u pultu dostaneš nabídku na několik připojištění za sebou. Není to podvod, je to standardní americký způsob prodeje.",
+            "Rozhodni se <strong>předem, doma</strong>, co chceš. U pultu po dvanácti hodinách letu se rozhoduje špatně a personál to ví.",
+            "Zjisti si taky, jestli něco z toho nekryje tvoje cestovní pojištění nebo kreditní karta. Někdy ano, ale <strong>vždycky si to nech potvrdit písemně</strong>, ne po telefonu.",
+            "[SEM DOPLNIT: co jsi u pultu zažila ty nebo tvoji klienti, na co vás ukecali a jestli se to vyplatilo. Tohle je přesně místo, kde tvoje zkušenost udělá víc než obecná rada.]"
+          ],
+          trap: {
+            title: "Pozor na tohle",
+            body: [
+              "Cena z porovnávače bývá bez pojištění, bez druhého řidiče a bez poplatků letiště. Skutečná částka může být <strong>i dvojnásobek</strong>.",
+              "Druhý řidič se musí <strong>nahlásit a zapsat do smlouvy</strong>. Když za volantem sedí někdo, kdo ve smlouvě není, pojištění při nehodě neplatí.",
+              "Nepodepisuj smlouvu, dokud nevidíš celkovou částku včetně všeho. Až podpis, pak už se nediskutuje."
+            ]
+          }
+        },
+        {
+          icon: ico("phone"),
+          title: "Kontrola auta, než odjedeš",
+          lead: [
+            "Dostaneš klíče a číslo místa v garáži. Tady je ta chvíle, kdy se vyplatí zdržet o 5 minut.",
+            "<strong>Obejdi auto s telefonem a natoč video.</strong> Celé kolem dokola, i kola a čelní sklo, a pak i palubní desku se stavem paliva a kilometrů.",
+            "Škrábance a promáčkliny na americkém autě z půjčovny nejsou nic výjimečného. Problém nastane, když se u vrácení nedá dokázat, že tam byly už předtím.",
+            "Ještě než vyjedeš z garáže, zkus si klimatizaci, světla a stěrače. A nastav si navigaci, dokud stojíš."
+          ],
+          checklist: [
+            "Natočit <strong>video celého auta</strong> včetně kol a skla",
+            "Vyfotit <strong>stav paliva a kilometrů</strong> na palubní desce",
+            "Nahlásit každé poškození <strong>ještě před odjezdem</strong> z parkoviště",
+            "Zjistit, jestli se auto vrací <strong>s plnou nádrží</strong>, nebo jinak"
+          ],
+          note: {
+            title: "Ještě jedna věc",
+            body: [
+              "Skoro každá půjčovna nabízí, že palivo koupíš předem. Vyplatí se to jen tehdy, když auto vrátíš opravdu prázdné, což se skoro nikdy nepovede.",
+              "Levnější bývá natankovat si sám cestou na letiště a schovat si účtenku."
+            ]
+          }
+        }
+      ] },
+    { id: "p-doprava", emoji: ico("car"), ikona: "images/ikony/highlight-doprava.svg", name: "V USA za volantem", shortName: "Za volantem", desc: "Pravidla provozu, tankování, mýtné a dlouhé přejezdy.", dashboard: true,
+      steps: [
+        {
+          icon: ico("warning"),
+          title: "Tři pravidla, na která Čech není zvyklý",
+          lead: [
+            "Řídit se v Americe dá naprosto v pohodě, silnice jsou široké a lidi klidnější než u nás. Jsou ale tři situace, kde česká rutina nefunguje.",
+            "<strong>Odbočení vpravo na červenou.</strong> Povolené je ve všech 50 státech: zastavíš úplně, dáš přednost chodcům i jedoucím autům a pak odbočíš. Neplatí to tam, kde je značka, která to zakazuje, a neplatí to plošně v New Yorku a ve Washingtonu.",
+            "<strong>Křižovatka se čtyřmi stopkami.</strong> Jede ten, kdo přijel první, a takhle popořadě dál. Když přijedou dva zároveň, přednost má ten zprava. Funguje to překvapivě dobře, jen se nesmíš bát rozjet, když jsi na řadě.",
+            "<strong>Školní autobus.</strong> Když vyklopí rameno se stopkou a bliká červeně, zastaví <strong>obě strany silnice</strong>, tedy i protisměr. Pokuty za tohle jsou vysoké a policie to hlídá.",
+            "U silnice s odděleným pásem se pravidlo o školním autobuse stát od státu liší. Zastavit je vždycky ta bezpečnější volba."
+          ],
+          why: {
+            title: "Proč je to důležité",
+            body: [
+              "Rychlost je v mílích za hodinu. <strong>65 mph je zhruba 105 km/h</strong>, převodník na to máš v téhle appce v sekci Tvoje věci.",
+              "Za překročení rychlosti se v USA neposílá složenka. Policie tě zastaví a řeší se to na místě, což je pro Čecha nezvyk sám o sobě.",
+              "Když tě zastaví: zůstaň sedět v autě, ruce na volantu, nevystupuj a nesahej pro doklady, dokud tě o ně nepožádají."
+            ]
+          }
+        },
+        {
+          icon: ico("plug"),
+          title: "Tankování krok za krokem",
+          lead: [
+            "Přijedeš ke stojanu, strčíš kartu a displej se zeptá na <strong>ZIP code</strong>, tedy americké poštovní směrovací číslo. Tvoje karta žádné nemá a stojan tě odmítne.",
+            "Tohle překvapí skoro každého Čecha a není to porucha. Prostě to takhle je.",
+            "Řešení je jednoduché: jdi dovnitř k obsluze, řekni číslo stojanu (je na něm velké číslo) a <strong>zaplať předem</strong>. Když natankuješ míň, rozdíl ti vrátí.",
+            "Případně dej obsluze kartu do zástavy a plať až po natankování. Obojí je běžné a nikoho tím nepřekvapíš."
+          ],
+          checklist: [
+            "Zapamatovat si <strong>číslo stojanu</strong>, než půjdeš dovnitř",
+            "Vědět, jestli auto jede na <strong>regular</strong>, nebo na něco jiného",
+            "Mít u sebe <strong>hotovost</strong> pro případ, že karta neprojde"
+          ],
+          note: {
+            title: "Ještě jedna věc",
+            body: [
+              "Skoro všechna auta z půjčovny jezdí na nejlevnější benzín, tedy <strong>regular</strong>. Dražší varianty nepotřebuješ.",
+              "Ceny se uvádějí za galon, což je asi 3,8 litru. Cedule u silnice tedy vypadá levněji, než ve skutečnosti je."
+            ]
+          }
+        },
+        {
+          icon: ico("coins"),
+          title: "Mýtné a parkování",
+          lead: [
+            "Placené úseky se v USA neplatí u závory a nekupuje se na ně dálniční známka. Většinou se projede a <strong>zaplatí se až potom</strong>.",
+            "Buď má auto z půjčovny krabičku na čelním skle, nebo brána vyfotí značku a půjčovna ti mýtné pošle. K částce si ale <strong>připočte svůj poplatek za každý den</strong>, kdy jsi placeným úsekem projel.",
+            "Zeptej se v půjčovně, jak to u nich funguje, ještě než odjedeš. Rozdíl mezi variantami bývá na dvoutýdenní cestě znát.",
+            "Ve městech se parkuje na aplikaci nebo do automatu, který chce číslo místa. Přečti si ceduli, americké značení parkování je hodně upovídané a platí přesně to, co je na ní napsané."
+          ],
+          trap: {
+            title: "Pozor na tohle",
+            body: [
+              "Expresní pruhy uprostřed dálnice mají vlastní, často výrazně vyšší mýtné, a měnící se cenu podle provozu. Vjezd do nich bývá oddělený čárami, přes které se nesmí přejíždět.",
+              "Nezaplacené mýtné nezmizí. Půjčovna ho strhne z karty i několik týdnů po návratu domů, i s přirážkou."
+            ]
+          }
+        },
+        {
+          icon: ico("car"),
+          title: "Automat a dlouhé přejezdy",
+          lead: [
+            "Auto z půjčovny bude skoro jistě automat. Levá noha nedělá nic, řadí se P, R, N, D a jede se jen plynem a brzdou.",
+            "Před nastartováním musí být páka v P a noha na brzdě. Když auto nechce nastartovat, bývá to tímhle, ne poruchou.",
+            "Americké vzdálenosti jsou jiná liga. <strong>Přejezd 400 mil je běžný denní úsek</strong>, což je asi 640 km, a na rovné silnici s tempomatem to ubíhá rychleji, než čekáš.",
+            "Únavu ale podceňují i zkušení. Plánuj zastávku každé 2 hodiny a nechtěj po sobě přejezd hned v den příletu, kdy tělo počítá s jiným časem.",
+            "[SEM DOPLNIT: tvoje nebo Jirkovo pravidlo na dlouhé přejezdy, něco konkrétního z vašich cest po Utahu a Coloradu.]"
+          ]
+        }
+      ] },
+    { id: "p-nakupovani", emoji: ico("cart"), name: "Nakupování, ta nejlepší věc v USA", shortName: "Nakupování", desc: "Sales tax u pokladny, platby kartou a kde nakoupit levněji.", dashboard: true,
+      steps: [
+        {
+          icon: ico("cart"),
+          title: "První nákup po příletu",
+          lead: [
+            "První cesta v Americe nevede do hotelu, ale do obchodu. Je to levnější než cokoli, co si koupíš cestou, a zbytek dovolené je pak klidnější.",
+            "Na roadtrip se vyplatí jediná věc nad všechny ostatní: <strong>chladicí box</strong>. Koupíš ho i s ledem za pár dolarů a vydrží celou cestu.",
+            "Led se dokupuje na každé benzínce, stojí pár dolarů za pytel a mění se zhruba obden. Ve voze s klimatizací vydrží déle, než čekáš.",
+            "Do boxu patří voda, ovoce, jogurty a něco na svačinu. Obědy na cestě jsou pak dobrovolné, ne nutné, a to je na rozpočtu vidět nejvíc."
+          ],
+          checklist: [
+            "Koupit <strong>chladicí box a led</strong> hned první den",
+            "Nakoupit <strong>vodu ve velkém balení</strong>, ne po lahvích z benzínky",
+            "Vzít si <strong>plátěnou tašku</strong>, papírové pytlíky z obchodu se cestou roztrhají"
+          ],
+          note: {
+            title: "Ještě jedna věc",
+            body: [
+              "Velké řetězce mají věrnostní kartu, bez které je část zboží dražší. Zaregistrovat se dá na místě během chvilky a slevy platí hned.",
+              "Balení jsou americky velká. Když jedete dva, často se víc vyplatí menší obchod než nákupní hala."
+            ]
+          }
+        },
+        {
+          icon: ico("receipt"),
+          title: "Daň, která se připočítá až u pokladny",
+          lead: [
+            "Tohle je první šok skoro každého Čecha. Na regálu je 9,99 a u pokladny řeknou jinou částku.",
+            "Americké ceny se uvádějí <strong>bez daně z prodeje</strong>. Ta se připočítá až u pokladny a liší se stát od státu, někdy i město od města.",
+            "Na Floridě je základ <strong>6 procent</strong> a k tomu si okres může přidat vlastní přirážku. Reálně se to pohybuje kolem sedmi.",
+            "Počítej s tím, když si skládáš rozpočet. U nákupu za 100 dolarů je to pár dolarů navíc, u větších útrat už je to znát.",
+            "Potraviny bývají v mnoha státech od daně osvobozené, hotové jídlo a nápoje ale ne."
+          ],
+          why: {
+            title: "Proč je to důležité",
+            body: [
+              "Stejná logika platí u <strong>všech</strong> cen v Americe, tedy i u hotelů a u jídla. Cedule nebo menu ukazuje cenu před daní.",
+              "U ubytování se k tomu navíc přidávají místní poplatky, o kterých se mluví v modulu o ubytování v prvním průvodci."
+            ]
+          }
+        }
+      ] },
+    { id: "p-stravovani", emoji: ico("food"), name: "Kde se najíst a jak tipovat", shortName: "Stravování", desc: "Spropitné, dinery a fastfoody, nákup potravin v supermarketu.",
+      steps: [
+        {
+          icon: ico("coins"),
+          title: "Spropitné: kolik a kde",
+          lead: [
+            "Spropitné v Americe není povinné a nikdo tě nedožene. Je to ale samozřejmost, asi jako u nás sezout boty, když přijdeš k někomu domů.",
+            "Důvod je jednoduchý: obsluha má výrazně nižší základní mzdu než u nás a z dýšek jí plyne většina výdělku. Nedat nic je proto čitelný vzkaz, ne úspora.",
+            "V restauraci s obsluhou je <strong>18 procent běžná slušnost</strong>. 15 už je vnímaných jako výtka, nad 20 se dává, když se o tebe fakt starali.",
+            "Účet přijde s prázdným řádkem Tip a řádkem Total. Dopíšeš částku, sečteš a podepíšeš. Kalkulačku na to máš v téhle appce v sekci Tvoje věci.",
+            "Mimo restauraci: nosiči 1 až 2 dolary za kufr, pokojské pár dolarů za noc, taxi a kadeřník zhruba jako v restauraci. U pultu, kde si jídlo bereš sám, spropitné nikdo nečeká."
+          ],
+          trap: {
+            title: "Pozor na tohle",
+            body: [
+              "U větších skupin bývá spropitné <strong>už zahrnuté v účtu</strong>, hledej řádek gratuity included nebo service charge. Pak se nic nedopisuje, jinak platíš dvakrát.",
+              "Platební terminály a tablety často nabízejí předvyplněné částky, občas počítané z ceny včetně daně. Nikdo tě nenutí zvolit jednu z nich, vlastní částku jde vždycky dopsat."
+            ]
+          }
+        },
+        {
+          icon: ico("food"),
+          title: "Kde se najíst",
+          lead: [
+            "Jíst v Americe může být neúměrně drahé, nebo úplně v pohodě. Rozhoduje o tom, kam vejdeš, ne kolik utratíš celkem.",
+            "<strong>Diner</strong> je americká klasika: levné snídaně, velké porce a káva, kterou dolévají zadarmo. Snídaně v dineru bývá nejlevnější jídlo dne.",
+            "Řetězce rychlého občerstvení mají v appkách kupony, které platí i na turisty. Stažení appky před cestou se u dvoutýdenního výletu vyplatí.",
+            "Nejvíc ale ušetří <strong>supermarket</strong>. Obědy z chladicího boxu, večeře v restauraci, a rozpočet vypadá úplně jinak než při třech jídlech venku.",
+            "Porce jsou velké a zbytek si můžeš nechat zabalit, řekne se to slovem <strong>to go</strong>. Nikdo se tomu nediví, je to běžné."
+          ],
+          note: {
+            title: "Ještě jedna věc",
+            body: [
+              "Voda z kohoutku se v restauraci nosí zdarma a automaticky, stačí říct <strong>tap water</strong>. Balená voda se platí.",
+              "Refill, tedy dolití nealkoholického nápoje, bývá v mnoha podnicích zdarma. Platí to u limonád a kávy, ne u čerstvých džusů."
+            ]
+          }
+        }
+      ] },
+    { id: "p-prakticke", emoji: ico("signal"), name: "Co si zařídit hned po přistání", shortName: "Hned po přistání", desc: "Data a navigace hned po přistání, ubytování první noc a jak fungují národní parky.", dashboard: true,
+      steps: [
+        {
+          icon: ico("signal"),
+          title: "Data a navigace hned po přistání",
+          lead: [
+            "Bez dat se v Americe cestuje špatně. Navigace, otevírací doby, rezervace i vstupenky do parků, všechno běží přes telefon.",
+            "Nejjednodušší je <strong>eSIM koupená ještě doma</strong>. Aktivuje se po přistání, není potřeba shánět obchod ani vyndávat českou kartu.",
+            "Na letišti proto stačí připojit se na wifi, zapnout eSIM a zkontrolovat, že telefon chytil americkou síť. Zabere to minutu, ještě než dojdeš pro kufry.",
+            "<strong>Stáhni si mapu oblasti offline</strong>, dokud máš wifi. V parcích a na dlouhých přejezdech signál mizí a offline mapa je tam jediná, která funguje.",
+            "Roaming od českého operátora funguje taky, ale u dvoutýdenní cesty vyjde skoro vždycky dráž. Porovnej si to doma, ne až na místě."
+          ],
+          checklist: [
+            "Koupit a nainstalovat <strong>eSIM ještě doma</strong>, aktivovat až po přistání",
+            "Stáhnout si <strong>offline mapu</strong> celé oblasti, kam jedeš",
+            "Uložit si adresu první noci <strong>do Trezoru</strong> v téhle appce, funguje bez signálu"
+          ]
+        },
+        {
+          icon: ico("bed"),
+          title: "Ubytování první noc",
+          lead: [
+            "Na recepci budou chtít pas a <strong>kreditní kartu na kauci</strong>, i když máš zaplaceno předem. Zablokují na ní částku, která se uvolní až po odjezdu.",
+            "Blokace není platba, ale na účtu ti chvíli chybí. U debetní karty se peníze vracejí pomaleji, někdy i 2 týdny.",
+            "Check in bývá až odpoledne, typicky od 15 nebo 16 hodin. Když přiletíš dopoledne, kufry ti na recepci nechají a vyrazíš si nalehko.",
+            "První noc po dálkovém letu si nedávej ambiciózní plán. Tělo je o 6 až 9 hodin jinde a večerka kolem osmé je úplně v pořádku.",
+            "[SEM DOPLNIT: jak to řešíš ty s klienty, tvoje pravidlo na první večer po příletu.]"
+          ],
+          note: {
+            title: "Ještě jedna věc",
+            body: [
+              "K ceně pokoje se v mnoha hotelech připočítává denní poplatek za vybavení, takzvaný resort fee. Píše se o něm v modulu o ubytování v prvním průvodci.",
+              "Wifi bývá zdarma, parkování u hotelu často ne. Ve městech se za noc platí i 30 dolarů a víc."
+            ]
+          }
+        },
+        {
+          icon: ico("map"),
+          title: "Jak fungují národní parky",
+          lead: [
+            "Do parku se platí vstupné <strong>za auto</strong>, ne za osobu, a lístek platí několik dní po sobě. Vjezd vypadá jako mýtná brána, obsluhuje ho ranger.",
+            "Od 1. ledna 2026 se ale pravidla pro cizince změnila a je to znát na peněžence. Roční pass America the Beautiful stojí <strong>pro obyvatele USA 80 dolarů, pro všechny ostatní 250 dolarů</strong>.",
+            "A hlavně: v <strong>11 nejnavštěvovanějších parcích</strong>, mezi nimi Yellowstone, Yosemite, Grand Canyon a Zion, platí cizinci od 16 let příplatek <strong>100 dolarů na osobu</strong> navíc k běžnému vstupnému. Kdo má roční pass, tenhle příplatek neplatí.",
+            "Přepočítej si to podle sebe. Ve dvou lidech stačí jediná návštěva Grand Canyonu nebo Yosemite a <strong>pass za 250 dolarů se zaplatí sám</strong>, protože jinak dáte 200 dolarů na příplatcích a vstupné k tomu.",
+            "Jsou to čerstvá pravidla z roku 2026, tak si ceny před cestou ještě jednou ověř na oficiální stránce parků níž.",
+            "Uvnitř parku se často nejezdí vlastním autem. Zaparkuje se u návštěvnického centra a dál jezdí <strong>kyvadlové autobusy</strong>, které jsou v ceně vstupu a jezdí po pár minutách.",
+            "Do návštěvnického centra se vyplatí zajít hned. Dostaneš mapu, aktuální stav cest a rangeři ti řeknou, co se dá stihnout za čas, který máš."
+          ],
+          link: {
+            title: "Vstupné a permanentky do amerických parků",
+            sub: "Oficiální stránka National Park Service s aktuálními cenami. Ceny pro cizince se od roku 2026 změnily, ověř si je před cestou.",
+            url: "https://www.nps.gov/planyourvisit/passes.htm"
+          },
+          trap: {
+            title: "Pozor na tohle",
+            body: [
+              "Do části parků se dnes nedá jen tak přijet. Vyžadují <strong>rezervaci vjezdu na konkrétní den a hodinu</strong>, která se vypisuje i několik měsíců dopředu a bývá vyprodaná.",
+              "Rezervace se dělá na Recreation.gov a řeší se <strong>ještě před cestou</strong>, ne na místě. Je o tom řeč i v modulu Kdy a kam v prvním průvodci."
+            ]
+          }
+        }
+      ] },
+    { id: "p-jinak", emoji: ico("people"), name: "Co všechno je jinak", shortName: "Co je jinak", desc: "Zvyky, míry a maličkosti, na které v Americe narazíš každý den.", dashboard: true,
+      steps: [
+        {
+          icon: ico("ruler"),
+          title: "Čísla, která znamenají něco jiného",
+          lead: [
+            "Nejčastější zmatky v Americe nedělá jazyk, ale čísla. Vypadají povědomě a znamenají něco jiného.",
+            "<strong>Datum se píše měsíc, den, rok.</strong> Takže 3. 9. 2027 je v Americe 9/3/2027. U rezervací a letenek se na tom dá pěkně naletět.",
+            "<strong>Přízemí je první patro.</strong> Co je u nás přízemí, je tady 1st floor, takže naše první patro je jejich druhé. Ve výtahu se podle toho dívej na L nebo 1.",
+            "Vzdálenosti v mílích, objem v galonech, teplota ve stupních Fahrenheita, váha v librách. Převodník na to všechno máš v téhle appce v sekci Tvoje věci.",
+            "<strong>Velikosti oblečení a bot jsou vlastní.</strong> Číslování nesedí na evropské, takže zkoušet se vyplatí i u věcí, u kterých doma znáš svoje číslo."
+          ],
+          why: {
+            title: "Proč je to důležité",
+            body: [
+              "86 stupňů Fahrenheita zní jako pekelné vedro, ale je to <strong>30 stupňů Celsia</strong>. Předpověď počasí se takhle dá číst úplně špatně.",
+              "Rychlostní limit 65 je 105 km/h. Když si to přepočítáš obráceně, pojedeš buď zbytečně pomalu, nebo o dost rychleji, než smíš."
+            ]
+          }
+        },
+        {
+          icon: ico("people"),
+          title: "Zvyky, které tě zaskočí",
+          lead: [
+            "Amerika je k cizincům vstřícnější, než Češi čekají. Pozdrav od neznámého člověka v obchodě není podezřelý, je to normální.",
+            "<strong>How are you</strong> není otázka na tvůj zdravotní stav. Je to pozdrav a čeká se krátká odpověď typu good, thanks, a totéž zpátky.",
+            "U alkoholu tě požádají o doklad, i když je ti přes padesát. Neber to osobně, prodavač se tím chrání a pas je jediný doklad, který uzná.",
+            "<strong>Otevřený alkohol na veřejnosti je skoro všude zakázaný</strong>, včetně otevřené lahve v autě. Pokuty jsou nepříjemné a policie to bere vážně.",
+            "V restauraci se čeká na usazení. U vchodu bývá cedule, že tě obsluha posadí, a předběhnout to je nezdvořilé."
+          ],
+          note: {
+            title: "Ještě jedna věc",
+            body: [
+              "Fronty a osobní prostor jsou tu větší téma než u nás. Stát někomu za zády v řadě působí nepříjemně.",
+              "Na dotazy typu odkud jsi se ptají zvědavě, ne zkoumavě. Je to součást small talku, ne výslech."
+            ]
+          }
+        },
+        {
+          icon: ico("plug"),
+          title: "Drobnosti, co potřebuješ hned první den",
+          lead: [
+            "Pár praktických věcí, které nikoho nenapadnou, dokud nestojí v pokoji s vybitým telefonem.",
+            "<strong>Zásuvky mají ploché kolíky a 110 voltů</strong> místo našich 230. Adaptér je nutnost, a rovnou takový, který umí nabít víc věcí najednou.",
+            "Většina nabíječek na telefon a notebook zvládne obojí napětí, stačí jim tvarový adaptér. U spotřebičů se topnou spirálou, jako je fén nebo kulma, to ale neplatí a bez měniče je zničíš.",
+            "<strong>Léky se kupují v drogerii</strong>, ne v samostatné lékárně jako u nás. Volně prodejné věci najdeš v regálech, na recept je pult v zadní části obchodu.",
+            "Vezmi si z domova to, co běžně používáš. Americké názvy léků jsou jiné a hledat v regálu ekvivalent s horečkou není zábava."
+          ],
+          checklist: [
+            "Koupit <strong>adaptér na americké zásuvky</strong> ještě doma",
+            "Ověřit, že <strong>fén nebo kulma zvládne 110 V</strong>, jinak je nechat doma",
+            "Vzít si <strong>vlastní volně prodejné léky</strong>, ty, co doma běžně používáš"
+          ]
+        }
+      ] }
   ];
+
+  /* Druhý průvodce jako skutečné moduly, ne jen dlaždice se slibem. Gábi je
+     plní postupně, prázdné steps appka umí (ukáže placeholder). Vlastní pole,
+     ne součást MODULES: průběh, časová osa i "Modul 1 z 7" počítají s
+     průvodcem Než odletíš a sedm modulů navíc by je rozhodilo. Dlaždice na
+     obrazovce Až přistaneš i tyhle moduly čtou z jednoho seznamu výš, ať se
+     názvy nikdy nerozejdou. */
+  var MODULES_PRISTANES = PRISTANES_MODULY.map(function (m) {
+    return {
+      id: m.id, balicek: "pristanes",
+      name: m.name, shortName: m.shortName || m.name,
+      emoji: m.emoji, ikona: m.ikona,
+      desc: m.desc,
+      dashboard: !!m.dashboard,
+      time: "", lessons: 0,
+      accent: "#C9A24B", accentSoft: "#F3E9D3",
+      steps: m.steps || []
+    };
+  });
   var PRISTANES_ODKAZ = "";   // e-mailové přihlášení na "dej mi vědět, až to vyjde", zatím prázdné
   var PRISTANES_KDY = "koncem roku 2026";   // jedno místo pravdy pro termín, ať appka neříká na dvou místech dvě různé věty
 
@@ -3244,14 +3826,15 @@
           tip: {
             title: "Tip navíc",
             body: [
-              "Ještě jedna věc, která se vyplatí spočítat dopředu.",
-              "Pokud plánuješ navštívit aspoň 2 až 3 parky, podívej se na <strong>America the Beautiful</strong>. Je to roční karta, která tě pustí do všech národních parků v USA bez dalšího vstupného.",
-              "Vstup do Grand Canyonu stojí 35 dolarů za auto, Zion podobně, <strong>karta se zaplatí po druhém parku a zbytek roku máš zdarma</strong>.",
-              "Kupuje se online nebo přímo u vstupu. Jedna věc méně, na kterou myslet na místě."
+              "Ještě jedna věc, která se vyplatí spočítat dopředu. A od letoška se počítá jinak než dřív.",
+              "Roční karta <strong>America the Beautiful</strong> pustí držitele do všech národních parků. Od 1. ledna 2026 ale stojí <strong>pro cizince 250 dolarů</strong>, zatímco pro obyvatele USA zůstala na 80.",
+              "Zároveň se v <strong>11 nejnavštěvovanějších parcích</strong>, mezi nimi Grand Canyon, Yosemite, Yellowstone a Zion, platí příplatek <strong>100 dolarů za osobu od 16 let</strong>. Kdo má roční kartu, ten ho neplatí.",
+              "Proto se to dneska láme jinde: <strong>ve dvou lidech se karta vyplatí hned u prvního z těch velkých parků</strong>, protože samotné příplatky by vyšly na 200 dolarů. Když jedeš jen do menších parků, spočítej si radši vstupné za auto.",
+              "Kupuje se online nebo přímo u vstupu. Ceny jsou čerstvé, tak si je před cestou ještě jednou ověř."
             ],
             link: {
-              title: "Koupit America the Beautiful",
-              url: "https://store.usgs.gov/pass"
+              title: "Vstupné a permanentky do parků",
+              url: "https://www.nps.gov/planyourvisit/passes.htm"
             }
           },
           why: {
@@ -5052,7 +5635,7 @@
   }
   /* stálý popisek: kolik lekcí a kolik minut */
   function modMeta(mod) {
-    return lekci(lessonCount(mod)) + " · " + mod.time;
+    return mod.time ? lekci(lessonCount(mod)) + " · " + mod.time : lekci(lessonCount(mod));
   }
   function modulSlovo(n) {
     if (n === 1) return "modul";
@@ -5516,13 +6099,28 @@
   }
   function saveUnlocked(arr) { uloz(STORAGE_UNLOCKED, JSON.stringify(arr)); }
 
-  /* Zámky jsou dočasně vypnuté: appka ještě neumí ověřit platbu, takže
-     tvrdit uživateli "tohle je zamčené" bez skutečného odemykání byl jen
-     měkký, obejitelný zámek, co nikoho nezastaví a jen kazí první dojem.
-     Až appka bude umět skutečně poznat platbu, vrátí se sem podmínka na
-     mod.balicek. Do té doby je dostupné úplně všechno. */
+  /* Průvodce Než odletíš zůstává celý otevřený: appka neumí ověřit platbu,
+     takže měkký zámek nad moduly 1 až 7 by nikoho nezastavil a jen kazil
+     první dojem po koupi. Až přistaneš je jiný produkt, který se teprve píše.
+     Ten zamčený je, dokud se neodemkne kódem (Gábi má vlastní, viz KODY). */
   function isUnlocked(mod) {
-    return true;
+    if (!mod || mod.balicek !== "pristanes") return true;
+    return loadUnlocked().indexOf("pristanes") !== -1;
+  }
+
+  /* Modul může žít ve dvou průvodcích. Tyhle tři funkce jsou jediné místo,
+     které o tom ví, zbytek appky se ptá jich. */
+  function najdiModul(id) {
+    return MODULES.concat(MODULES_PRISTANES).filter(function (m) { return m.id === id; })[0];
+  }
+  function poleModulu(mod) {
+    return (mod && mod.balicek === "pristanes") ? MODULES_PRISTANES : MODULES;
+  }
+  function cisloModulu(mod) {
+    return poleModulu(mod).indexOf(mod) + 1;
+  }
+  function pruvodceNazev(mod) {
+    return (mod && mod.balicek === "pristanes") ? "Až přistaneš" : "Než odletíš";
   }
 
   /* Vrátí id balíčku, pokud kód sedí, jinak null. Nezáleží na velikosti písmen. */
@@ -5562,7 +6160,7 @@
 
     var inShell = (screenId === "s-uvod" || screenId === "s-home" ||
                    screenId === "s-module" || screenId === "s-trezor" || screenId === "s-itinerar" || screenId === "s-rozpocet" ||
-                   screenId === "s-prevodnik" || screenId === "s-pristanes" || screenId === "s-cteni");
+                   screenId === "s-prevodnik" || screenId === "s-spropitne" || screenId === "s-pristanes" || screenId === "s-cteni");
     onboarding.hidden = inShell;
     onboarding.style.display = inShell ? "none" : "grid";
     shell.hidden = !inShell;
@@ -5575,6 +6173,7 @@
     else if (screenId === "s-itinerar") topbarTitle.textContent = "Itinerář";
     else if (screenId === "s-rozpocet") topbarTitle.textContent = "Můj rozpočet";
     else if (screenId === "s-prevodnik") topbarTitle.textContent = "Převodník";
+    else if (screenId === "s-spropitne") topbarTitle.textContent = "Spropitné";
     else if (screenId === "s-pristanes") topbarTitle.textContent = "Až přistaneš";
     else if (screenId === "s-cteni") topbarTitle.textContent = "Na čtení do letadla";
 
@@ -5582,7 +6181,7 @@
     // v rozpočtu a v náhledu druhého průvodce nic neznázorňuje, tak tam jen mate
     var railEl = document.getElementById("rail");
     if (railEl) railEl.hidden = (screenId === "s-trezor" || screenId === "s-itinerar" || screenId === "s-rozpocet" ||
-                                  screenId === "s-prevodnik" || screenId === "s-pristanes" || screenId === "s-cteni");
+                                  screenId === "s-prevodnik" || screenId === "s-spropitne" || screenId === "s-pristanes" || screenId === "s-cteni");
 
     closeMenu();
     renderSidebar();
@@ -5616,6 +6215,14 @@
   buildRailStops();
 
   function renderRail(playTakeoff) {
+    // Osa je postup průvodcem Než odletíš. U modulu druhého průvodce by
+    // ukazovala cizí sedmičku, tak se schová, stejně jako na Trezoru.
+    var railWrap = document.getElementById("rail");
+    if (railWrap && currentScreen === "s-module" && currentModuleId) {
+      var otevreny = najdiModul(currentModuleId);
+      railWrap.hidden = !!(otevreny && otevreny.balicek === "pristanes");
+    }
+
     var progress = loadProgress();
     var n = MODULES.length;
     var doneCount = MODULES.filter(function (m) { return progress[m.id]; }).length;
@@ -5687,7 +6294,7 @@
         '</span>' +
         '<span class="side-chev">›</span>';
       b.addEventListener("click", opts.onClick);
-      nav.appendChild(b);
+      (opts.parent || nav).appendChild(b);
     }
 
     item({
@@ -5725,44 +6332,86 @@
       });
     });
 
+    /* Druhý průvodce má vlastní plochu: je to samostatný produkt, který se
+       teprve plní, a nemá splývat se sedmi moduly Než odletíš. */
+    var guide2 = document.createElement("div");
+    guide2.className = "side-guide2";
+    nav.appendChild(guide2);
+
+    var lblP = document.createElement("div");
+    lblP.className = "side-group-label";
+    lblP.textContent = "Až přistaneš";
+    guide2.appendChild(lblP);
+
     item({
-      ico: ico("lock", "ico-side"), title: "Až přistaneš", meta: "7 modulů · " + PRISTANES_KDY,
-      active: currentScreen === "s-pristanes", locked: true,
+      parent: guide2,
+      ico: ico("sparkle", "ico-side"), title: "Co je uvnitř", meta: "7 modulů · " + PRISTANES_KDY,
+      active: currentScreen === "s-pristanes",
       onClick: function () { goTo("s-pristanes"); }
     });
+
+    MODULES_PRISTANES.forEach(function (mod, i) {
+      var zamceny = !isUnlocked(mod);
+      item({
+        parent: guide2,
+        ico: zamceny ? ico("lock", "ico-side") : (i + 1),
+        title: mod.shortName || mod.name,
+        meta: zamceny ? "zatím zamčené" : (lessonCount(mod) ? modMeta(mod) : "zatím prázdný"),
+        active: currentScreen === "s-module" && currentModuleId === mod.id,
+        locked: zamceny,
+        onClick: function () { openModule(mod.id); }
+      });
+    });
+
+    /* Nástroje a čtení stojí na vlastní ploše, ne v jednom sloupci s moduly:
+       do modulů se jde po pořadí, sem se skáče kdykoli. */
+    var tools = document.createElement("div");
+    tools.className = "side-tools";
+    nav.appendChild(tools);
 
     var lbl2 = document.createElement("div");
     lbl2.className = "side-group-label";
     lbl2.textContent = "Tvoje věci";
-    nav.appendChild(lbl2);
+    tools.appendChild(lbl2);
 
     item({
+      parent: tools,
       ico: ico("lock", "ico-side"), title: "Trezor", meta: "ESTA, letenky, rezervace",
       active: currentScreen === "s-trezor",
       onClick: function () { goTo("s-trezor"); }
     });
     item({
+      parent: tools,
       ico: ico("map", "ico-side"), title: "Itinerář", meta: "Plán den po dni",
       active: currentScreen === "s-itinerar",
       onClick: function () { goTo("s-itinerar"); }
     });
     item({
+      parent: tools,
       ico: ico("coins", "ico-side"), title: "Můj rozpočet", meta: "Kolik to celé bude stát",
       active: currentScreen === "s-rozpocet",
       onClick: function () { goTo("s-rozpocet"); }
     });
     item({
-      ico: ico("refresh", "ico-side"), title: "Převodník", meta: "Měna, jednotky, spropitné",
+      parent: tools,
+      ico: ico("refresh", "ico-side"), title: "Převodník", meta: "Měna a jednotky",
       active: currentScreen === "s-prevodnik",
       onClick: function () { goTo("s-prevodnik"); }
+    });
+    item({
+      parent: tools,
+      ico: ico("receipt", "ico-side"), title: "Spropitné", meta: "Kolik nechat a kolik na osobu",
+      active: currentScreen === "s-spropitne",
+      onClick: function () { goTo("s-spropitne"); }
     });
 
     var lbl3 = document.createElement("div");
     lbl3.className = "side-group-label";
     lbl3.textContent = "Na chvíli volna";
-    nav.appendChild(lbl3);
+    tools.appendChild(lbl3);
 
     item({
+      parent: tools,
       ico: ico("book", "ico-side"), title: "Na čtení do letadla", meta: "Historky, ne úkoly",
       active: currentScreen === "s-cteni",
       onClick: function () { goTo("s-cteni"); }
@@ -6940,8 +7589,9 @@
     spocitej();
   }
 
-  /* Převodník: měna, jednotky a spropitné. Nic se neukládá do localStorage,
-     přepočítává se to za běhu, appka funguje offline i bez dat. */
+  /* Převodník: měna a jednotky. Spropitné má vlastní záložku, viz initSpropitne.
+     Nic se neukládá do localStorage, přepočítává se to za běhu, appka funguje
+     offline i bez dat. */
   function initPrevodnik() {
     var box = document.getElementById("prevodnik-kalk");
     if (!box) return;
@@ -6989,24 +7639,6 @@
           '<div class="rozpocet-pole"><label for="pv-kg">Kila</label>' +
             '<div class="rozpocet-input-wrap"><input type="number" min="0" inputmode="decimal" id="pv-kg" value="10.4"><span class="rozpocet-unit">kg</span></div></div>' +
         '</div>' +
-      '</div>' +
-
-      '<div class="prevodnik-sekce ruzova">' +
-        '<div class="blok-eyebrow eyebrow eyebrow-ruzova">' + ico("coins", "ico-side") + ' Spropitné</div>' +
-        '<p class="prevodnik-hint prevodnik-hint-top">V USA je spropitné skoro povinnost, ne laskavost. 18 % je slušnost, 15 % je už tak trochu drzost.</p>' +
-        '<div class="rozpocet-grid">' +
-          '<div class="rozpocet-pole"><label for="pv-ucet">Účet v restauraci</label>' +
-            '<div class="rozpocet-input-wrap"><input type="number" min="0" inputmode="decimal" id="pv-ucet" value="50"><span class="rozpocet-unit">$</span></div></div>' +
-          '<div class="rozpocet-pole"><label for="pv-lidi">Počet lidí</label>' +
-            '<div class="rozpocet-input-wrap"><input type="number" min="1" inputmode="numeric" id="pv-lidi" value="1"><span class="rozpocet-unit">os.</span></div></div>' +
-        '</div>' +
-        '<div class="prevodnik-tip-btns" id="pv-tip-btns">' +
-          [15, 18, 20, 22].map(function (p) {
-            return '<button type="button" class="prevodnik-tip-btn' + (p === 18 ? ' active' : '') + '" data-tip="' + p + '">' + p + ' %</button>';
-          }).join('') +
-          '<div class="rozpocet-input-wrap" style="width:90px;"><input type="number" min="0" max="100" inputmode="numeric" id="pv-tip-vlastni" placeholder="vlastní"><span class="rozpocet-unit">%</span></div>' +
-        '</div>' +
-        '<div class="rozpocet-vysledek" id="pv-tip-vysledek"></div>' +
       '</div>';
 
     // --- měna ---
@@ -7046,7 +7678,34 @@
     dvojice("pv-gal", "pv-l", function (g) { return g * 3.78541; }, function (l) { return l / 3.78541; });
     dvojice("pv-lb", "pv-kg", function (lb) { return lb * 0.453592; }, function (kg) { return kg / 0.453592; });
 
-    // --- spropitné ---
+  }
+
+  /* Spropitné: vlastní záložka, ne sekce v převodníku. V restauraci se počítá
+     ve chvíli, kdy přijde účet a všichni koukají, takže se k němu musí jít
+     jedním klepnutím, ne přes scrollování kolem kurzu a galonů. */
+  function initSpropitne() {
+    var box = document.getElementById("spropitne-kalk");
+    if (!box) return;
+
+    box.innerHTML =
+      '<div class="prevodnik-sekce ruzova">' +
+        '<div class="blok-eyebrow eyebrow eyebrow-ruzova">' + ico("receipt", "ico-side") + ' Kolik nechat</div>' +
+        '<p class="prevodnik-hint prevodnik-hint-top">18 % je běžná slušnost, 15 % už obsluha vnímá jako výtku. Nad 20 % se dává, když se o tebe fakt starali.</p>' +
+        '<div class="rozpocet-grid">' +
+          '<div class="rozpocet-pole"><label for="pv-ucet">Účet v restauraci</label>' +
+            '<div class="rozpocet-input-wrap"><input type="number" min="0" inputmode="decimal" id="pv-ucet" value="50"><span class="rozpocet-unit">$</span></div></div>' +
+          '<div class="rozpocet-pole"><label for="pv-lidi">Počet lidí</label>' +
+            '<div class="rozpocet-input-wrap"><input type="number" min="1" inputmode="numeric" id="pv-lidi" value="1"><span class="rozpocet-unit">os.</span></div></div>' +
+        '</div>' +
+        '<div class="prevodnik-tip-btns" id="pv-tip-btns">' +
+          [15, 18, 20, 22].map(function (p) {
+            return '<button type="button" class="prevodnik-tip-btn' + (p === 18 ? ' active' : '') + '" data-tip="' + p + '">' + p + ' %</button>';
+          }).join('') +
+          '<div class="rozpocet-input-wrap" style="width:90px;"><input type="number" min="0" max="100" inputmode="numeric" id="pv-tip-vlastni" placeholder="vlastní"><span class="rozpocet-unit">%</span></div>' +
+        '</div>' +
+        '<div class="rozpocet-vysledek" id="pv-tip-vysledek"></div>' +
+      '</div>';
+
     var ucetEl = document.getElementById("pv-ucet");
     var lidiEl = document.getElementById("pv-lidi");
     var vlastniEl = document.getElementById("pv-tip-vlastni");
@@ -7827,7 +8486,7 @@
 
     var r = computeReadiness(mod);
     var pct = r.total ? Math.round(r.done / r.total * 100) : 0;
-    var modCislo = MODULES.findIndex(function (m) { return m.id === mod.id; }) + 1;
+    var modCislo = cisloModulu(mod);
 
     var left = r.total - r.done;
     var mascotSrc = left <= 0 ? "images/pani-cokdyz-kufr-smile.svg" : "images/pani-cokdyz-kufr.svg";
@@ -7868,7 +8527,7 @@
   }
 
   function refreshDashboard() {
-    var mod = MODULES.filter(function (m) { return m.id === currentModuleId; })[0];
+    var mod = najdiModul(currentModuleId);
     renderDashboard(mod);
   }
 
@@ -7876,7 +8535,7 @@
     // Číslo kroku je vždy "modul.krok" (např. 2.3), ať sedí s pravým
     // sloupcem „V téhle lekci“. Ignoruje se tím uložené step.kicker,
     // který v datech stejně vždy jen opakoval pořadí kroku.
-    var modCislo = MODULES.findIndex(function (m) { return m.id === moduleId; }) + 1;
+    var modCislo = cisloModulu(najdiModul(moduleId));
     var setup = loadSetup();
     return steps.map(function (step, i) {
       var html = '<article class="step-card" id="krok-' + (i + 1) + '">';
@@ -8418,11 +9077,13 @@
   }
 
   function openModule(id) {
-    var mod = MODULES.filter(function (m) { return m.id === id; })[0];
+    var mod = najdiModul(id);
     if (!mod) return;
     currentModuleId = id;
 
-    document.getElementById("module-badge").textContent = "Modul " + (MODULES.indexOf(mod) + 1) + " z " + MODULES.length;
+    document.getElementById("module-badge").textContent =
+      "Modul " + cisloModulu(mod) + " z " + poleModulu(mod).length +
+      (mod.balicek === "pristanes" ? " · " + pruvodceNazev(mod) : "");
     document.getElementById("module-title").textContent = mod.name;
     // fotka v hlavičce modulu
     var hero = document.getElementById("module-hero");
@@ -8441,10 +9102,14 @@
       iconEl.innerHTML = '<img src="' + mod.ikona + '" alt="">';
       iconEl.classList.add("has-img");
     } else {
-      iconEl.textContent = mod.emoji;
+      iconEl.innerHTML = mod.emoji || "";
       iconEl.classList.remove("has-img");
     }
-    document.getElementById("module-time").textContent = mod.time;
+    // prázdný modul druhého průvodce ještě neví, jak dlouho potrvá:
+    // radši schovat celý řádek než ukazovat "Zabere ti" bez hodnoty
+    var timeEl = document.getElementById("module-time");
+    timeEl.textContent = mod.time || "";
+    timeEl.parentNode.style.display = mod.time ? "flex" : "none";
     document.getElementById("module-scope").textContent = lekci(lessonCount(mod));
     topbarTitle.textContent = mod.name;
 
@@ -8519,7 +9184,7 @@
     toc.innerHTML = "";
     if (mod.steps && mod.steps.length) {
       tocCard.hidden = false;
-      var modCislo = MODULES.indexOf(mod) + 1;
+      var modCislo = cisloModulu(mod);
       mod.steps.forEach(function (step, i) {
         var b = document.createElement("button");
         b.type = "button";
@@ -8611,8 +9276,8 @@
   function printModuleChecklist(mod) {
     var groups = moduleChecklistGroups(mod);
     if (!groups.length) return;
-    var modCislo = MODULES.indexOf(mod) + 1;
-    var html = '<div class="pa-modul">Než odletíš · Modul ' + modCislo + '</div>' +
+    var modCislo = cisloModulu(mod);
+    var html = '<div class="pa-modul">' + pruvodceNazev(mod) + ' · Modul ' + modCislo + '</div>' +
                '<div class="pa-nadpis">' + mod.name + '</div>';
     if (mod.shrnuti && mod.shrnuti.length) {
       html += '<div class="pa-krok"><div class="pa-krok-titulek">Tři věci, co si odsud vzít</div>' +
@@ -8677,7 +9342,7 @@
 
   document.getElementById("btn-module-done").addEventListener("click", function () {
     if (!currentModuleId) return;
-    var mod = MODULES.filter(function (m) { return m.id === currentModuleId; })[0];
+    var mod = najdiModul(currentModuleId);
     var progress = loadProgress();
     progress[currentModuleId] = true;
     saveProgress(progress);
@@ -8760,6 +9425,7 @@
   initItinerar();
   initRozpocet();
   initPrevodnik();
+  initSpropitne();
   initStepVideos();
 
   /* Bezpečnostní síť pro chybějící obrázek: appka nikdy neukáže rozbitou

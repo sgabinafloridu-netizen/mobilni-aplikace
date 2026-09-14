@@ -14,6 +14,21 @@ Appka přehrává nahrávky **z týhle složky**, ne z internetu. Proto fungují
 | 6.1 | `co-musi-byt-v-prirucnim.mp3` | Checklisty, krok 1 „Co musí být v příručním, ať se stane cokoliv" | ⬜ čeká na nahrání |
 | 7.5 | `kdyz-se-neco-pokazi.mp3` | Krizové situace, krok 5 „Co mít po ruce, aby se to řešilo snadno" | ⬜ čeká na nahrání |
 
+### Druhý průvodce „Až přistaneš"
+
+| Krok | Soubor | Kde se objeví | Stav |
+|---|---|---|---|
+| 1.1 | `co-me-ceka-za-temi-dvermi.mp3` | Až přistaneš → Imigrační kontrola, krok 1 „Poslední hodina v letadle" | ⬜ čeká na nahrání |
+
+Je to **zvuk z produktu Přes imigrační v klidu** (11 min video za 297 Kč), vyexportovaný do mp3.
+Rozhodnuto 13. 9. 2026: video se do appky nedává, mělo by kolem 150 MB a zabilo by stahování,
+zvuk má zhruba 11 MB. Miniprodukt se prodává dál, tady jde o jiný okamžik: video se dívá doma
+před cestou, nahrávka se poslouchá hodinu před přistáním.
+
+⚠️ Až soubor přibude, musí se přidat do `CACHE_FILES` v `sw.js` a povýšit `CACHE_NAME`, jinak
+nebude fungovat offline. Dřív ho tam nedávat, `cache.addAll` selže na chybějícím souboru a rozbil
+by se offline režim celé appky.
+
 **Proč zrovna tyhle 4 místa.** Podcast má smysl tam, kde jsou při poslechu **ruce nebo oči zaneprázdněné něčím jiným**, ne kdekoliv. Vybírala jsem podle toho:
 - **1.3** se poslouchá večer, když člověk leží v posteli a řeší si to v hlavě, ne na displeji.
 - **3.4** se poslouchá v letadle nebo cestou na letiště, kde stejně nejde nic jiného dělat.
