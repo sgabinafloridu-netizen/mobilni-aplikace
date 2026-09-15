@@ -59,6 +59,14 @@ Každý krok v modulu má tři vrstvy a v tomhle pořadí se i vykresluje:
 - `trap` — „Pozor na tohle" (červená, ⚠️): **jen pro věci, kde přehlédnutí znamená reálný problém** (zmeškaný let, zamítnutý vstup, účet v tisících dolarů). Červená se nesmí opotřebovat.
 - `note` — „Ještě jedna věc" (zlatá, 📝): užitečné, ale nekritické
 
+**`hookMedia{}`** na modulu je nahrávka nebo video **nad prvním krokem**, tedy dřív, než modul
+začne. Používá se na uvítání do celého průvodce, ne na obsah kroku, na to je `step.media`.
+Tvar je stejný jako u `media`. Takhle má druhý průvodce úvodní podcast místo uvítacího videa.
+
+⚠️ Styly hooku (`.lesson-hook > p:first-of-type` a `> p:last-of-type`) míří schválně jen na
+**přímé potomky**. Uvnitř hooku totiž může být dlaždice s nahrávkou a její popisek není
+uzávěrka hooku, takže si nemá brát zlatou barvu závěrečné otázky.
+
 **`quote{}`** umí volitelné pole **`foto`**: kresba mluvčího, která se postaví vedle citátu
 (`.step-quote.s-fotkou`, 84 px, na mobilu 62 px). Typicky paní Cokdyž. Bez `foto` se citát
 vykreslí jako dřív, jen s barevnou linkou.

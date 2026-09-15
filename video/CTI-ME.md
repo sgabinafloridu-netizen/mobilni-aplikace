@@ -13,6 +13,22 @@ Appka videa **nehostuje nikde na internetu**, přehrává je z týhle složky. D
 | 3.3 | `letenky-jak-kupuju.mp4` + `letenky-jak-kupuju-poster.jpg` | Letenky, krok 3 „Tři funkce, které dělají celý rozdíl" | ⬜ čeká na natočení |
 | 3.4 | `letenky-prestup.mp4` + `letenky-prestup-poster.jpg` | Letenky, krok 4 „Proč je americký přestup jiný než evropský" | ⬜ čeká na natočení |
 
+### Druhý průvodce „Až přistaneš"
+
+| Krok | Soubor | Kde se objeví | Stav |
+|---|---|---|---|
+| 5.1 | `spropitne-uctenka.mp4` + `spropitne-uctenka-poster.jpg` | Až přistaneš → Kde se najíst a jak tipovat, krok 1 „Spropitné: kolik a kde" | ⬜ čeká na natočení |
+
+Rozhodnuto 15. 9. 2026: **v celém druhém průvodci je tohle jediné video.** Účtenka s prázdným
+řádkem Tip je papír, se kterým se něco dělá, a to se textem popisuje hůř než ukázkou. Ostatní
+místa, o kterých byla řeč (tankování, křižovatka se čtyřmi stopkami, obhlídka auta, Turo
+v New Orleans), zůstávají zatím bez videa.
+
+⚠️ **Tohle video se nemá dávat do `CACHE_FILES`.** Rozdíl proti nahrávce na imigrační: podcast
+se poslouchá v letadle bez signálu, takže musí být offline. Tenhle záběr se kouká doma před
+cestou, kde signál je. Precache dneska stahuje 29 MB a skoro celé jsou to dvě videa z prvního
+průvodce. Videa druhého průvodce necháme streamovat, jinak se stahování appky zabije.
+
 ## Jak to nahrát
 
 1. Video ulož **přesně pod tím názvem** z tabulky, do týhle složky.

@@ -1051,18 +1051,22 @@
     background: var(--accent-soft); border-radius: var(--r-lg);
     padding: var(--s6); margin-bottom: var(--s8);
   }
-  .lesson-hook p + p { margin-top: var(--s4); }
+  .lesson-hook > p + p { margin-top: var(--s4); }
   .lesson-hook strong { color: var(--text); }
   /* první odstavec = otevírací věta hooku, dostane víc váhy, ať se karta
      nečte jako jedna šedá plocha textu */
-  .lesson-hook p:first-of-type {
+  .lesson-hook > p:first-of-type {
     font-size: 19px; font-weight: 700; color: var(--text); text-align: left;
   }
   /* poslední odstavec = otázka na čtenáře (uzávěrka hooku), barevně
      odlišená, ať se nečte jako další z řady odstavců */
-  .lesson-hook p:last-of-type {
+  /* jen přímý potomek: uvnitř hooku může být i dlaždice s nahrávkou
+     a její popisek pod přehrávačem není uzávěrka hooku. */
+  .lesson-hook > p:last-of-type {
     color: var(--accent); font-weight: 600; text-align: left;
   }
+  /* popisek pod nahrávkou v hooku se čte jako popisek, ne jako odstavec hooku */
+  .lesson-hook .step-video-popis { font-size: 14.5px; line-height: 1.6; }
   /* volitelná fotka, kterou text v úvodu modulu obtéká, stejný princip
      jako u step.ilustrace, jen pro modulový hook místo kroku */
   .lesson-hook::after { content: ""; display: block; clear: both; }
@@ -3163,6 +3167,17 @@
      jako hotový text. Odemyká se autorským kódem, viz KODY výš. */
   var PRISTANES_MODULY = [
     { id: "p-imigracni", emoji: ico("doc"), name: "Imigrační kontrola podrobněji", shortName: "Imigrační kontrola", desc: "Co přesně čeká za dveřmi, jak vypadá fronta a co u toho říct.", dashboard: true,
+      /* Uvítání do celého druhého průvodce. Stojí nad prvním krokem prvního
+         modulu, takže na ně narazí každý, kdo si Až přistaneš otevře.
+         Zvuk místo videa schválně: uvítací video z prvního průvodce má 9,6 MB
+         a stahuje se všem předem. Mluvené slovo vyjde na 1 MB za minutu. */
+      hookMedia: {
+        kicker: "K poslechu",
+        src: "audio/az-pristanes-uvod.mp3",
+        titulek: "Než začneš: jak tenhle průvodce používat",
+        obrazek: "images/gabi-mikrofon.svg",
+        popis: "Pusť si to jako první. Vysvětlím, čím se tenhle průvodce liší od toho prvního a kdy ho otevřít."
+      },
       hook: [
         "Možná už tohle znáš z prvního dílu. Neboj, tady to bude podrobněji.",
         "Projdeme si celou cestu od chvíle, kdy se v kabině rozsvítí, až po pás se zavazadly. Včetně <strong>vět, které u kontroly řekneš nahlas</strong>, i s výslovností.",
@@ -3775,8 +3790,15 @@
             "Důvod je jednoduchý: obsluha má výrazně nižší základní mzdu než u nás a z dýšek jí plyne většina výdělku. Nedat nic je proto čitelný vzkaz, ne úspora.",
             "V restauraci s obsluhou je <strong>18 procent běžná slušnost</strong>. 15 už je vnímaných jako výtka, nad 20 se dává, když se o tebe fakt starali.",
             "Účet přijde s prázdným řádkem Tip a řádkem Total. Dopíšeš částku, sečteš a podepíšeš. Kalkulačku na to máš v téhle appce v sekci Tvoje věci.",
-            "Mimo restauraci: nosiči 1 až 2 dolary za kufr, pokojské pár dolarů za noc, taxi a kadeřník zhruba jako v restauraci. U pultu, kde si jídlo bereš sám, spropitné nikdo nečeká."
+            "Mimo restauraci: nosiči 1 až 2 dolary za kufr, pokojské pár dolarů za noc, taxi a kadeřník zhruba jako v restauraci. U pultu, kde si jídlo bereš bez obsluhy, spropitné nikdo nečeká."
           ],
+          media: {
+            kicker: "Jak to dělám já",
+            src: "video/spropitne-uctenka.mp4",
+            poster: "video/spropitne-uctenka-poster.jpg",
+            titulek: "Účtenka a řádek Tip",
+            popis: "Pusť si to doma, ať tě ten prázdný řádek nepřekvapí až u stolu."
+          },
           trap: {
             title: "Pozor na tohle",
             body: [
@@ -3896,6 +3918,13 @@
             "<strong>Otevřený alkohol na veřejnosti je skoro všude zakázaný</strong>, včetně otevřené lahve v autě. Pokuty jsou nepříjemné a policie to bere vážně.",
             "V restauraci se čeká na usazení. U vchodu bývá cedule, že tě obsluha posadí, a předběhnout to je nezdvořilé."
           ],
+          media: {
+            kicker: "K poslechu",
+            src: "audio/zvyky-a-zdravotnictvi.mp3",
+            titulek: "Zvyky, které tě zaskočí, a americké zdravotnictví",
+            obrazek: "images/gabi-mikrofon.svg",
+            popis: "Pusť si to při dlouhém přejezdu. Je to na poslech, ne na učení."
+          },
           note: {
             title: "Ještě jedna věc",
             body: [
@@ -3933,7 +3962,7 @@
     return {
       id: m.id, balicek: "pristanes",
       name: m.name, shortName: m.shortName || m.name,
-      hook: m.hook, hookFoto: m.hookFoto, hookFotoAlt: m.hookFotoAlt,
+      hook: m.hook, hookFoto: m.hookFoto, hookFotoAlt: m.hookFotoAlt, hookMedia: m.hookMedia,
       emoji: m.emoji, ikona: m.ikona,
       desc: m.desc,
       dashboard: !!m.dashboard,
@@ -7319,6 +7348,7 @@
                                (b.ikona || '✦') + '</span></div>';
       /* historka i uvnitř bloků, ne jen jako samostatný prvek za textem.
          Někdy patří doprostřed výkladu, ne až na jeho konec.            */
+      if (b.media)     return [].concat(b.media).map(mediaHtml).join('');
       if (b.historka)  return '<div class="historka"><div class="historka-text">' +
                                '<img src="' + (b.historka.foto || 'images/gabi-hlavicka.jpg') + '" alt="Gábi">' +
                                paras([].concat(b.historka.text)) + '</div></div>';
@@ -8979,6 +9009,47 @@
     return '<div class="d-zaver">' + paras([].concat(blok.zaver)) + '</div>';
   }
 
+  /* Video nebo podcast jako jeden kus HTML. Rozliší se podle přípony:
+     .mp3 je poslech, zbytek video. Dokud soubor neexistuje, zůstane na jeho
+     místě dlaždice s návodem, `initStepVideos()` z ní `missing` sundá, jakmile
+     se metadata načtou. Vytažené zvlášť, aby šlo médium vložit i doprostřed
+     textu přes `bloky`, ne jen za celý lead.                                */
+  function mediaHtml(med) {
+    var jeZvuk = /\.mp3$/i.test(med.src);
+    var html = '<div class="step-video">' +
+                 '<div class="step-video-head"><span aria-hidden="true">' +
+                   (jeZvuk ? ico("headphones") : ico("video")) + '</span>' + med.kicker + '</div>';
+
+    if (jeZvuk) {
+      html += '<div class="step-audio missing" data-media>' +
+                '<img src="' + (med.obrazek || 'images/gabi-happy-plaz.svg') + '" alt="">' +
+                '<div class="step-audio-body">' +
+                  '<div class="step-audio-title">' + med.titulek + '</div>' +
+                  (med.delka ? '<div class="step-audio-delka">' + med.delka + '</div>' : '') +
+                  '<audio controls preload="metadata" src="' + med.src + '"></audio>' +
+                  '<div class="step-audio-ceka">Tahle nahrávka se právě chystá, přidám ji sem brzy.</div>' +
+                '</div>' +
+              '</div>';
+    } else {
+      html += '<div class="video-frame missing" data-media>' +
+                '<video controls preload="metadata" playsinline poster="' + med.poster + '">' +
+                  '<source src="' + med.src + '" type="video/mp4">' +
+                  'Tvůj prohlížeč neumí přehrát video.' +
+                '</video>' +
+                '<div class="video-missing">' +
+                  '<div class="play-mark" aria-hidden="true">▶</div>' +
+                  '<div class="vm-title">' + med.titulek + '</div>' +
+                  '<div class="vm-loading" aria-hidden="true">' +
+                    '<span class="vm-cam">' + ico("video") + '</span><span class="vm-spinner"></span>' +
+                  '</div>' +
+                  '<div class="vm-note">Tohle video se právě chystá, přidám ho sem brzy.</div>' +
+                '</div>' +
+              '</div>';
+    }
+
+    return html + (med.popis ? '<p class="step-video-popis">' + med.popis + '</p>' : '') + '</div>';
+  }
+
   function renderStepsHtml(steps, moduleId) {
     // Číslo kroku je vždy "modul.krok" (např. 2.3), ať sedí s pravým
     // sloupcem „V téhle lekci“. Ignoruje se tím uložené step.kicker,
@@ -9041,42 +9112,7 @@
       /* Video nebo podcast. Rozliší se podle přípony: .mp3 je poslech, zbytek video.
          Dokud soubor neexistuje, zůstane na jeho místě dlaždice s návodem. */
       if (step.media) {
-        [].concat(step.media).forEach(function (med) {
-        var jeZvuk = /\.mp3$/i.test(med.src);
-        html += '<div class="step-video">' +
-                  '<div class="step-video-head"><span aria-hidden="true">' +
-                    (jeZvuk ? ico("headphones") : ico("video")) + '</span>' + med.kicker + '</div>';
-
-        if (jeZvuk) {
-          html += '<div class="step-audio missing" data-media>' +
-                    '<img src="' + (med.obrazek || 'images/gabi-happy-plaz.svg') + '" alt="">' +
-                    '<div class="step-audio-body">' +
-                      '<div class="step-audio-title">' + med.titulek + '</div>' +
-                      (med.delka ? '<div class="step-audio-delka">' + med.delka + '</div>' : '') +
-                      '<audio controls preload="metadata" src="' + med.src + '"></audio>' +
-                      '<div class="step-audio-ceka">Tahle nahrávka se právě chystá, přidám ji sem brzy.</div>' +
-                    '</div>' +
-                  '</div>';
-        } else {
-          html += '<div class="video-frame missing" data-media>' +
-                    '<video controls preload="metadata" playsinline poster="' + med.poster + '">' +
-                      '<source src="' + med.src + '" type="video/mp4">' +
-                      'Tvůj prohlížeč neumí přehrát video.' +
-                    '</video>' +
-                    '<div class="video-missing">' +
-                      '<div class="play-mark" aria-hidden="true">▶</div>' +
-                      '<div class="vm-title">' + med.titulek + '</div>' +
-                      '<div class="vm-loading" aria-hidden="true">' +
-                        '<span class="vm-cam">' + ico("video") + '</span><span class="vm-spinner"></span>' +
-                      '</div>' +
-                      '<div class="vm-note">Tohle video se právě chystá, přidám ho sem brzy.</div>' +
-                    '</div>' +
-                  '</div>';
-        }
-
-        html += (med.popis ? '<p class="step-video-popis">' + med.popis + '</p>' : '') +
-                '</div>';
-        });
+        [].concat(step.media).forEach(function (med) { html += mediaHtml(med); });
       }
 
       if (step.mapa) {
@@ -9617,7 +9653,11 @@
       var hookFotoHtml = mod.hookFoto
         ? '<img class="hook-foto" src="' + mod.hookFoto + '" alt="' + (mod.hookFotoAlt || "") + '" loading="lazy">'
         : "";
-      hookEl.innerHTML = hookFotoHtml + paras(hookParas);
+      /* `hookMedia` je nahrávka nebo video nad prvním krokem, tedy dřív, než
+         modul vůbec začne. Používá se na uvítání do celého průvodce, ne na
+         obsah jednoho kroku. Na to je `step.media`.                        */
+      hookEl.innerHTML = hookFotoHtml + paras(hookParas) +
+                         (mod.hookMedia ? mediaHtml(mod.hookMedia) : "");
       hookEl.style.display = "block";
     } else {
       hookEl.style.display = "none";

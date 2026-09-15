@@ -18,8 +18,26 @@ Appka přehrává nahrávky **z týhle složky**, ne z internetu. Proto fungují
 
 | Krok | Soubor | Kde se objeví | Stav |
 |---|---|---|---|
+| úvod | `az-pristanes-uvod.mp3` | Až přistaneš → nad prvním krokem modulu 1, uvítání do celého průvodce | ⬜ čeká na nahrání |
 | 1.1 | `co-me-ceka-za-temi-dvermi.mp3` | Až přistaneš → Imigrační kontrola, krok 1 „Papír, který tě zachrání" | ⬜ čeká na nahrání |
 | 2.4 | `dva-ridicaky-v-pujcovne.mp3` | Až přistaneš → Půjčovna aut, krok 4 „Pojištění: co je v ceně a co ti nabídnou u přepážky" | ⬜ čeká na nahrání |
+| 7.2 | `zvyky-a-zdravotnictvi.mp3` | Až přistaneš → Co je jinak, krok 2 „Zvyky, které tě zaskočí" | ⬜ čeká na nahrání |
+
+**O čem úvodní díl je:** jak druhého průvodce používat. Nahrazuje uvítací video, které má
+první průvodce. Rozhodnuto 15. 9. 2026: **video ne, zvuk ano.** `uvitani.mp4` má 9,6 MB a
+stahuje se všem předem, mluvené slovo vyjde na 1 MB za minutu, takže čtyřminutový úvod má 4 MB.
+
+Sedí v poli `hookMedia` u modulu `p-imigracni`, tedy nad prvním krokem, ne uvnitř něj. Narazí
+na něj každý, kdo si Až přistaneš otevře. Mělo by v něm zaznít, čím se druhý průvodce liší od
+prvního (čte se **až na místě**, ne při přípravě před odletem) a že Trezor a nástroje jsou
+společné, nejsou to dva oddělené produkty.
+
+**O čem 7.2 je:** zvyky, které Čecha v Americe zaskočí, a k tomu **americké zdravotnictví**.
+Zadáno Gábi 15. 9. 2026. Poslouchá se při dlouhém přejezdu, kdy jsou ruce na volantu.
+
+⚠️ Zdravotnictví zatím **není nikde v textu appky**, existovalo by jen v týhle nahrávce. Kdo si
+ji nepustí, nedozví se nic. Až díl vznikne, stojí za zvážení vytáhnout z něj do textu aspoň to
+nejdražší, tedy co dělat při úrazu a proč se do USA nejezdí bez cestovního pojištění.
 
 **O čem 2.4 je:** proč se do USA vozí dva řidičáky (český a mezinárodní, ten je jenom překlad)
 a jak celé převzetí auta u přepážky reálně probíhá. Zadáno Gábi 14. 9. 2026. Nahradilo to
